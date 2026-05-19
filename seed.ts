@@ -4,6 +4,12 @@ import config from './src/payload.config'
 
 const characteristicNames = ['simple', 'structured', 'playful', 'activating', 'creative']
 
+const groupSizeNames = [
+  'Small Group (up to 15 people)',
+  'Medium Group (up to 30 people)',
+  'Big Group (above 30 people)',
+]
+
 const methods = [
   {
     title: 'World Café',
@@ -145,6 +151,21 @@ async function seed() {
       const created = await payload.create({ collection: 'characteristics', data: { name } })
       characteristicMap[name] = String(created.id)
       console.log(`  Created characteristic: ${name}`)
+    }
+  }
+
+  // Create predefined group sizes
+  for (const name of groupSizeNames) {
+    const existing = await payload.find({
+      collection: 'group-sizes',
+      where: { name: { equals: name } },
+      limit: 1,
+    })
+    if (existing.docs.length > 0) {
+      console.log(`  Group size exists: ${name}`)
+    } else {
+      await payload.create({ collection: 'group-sizes', data: { name } })
+      console.log(`  Created group size: ${name}`)
     }
   }
 
