@@ -5,7 +5,7 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 
 import { Media } from './collections/Media'
-import { Methoden } from './collections/Methoden'
+import { Methods } from './collections/Methods'
 import { Characteristics } from './collections/Characteristics'
 import { Users } from './collections/Users'
 
@@ -19,7 +19,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Characteristics, Media, Methoden],
+  collections: [Users, Characteristics, Media, Methods],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? 'fallback-secret-change-in-production',
   typescript: {

@@ -8,24 +8,24 @@ export default function CartPage() {
   const { cart, remove, mounted } = useCart()
 
   if (!mounted) {
-    return <div className="py-16 text-center text-gray-400">Laden…</div>
+    return <div className="py-16 text-center text-gray-400">Loading…</div>
   }
 
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-1">Merkliste</h1>
-          <p className="text-gray-500">{cart.length} Methode{cart.length !== 1 ? 'n' : ''} gespeichert</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-1">Saved Methods</h1>
+          <p className="text-gray-500">{cart.length} method{cart.length !== 1 ? 's' : ''} saved</p>
         </div>
         <CartExport items={cart} />
       </div>
 
       {cart.length === 0 ? (
         <div className="text-center py-20 text-gray-400">
-          <p className="text-lg mb-2">Deine Merkliste ist leer.</p>
+          <p className="text-lg mb-2">Your saved list is empty.</p>
           <Link href="/" className="text-blue-600 hover:underline text-sm">
-            Methoden entdecken →
+            Discover methods →
           </Link>
         </div>
       ) : (
@@ -37,7 +37,7 @@ export default function CartPage() {
             >
               <div className="flex items-start justify-between gap-2">
                 <Link
-                  href={`/methoden/${item.slug}`}
+                  href={`/methods/${item.slug}`}
                   className="font-semibold text-gray-900 hover:text-blue-600 transition-colors"
                 >
                   {item.title}
@@ -45,7 +45,7 @@ export default function CartPage() {
                 <button
                   onClick={() => remove(item.id)}
                   className="text-xs text-red-400 hover:text-red-600 flex-shrink-0"
-                  title="Entfernen"
+                  title="Remove"
                 >
                   ✕
                 </button>
@@ -62,10 +62,10 @@ export default function CartPage() {
               )}
 
               <Link
-                href={`/methoden/${item.slug}`}
+                href={`/methods/${item.slug}`}
                 className="text-xs text-blue-600 hover:underline mt-auto"
               >
-                Details ansehen →
+                View details →
               </Link>
             </div>
           ))}
@@ -74,12 +74,12 @@ export default function CartPage() {
 
       {cart.length > 1 && (
         <section className="mt-12">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Vergleich</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">Comparison</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse">
               <thead>
                 <tr className="bg-gray-50">
-                  <th className="text-left p-3 border border-gray-200 font-medium text-gray-600">Methode</th>
+                  <th className="text-left p-3 border border-gray-200 font-medium text-gray-600">Method</th>
                   <th className="text-left p-3 border border-gray-200 font-medium text-gray-600">Characteristics</th>
                 </tr>
               </thead>
@@ -87,7 +87,7 @@ export default function CartPage() {
                 {cart.map((item) => (
                   <tr key={item.id} className="hover:bg-gray-50">
                     <td className="p-3 border border-gray-200">
-                      <Link href={`/methoden/${item.slug}`} className="text-blue-600 hover:underline">
+                      <Link href={`/methods/${item.slug}`} className="text-blue-600 hover:underline">
                         {item.title}
                       </Link>
                     </td>

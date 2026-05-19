@@ -1,7 +1,11 @@
 import type { CollectionConfig } from 'payload'
 
-export const Methoden: CollectionConfig = {
-  slug: 'methoden',
+export const Methods: CollectionConfig = {
+  slug: 'methods',
+  labels: {
+    singular: 'Method',
+    plural: 'Methods',
+  },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'characteristics', 'status', 'updatedAt'],
@@ -50,7 +54,6 @@ export const Methoden: CollectionConfig = {
         position: 'sidebar',
       },
     },
-
     {
       name: 'image',
       type: 'upload',

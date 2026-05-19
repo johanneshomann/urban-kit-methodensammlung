@@ -15,12 +15,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const payload = await getPayload({ config })
   const result = await payload.find({
-    collection: 'methoden',
+    collection: 'methods',
     where: { slug: { equals: slug } },
     limit: 1,
   })
   const method = result.docs[0] as unknown as Methode | undefined
-  if (!method) return { title: 'Nicht gefunden' }
+  if (!method) return { title: 'Not found' }
   return { title: `${method.title} – Urban Kit` }
 }
 
@@ -31,7 +31,7 @@ export default async function MethodDetailPage({ params }: Props) {
   const payload = await getPayload({ config })
 
   const result = await payload.find({
-    collection: 'methoden',
+    collection: 'methods',
     where: {
       slug: { equals: slug },
       status: { equals: 'published' },
@@ -50,7 +50,7 @@ export default async function MethodDetailPage({ params }: Props) {
   return (
     <div className="max-w-3xl">
       <Link href="/" className="text-sm text-blue-600 hover:underline mb-6 inline-block">
-        ← Alle Methoden
+        ← All Methods
       </Link>
 
       <div className="flex items-start justify-between gap-4 mb-6">
@@ -77,7 +77,7 @@ export default async function MethodDetailPage({ params }: Props) {
 
       {!!method.description && (
         <section className="mb-8">
-          <h2 className="text-lg font-semibold text-gray-900 mb-3">Beschreibung</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-3">Description</h2>
           <RichTextRenderer
             content={method.description}
             className="text-gray-700 prose prose-sm max-w-none"
@@ -87,7 +87,7 @@ export default async function MethodDetailPage({ params }: Props) {
 
       {method.steps && method.steps.length > 0 && (
         <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-3">Schritte</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-3">Steps</h2>
           <ol className="space-y-3">
             {method.steps.map((s, i) => (
               <li key={s.id ?? i} className="flex gap-3">

@@ -20,7 +20,7 @@ export default function CartButton({ item }: Props) {
           : 'bg-white text-gray-600 border-gray-300 hover:border-blue-500 hover:text-blue-600'
       }`}
     >
-      {saved ? '✓ Gespeichert' : '+ Merken'}
+      {saved ? '✓ Saved' : '+ Save'}
     </button>
   )
 }

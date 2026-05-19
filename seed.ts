@@ -166,7 +166,7 @@ async function seed() {
       .replace(/^-|-$/g, '')
 
     const existing = await payload.find({
-      collection: 'methoden',
+      collection: 'methods',
       where: { slug: { equals: slug } },
       limit: 1,
     })
@@ -209,7 +209,7 @@ async function seed() {
     }
 
     await payload.create({
-      collection: 'methoden',
+      collection: 'methods',
       data: {
         title: method.title,
         slug,

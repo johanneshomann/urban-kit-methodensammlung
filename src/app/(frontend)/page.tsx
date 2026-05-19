@@ -9,7 +9,7 @@ export default async function HomePage() {
   const payload = await getPayload({ config })
 
   const result = await payload.find({
-    collection: 'methoden',
+    collection: 'methods',
     where: {
       status: { equals: 'published' },
     },
@@ -23,9 +23,9 @@ export default async function HomePage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Methodensammlung</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Method Archive</h1>
         <p className="text-gray-500">
-          Entdecke und filtere unsere Sammlung von Methoden für urbane Projekte.
+          Discover and filter our collection of methods for urban projects.
         </p>
       </div>
 
