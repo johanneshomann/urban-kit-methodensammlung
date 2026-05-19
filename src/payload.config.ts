@@ -4,8 +4,10 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 
+import { Goals } from './collections/Goals'
 import { Characteristics } from './collections/Characteristics'
 import { Durations } from './collections/Durations'
+import { Formats } from './collections/Formats'
 import { GroupSizes } from './collections/GroupSizes'
 import { Icons } from './collections/Icons'
 import { Media } from './collections/Media'
@@ -23,7 +25,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Characteristics, Durations, GroupSizes, Icons, Media, Methods, TargetGroups],
+  collections: [Users, Goals, Characteristics, Durations, Formats, GroupSizes, Icons, Media, Methods, TargetGroups],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? 'fallback-secret-change-in-production',
   typescript: {

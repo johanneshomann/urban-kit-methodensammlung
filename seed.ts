@@ -39,6 +39,18 @@ const targetGroups = [
   },
 ]
 
+const aimNames = [
+  'Understanding & Gathering Perspectives',
+  'Developing Ideas',
+  'Exchange & Discourse',
+  'Structuring & Prioritising',
+  'Decision-Making',
+  'Visualisation & Communication',
+  'Testing & Prototyping',
+]
+
+const formatNames = ['Digital', 'Analogue', 'Hybrid']
+
 const durations = [
   { label: 'Under 1 hour', category: 'short' },
   { label: '1–3 hours', category: 'short' },
@@ -122,6 +134,36 @@ async function seed() {
         },
       })
       console.log(`  Created target group: ${name}`)
+    }
+  }
+
+  // Create predefined goals
+  for (const name of aimNames) {
+    const existing = await payload.find({
+      collection: 'goals',
+      where: { name: { equals: name } },
+      limit: 1,
+    })
+    if (existing.docs.length > 0) {
+      console.log(`  Aim exists: ${name}`)
+    } else {
+      await payload.create({ collection: 'goals', data: { name } })
+      console.log(`  Created goal: ${name}`)
+    }
+  }
+
+  // Create predefined formats
+  for (const name of formatNames) {
+    const existing = await payload.find({
+      collection: 'formats',
+      where: { name: { equals: name } },
+      limit: 1,
+    })
+    if (existing.docs.length > 0) {
+      console.log(`  Format exists: ${name}`)
+    } else {
+      await payload.create({ collection: 'formats', data: { name } })
+      console.log(`  Created format: ${name}`)
     }
   }
 
