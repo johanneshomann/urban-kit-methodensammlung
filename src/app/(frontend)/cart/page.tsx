@@ -4,18 +4,6 @@ import CartExport from '@/components/CartExport'
 import { useCart } from '@/hooks/useCart'
 import Link from 'next/link'
 
-const difficultyColor: Record<string, string> = {
-  Easy: 'bg-green-100 text-green-700',
-  Medium: 'bg-yellow-100 text-yellow-700',
-  Hard: 'bg-red-100 text-red-700',
-}
-
-const categoryColor: Record<string, string> = {
-  A: 'bg-purple-100 text-purple-700',
-  B: 'bg-blue-100 text-blue-700',
-  C: 'bg-orange-100 text-orange-700',
-}
-
 export default function CartPage() {
   const { cart, remove, mounted } = useCart()
 
@@ -63,18 +51,15 @@ export default function CartPage() {
                 </button>
               </div>
 
-              <div className="flex flex-wrap gap-1.5">
-                {item.category && (
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${categoryColor[item.category] ?? 'bg-gray-100 text-gray-600'}`}>
-                    {item.category}
-                  </span>
-                )}
-                {item.difficulty && (
-                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${difficultyColor[item.difficulty] ?? 'bg-gray-100 text-gray-600'}`}>
-                    {item.difficulty}
-                  </span>
-                )}
-              </div>
+              {item.tags && item.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1.5">
+                  {item.tags.map((tag) => (
+                    <span key={tag} className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
 
               <Link
                 href={`/methoden/${item.slug}`}
@@ -95,8 +80,7 @@ export default function CartPage() {
               <thead>
                 <tr className="bg-gray-50">
                   <th className="text-left p-3 border border-gray-200 font-medium text-gray-600">Methode</th>
-                  <th className="text-left p-3 border border-gray-200 font-medium text-gray-600">Kategorie</th>
-                  <th className="text-left p-3 border border-gray-200 font-medium text-gray-600">Schwierigkeit</th>
+                  <th className="text-left p-3 border border-gray-200 font-medium text-gray-600">Tags</th>
                 </tr>
               </thead>
               <tbody>
@@ -107,8 +91,9 @@ export default function CartPage() {
                         {item.title}
                       </Link>
                     </td>
-                    <td className="p-3 border border-gray-200">{item.category ?? '—'}</td>
-                    <td className="p-3 border border-gray-200">{item.difficulty ?? '—'}</td>
+                    <td className="p-3 border border-gray-200">
+                      {item.tags?.join(', ') ?? '—'}
+                    </td>
                   </tr>
                 ))}
               </tbody>

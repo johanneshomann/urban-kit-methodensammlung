@@ -16,8 +16,6 @@ export type Methode = {
   title: string
   slug?: string | null
   status?: 'draft' | 'published' | null
-  category?: 'A' | 'B' | 'C' | null
-  difficulty?: 'Easy' | 'Medium' | 'Hard' | null
   description?: unknown
   steps?: Array<{ id?: string | null; step: string }> | null
   tags?: (Tag | string)[] | null

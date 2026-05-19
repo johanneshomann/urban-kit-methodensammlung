@@ -10,7 +10,7 @@ type Props = {
 }
 
 export default function FilterableMethodList({ methods }: Props) {
-  const [filters, setFilters] = useState({ category: '', difficulty: '', tag: '' })
+  const [filters, setFilters] = useState({ tag: '' })
 
   const availableTags = useMemo(() => {
     const names = new Set<string>()
@@ -26,8 +26,6 @@ export default function FilterableMethodList({ methods }: Props) {
 
   const filtered = useMemo(() => {
     return methods.filter((m) => {
-      if (filters.category && m.category !== filters.category) return false
-      if (filters.difficulty && m.difficulty !== filters.difficulty) return false
       if (filters.tag) {
         const tagNames = (m.tags ?? []).map((t) =>
           typeof t === 'object' ? (t as Tag).name : '',

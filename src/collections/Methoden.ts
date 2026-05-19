@@ -4,7 +4,7 @@ export const Methoden: CollectionConfig = {
   slug: 'methoden',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'category', 'difficulty', 'status', 'updatedAt'],
+    defaultColumns: ['title', 'tags', 'status', 'updatedAt'],
   },
   fields: [
     {
@@ -50,30 +50,7 @@ export const Methoden: CollectionConfig = {
         position: 'sidebar',
       },
     },
-    {
-      name: 'category',
-      type: 'select',
-      options: [
-        { label: 'Category A', value: 'A' },
-        { label: 'Category B', value: 'B' },
-        { label: 'Category C', value: 'C' },
-      ],
-      admin: {
-        position: 'sidebar',
-      },
-    },
-    {
-      name: 'difficulty',
-      type: 'select',
-      options: [
-        { label: 'Easy', value: 'Easy' },
-        { label: 'Medium', value: 'Medium' },
-        { label: 'Hard', value: 'Hard' },
-      ],
-      admin: {
-        position: 'sidebar',
-      },
-    },
+
     {
       name: 'image',
       type: 'upload',

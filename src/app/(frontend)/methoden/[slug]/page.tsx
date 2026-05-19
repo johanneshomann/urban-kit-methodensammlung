@@ -60,29 +60,20 @@ export default async function MethodDetailPage({ params }: Props) {
             id: String(method.id),
             slug: method.slug ?? '',
             title: method.title,
-            category: method.category ?? undefined,
-            difficulty: method.difficulty ?? undefined,
+            tags: tags.map((t) => t.name),
           }}
         />
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-6">
-        {method.category && (
-          <span className="text-sm px-3 py-1 rounded-full bg-purple-100 text-purple-700 font-medium">
-            Kategorie {method.category}
-          </span>
-        )}
-        {method.difficulty && (
-          <span className="text-sm px-3 py-1 rounded-full bg-blue-100 text-blue-700 font-medium">
-            {method.difficulty}
-          </span>
-        )}
-        {tags.map((tag) => (
-          <span key={tag.id} className="text-sm px-3 py-1 rounded-full bg-gray-100 text-gray-600">
-            {tag.name}
-          </span>
-        ))}
-      </div>
+      {tags.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-6">
+          {tags.map((tag) => (
+            <span key={tag.id} className="text-sm px-3 py-1 rounded-full bg-gray-100 text-gray-600">
+              {tag.name}
+            </span>
+          ))}
+        </div>
+      )}
 
       {!!method.description && (
         <section className="mb-8">
