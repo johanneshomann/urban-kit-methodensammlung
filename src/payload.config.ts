@@ -9,6 +9,7 @@ import { GroupSizes } from './collections/GroupSizes'
 import { Icons } from './collections/Icons'
 import { Media } from './collections/Media'
 import { Methods } from './collections/Methods'
+import { TargetGroups } from './collections/TargetGroups'
 import { Users } from './collections/Users'
 
 const filename = fileURLToPath(import.meta.url)
@@ -21,7 +22,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Characteristics, GroupSizes, Icons, Media, Methods],
+  collections: [Users, Characteristics, GroupSizes, Icons, Media, Methods, TargetGroups],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? 'fallback-secret-change-in-production',
   typescript: {
