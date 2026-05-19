@@ -12,6 +12,8 @@ import { GroupSizes } from './collections/GroupSizes'
 import { Icons } from './collections/Icons'
 import { Media } from './collections/Media'
 import { Methods } from './collections/Methods'
+import { ParticipationDepths } from './collections/ParticipationDepths'
+import { ProjectPhases } from './collections/ProjectPhases'
 import { TargetGroups } from './collections/TargetGroups'
 import { Users } from './collections/Users'
 
@@ -25,7 +27,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Goals, Characteristics, Durations, Formats, GroupSizes, Icons, Media, Methods, TargetGroups],
+  collections: [Users, Goals, Characteristics, Durations, Formats, GroupSizes, Icons, Media, Methods, ParticipationDepths, ProjectPhases, TargetGroups],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? 'fallback-secret-change-in-production',
   typescript: {

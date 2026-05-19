@@ -39,6 +39,19 @@ const targetGroups = [
   },
 ]
 
+const participationDepthNames = ['Informing', 'Consultation', 'Co-determination']
+
+const projectPhases = [
+  { name: 'Onboarding', category: 'preparation' },
+  { name: 'Concept Development', category: 'preparation' },
+  { name: 'Project Planning', category: 'preparation' },
+  { name: 'Project Execution', category: 'implementation' },
+  { name: 'Project Monitoring', category: 'implementation' },
+  { name: 'Project Completion', category: 'follow-up' },
+  { name: 'Conclusion & Impact', category: 'follow-up' },
+  { name: 'Reflection & Evaluation', category: 'follow-up' },
+]
+
 const aimNames = [
   'Understanding & Gathering Perspectives',
   'Developing Ideas',
@@ -134,6 +147,36 @@ async function seed() {
         },
       })
       console.log(`  Created target group: ${name}`)
+    }
+  }
+
+  // Create predefined participation depths
+  for (const name of participationDepthNames) {
+    const existing = await payload.find({
+      collection: 'participation-depths',
+      where: { name: { equals: name } },
+      limit: 1,
+    })
+    if (existing.docs.length > 0) {
+      console.log(`  Participation depth exists: ${name}`)
+    } else {
+      await payload.create({ collection: 'participation-depths', data: { name } })
+      console.log(`  Created participation depth: ${name}`)
+    }
+  }
+
+  // Create predefined project phases
+  for (const { name, category } of projectPhases) {
+    const existing = await payload.find({
+      collection: 'project-phases',
+      where: { name: { equals: name } },
+      limit: 1,
+    })
+    if (existing.docs.length > 0) {
+      console.log(`  Project phase exists: ${name}`)
+    } else {
+      await payload.create({ collection: 'project-phases', data: { name, category } })
+      console.log(`  Created project phase: ${name}`)
     }
   }
 

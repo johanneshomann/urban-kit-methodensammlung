@@ -1,0 +1,34 @@
+import type { CollectionConfig } from 'payload'
+
+export const ProjectPhases: CollectionConfig = {
+  slug: 'project-phases',
+  labels: {
+    singular: 'Project Phase',
+    plural: 'Project Phases',
+  },
+  admin: {
+    useAsTitle: 'name',
+    defaultColumns: ['name', 'category'],
+  },
+  fields: [
+    {
+      name: 'name',
+      type: 'text',
+      required: true,
+      unique: true,
+    },
+    {
+      name: 'category',
+      type: 'select',
+      required: true,
+      options: [
+        { label: 'Preparation', value: 'preparation' },
+        { label: 'Implementation', value: 'implementation' },
+        { label: 'Follow-up', value: 'follow-up' },
+      ],
+      admin: {
+        position: 'sidebar',
+      },
+    },
+  ],
+}
