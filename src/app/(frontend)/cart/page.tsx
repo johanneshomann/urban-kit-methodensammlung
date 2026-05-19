@@ -51,11 +51,11 @@ export default function CartPage() {
                 </button>
               </div>
 
-              {item.tags && item.tags.length > 0 && (
+              {item.characteristics && item.characteristics.length > 0 && (
                 <div className="flex flex-wrap gap-1.5">
-                  {item.tags.map((tag) => (
-                    <span key={tag} className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">
-                      {tag}
+                  {item.characteristics.map((c) => (
+                    <span key={c} className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">
+                      {c}
                     </span>
                   ))}
                 </div>
@@ -80,7 +80,7 @@ export default function CartPage() {
               <thead>
                 <tr className="bg-gray-50">
                   <th className="text-left p-3 border border-gray-200 font-medium text-gray-600">Methode</th>
-                  <th className="text-left p-3 border border-gray-200 font-medium text-gray-600">Tags</th>
+                  <th className="text-left p-3 border border-gray-200 font-medium text-gray-600">Characteristics</th>
                 </tr>
               </thead>
               <tbody>
@@ -92,7 +92,7 @@ export default function CartPage() {
                       </Link>
                     </td>
                     <td className="p-3 border border-gray-200">
-                      {item.tags?.join(', ') ?? '—'}
+                      {item.characteristics?.join(', ') ?? '—'}
                     </td>
                   </tr>
                 ))}

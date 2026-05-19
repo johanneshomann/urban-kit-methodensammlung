@@ -1,23 +1,23 @@
 'use client'
 
-import type { Methode, Tag } from '@/types'
+import type { Characteristic, Methode } from '@/types'
 import { useMemo, useState } from 'react'
+import CharacteristicFilter from './CharacteristicFilter'
 import MethodCard from './MethodCard'
-import TagFilter from './TagFilter'
 
 type Props = {
   methods: Methode[]
 }
 
 export default function FilterableMethodList({ methods }: Props) {
-  const [filters, setFilters] = useState({ tag: '' })
+  const [filters, setFilters] = useState({ characteristic: '' })
 
-  const availableTags = useMemo(() => {
+  const availableCharacteristics = useMemo(() => {
     const names = new Set<string>()
     for (const m of methods) {
-      if (Array.isArray(m.tags)) {
-        for (const t of m.tags) {
-          if (typeof t === 'object' && t !== null) names.add((t as Tag).name)
+      if (Array.isArray(m.characteristics)) {
+        for (const c of m.characteristics) {
+          if (typeof c === 'object' && c !== null) names.add((c as Characteristic).name)
         }
       }
     }
@@ -26,11 +26,11 @@ export default function FilterableMethodList({ methods }: Props) {
 
   const filtered = useMemo(() => {
     return methods.filter((m) => {
-      if (filters.tag) {
-        const tagNames = (m.tags ?? []).map((t) =>
-          typeof t === 'object' ? (t as Tag).name : '',
+      if (filters.characteristic) {
+        const names = (m.characteristics ?? []).map((c) =>
+          typeof c === 'object' ? (c as Characteristic).name : '',
         )
-        if (!tagNames.includes(filters.tag)) return false
+        if (!names.includes(filters.characteristic)) return false
       }
       return true
     })
@@ -38,7 +38,11 @@ export default function FilterableMethodList({ methods }: Props) {
 
   return (
     <div className="flex flex-col gap-6">
-      <TagFilter filters={filters} onChange={setFilters} availableTags={availableTags} />
+      <CharacteristicFilter
+        filters={filters}
+        onChange={setFilters}
+        availableCharacteristics={availableCharacteristics}
+      />
 
       <p className="text-sm text-gray-500">
         {filtered.length} Methode{filtered.length !== 1 ? 'n' : ''} gefunden

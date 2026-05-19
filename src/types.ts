@@ -1,4 +1,4 @@
-export type Tag = {
+export type Characteristic = {
   id: string
   name: string
 }
@@ -18,7 +18,7 @@ export type Methode = {
   status?: 'draft' | 'published' | null
   description?: unknown
   steps?: Array<{ id?: string | null; step: string }> | null
-  tags?: (Tag | string)[] | null
+  characteristics?: (Characteristic | string)[] | null
   image?: MediaFile | string | null
   createdAt: string
   updatedAt: string

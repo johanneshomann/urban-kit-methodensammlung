@@ -1,4 +1,4 @@
-import type { Methode, Tag } from '@/types'
+import type { Characteristic, Methode } from '@/types'
 import Link from 'next/link'
 import CartButton from './CartButton'
 
@@ -7,8 +7,8 @@ type Props = {
 }
 
 export default function MethodCard({ method }: Props) {
-  const tags = Array.isArray(method.tags)
-    ? method.tags.map((t) => (typeof t === 'object' ? t : null)).filter(Boolean) as Tag[]
+  const characteristics = Array.isArray(method.characteristics)
+    ? method.characteristics.map((c) => (typeof c === 'object' ? c : null)).filter(Boolean) as Characteristic[]
     : []
 
   return (
@@ -25,16 +25,16 @@ export default function MethodCard({ method }: Props) {
             id: String(method.id),
             slug: method.slug ?? '',
             title: method.title,
-            tags: tags.map((t) => t.name),
+            characteristics: characteristics.map((c) => c.name),
           }}
         />
       </div>
 
-      {tags.length > 0 && (
+      {characteristics.length > 0 && (
         <div className="flex flex-wrap gap-1.5">
-          {tags.map((tag) => (
-            <span key={tag.id} className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">
-              {tag.name}
+          {characteristics.map((c) => (
+            <span key={c.id} className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">
+              {c.name}
             </span>
           ))}
         </div>

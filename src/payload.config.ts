@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url'
 
 import { Media } from './collections/Media'
 import { Methoden } from './collections/Methoden'
-import { Tags } from './collections/Tags'
+import { Characteristics } from './collections/Characteristics'
 import { Users } from './collections/Users'
 
 const filename = fileURLToPath(import.meta.url)
@@ -19,7 +19,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Tags, Media, Methoden],
+  collections: [Users, Characteristics, Media, Methoden],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? 'fallback-secret-change-in-production',
   typescript: {

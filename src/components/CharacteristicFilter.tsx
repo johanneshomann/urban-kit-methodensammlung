@@ -1,44 +1,44 @@
 'use client'
 
 type FilterState = {
-  tag: string
+  characteristic: string
 }
 
 type Props = {
   filters: FilterState
   onChange: (filters: FilterState) => void
-  availableTags: string[]
+  availableCharacteristics: string[]
 }
 
-export default function TagFilter({ filters, onChange, availableTags }: Props) {
+export default function CharacteristicFilter({ filters, onChange, availableCharacteristics }: Props) {
   return (
     <div className="flex flex-wrap gap-3 items-center bg-white border border-gray-200 rounded-xl p-4">
       <span className="text-sm font-medium text-gray-500 mr-1">Filter:</span>
 
-      {availableTags.length > 0 && (
+      {availableCharacteristics.length > 0 && (
         <div className="flex items-center gap-1.5">
-          <label className="text-xs text-gray-500">Tag</label>
+          <label className="text-xs text-gray-500">Characteristic</label>
           <select
-            value={filters.tag}
-            onChange={(e) => onChange({ tag: e.target.value })}
+            value={filters.characteristic}
+            onChange={(e) => onChange({ characteristic: e.target.value })}
             className="text-sm border border-gray-200 rounded-md px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="">Alle</option>
-            {availableTags.map((t) => (
-              <option key={t} value={t}>
-                {t}
+            <option value="">All</option>
+            {availableCharacteristics.map((c) => (
+              <option key={c} value={c}>
+                {c}
               </option>
             ))}
           </select>
         </div>
       )}
 
-      {filters.tag && (
+      {filters.characteristic && (
         <button
-          onClick={() => onChange({ tag: '' })}
+          onClick={() => onChange({ characteristic: '' })}
           className="text-xs text-red-500 hover:text-red-700 ml-auto"
         >
-          Zurücksetzen
+          Reset
         </button>
       )}
     </div>

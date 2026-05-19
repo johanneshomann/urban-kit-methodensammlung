@@ -4,7 +4,7 @@ export type CartItem = {
   id: string
   slug: string
   title: string
-  tags?: string[]
+  characteristics?: string[]
 }
 
 export function getCart(): CartItem[] {

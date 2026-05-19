@@ -2,7 +2,7 @@ import 'dotenv/config'
 import { getPayload } from 'payload'
 import config from './src/payload.config'
 
-const tags = [
+const characteristicNames = [
   'experimental',
   'standard',
   'partizipativ',
@@ -15,9 +15,7 @@ const tags = [
 const methods = [
   {
     title: 'World Café',
-    category: 'A' as const,
-    difficulty: 'Easy' as const,
-    tags: ['partizipativ', 'analog'],
+    characteristics: ['partizipativ', 'analog'],
     steps: [
       'Tische mit Papiertischdecken aufstellen',
       'Teilnehmende auf Tische verteilen',
@@ -29,9 +27,7 @@ const methods = [
   },
   {
     title: 'Design Thinking Sprint',
-    category: 'B' as const,
-    difficulty: 'Hard' as const,
-    tags: ['kreativ', 'experimental'],
+    characteristics: ['kreativ', 'experimental'],
     steps: [
       'Problem definieren und verstehen',
       'Nutzerbedürfnisse erforschen',
@@ -43,9 +39,7 @@ const methods = [
   },
   {
     title: 'Stakeholder-Mapping',
-    category: 'A' as const,
-    difficulty: 'Medium' as const,
-    tags: ['analytisch', 'standard'],
+    characteristics: ['analytisch', 'standard'],
     steps: [
       'Alle relevanten Stakeholder identifizieren',
       'Interessen und Einfluss einschätzen',
@@ -56,9 +50,7 @@ const methods = [
   },
   {
     title: 'Zukunftswerkstatt',
-    category: 'C' as const,
-    difficulty: 'Medium' as const,
-    tags: ['partizipativ', 'kreativ'],
+    characteristics: ['partizipativ', 'kreativ'],
     steps: [
       'Kritikphase: Probleme benennen',
       'Utopiephase: Wünsche formulieren',
@@ -69,9 +61,7 @@ const methods = [
   },
   {
     title: 'Open Space Technology',
-    category: 'B' as const,
-    difficulty: 'Easy' as const,
-    tags: ['partizipativ', 'experimental'],
+    characteristics: ['partizipativ', 'experimental'],
     steps: [
       'Rahmenthema bekannt geben',
       'Agenda von Teilnehmenden erstellen lassen',
@@ -83,9 +73,7 @@ const methods = [
   },
   {
     title: 'Community Walk',
-    category: 'C' as const,
-    difficulty: 'Easy' as const,
-    tags: ['analog', 'partizipativ'],
+    characteristics: ['analog', 'partizipativ'],
     steps: [
       'Untersuchungsgebiet festlegen',
       'Teilnehmende einladen',
@@ -97,9 +85,7 @@ const methods = [
   },
   {
     title: 'Digitale Partizipationsplattform',
-    category: 'B' as const,
-    difficulty: 'Hard' as const,
-    tags: ['digital', 'experimental'],
+    characteristics: ['digital', 'experimental'],
     steps: [
       'Anforderungen und Zielgruppe definieren',
       'Plattform auswählen oder entwickeln',
@@ -111,9 +97,7 @@ const methods = [
   },
   {
     title: 'Fishbowl-Diskussion',
-    category: 'A' as const,
-    difficulty: 'Easy' as const,
-    tags: ['standard', 'analog'],
+    characteristics: ['standard', 'analog'],
     steps: [
       'Innenkreis mit 4–5 Stühlen aufstellen',
       'Thema und Regeln erklären',
@@ -125,9 +109,7 @@ const methods = [
   },
   {
     title: 'Rapid Prototyping im Stadtraum',
-    category: 'C' as const,
-    difficulty: 'Hard' as const,
-    tags: ['experimental', 'kreativ'],
+    characteristics: ['experimental', 'kreativ'],
     steps: [
       'Problemstellung im Stadtraum identifizieren',
       'Günstige Materialien beschaffen',
@@ -139,9 +121,7 @@ const methods = [
   },
   {
     title: 'Bürgerpanel',
-    category: 'A' as const,
-    difficulty: 'Medium' as const,
-    tags: ['standard', 'partizipativ'],
+    characteristics: ['standard', 'partizipativ'],
     steps: [
       'Zufällige Auswahl von Bürgerinnen und Bürgern',
       'Informationsphase zu Thema durchführen',
@@ -158,21 +138,21 @@ async function seed() {
 
   console.log('🌱 Seeding database...')
 
-  // Create tags
-  const tagMap: Record<string, string> = {}
-  for (const tagName of tags) {
+  // Create characteristics
+  const characteristicMap: Record<string, string> = {}
+  for (const name of characteristicNames) {
     const existing = await payload.find({
-      collection: 'tags',
-      where: { name: { equals: tagName } },
+      collection: 'characteristics',
+      where: { name: { equals: name } },
       limit: 1,
     })
     if (existing.docs.length > 0) {
-      tagMap[tagName] = String(existing.docs[0].id)
-      console.log(`  Tag exists: ${tagName}`)
+      characteristicMap[name] = String(existing.docs[0].id)
+      console.log(`  Characteristic exists: ${name}`)
     } else {
-      const tag = await payload.create({ collection: 'tags', data: { name: tagName } })
-      tagMap[tagName] = String(tag.id)
-      console.log(`  Created tag: ${tagName}`)
+      const created = await payload.create({ collection: 'characteristics', data: { name } })
+      characteristicMap[name] = String(created.id)
+      console.log(`  Created characteristic: ${name}`)
     }
   }
 
@@ -234,11 +214,9 @@ async function seed() {
         title: method.title,
         slug,
         status: 'published',
-        category: method.category,
-        difficulty: method.difficulty,
         description: descriptionContent,
         steps: method.steps.map((step) => ({ step })),
-        tags: method.tags.map((t) => tagMap[t]).filter(Boolean),
+        characteristics: method.characteristics.map((c) => characteristicMap[c]).filter(Boolean),
       },
     })
     console.log(`  Created method: ${method.title}`)

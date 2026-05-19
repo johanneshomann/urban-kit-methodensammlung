@@ -4,7 +4,7 @@ export const Methoden: CollectionConfig = {
   slug: 'methoden',
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'tags', 'status', 'updatedAt'],
+    defaultColumns: ['title', 'characteristics', 'status', 'updatedAt'],
   },
   fields: [
     {
@@ -77,9 +77,10 @@ export const Methoden: CollectionConfig = {
       ],
     },
     {
-      name: 'tags',
+      name: 'characteristics',
+      label: 'Characteristics',
       type: 'relationship',
-      relationTo: 'tags',
+      relationTo: 'characteristics',
       hasMany: true,
     },
   ],

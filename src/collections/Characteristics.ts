@@ -1,7 +1,11 @@
 import type { CollectionConfig } from 'payload'
 
-export const Tags: CollectionConfig = {
-  slug: 'tags',
+export const Characteristics: CollectionConfig = {
+  slug: 'characteristics',
+  labels: {
+    singular: 'Characteristic',
+    plural: 'Characteristics',
+  },
   admin: {
     useAsTitle: 'name',
   },

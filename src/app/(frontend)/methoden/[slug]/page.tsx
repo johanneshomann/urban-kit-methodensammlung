@@ -1,6 +1,6 @@
 import CartButton from '@/components/CartButton'
 import RichTextRenderer from '@/components/RichTextRenderer'
-import type { Methode, Tag } from '@/types'
+import type { Characteristic, Methode } from '@/types'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import type { Metadata } from 'next'
@@ -43,9 +43,9 @@ export default async function MethodDetailPage({ params }: Props) {
   const method = result.docs[0] as unknown as Methode | undefined
   if (!method) notFound()
 
-  const tags = (method.tags ?? []).map((t) =>
-    typeof t === 'object' ? (t as Tag) : null,
-  ).filter(Boolean) as Tag[]
+  const characteristics = (method.characteristics ?? []).map((c) =>
+    typeof c === 'object' ? (c as Characteristic) : null,
+  ).filter(Boolean) as Characteristic[]
 
   return (
     <div className="max-w-3xl">
@@ -60,16 +60,16 @@ export default async function MethodDetailPage({ params }: Props) {
             id: String(method.id),
             slug: method.slug ?? '',
             title: method.title,
-            tags: tags.map((t) => t.name),
+            characteristics: characteristics.map((c) => c.name),
           }}
         />
       </div>
 
-      {tags.length > 0 && (
+      {characteristics.length > 0 && (
         <div className="flex flex-wrap gap-2 mb-6">
-          {tags.map((tag) => (
-            <span key={tag.id} className="text-sm px-3 py-1 rounded-full bg-gray-100 text-gray-600">
-              {tag.name}
+          {characteristics.map((c) => (
+            <span key={c.id} className="text-sm px-3 py-1 rounded-full bg-gray-100 text-gray-600">
+              {c.name}
             </span>
           ))}
         </div>
