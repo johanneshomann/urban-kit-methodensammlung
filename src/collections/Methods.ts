@@ -9,6 +9,7 @@ export const Methods: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'characteristics', 'status', 'updatedAt'],
+    group: 'Methods Archive',
   },
   fields: [
     {
