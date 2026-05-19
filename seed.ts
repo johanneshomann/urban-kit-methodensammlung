@@ -39,6 +39,15 @@ const targetGroups = [
   },
 ]
 
+const durations = [
+  { label: 'Under 1 hour', category: 'short' },
+  { label: '1–3 hours', category: 'short' },
+  { label: '1 day', category: 'medium' },
+  { label: '1 day – 1 week', category: 'medium' },
+  { label: 'Several weeks', category: 'long' },
+  { label: 'Several months', category: 'long' },
+]
+
 const groupSizeNames = [
   'Small Group (up to 15 people)',
   'Medium Group (up to 30 people)',
@@ -113,6 +122,21 @@ async function seed() {
         },
       })
       console.log(`  Created target group: ${name}`)
+    }
+  }
+
+  // Create predefined durations
+  for (const { label, category } of durations) {
+    const existing = await payload.find({
+      collection: 'durations',
+      where: { label: { equals: label } },
+      limit: 1,
+    })
+    if (existing.docs.length > 0) {
+      console.log(`  Duration exists: ${label}`)
+    } else {
+      await payload.create({ collection: 'durations', data: { label, category } })
+      console.log(`  Created duration: ${label}`)
     }
   }
 

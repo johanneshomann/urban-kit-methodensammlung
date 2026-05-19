@@ -5,6 +5,7 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 
 import { Characteristics } from './collections/Characteristics'
+import { Durations } from './collections/Durations'
 import { GroupSizes } from './collections/GroupSizes'
 import { Icons } from './collections/Icons'
 import { Media } from './collections/Media'
@@ -22,7 +23,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Characteristics, GroupSizes, Icons, Media, Methods, TargetGroups],
+  collections: [Users, Characteristics, Durations, GroupSizes, Icons, Media, Methods, TargetGroups],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? 'fallback-secret-change-in-production',
   typescript: {
