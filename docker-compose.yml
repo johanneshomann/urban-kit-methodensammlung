@@ -9,6 +9,7 @@ services:
         condition: service_healthy
     volumes:
       - media_data:/app/public/media
+      - icons_data:/app/public/icons
     healthcheck:
       test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/admin', r => process.exit(r.statusCode >= 500 ? 1 : 0)).on('error', () => process.exit(1))"]
       interval: 10s
@@ -44,3 +45,4 @@ services:
 volumes:
   mongodb_data:
   media_data:
+  icons_data:
