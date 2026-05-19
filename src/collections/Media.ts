@@ -1,9 +1,10 @@
 import type { CollectionConfig } from 'payload'
+import path from 'path'
 
 export const Media: CollectionConfig = {
   slug: 'media',
   upload: {
-    staticDir: '../public/media',
+    staticDir: path.resolve(process.cwd(), 'public/media'),
   },
   fields: [
     {
