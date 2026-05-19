@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "allMethods": "All Methods",
+    "saved": "Saved"
+  },
+  "footer": {
+    "text": "Urban Kit Method Archive"
+  },
+  "meta": {
+    "title": "Urban Kit – Method Archive",
+    "description": "A collection of methods and tools for urban projects."
+  },
+  "home": {
+    "title": "Method Archive",
+    "subtitle": "Discover and filter our collection of methods for urban projects."
+  },
+  "filter": {
+    "label": "Filter:",
+    "characteristic": "Characteristic",
+    "all": "All",
+    "reset": "Reset"
+  },
+  "methods": {
+    "foundOne": "1 method found",
+    "foundMany": "{count} methods found",
+    "notFound": "No methods found.",
+    "adjustFilters": "Adjust filters or reset.",
+    "learnMore": "Learn more →",
+    "allMethods": "← All Methods",
+    "description": "Description",
+    "steps": "Steps"
+  },
+  "cart": {
+    "title": "Saved Methods",
+    "countOne": "1 method saved",
+    "countMany": "{count} methods saved",
+    "empty": "Your saved list is empty.",
+    "discover": "Discover methods →",
+    "remove": "Remove",
+    "viewDetails": "View details →",
+    "comparison": "Comparison",
+    "method": "Method",
+    "characteristics": "Characteristics",
+    "export": "↓ Export as JSON"
+  },
+  "cartButton": {
+    "saved": "✓ Saved",
+    "save": "+ Save"
+  },
+  "loading": "Loading…"
+}

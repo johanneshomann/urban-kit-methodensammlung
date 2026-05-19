@@ -2,30 +2,34 @@
 
 import CartExport from '@/components/CartExport'
 import { useCart } from '@/hooks/useCart'
-import Link from 'next/link'
+import { Link } from '@/navigation'
+import { useTranslations } from 'next-intl'
 
 export default function CartPage() {
   const { cart, remove, mounted } = useCart()
+  const t = useTranslations('cart')
 
   if (!mounted) {
-    return <div className="py-16 text-center text-gray-400">Loading…</div>
+    return <div className="py-16 text-center text-gray-400"><LoadingText /></div>
   }
 
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-1">Saved Methods</h1>
-          <p className="text-gray-500">{cart.length} method{cart.length !== 1 ? 's' : ''} saved</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-1">{t('title')}</h1>
+          <p className="text-gray-500">
+            {cart.length === 1 ? t('countOne') : t('countMany', { count: cart.length })}
+          </p>
         </div>
         <CartExport items={cart} />
       </div>
 
       {cart.length === 0 ? (
         <div className="text-center py-20 text-gray-400">
-          <p className="text-lg mb-2">Your saved list is empty.</p>
+          <p className="text-lg mb-2">{t('empty')}</p>
           <Link href="/" className="text-blue-600 hover:underline text-sm">
-            Discover methods →
+            {t('discover')}
           </Link>
         </div>
       ) : (
@@ -45,7 +49,7 @@ export default function CartPage() {
                 <button
                   onClick={() => remove(item.id)}
                   className="text-xs text-red-400 hover:text-red-600 flex-shrink-0"
-                  title="Remove"
+                  title={t('remove')}
                 >
                   ✕
                 </button>
@@ -65,7 +69,7 @@ export default function CartPage() {
                 href={`/methods/${item.slug}`}
                 className="text-xs text-blue-600 hover:underline mt-auto"
               >
-                View details →
+                {t('viewDetails')}
               </Link>
             </div>
           ))}
@@ -74,13 +78,13 @@ export default function CartPage() {
 
       {cart.length > 1 && (
         <section className="mt-12">
-          <h2 className="text-lg font-semibold text-gray-900 mb-4">Comparison</h2>
+          <h2 className="text-lg font-semibold text-gray-900 mb-4">{t('comparison')}</h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm border-collapse">
               <thead>
                 <tr className="bg-gray-50">
-                  <th className="text-left p-3 border border-gray-200 font-medium text-gray-600">Method</th>
-                  <th className="text-left p-3 border border-gray-200 font-medium text-gray-600">Characteristics</th>
+                  <th className="text-left p-3 border border-gray-200 font-medium text-gray-600">{t('method')}</th>
+                  <th className="text-left p-3 border border-gray-200 font-medium text-gray-600">{t('characteristics')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -103,4 +107,9 @@ export default function CartPage() {
       )}
     </div>
   )
+}
+
+function LoadingText() {
+  const t = useTranslations()
+  return <>{t('loading')}</>
 }

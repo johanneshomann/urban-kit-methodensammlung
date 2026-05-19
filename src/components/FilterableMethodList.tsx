@@ -1,6 +1,7 @@
 'use client'
 
 import type { Characteristic, Methode } from '@/types'
+import { useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 import CharacteristicFilter from './CharacteristicFilter'
 import MethodCard from './MethodCard'
@@ -10,6 +11,7 @@ type Props = {
 }
 
 export default function FilterableMethodList({ methods }: Props) {
+  const t = useTranslations('methods')
   const [filters, setFilters] = useState({ characteristic: '' })
 
   const availableCharacteristics = useMemo(() => {
@@ -43,13 +45,13 @@ export default function FilterableMethodList({ methods }: Props) {
       />
 
       <p className="text-sm text-gray-500">
-        {filtered.length} method{filtered.length !== 1 ? 's' : ''} found
+        {filtered.length === 1 ? t('foundOne') : t('foundMany', { count: filtered.length })}
       </p>
 
       {filtered.length === 0 ? (
         <div className="text-center py-16 text-gray-400">
-          <p className="text-lg">No methods found.</p>
-          <p className="text-sm mt-1">Adjust filters or reset.</p>
+          <p className="text-lg">{t('notFound')}</p>
+          <p className="text-sm mt-1">{t('adjustFilters')}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

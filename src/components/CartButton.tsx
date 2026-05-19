@@ -2,6 +2,7 @@
 
 import { useCart } from '@/hooks/useCart'
 import type { CartItem } from '@/lib/cart'
+import { useTranslations } from 'next-intl'
 
 type Props = {
   item: CartItem
@@ -9,6 +10,7 @@ type Props = {
 
 export default function CartButton({ item }: Props) {
   const { add, remove, inCart, mounted } = useCart()
+  const t = useTranslations('cartButton')
   const saved = mounted && inCart(item.id)
 
   return (
@@ -20,7 +22,7 @@ export default function CartButton({ item }: Props) {
           : 'bg-white text-gray-600 border-gray-300 hover:border-blue-500 hover:text-blue-600'
       }`}
     >
-      {saved ? '✓ Saved' : '+ Save'}
+      {saved ? t('saved') : t('save')}
     </button>
   )
 }

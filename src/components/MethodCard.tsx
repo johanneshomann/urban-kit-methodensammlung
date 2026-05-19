@@ -1,5 +1,6 @@
 import type { Characteristic, Methode } from '@/types'
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/navigation'
 import CartButton from './CartButton'
 
 type Props = {
@@ -7,6 +8,7 @@ type Props = {
 }
 
 export default function MethodCard({ method }: Props) {
+  const t = useTranslations('methods')
   const characteristics = Array.isArray(method.characteristics)
     ? method.characteristics.map((c) => (typeof c === 'object' ? c : null)).filter(Boolean) as Characteristic[]
     : []
@@ -41,7 +43,7 @@ export default function MethodCard({ method }: Props) {
       )}
 
       <Link href={`/methods/${method.slug}`} className="text-xs text-blue-600 hover:underline mt-auto">
-        Learn more →
+        {t('learnMore')}
       </Link>
     </div>
   )

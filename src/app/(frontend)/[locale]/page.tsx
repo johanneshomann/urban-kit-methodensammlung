@@ -1,5 +1,6 @@
 import FilterableMethodList from '@/components/FilterableMethodList'
 import type { Methode } from '@/types'
+import { getTranslations } from 'next-intl/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
@@ -7,6 +8,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
   const payload = await getPayload({ config })
+  const t = await getTranslations('home')
 
   const result = await payload.find({
     collection: 'methods',
@@ -23,10 +25,8 @@ export default async function HomePage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Method Archive</h1>
-        <p className="text-gray-500">
-          Discover and filter our collection of methods for urban projects.
-        </p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('title')}</h1>
+        <p className="text-gray-500">{t('subtitle')}</p>
       </div>
 
       <FilterableMethodList methods={methods} />
