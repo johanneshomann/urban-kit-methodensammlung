@@ -8,6 +8,7 @@ export const Formats: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
+    group: 'Filter Collections',
   },
   fields: [
     {

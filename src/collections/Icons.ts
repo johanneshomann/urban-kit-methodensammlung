@@ -10,6 +10,7 @@ export const Icons: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
+    group: 'Assets',
   },
   fields: [
     {

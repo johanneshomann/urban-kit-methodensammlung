@@ -3,6 +3,9 @@ import path from 'path'
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  admin: {
+    group: 'Assets',
+  },
   upload: {
     staticDir: path.resolve(process.cwd(), 'public/media'),
   },

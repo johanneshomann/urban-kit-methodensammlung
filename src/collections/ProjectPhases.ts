@@ -9,6 +9,7 @@ export const ProjectPhases: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     defaultColumns: ['name', 'category'],
+    group: 'Filter Collections',
   },
   fields: [
     {

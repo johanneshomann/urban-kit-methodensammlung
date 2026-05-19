@@ -8,6 +8,7 @@ export const Characteristics: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
+    group: 'Filter Collections',
   },
   fields: [
     {

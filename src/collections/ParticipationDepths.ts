@@ -8,6 +8,7 @@ export const ParticipationDepths: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
+    group: 'Filter Collections',
   },
   fields: [
     {

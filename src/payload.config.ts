@@ -27,7 +27,16 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Goals, Characteristics, Durations, Formats, GroupSizes, Icons, Media, Methods, ParticipationDepths, ProjectPhases, TargetGroups],
+  collections: [
+    // Content
+    Methods,
+    // Filter Collections
+    Characteristics, Durations, Formats, Goals, GroupSizes, ParticipationDepths, ProjectPhases, TargetGroups,
+    // Assets
+    Icons, Media,
+    // System
+    Users,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? 'fallback-secret-change-in-production',
   typescript: {

@@ -9,6 +9,7 @@ export const Durations: CollectionConfig = {
   admin: {
     useAsTitle: 'label',
     defaultColumns: ['label', 'category'],
+    group: 'Filter Collections',
   },
   fields: [
     {

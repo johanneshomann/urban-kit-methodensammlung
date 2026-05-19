@@ -8,6 +8,7 @@ export const TargetGroups: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
+    group: 'Filter Collections',
   },
   fields: [
     {
