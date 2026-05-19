@@ -9,7 +9,24 @@ services:
         condition: service_healthy
     volumes:
       - media_data:/app/public/media
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     restart: unless-stopped
+
+  seed:
+    build: .
+    command: npx tsx seed.ts
+    env_file: .env
+    depends_on:
+      app:
+        condition: service_healthy
+      mongodb:
+        condition: service_healthy
+    restart: "no"
 
   mongodb:
     image: mongo:7

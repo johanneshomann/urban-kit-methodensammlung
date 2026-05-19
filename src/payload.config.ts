@@ -4,9 +4,9 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 
+import { Characteristics } from './collections/Characteristics'
 import { Media } from './collections/Media'
 import { Methods } from './collections/Methods'
-import { Characteristics } from './collections/Characteristics'
 import { Users } from './collections/Users'
 
 const filename = fileURLToPath(import.meta.url)

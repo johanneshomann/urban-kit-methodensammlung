@@ -2,134 +2,126 @@ import 'dotenv/config'
 import { getPayload } from 'payload'
 import config from './src/payload.config'
 
-const characteristicNames = [
-  'experimental',
-  'standard',
-  'partizipativ',
-  'digital',
-  'analog',
-  'kreativ',
-  'analytisch',
-]
+const characteristicNames = ['simple', 'structured', 'playful', 'activating', 'creative']
 
 const methods = [
   {
     title: 'World Café',
-    characteristics: ['partizipativ', 'analog'],
+    characteristics: ['activating', 'playful'],
     steps: [
-      'Tische mit Papiertischdecken aufstellen',
-      'Teilnehmende auf Tische verteilen',
-      'Fragen diskutieren und Ideen notieren',
-      'Gruppen rotieren lassen',
-      'Ergebnisse zusammenfassen',
+      'Set up tables with paper tablecloths',
+      'Distribute participants across tables',
+      'Discuss questions and note ideas',
+      'Rotate groups between tables',
+      'Summarise results in plenary',
     ],
-    description: 'Das World Café ist eine strukturierte Gesprächsmethode, bei der kleine Gruppen an verschiedenen Tischen über Themen diskutieren und dann die Tische wechseln.',
+    description: 'World Café is a structured conversation method in which small groups discuss topics at different tables and then rotate.',
   },
   {
     title: 'Design Thinking Sprint',
-    characteristics: ['kreativ', 'experimental'],
+    characteristics: ['creative', 'structured'],
     steps: [
-      'Problem definieren und verstehen',
-      'Nutzerbedürfnisse erforschen',
-      'Ideen generieren (Brainstorming)',
-      'Prototype entwickeln',
-      'Testen und Feedback einholen',
+      'Define and understand the problem',
+      'Research user needs',
+      'Generate ideas (brainstorming)',
+      'Develop a prototype',
+      'Test and collect feedback',
     ],
-    description: 'Ein strukturierter Prozess zur Lösung komplexer Probleme in kurzer Zeit durch menschenzentriertes Design.',
+    description: 'A structured process for solving complex problems in a short time through human-centred design.',
   },
   {
-    title: 'Stakeholder-Mapping',
-    characteristics: ['analytisch', 'standard'],
+    title: 'Stakeholder Mapping',
+    characteristics: ['structured', 'simple'],
     steps: [
-      'Alle relevanten Stakeholder identifizieren',
-      'Interessen und Einfluss einschätzen',
-      'Matrix erstellen (Einfluss vs. Interesse)',
-      'Kommunikationsstrategie ableiten',
+      'Identify all relevant stakeholders',
+      'Assess interests and influence',
+      'Create a matrix (influence vs. interest)',
+      'Derive a communication strategy',
     ],
-    description: 'Stakeholder-Mapping hilft dabei, alle beteiligten Personen und Gruppen eines Projekts systematisch zu erfassen und ihre Beziehungen zu verstehen.',
+    description: 'Stakeholder mapping helps systematically capture all parties involved in a project and understand their relationships.',
   },
   {
-    title: 'Zukunftswerkstatt',
-    characteristics: ['partizipativ', 'kreativ'],
+    title: 'Future Workshop',
+    characteristics: ['activating', 'creative'],
     steps: [
-      'Kritikphase: Probleme benennen',
-      'Utopiephase: Wünsche formulieren',
-      'Realisierungsphase: Umsetzung planen',
-      'Ergebnisse dokumentieren und verteilen',
+      'Critique phase: name problems',
+      'Utopia phase: formulate wishes',
+      'Realisation phase: plan implementation',
+      'Document and distribute results',
     ],
-    description: 'Die Zukunftswerkstatt ist eine Methode zur demokratischen Zukunftsgestaltung, bei der Bürgerinnen und Bürger aktiv an der Lösung gesellschaftlicher Probleme teilnehmen.',
+    description: 'The future workshop is a method for democratic future-shaping in which citizens actively participate in solving societal problems.',
   },
   {
     title: 'Open Space Technology',
-    characteristics: ['partizipativ', 'experimental'],
+    characteristics: ['activating', 'playful'],
     steps: [
-      'Rahmenthema bekannt geben',
-      'Agenda von Teilnehmenden erstellen lassen',
-      'Parallele Sessions durchführen',
-      'Freies Wandern zwischen Sessions ermöglichen',
-      'Abschlussplenium mit Ergebnissen',
+      'Announce the framing theme',
+      'Let participants create the agenda',
+      'Run parallel sessions',
+      'Allow free movement between sessions',
+      'Closing plenary with results',
     ],
-    description: 'Open Space ist eine selbstorganisierende Konferenzmethode, bei der die Agenda von den Teilnehmenden selbst gestaltet wird.',
+    description: 'Open Space is a self-organising conference method in which the agenda is shaped by the participants themselves.',
   },
   {
     title: 'Community Walk',
-    characteristics: ['analog', 'partizipativ'],
+    characteristics: ['simple', 'activating'],
     steps: [
-      'Untersuchungsgebiet festlegen',
-      'Teilnehmende einladen',
-      'Gemeinsam durch den Stadtraum gehen',
-      'Beobachtungen und Eindrücke dokumentieren',
-      'Erkenntnisse im Nachgang teilen',
+      'Define the area of investigation',
+      'Invite participants',
+      'Walk through the urban space together',
+      'Document observations and impressions',
+      'Share insights afterwards',
     ],
-    description: 'Beim Community Walk erkunden Bewohnerinnen und Bewohner gemeinsam ihr Quartier und tauschen Wahrnehmungen über öffentliche Räume aus.',
+    description: 'In a community walk, residents explore their neighbourhood together and exchange perceptions about public spaces.',
   },
   {
-    title: 'Digitale Partizipationsplattform',
-    characteristics: ['digital', 'experimental'],
+    title: 'Digital Participation Platform',
+    characteristics: ['structured', 'creative'],
     steps: [
-      'Anforderungen und Zielgruppe definieren',
-      'Plattform auswählen oder entwickeln',
-      'Inhalte und Beteiligungsformate gestalten',
-      'Community aktivieren und begleiten',
-      'Ergebnisse auswerten und kommunizieren',
+      'Define requirements and target group',
+      'Select or develop a platform',
+      'Design content and participation formats',
+      'Activate and support the community',
+      'Evaluate and communicate results',
     ],
-    description: 'Digitale Plattformen ermöglichen es, Bürgerinnen und Bürger ortsunabhängig in Planungs- und Entscheidungsprozesse einzubinden.',
+    description: 'Digital platforms allow citizens to participate in planning and decision-making processes regardless of location.',
   },
   {
-    title: 'Fishbowl-Diskussion',
-    characteristics: ['standard', 'analog'],
+    title: 'Fishbowl Discussion',
+    characteristics: ['structured', 'simple'],
     steps: [
-      'Innenkreis mit 4–5 Stühlen aufstellen',
-      'Thema und Regeln erklären',
-      'Diskussion im Innenkreis starten',
-      'Außenstehende können Platz tauschen',
-      'Erkenntnisse im Plenum zusammenfassen',
+      'Set up an inner circle with 4–5 chairs',
+      'Explain the topic and rules',
+      'Start the discussion in the inner circle',
+      'Allow observers to swap seats',
+      'Summarise insights in plenary',
     ],
-    description: 'Die Fishbowl-Methode ermöglicht strukturierte Diskussionen, bei denen ein kleiner Kreis aktiv diskutiert und der Rest beobachtet.',
+    description: 'The fishbowl method enables structured discussions in which a small circle actively debates while the rest observes.',
   },
   {
-    title: 'Rapid Prototyping im Stadtraum',
-    characteristics: ['experimental', 'kreativ'],
+    title: 'Rapid Prototyping in Urban Space',
+    characteristics: ['playful', 'creative'],
     steps: [
-      'Problemstellung im Stadtraum identifizieren',
-      'Günstige Materialien beschaffen',
-      'Temporäre Intervention aufbauen',
-      'Reaktionen beobachten und dokumentieren',
-      'Iteration oder Verstetigung entscheiden',
+      'Identify a problem in the urban space',
+      'Source inexpensive materials',
+      'Build a temporary intervention',
+      'Observe and document reactions',
+      'Decide on iteration or continuation',
     ],
-    description: 'Durch temporäre, kostengünstige Eingriffe in den Stadtraum werden Ideen schnell getestet und Feedback von Nutzerinnen und Nutzern gesammelt.',
+    description: 'Through temporary, low-cost interventions in urban space, ideas are tested quickly and user feedback is gathered.',
   },
   {
-    title: 'Bürgerpanel',
-    characteristics: ['standard', 'partizipativ'],
+    title: 'Citizens Panel',
+    characteristics: ['structured', 'activating'],
     steps: [
-      'Zufällige Auswahl von Bürgerinnen und Bürgern',
-      'Informationsphase zu Thema durchführen',
-      'Deliberation in Kleingruppen',
-      'Abstimmung über Empfehlungen',
-      'Ergebnisse an Entscheidungsträger übergeben',
+      'Random selection of citizens',
+      'Information phase on the topic',
+      'Deliberation in small groups',
+      'Vote on recommendations',
+      'Hand results to decision-makers',
     ],
-    description: 'Ein Bürgerpanel ist eine repräsentative Gruppe von Bürgerinnen und Bürgern, die zu einem spezifischen Thema beraten und Empfehlungen erarbeiten.',
+    description: 'A citizens panel is a representative group of citizens who deliberate on a specific topic and develop recommendations.',
   },
 ]
 
@@ -138,7 +130,7 @@ async function seed() {
 
   console.log('🌱 Seeding database...')
 
-  // Create characteristics
+  // Create predefined characteristics
   const characteristicMap: Record<string, string> = {}
   for (const name of characteristicNames) {
     const existing = await payload.find({
@@ -172,7 +164,7 @@ async function seed() {
     })
 
     if (existing.docs.length > 0) {
-      console.log(`  Methode exists: ${method.title}`)
+      console.log(`  Method exists: ${method.title}`)
       continue
     }
 

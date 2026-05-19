@@ -25,14 +25,12 @@ export default function FilterableMethodList({ methods }: Props) {
   }, [methods])
 
   const filtered = useMemo(() => {
+    if (!filters.characteristic) return methods
     return methods.filter((m) => {
-      if (filters.characteristic) {
-        const names = (m.characteristics ?? []).map((c) =>
-          typeof c === 'object' ? (c as Characteristic).name : '',
-        )
-        if (!names.includes(filters.characteristic)) return false
-      }
-      return true
+      const names = (m.characteristics ?? []).map((c) =>
+        typeof c === 'object' ? (c as Characteristic).name : '',
+      )
+      return names.includes(filters.characteristic)
     })
   }, [methods, filters])
 
