@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { Link } from '@/navigation'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
+import CartWidget from '@/components/CartWidget'
 import localFont from 'next/font/local'
 import '../globals.css'
 
@@ -74,6 +75,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <footer className="border-t border-gray-200 mt-auto">
             <FooterText />
           </footer>
+          <CartWidget />
         </NextIntlClientProvider>
       </body>
     </html>
@@ -83,17 +85,9 @@ export default async function LocaleLayout({ children, params }: Props) {
 async function NavLinks() {
   const t = await getTranslations('nav')
   return (
-    <>
-      <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
-        {t('allMethods')}
-      </Link>
-      <Link
-        href="/cart"
-        className="flex items-center gap-1.5 text-sm bg-blue-600 text-white px-3 py-1.5 rounded-md hover:bg-blue-700 transition-colors"
-      >
-        {t('saved')}
-      </Link>
-    </>
+    <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+      {t('allMethods')}
+    </Link>
   )
 }
 

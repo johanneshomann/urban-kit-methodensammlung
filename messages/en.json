@@ -47,5 +47,13 @@
     "saved": "✓ Saved",
     "save": "+ Save"
   },
+  "cartWidget": {
+    "title": "Saved Methods",
+    "countOne": "1 method",
+    "countMany": "{count} methods",
+    "empty": "Nothing saved yet.",
+    "remove": "Remove",
+    "viewAll": "View all saved →"
+  },
   "loading": "Loading…"
 }

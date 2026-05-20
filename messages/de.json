@@ -47,5 +47,13 @@
     "saved": "✓ Gespeichert",
     "save": "+ Speichern"
   },
+  "cartWidget": {
+    "title": "Gespeicherte Methoden",
+    "countOne": "1 Methode",
+    "countMany": "{count} Methoden",
+    "empty": "Noch nichts gespeichert.",
+    "remove": "Entfernen",
+    "viewAll": "Alle gespeicherten ansehen →"
+  },
   "loading": "Lädt…"
 }
