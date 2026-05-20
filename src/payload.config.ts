@@ -34,10 +34,10 @@ export default buildConfig({
   },
   localization: {
     locales: [
-      { label: 'English', code: 'en' },
       { label: 'Deutsch', code: 'de' },
+      { label: 'English', code: 'en' },
     ],
-    defaultLocale: 'en',
+    defaultLocale: 'de',
     fallback: true,
   },
   collections: [

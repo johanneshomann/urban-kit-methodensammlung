@@ -2,21 +2,15 @@ import type { CollectionConfig } from 'payload'
 
 export const ProjectPhases: CollectionConfig = {
   slug: 'project-phases',
-  labels: {
-    singular: 'Project Phase',
-    plural: 'Project Phases',
-  },
-  admin: {
-    useAsTitle: 'name',
-    defaultColumns: ['name', 'category'],
-    group: 'Filter Collections',
-  },
+  labels: { singular: 'Project Phase', plural: 'Project Phases' },
+  admin: { useAsTitle: 'name', defaultColumns: ['name', 'category'], group: 'Filter Collections' },
   fields: [
     {
       name: 'name',
       type: 'text',
       required: true,
       localized: true,
+      admin: { description: 'Sprache oben wechseln um zu übersetzen · Switch language above to translate' },
     },
     {
       name: 'category',
@@ -27,9 +21,7 @@ export const ProjectPhases: CollectionConfig = {
         { label: 'Implementation', value: 'implementation' },
         { label: 'Follow-up', value: 'follow-up' },
       ],
-      admin: {
-        position: 'sidebar',
-      },
+      admin: { position: 'sidebar' },
     },
   ],
 }
