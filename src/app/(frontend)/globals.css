@@ -4,8 +4,11 @@
 
 :root {
   --foreground: #111827;
-  --background: #f9fafb;
-  --accent: #2563eb;
+  --background: #eef;
+  --accent: #a0a2e8;
+  --method-dark-1: #a0a2e8;
+  --method-light-1: #eef;
+  --method-accent: #d8d9ff;
 }
 
 body {

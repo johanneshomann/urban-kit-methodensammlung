@@ -16,7 +16,7 @@ export default function CharacteristicFilter({ filters, onChange, availableChara
   const t = useTranslations('filter')
 
   return (
-    <div className="flex flex-wrap gap-3 items-center bg-white border border-gray-200 rounded-xl p-4">
+    <div className="flex flex-wrap gap-3 items-center bg-white border border-[#d8d9ff] rounded-xl p-4">
       <span className="text-sm font-medium text-gray-500 mr-1">{t('label')}</span>
 
       {availableCharacteristics.length > 0 && (
@@ -25,7 +25,7 @@ export default function CharacteristicFilter({ filters, onChange, availableChara
           <select
             value={filters.characteristic}
             onChange={(e) => onChange({ characteristic: e.target.value })}
-            className="text-sm border border-gray-200 rounded-md px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="text-sm border border-[#d8d9ff] rounded-md px-2 py-1 bg-white focus:outline-none focus:ring-2 focus:ring-[#a0a2e8]"
           >
             <option value="">{t('all')}</option>
             {availableCharacteristics.map((c) => (

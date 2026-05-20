@@ -1,7 +1,12 @@
-type LocalizedItem = { nameDe?: string | null; nameEn?: string | null }
+type LocalizedItem = {
+  nameDe?: string | null
+  nameEn?: string | null
+  labelDe?: string | null
+  labelEn?: string | null
+}
 
 export function getLocalizedName(item: LocalizedItem | null | undefined, locale: string): string {
   if (!item) return ''
-  if (locale === 'de') return item.nameDe || item.nameEn || ''
-  return item.nameEn || item.nameDe || ''
+  const primary = locale === 'de' ? (item.nameDe || item.labelDe) : (item.nameEn || item.labelEn)
+  return primary || item.nameDe || item.labelDe || item.nameEn || item.labelEn || ''
 }

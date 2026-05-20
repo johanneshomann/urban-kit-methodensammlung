@@ -1,52 +1,83 @@
 'use client'
 
-import type { Characteristic, Methode } from '@/types'
+import type { FilterItem, Methode } from '@/types'
 import { getLocalizedName } from '@/lib/localize'
-import { useTranslations, useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
-import CharacteristicFilter from './CharacteristicFilter'
 import MethodCard from './MethodCard'
+import MethodFilters, { EMPTY_FILTERS, FILTER_CONFIGS, type FilterKey, type FilterState } from './MethodFilters'
 
 type Props = {
   methods: Methode[]
 }
 
+function getItems(method: Methode, key: FilterKey): FilterItem[] {
+  const raw = method[key]
+  if (!Array.isArray(raw)) return []
+  return raw.filter((x): x is FilterItem => typeof x === 'object' && x !== null)
+}
+
+function getNames(method: Methode, key: FilterKey, locale: string): string[] {
+  return getItems(method, key).map((item) => getLocalizedName(item, locale)).filter(Boolean)
+}
+
 export default function FilterableMethodList({ methods }: Props) {
   const t = useTranslations('methods')
   const locale = useLocale()
-  const [filters, setFilters] = useState({ characteristic: '' })
+  const [filters, setFilters] = useState<FilterState>({ ...EMPTY_FILTERS })
 
-  const availableCharacteristics = useMemo(() => {
-    const names = new Set<string>()
-    for (const m of methods) {
-      if (Array.isArray(m.characteristics)) {
-        for (const c of m.characteristics) {
-          if (typeof c === 'object' && c !== null) {
-            const label = getLocalizedName(c as Characteristic, locale)
-            if (label) names.add(label)
-          }
-        }
+  // All options per filter key (from all methods)
+  const allOptions = useMemo(() => {
+    const result = {} as Record<FilterKey, string[]>
+    for (const { key } of FILTER_CONFIGS) {
+      const names = new Set<string>()
+      for (const m of methods) {
+        for (const n of getNames(m, key, locale)) names.add(n)
       }
+      result[key] = [...names].sort()
     }
-    return [...names].sort()
+    return result
   }, [methods, locale])
 
+  // Methods matching all active filters (AND logic)
   const filtered = useMemo(() => {
-    if (!filters.characteristic) return methods
     return methods.filter((m) => {
-      const names = (m.characteristics ?? []).map((c) =>
-        typeof c === 'object' ? getLocalizedName(c as Characteristic, locale) : '',
-      )
-      return names.includes(filters.characteristic)
+      return FILTER_CONFIGS.every(({ key }) => {
+        const selected = filters[key]
+        if (!selected) return true
+        return getNames(m, key, locale).includes(selected)
+      })
     })
+  }, [methods, filters, locale])
+
+  // Available options per key: which options exist in methods that match all OTHER active filters
+  const availableOptions = useMemo(() => {
+    const result = {} as Record<FilterKey, string[]>
+    for (const { key } of FILTER_CONFIGS) {
+      const otherFilters = FILTER_CONFIGS.filter((c) => c.key !== key)
+      const subset = methods.filter((m) =>
+        otherFilters.every(({ key: k }) => {
+          const selected = filters[k]
+          if (!selected) return true
+          return getNames(m, k, locale).includes(selected)
+        }),
+      )
+      const names = new Set<string>()
+      for (const m of subset) {
+        for (const n of getNames(m, key, locale)) names.add(n)
+      }
+      result[key] = [...names]
+    }
+    return result
   }, [methods, filters, locale])
 
   return (
     <div className="flex flex-col gap-6">
-      <CharacteristicFilter
+      <MethodFilters
         filters={filters}
         onChange={setFilters}
-        availableCharacteristics={availableCharacteristics}
+        allOptions={allOptions}
+        availableOptions={availableOptions}
       />
 
       <p className="text-sm text-gray-500">

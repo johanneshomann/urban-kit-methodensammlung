@@ -6,22 +6,18 @@ export const Durations: CollectionConfig = {
     singular: { en: 'Duration', de: 'Dauer' },
     plural: { en: 'Durations', de: 'Zeitrahmen' },
   },
-  admin: { useAsTitle: 'labelDe', defaultColumns: ['labelDe', 'category'], group: { en: 'Filter Collections', de: 'Filter' } },
+  admin: { useAsTitle: 'nameDe', defaultColumns: ['nameDe', 'category'], group: { en: 'Filter Collections', de: 'Filter' } },
   fields: [
     {
       type: 'tabs',
       tabs: [
         {
-          label: { en: 'German', de: 'Deutsch' },
-          fields: [
-            { name: 'labelDe', label: { en: 'Label (German)', de: 'Bezeichnung (Deutsch)' }, type: 'text', required: true },
-          ],
+          label: 'DE',
+          fields: [{ name: 'nameDe', label: { en: 'Name', de: 'Name' }, type: 'text', required: true }],
         },
         {
-          label: { en: 'English', de: 'Englisch' },
-          fields: [
-            { name: 'labelEn', label: { en: 'Label (English)', de: 'Bezeichnung (Englisch)' }, type: 'text' },
-          ],
+          label: 'EN',
+          fields: [{ name: 'nameEn', label: { en: 'Name', de: 'Name' }, type: 'text' }],
         },
       ],
     },

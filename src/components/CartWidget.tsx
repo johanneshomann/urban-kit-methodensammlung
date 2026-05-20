@@ -52,7 +52,7 @@ export default function CartWidget() {
                   <Link
                     href={`/methods/${item.slug}`}
                     onClick={() => setOpen(false)}
-                    className="text-sm text-gray-800 hover:text-blue-600 transition-colors line-clamp-1 flex-1"
+                    className="text-sm text-gray-800 hover:text-[#a0a2e8] transition-colors line-clamp-1 flex-1"
                   >
                     {item.title}
                   </Link>
@@ -76,7 +76,7 @@ export default function CartWidget() {
           <Link
             href="/cart"
             onClick={() => setOpen(false)}
-            className="block w-full text-center text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-xl transition-colors"
+            className="block w-full text-center text-sm font-medium bg-[#a0a2e8] hover:bg-[#8082d0] text-white py-2.5 rounded-xl transition-colors"
           >
             {t('viewAll')}
           </Link>
@@ -86,14 +86,14 @@ export default function CartWidget() {
       {/* FAB button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-14 h-14 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-150 flex items-center justify-center relative"
+        className="w-14 h-14 rounded-full bg-[#a0a2e8] hover:bg-[#8082d0] text-white shadow-lg hover:shadow-xl transition-all duration-150 flex items-center justify-center relative"
         aria-label={t('title')}
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
         </svg>
         {count > 0 && (
-          <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-white text-blue-600 text-xs font-bold flex items-center justify-center shadow border border-blue-100">
+          <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-white text-[#a0a2e8] text-xs font-bold flex items-center justify-center shadow border border-[#d8d9ff]">
             {count > 9 ? '9+' : count}
           </span>
         )}

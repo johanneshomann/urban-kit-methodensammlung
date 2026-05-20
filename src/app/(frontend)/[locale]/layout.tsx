@@ -56,10 +56,12 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html lang={locale} className={atkinson.variable}>
       <body className="min-h-screen flex flex-col font-sans">
         <NextIntlClientProvider messages={messages}>
-          <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
+          <header className="bg-white border-b border-[#d8d9ff] sticky top-0 z-10">
             <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-              <Link href="/" className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors">
-                Urban Kit
+              <Link href="/" className="transition-colors block leading-none">
+                <span className="font-bold text-black">Urban</span><span className="font-bold text-[#a0a2e8]">KIT</span>
+                <br />
+                <span className="font-normal text-gray-400 text-sm uppercase tracking-[0.1em]">Methodensammlung</span>
               </Link>
               <nav className="flex items-center gap-4">
                 <NavLinks />
@@ -72,7 +74,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             {children}
           </main>
 
-          <footer className="border-t border-gray-200 mt-auto">
+          <footer className="border-t border-[#d8d9ff] mt-auto">
             <FooterText />
           </footer>
           <CartWidget />
@@ -85,7 +87,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 async function NavLinks() {
   const t = await getTranslations('nav')
   return (
-    <Link href="/" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
+    <Link href="/" className="text-sm text-gray-500 hover:text-[#a0a2e8] transition-colors">
       {t('allMethods')}
     </Link>
   )

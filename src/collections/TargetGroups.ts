@@ -12,17 +12,15 @@ export const TargetGroups: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
-          label: { en: 'German', de: 'Deutsch' },
+          label: 'DE',
           fields: [
-            { name: 'nameDe', label: { en: 'Name (German)', de: 'Name (Deutsch)' }, type: 'text', required: true },
+            { name: 'nameDe', label: { en: 'Name', de: 'Name' }, type: 'text', required: true },
             { name: 'explanation', type: 'richText', label: { en: 'Explanation', de: 'Erläuterung' } },
           ],
         },
         {
-          label: { en: 'English', de: 'Englisch' },
-          fields: [
-            { name: 'nameEn', label: { en: 'Name (English)', de: 'Name (Englisch)' }, type: 'text' },
-          ],
+          label: 'EN',
+          fields: [{ name: 'nameEn', label: { en: 'Name', de: 'Name' }, type: 'text' }],
         },
       ],
     },

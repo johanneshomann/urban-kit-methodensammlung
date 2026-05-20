@@ -1,4 +1,4 @@
-import type { Characteristic, Methode } from '@/types'
+import type { FilterItem, Methode } from '@/types'
 import { getLocalizedName } from '@/lib/localize'
 import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '@/navigation'
@@ -12,15 +12,15 @@ export default function MethodCard({ method }: Props) {
   const t = useTranslations('methods')
   const locale = useLocale()
   const characteristics = Array.isArray(method.characteristics)
-    ? method.characteristics.map((c) => (typeof c === 'object' ? c : null)).filter(Boolean) as Characteristic[]
+    ? method.characteristics.map((c) => (typeof c === 'object' ? c : null)).filter(Boolean) as FilterItem[]
     : []
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col gap-3 hover:shadow-md transition-shadow">
+    <div className="bg-white rounded-xl border border-[#d8d9ff] p-5 flex flex-col gap-3 hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between gap-2">
         <Link
           href={`/methods/${method.slug}`}
-          className="text-base font-semibold text-gray-900 hover:text-blue-600 transition-colors leading-snug"
+          className="text-base font-semibold text-gray-900 hover:text-[#a0a2e8] transition-colors leading-snug"
         >
           {method.title}
         </Link>
@@ -37,14 +37,14 @@ export default function MethodCard({ method }: Props) {
       {characteristics.length > 0 && (
         <div className="flex flex-wrap gap-1.5">
           {characteristics.map((c) => (
-            <span key={c.id} className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">
+            <span key={c.id} className="text-xs px-2 py-0.5 rounded-full bg-[#d8d9ff] text-gray-700">
               {getLocalizedName(c, locale)}
             </span>
           ))}
         </div>
       )}
 
-      <Link href={`/methods/${method.slug}`} className="text-xs text-blue-600 hover:underline mt-auto">
+      <Link href={`/methods/${method.slug}`} className="text-xs text-[#a0a2e8] hover:underline mt-auto">
         {t('learnMore')}
       </Link>
     </div>

@@ -1,6 +1,6 @@
 import CartButton from '@/components/CartButton'
 import RichTextRenderer from '@/components/RichTextRenderer'
-import type { Characteristic, Methode } from '@/types'
+import type { FilterItem, Methode } from '@/types'
 import { getLocalizedName } from '@/lib/localize'
 import { getTranslations } from 'next-intl/server'
 import { getPayload } from 'payload'
@@ -47,8 +47,8 @@ export default async function MethodDetailPage({ params }: Props) {
   if (!method) notFound()
 
   const characteristics = (method.characteristics ?? []).map((c) =>
-    typeof c === 'object' ? (c as Characteristic) : null,
-  ).filter(Boolean) as Characteristic[]
+    typeof c === 'object' ? (c as FilterItem) : null,
+  ).filter(Boolean) as FilterItem[]
 
   return (
     <div className="max-w-3xl">
@@ -88,21 +88,6 @@ export default async function MethodDetailPage({ params }: Props) {
         </section>
       )}
 
-      {method.steps && method.steps.length > 0 && (
-        <section>
-          <h2 className="text-lg font-semibold text-gray-900 mb-3">{t('steps')}</h2>
-          <ol className="space-y-3">
-            {method.steps.map((s, i) => (
-              <li key={s.id ?? i} className="flex gap-3">
-                <span className="flex-shrink-0 w-7 h-7 rounded-full bg-blue-600 text-white text-sm font-bold flex items-center justify-center">
-                  {i + 1}
-                </span>
-                <span className="text-gray-700 pt-0.5">{s.step}</span>
-              </li>
-            ))}
-          </ol>
-        </section>
-      )}
     </div>
   )
 }

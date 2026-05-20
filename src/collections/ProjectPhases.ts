@@ -12,16 +12,12 @@ export const ProjectPhases: CollectionConfig = {
       type: 'tabs',
       tabs: [
         {
-          label: { en: 'German', de: 'Deutsch' },
-          fields: [
-            { name: 'nameDe', label: { en: 'Name (German)', de: 'Name (Deutsch)' }, type: 'text', required: true },
-          ],
+          label: 'DE',
+          fields: [{ name: 'nameDe', label: { en: 'Name', de: 'Name' }, type: 'text', required: true }],
         },
         {
-          label: { en: 'English', de: 'Englisch' },
-          fields: [
-            { name: 'nameEn', label: { en: 'Name (English)', de: 'Name (Englisch)' }, type: 'text' },
-          ],
+          label: 'EN',
+          fields: [{ name: 'nameEn', label: { en: 'Name', de: 'Name' }, type: 'text' }],
         },
       ],
     },
