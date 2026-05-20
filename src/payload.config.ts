@@ -6,6 +6,7 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 
+import { FilterIcons } from './globals/FilterIcons'
 import { Goals } from './collections/Goals'
 import { Characteristics } from './collections/Characteristics'
 import { Durations } from './collections/Durations'
@@ -43,6 +44,7 @@ export default buildConfig({
     // System
     Users,
   ],
+  globals: [FilterIcons],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? 'fallback-secret-change-in-production',
   typescript: {

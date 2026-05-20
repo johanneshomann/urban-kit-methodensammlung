@@ -30,12 +30,12 @@ export const EMPTY_FILTERS: FilterState = {
 type Props = {
   filters: FilterState
   onChange: (filters: FilterState) => void
-  // For each filter key: all known options + which are "available" given other active filters
   availableOptions: Record<FilterKey, string[]>
   allOptions: Record<FilterKey, string[]>
+  filterIcons?: Record<string, string | undefined>
 }
 
-export default function MethodFilters({ filters, onChange, availableOptions, allOptions }: Props) {
+export default function MethodFilters({ filters, onChange, availableOptions, allOptions, filterIcons }: Props) {
   const t = useTranslations('filter')
   const locale = useLocale()
 
@@ -67,7 +67,12 @@ export default function MethodFilters({ filters, onChange, availableOptions, all
 
           return (
             <div key={key} className="flex flex-col gap-1">
-              <label className="text-xs text-gray-400 font-medium">{label}</label>
+              <label className="text-xs text-gray-400 font-medium flex items-center gap-1">
+                {filterIcons?.[key] && (
+                  <img src={filterIcons[key]} alt="" aria-hidden className="w-4 h-4 object-contain" />
+                )}
+                {label}
+              </label>
               <select
                 value={filters[key]}
                 onChange={(e) => set(key, e.target.value)}

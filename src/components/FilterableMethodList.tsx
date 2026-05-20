@@ -9,6 +9,7 @@ import MethodFilters, { EMPTY_FILTERS, FILTER_CONFIGS, type FilterKey, type Filt
 
 type Props = {
   methods: Methode[]
+  filterIcons?: Record<string, string | undefined>
 }
 
 function getItems(method: Methode, key: FilterKey): FilterItem[] {
@@ -21,7 +22,7 @@ function getNames(method: Methode, key: FilterKey, locale: string): string[] {
   return getItems(method, key).map((item) => getLocalizedName(item, locale)).filter(Boolean)
 }
 
-export default function FilterableMethodList({ methods }: Props) {
+export default function FilterableMethodList({ methods, filterIcons }: Props) {
   const t = useTranslations('methods')
   const locale = useLocale()
   const [filters, setFilters] = useState<FilterState>({ ...EMPTY_FILTERS })
@@ -78,6 +79,7 @@ export default function FilterableMethodList({ methods }: Props) {
         onChange={setFilters}
         allOptions={allOptions}
         availableOptions={availableOptions}
+        filterIcons={filterIcons}
       />
 
       <p className="text-sm text-gray-500">
