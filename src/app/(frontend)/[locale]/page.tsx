@@ -6,12 +6,18 @@ import config from '@payload-config'
 
 export const dynamic = 'force-dynamic'
 
-export default async function HomePage() {
+type Props = {
+  params: Promise<{ locale: string }>
+}
+
+export default async function HomePage({ params }: Props) {
+  const { locale } = await params
   const payload = await getPayload({ config })
   const t = await getTranslations('home')
 
   const result = await payload.find({
     collection: 'methods',
+    locale: locale as 'en' | 'de',
     where: {
       status: { equals: 'published' },
     },

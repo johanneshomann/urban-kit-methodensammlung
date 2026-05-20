@@ -16,7 +16,7 @@ export const ProjectPhases: CollectionConfig = {
       name: 'name',
       type: 'text',
       required: true,
-      unique: true,
+      localized: true,
     },
     {
       name: 'category',

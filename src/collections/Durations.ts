@@ -16,7 +16,7 @@ export const Durations: CollectionConfig = {
       name: 'label',
       type: 'text',
       required: true,
-      unique: true,
+      localized: true,
     },
     {
       name: 'category',

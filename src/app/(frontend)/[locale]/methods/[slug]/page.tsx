@@ -28,12 +28,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export const dynamic = 'force-dynamic'
 
 export default async function MethodDetailPage({ params }: Props) {
-  const { slug } = await params
+  const { slug, locale } = await params
   const payload = await getPayload({ config })
   const t = await getTranslations('methods')
 
   const result = await payload.find({
     collection: 'methods',
+    locale: locale as 'en' | 'de',
     where: {
       slug: { equals: slug },
       status: { equals: 'published' },

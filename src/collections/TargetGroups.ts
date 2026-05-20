@@ -15,7 +15,7 @@ export const TargetGroups: CollectionConfig = {
       name: 'name',
       type: 'text',
       required: true,
-      unique: true,
+      localized: true,
     },
     {
       name: 'explanation',
