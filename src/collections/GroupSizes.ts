@@ -2,15 +2,28 @@ import type { CollectionConfig } from 'payload'
 
 export const GroupSizes: CollectionConfig = {
   slug: 'group-sizes',
-  labels: { singular: 'Group Size', plural: 'Group Sizes' },
-  admin: { useAsTitle: 'name', group: 'Filter Collections' },
+  labels: {
+    singular: { en: 'Group Size', de: 'Gruppengröße' },
+    plural: { en: 'Group Sizes', de: 'Gruppengrößen' },
+  },
+  admin: { useAsTitle: 'nameDe', group: { en: 'Filter Collections', de: 'Filter' } },
   fields: [
     {
-      name: 'name',
-      type: 'text',
-      required: true,
-      localized: true,
-      admin: { description: 'Sprache oben wechseln um zu übersetzen · Switch language above to translate' },
+      type: 'tabs',
+      tabs: [
+        {
+          label: { en: 'German', de: 'Deutsch' },
+          fields: [
+            { name: 'nameDe', label: { en: 'Name (German)', de: 'Name (Deutsch)' }, type: 'text', required: true },
+          ],
+        },
+        {
+          label: { en: 'English', de: 'Englisch' },
+          fields: [
+            { name: 'nameEn', label: { en: 'Name (English)', de: 'Name (Englisch)' }, type: 'text' },
+          ],
+        },
+      ],
     },
   ],
 }

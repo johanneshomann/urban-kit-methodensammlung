@@ -17,7 +17,6 @@ export default async function HomePage({ params }: Props) {
 
   const result = await payload.find({
     collection: 'methods',
-    locale: locale as 'en' | 'de',
     where: {
       status: { equals: 'published' },
     },

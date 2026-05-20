@@ -31,14 +31,7 @@ export default buildConfig({
   },
   i18n: {
     supportedLanguages: { en, de },
-  },
-  localization: {
-    locales: [
-      { label: 'Deutsch', code: 'de' },
-      { label: 'English', code: 'en' },
-    ],
-    defaultLocale: 'de',
-    fallback: true,
+    fallbackLanguage: 'de',
   },
   collections: [
     // Content

@@ -1,6 +1,7 @@
 export type Characteristic = {
   id: string
-  name: string
+  nameDe?: string | null
+  nameEn?: string | null
 }
 
 export type MediaFile = {

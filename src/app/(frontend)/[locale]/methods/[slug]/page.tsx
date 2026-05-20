@@ -1,6 +1,7 @@
 import CartButton from '@/components/CartButton'
 import RichTextRenderer from '@/components/RichTextRenderer'
 import type { Characteristic, Methode } from '@/types'
+import { getLocalizedName } from '@/lib/localize'
 import { getTranslations } from 'next-intl/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
@@ -34,7 +35,6 @@ export default async function MethodDetailPage({ params }: Props) {
 
   const result = await payload.find({
     collection: 'methods',
-    locale: locale as 'en' | 'de',
     where: {
       slug: { equals: slug },
       status: { equals: 'published' },
@@ -63,7 +63,7 @@ export default async function MethodDetailPage({ params }: Props) {
             id: String(method.id),
             slug: method.slug ?? '',
             title: method.title,
-            characteristics: characteristics.map((c) => c.name),
+            characteristics: characteristics.map((c) => getLocalizedName(c, locale)),
           }}
         />
       </div>
@@ -72,7 +72,7 @@ export default async function MethodDetailPage({ params }: Props) {
         <div className="flex flex-wrap gap-2 mb-6">
           {characteristics.map((c) => (
             <span key={c.id} className="text-sm px-3 py-1 rounded-full bg-gray-100 text-gray-600">
-              {c.name}
+              {getLocalizedName(c, locale)}
             </span>
           ))}
         </div>

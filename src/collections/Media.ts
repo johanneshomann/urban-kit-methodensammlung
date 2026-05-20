@@ -4,7 +4,7 @@ import path from 'path'
 export const Media: CollectionConfig = {
   slug: 'media',
   admin: {
-    group: 'Assets',
+    group: { en: 'Assets', de: 'Medien' },
   },
   upload: {
     staticDir: path.resolve(process.cwd(), 'public/media'),
@@ -13,7 +13,7 @@ export const Media: CollectionConfig = {
     {
       name: 'alt',
       type: 'text',
-      label: 'Alt Text',
+      label: { en: 'Alt Text', de: 'Alternativtext' },
     },
   ],
 }

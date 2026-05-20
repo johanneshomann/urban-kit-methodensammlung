@@ -1,7 +1,8 @@
 'use client'
 
 import type { Characteristic, Methode } from '@/types'
-import { useTranslations } from 'next-intl'
+import { getLocalizedName } from '@/lib/localize'
+import { useTranslations, useLocale } from 'next-intl'
 import { useMemo, useState } from 'react'
 import CharacteristicFilter from './CharacteristicFilter'
 import MethodCard from './MethodCard'
@@ -12,6 +13,7 @@ type Props = {
 
 export default function FilterableMethodList({ methods }: Props) {
   const t = useTranslations('methods')
+  const locale = useLocale()
   const [filters, setFilters] = useState({ characteristic: '' })
 
   const availableCharacteristics = useMemo(() => {
@@ -19,22 +21,25 @@ export default function FilterableMethodList({ methods }: Props) {
     for (const m of methods) {
       if (Array.isArray(m.characteristics)) {
         for (const c of m.characteristics) {
-          if (typeof c === 'object' && c !== null) names.add((c as Characteristic).name)
+          if (typeof c === 'object' && c !== null) {
+            const label = getLocalizedName(c as Characteristic, locale)
+            if (label) names.add(label)
+          }
         }
       }
     }
     return [...names].sort()
-  }, [methods])
+  }, [methods, locale])
 
   const filtered = useMemo(() => {
     if (!filters.characteristic) return methods
     return methods.filter((m) => {
       const names = (m.characteristics ?? []).map((c) =>
-        typeof c === 'object' ? (c as Characteristic).name : '',
+        typeof c === 'object' ? getLocalizedName(c as Characteristic, locale) : '',
       )
       return names.includes(filters.characteristic)
     })
-  }, [methods, filters])
+  }, [methods, filters, locale])
 
   return (
     <div className="flex flex-col gap-6">

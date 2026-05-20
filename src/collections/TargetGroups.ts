@@ -2,20 +2,29 @@ import type { CollectionConfig } from 'payload'
 
 export const TargetGroups: CollectionConfig = {
   slug: 'target-groups',
-  labels: { singular: 'Target Group', plural: 'Target Groups' },
-  admin: { useAsTitle: 'name', group: 'Filter Collections' },
+  labels: {
+    singular: { en: 'Target Group', de: 'Zielgruppe' },
+    plural: { en: 'Target Groups', de: 'Zielgruppen' },
+  },
+  admin: { useAsTitle: 'nameDe', group: { en: 'Filter Collections', de: 'Filter' } },
   fields: [
     {
-      name: 'name',
-      type: 'text',
-      required: true,
-      localized: true,
-      admin: { description: 'Sprache oben wechseln um zu übersetzen · Switch language above to translate' },
-    },
-    {
-      name: 'explanation',
-      type: 'richText',
-      label: 'Explanation',
+      type: 'tabs',
+      tabs: [
+        {
+          label: { en: 'German', de: 'Deutsch' },
+          fields: [
+            { name: 'nameDe', label: { en: 'Name (German)', de: 'Name (Deutsch)' }, type: 'text', required: true },
+            { name: 'explanation', type: 'richText', label: { en: 'Explanation', de: 'Erläuterung' } },
+          ],
+        },
+        {
+          label: { en: 'English', de: 'Englisch' },
+          fields: [
+            { name: 'nameEn', label: { en: 'Name (English)', de: 'Name (Englisch)' }, type: 'text' },
+          ],
+        },
+      ],
     },
   ],
 }

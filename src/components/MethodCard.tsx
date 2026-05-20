@@ -1,5 +1,6 @@
 import type { Characteristic, Methode } from '@/types'
-import { useTranslations } from 'next-intl'
+import { getLocalizedName } from '@/lib/localize'
+import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '@/navigation'
 import CartButton from './CartButton'
 
@@ -9,6 +10,7 @@ type Props = {
 
 export default function MethodCard({ method }: Props) {
   const t = useTranslations('methods')
+  const locale = useLocale()
   const characteristics = Array.isArray(method.characteristics)
     ? method.characteristics.map((c) => (typeof c === 'object' ? c : null)).filter(Boolean) as Characteristic[]
     : []
@@ -27,7 +29,7 @@ export default function MethodCard({ method }: Props) {
             id: String(method.id),
             slug: method.slug ?? '',
             title: method.title,
-            characteristics: characteristics.map((c) => c.name),
+            characteristics: characteristics.map((c) => getLocalizedName(c, locale)),
           }}
         />
       </div>
@@ -36,7 +38,7 @@ export default function MethodCard({ method }: Props) {
         <div className="flex flex-wrap gap-1.5">
           {characteristics.map((c) => (
             <span key={c.id} className="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">
-              {c.name}
+              {getLocalizedName(c, locale)}
             </span>
           ))}
         </div>

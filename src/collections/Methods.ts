@@ -3,13 +3,13 @@ import type { CollectionConfig } from 'payload'
 export const Methods: CollectionConfig = {
   slug: 'methods',
   labels: {
-    singular: 'Method',
-    plural: 'Methods',
+    singular: { en: 'Method', de: 'Methode' },
+    plural: { en: 'Methods', de: 'Methoden' },
   },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'characteristics', 'status', 'updatedAt'],
-    group: 'Methods Archive',
+    group: { en: 'Methods Archive', de: 'Methodensammlung' },
   },
   fields: [
     {
@@ -24,7 +24,7 @@ export const Methods: CollectionConfig = {
       index: true,
       admin: {
         position: 'sidebar',
-        description: 'Auto-generated from title. You can override it.',
+        description: { en: 'Auto-generated from title. You can override it.', de: 'Automatisch aus dem Titel generiert. Kann überschrieben werden.' },
       },
       hooks: {
         beforeValidate: [
@@ -46,8 +46,8 @@ export const Methods: CollectionConfig = {
       name: 'status',
       type: 'select',
       options: [
-        { label: 'Draft', value: 'draft' },
-        { label: 'Published', value: 'published' },
+        { label: { en: 'Draft', de: 'Entwurf' }, value: 'draft' },
+        { label: { en: 'Published', de: 'Veröffentlicht' }, value: 'published' },
       ],
       defaultValue: 'draft',
       required: true,
@@ -66,12 +66,12 @@ export const Methods: CollectionConfig = {
     {
       name: 'description',
       type: 'richText',
-      label: 'Description',
+      label: { en: 'Description', de: 'Beschreibung' },
     },
     {
       name: 'steps',
       type: 'array',
-      label: 'Steps',
+      label: { en: 'Steps', de: 'Schritte' },
       fields: [
         {
           name: 'step',
@@ -82,7 +82,7 @@ export const Methods: CollectionConfig = {
     },
     {
       name: 'characteristics',
-      label: 'Characteristics',
+      label: { en: 'Characteristics', de: 'Merkmale' },
       type: 'relationship',
       relationTo: 'characteristics',
       hasMany: true,
