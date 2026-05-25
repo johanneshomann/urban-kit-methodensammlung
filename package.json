@@ -2,10 +2,12 @@
   "name": "urban-kit-methodensammlung",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "payload generate:importmap && next build",
-    "start": "next start",
+    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
+    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
+    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "seed": "npx tsx seed.ts"
   },
   "dependencies": {
@@ -14,6 +16,7 @@
     "@payloadcms/richtext-lexical": "3.84.1",
     "@payloadcms/translations": "3.84.1",
     "@swc/helpers": "^0.5.21",
+    "cross-env": "^7.0.3",
     "graphql": "16.8.1",
     "next": "^16.2.2",
     "next-intl": "^4.12.0",
@@ -30,10 +33,10 @@
     "dotenv": "^16.5.0",
     "postcss": "8.5.3",
     "tailwindcss": "3.4.17",
-    "tsx": "4.19.4",
+    "tsx": "^4.22.3",
     "typescript": "5.8.3"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=24.15.0"
   }
 }

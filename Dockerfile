@@ -1,4 +1,4 @@
-FROM node:20-alpine AS base
+FROM node:24-alpine AS base
 WORKDIR /app
 ENV NEXT_TELEMETRY_DISABLED=1
 
@@ -13,6 +13,7 @@ FROM base AS builder
 RUN apk add --no-cache libc6-compat
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+RUN npm run generate:importmap
 RUN npm run build
 
 # Production runner — copies full node_modules for reliable module resolution
