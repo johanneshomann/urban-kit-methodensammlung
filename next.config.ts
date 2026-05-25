@@ -4,8 +4,6 @@ import type { NextConfig } from 'next'
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts')
 
-const nextConfig: NextConfig = {
-  turbopack: {},
-}
+const nextConfig: NextConfig = {}
 
-export default withPayload(withNextIntl(nextConfig))
+export default withNextIntl(withPayload(nextConfig))

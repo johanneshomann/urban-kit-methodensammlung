@@ -15,12 +15,15 @@ export const TargetGroups: CollectionConfig = {
           label: 'DE',
           fields: [
             { name: 'nameDe', label: { en: 'Name', de: 'Name' }, type: 'text', required: true },
-            { name: 'explanation', type: 'richText', label: { en: 'Explanation', de: 'Erläuterung' } },
+            { name: 'explanation', type: 'textarea', label: { en: 'Explanation', de: 'Erläuterung' }, maxLength: 250, admin: { description: { en: 'Max. 250 characters', de: 'Max. 250 Zeichen' } } },
           ],
         },
         {
           label: 'EN',
-          fields: [{ name: 'nameEn', label: { en: 'Name', de: 'Name' }, type: 'text' }],
+          fields: [
+            { name: 'nameEn', label: { en: 'Name', de: 'Name' }, type: 'text' },
+            { name: 'explanationEn', type: 'textarea', label: { en: 'Explanation', de: 'Erläuterung' }, maxLength: 250, admin: { description: { en: 'Max. 250 characters', de: 'Max. 250 Zeichen' } } },
+          ],
         },
       ],
     },

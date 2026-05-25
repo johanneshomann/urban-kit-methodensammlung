@@ -18,17 +18,6 @@ services:
       start_period: 20s
     restart: unless-stopped
 
-  seed:
-    build: .
-    command: npx tsx seed.ts
-    env_file: .env
-    depends_on:
-      app:
-        condition: service_healthy
-      mongodb:
-        condition: service_healthy
-    restart: "no"
-
   mongodb:
     image: mongo:7
     volumes:

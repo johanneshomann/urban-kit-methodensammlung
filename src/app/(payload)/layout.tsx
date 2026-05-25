@@ -11,7 +11,7 @@ const serverFunction: ServerFunctionClient = async (args) => {
   return handleServerFunctions({ ...args, config, importMap })
 }
 
-const Layout = ({ children }: { children: React.ReactNode }) =>
+const Layout = async ({ children }: { children: React.ReactNode }) =>
   RootLayout({ children, config, importMap, serverFunction })
 
 export default Layout

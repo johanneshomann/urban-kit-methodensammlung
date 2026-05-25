@@ -13,9 +13,52 @@ export const Methods: CollectionConfig = {
   },
   fields: [
     {
-      name: 'title',
-      type: 'text',
-      required: true,
+      type: 'tabs',
+      tabs: [
+        {
+          label: 'DE',
+          fields: [
+            {
+              name: 'title',
+              type: 'text',
+              label: { en: 'Title', de: 'Titel' },
+              required: true,
+            },
+            {
+              name: 'auszug',
+              type: 'richText',
+              label: { en: 'Excerpt', de: 'Auszug' },
+                            admin: { description: { en: 'Short summary of the method', de: 'Kurze Zusammenfassung der Methode' } },
+            },
+            {
+              name: 'description',
+              type: 'richText',
+              label: { en: 'Description', de: 'Beschreibung' },
+                          },
+          ],
+        },
+        {
+          label: 'EN',
+          fields: [
+            {
+              name: 'titleEn',
+              type: 'text',
+              label: { en: 'Title', de: 'Titel' },
+            },
+            {
+              name: 'auszugEn',
+              type: 'richText',
+              label: { en: 'Excerpt', de: 'Auszug' },
+                            admin: { description: { en: 'Short summary of the method', de: 'Kurze Zusammenfassung der Methode' } },
+            },
+            {
+              name: 'descriptionEn',
+              type: 'richText',
+              label: { en: 'Description', de: 'Beschreibung' },
+                          },
+          ],
+        },
+      ],
     },
     {
       name: 'slug',
@@ -122,11 +165,6 @@ export const Methods: CollectionConfig = {
       relationTo: 'target-groups',
       hasMany: true,
       admin: { position: 'sidebar' },
-    },
-    {
-      name: 'description',
-      type: 'richText',
-      label: { en: 'Description', de: 'Beschreibung' },
     },
   ],
 }
