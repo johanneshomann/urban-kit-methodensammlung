@@ -16,22 +16,22 @@ export default function MethodCard({ method }: Props) {
     : []
 
   return (
-    <div className="bg-white rounded-xl border border-[#d8d9ff] p-5 flex flex-col gap-3 hover:shadow-md transition-shadow">
-      <div className="flex items-start justify-between gap-2">
+    <div className="relative group bg-white rounded-xl border border-[#d8d9ff] p-5 flex flex-col gap-3 hover:shadow-md transition-shadow">
+      <SaveButton
+        item={{
+          id: String(method.id),
+          slug: method.slug ?? '',
+          title: method.title,
+          characteristics: characteristics.map((c) => getLocalizedName(c, locale)),
+        }}
+      />
+      <div className="flex items-start">
         <Link
           href={`/methods/${method.slug}`}
-          className="text-base font-semibold text-gray-900 hover:text-[#a0a2e8] transition-colors leading-snug"
+          className="text-base font-semibold text-gray-900 hover:text-[#a0a2e8] transition-colors leading-snug pr-8"
         >
           {method.title}
         </Link>
-        <SaveButton
-          item={{
-            id: String(method.id),
-            slug: method.slug ?? '',
-            title: method.title,
-            characteristics: characteristics.map((c) => getLocalizedName(c, locale)),
-          }}
-        />
       </div>
 
       {characteristics.length > 0 && (

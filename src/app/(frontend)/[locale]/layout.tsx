@@ -57,7 +57,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html lang={locale} className={atkinson.variable}>
       <body className="min-h-screen flex flex-col font-sans">
         <NextIntlClientProvider messages={messages}>
-          <header className="bg-white border-b border-[#d8d9ff] sticky top-0 z-10">
+          <header className="bg-white border-b border-[#d8d9ff] sticky top-0 z-10 shadow-md">
             <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
               <Link href="/" className="transition-colors block leading-none">
                 <span className="font-bold text-black">Urban</span><span className="font-bold text-[#a0a2e8]">KIT</span>
