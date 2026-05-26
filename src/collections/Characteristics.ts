@@ -6,7 +6,7 @@ export const Characteristics: CollectionConfig = {
     singular: { en: 'Characteristic', de: 'Merkmal' },
     plural: { en: 'Characteristics', de: 'Merkmale' },
   },
-  admin: { useAsTitle: 'nameDe', group: { en: 'Filter Collections', de: 'Filter' } },
+  admin: { useAsTitle: 'nameDe', group: { en: 'Characteristics', de: 'Merkmale' } },
   fields: [
     {
       type: 'tabs',

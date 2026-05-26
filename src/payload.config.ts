@@ -6,16 +6,26 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 
-import { FilterIcons } from './globals/FilterIcons'
-import { Goals } from './collections/Goals'
+import { CharacteristicsSettings } from './globals/CharacteristicsSettings'
+import { DurationSettings } from './globals/DurationSettings'
+import { FormatSettings } from './globals/FormatSettings'
+import { GoalSettings } from './globals/GoalSettings'
+import { GroupSizeSettings } from './globals/GroupSizeSettings'
+import { ParticipationDepthSettings } from './globals/ParticipationDepthSettings'
+import { ProjectPhaseSettings } from './globals/ProjectPhaseSettings'
+import { TargetGroupSettings } from './globals/TargetGroupSettings'
+
 import { Characteristics } from './collections/Characteristics'
+import { DurationCategories } from './collections/DurationCategories'
 import { Durations } from './collections/Durations'
 import { Formats } from './collections/Formats'
+import { Goals } from './collections/Goals'
 import { GroupSizes } from './collections/GroupSizes'
 import { Icons } from './collections/Icons'
 import { Media } from './collections/Media'
 import { Methods } from './collections/Methods'
 import { ParticipationDepths } from './collections/ParticipationDepths'
+import { ProjectPhaseCategories } from './collections/ProjectPhaseCategories'
 import { ProjectPhases } from './collections/ProjectPhases'
 import { TargetGroups } from './collections/TargetGroups'
 import { Users } from './collections/Users'
@@ -38,14 +48,28 @@ export default buildConfig({
     // Content
     Methods,
     // Filter Collections
-    ParticipationDepths, ProjectPhases, Goals, Formats, Durations, TargetGroups, GroupSizes, Characteristics,
+    ParticipationDepths,
+    ProjectPhases, ProjectPhaseCategories,
+    Goals,
+    Formats,
+    Durations, DurationCategories,
+    TargetGroups,
+    GroupSizes,
+    Characteristics,
     // Assets
     Icons, Media,
     // Administration (last)
     Users,
   ],
   globals: [
-    FilterIcons,
+    ParticipationDepthSettings,
+    ProjectPhaseSettings,
+    GoalSettings,
+    FormatSettings,
+    DurationSettings,
+    TargetGroupSettings,
+    GroupSizeSettings,
+    CharacteristicsSettings,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? 'fallback-secret-change-in-production',

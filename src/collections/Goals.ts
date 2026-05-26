@@ -6,7 +6,7 @@ export const Goals: CollectionConfig = {
     singular: { en: 'Goal', de: 'Ziel' },
     plural: { en: 'Goals', de: 'Ziele' },
   },
-  admin: { useAsTitle: 'nameDe', group: { en: 'Filter Collections', de: 'Filter' } },
+  admin: { useAsTitle: 'nameDe', group: { en: 'Goals', de: 'Ziele' } },
   fields: [
     {
       type: 'tabs',

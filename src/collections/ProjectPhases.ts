@@ -6,7 +6,7 @@ export const ProjectPhases: CollectionConfig = {
     singular: { en: 'Project Phase', de: 'Projektphase' },
     plural: { en: 'Project Phases', de: 'Projektphasen' },
   },
-  admin: { useAsTitle: 'nameDe', defaultColumns: ['nameDe', 'category'], group: { en: 'Filter Collections', de: 'Filter' } },
+  admin: { useAsTitle: 'nameDe', defaultColumns: ['nameDe', 'category'], group: { en: 'Project Phases', de: 'Projektphasen' } },
   fields: [
     {
       type: 'tabs',
@@ -24,13 +24,9 @@ export const ProjectPhases: CollectionConfig = {
     {
       name: 'category',
       label: { en: 'Category', de: 'Kategorie' },
-      type: 'select',
+      type: 'relationship',
+      relationTo: 'project-phase-categories',
       required: true,
-      options: [
-        { label: { en: 'Preparation', de: 'Vorbereitung' }, value: 'preparation' },
-        { label: { en: 'Implementation', de: 'Durchführung' }, value: 'implementation' },
-        { label: { en: 'Follow-up', de: 'Nachbereitung' }, value: 'follow-up' },
-      ],
       admin: { position: 'sidebar' },
     },
   ],

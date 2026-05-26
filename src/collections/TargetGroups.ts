@@ -6,7 +6,7 @@ export const TargetGroups: CollectionConfig = {
     singular: { en: 'Target Group', de: 'Zielgruppe' },
     plural: { en: 'Target Groups', de: 'Zielgruppen' },
   },
-  admin: { useAsTitle: 'nameDe', group: { en: 'Filter Collections', de: 'Filter' } },
+  admin: { useAsTitle: 'nameDe', group: { en: 'Target Groups', de: 'Zielgruppen' } },
   fields: [
     {
       type: 'tabs',

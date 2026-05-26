@@ -6,7 +6,7 @@ export const Formats: CollectionConfig = {
     singular: { en: 'Format', de: 'Format' },
     plural: { en: 'Formats', de: 'Formate' },
   },
-  admin: { useAsTitle: 'nameDe', group: { en: 'Filter Collections', de: 'Filter' } },
+  admin: { useAsTitle: 'nameDe', group: { en: 'Formats', de: 'Formate' } },
   fields: [
     {
       type: 'tabs',

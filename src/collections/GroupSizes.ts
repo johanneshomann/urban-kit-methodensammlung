@@ -6,7 +6,7 @@ export const GroupSizes: CollectionConfig = {
     singular: { en: 'Group Size', de: 'Gruppengröße' },
     plural: { en: 'Group Sizes', de: 'Gruppengrößen' },
   },
-  admin: { useAsTitle: 'nameDe', group: { en: 'Filter Collections', de: 'Filter' } },
+  admin: { useAsTitle: 'nameDe', group: { en: 'Group Sizes', de: 'Gruppengrößen' } },
   fields: [
     {
       type: 'tabs',

@@ -6,7 +6,7 @@ export const ParticipationDepths: CollectionConfig = {
     singular: { en: 'Participation Depth', de: 'Beteiligungstiefe' },
     plural: { en: 'Participation Depths', de: 'Beteiligungstiefen' },
   },
-  admin: { useAsTitle: 'nameDe', group: { en: 'Filter Collections', de: 'Filter' } },
+  admin: { useAsTitle: 'nameDe', group: { en: 'Participation Depth', de: 'Beteiligungstiefe' } },
   fields: [
     {
       type: 'tabs',

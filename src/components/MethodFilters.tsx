@@ -3,7 +3,7 @@
 import { useLocale } from 'next-intl'
 import { useState } from 'react'
 import { FILTER_CONFIGS, EMPTY_FILTERS, type FilterKey, type FilterState } from '@/lib/filterConfig'
-import type { FilterItem } from '@/types'
+import type { CategoryItem, FilterItem } from '@/types'
 import { getLocalizedName } from '@/lib/localize'
 export type { FilterKey, FilterState } from '@/lib/filterConfig'
 export { FILTER_CONFIGS, EMPTY_FILTERS }
@@ -15,6 +15,14 @@ type Props = {
   allOptions: Record<FilterKey, string[]>
   filterIcons?: Record<string, string | undefined>
   allFilterItems?: Record<FilterKey, FilterItem[]>
+  allCategoryItems?: Partial<Record<FilterKey, CategoryItem[]>>
+  activeFilterKeys?: Set<FilterKey>
+}
+
+function getCategoryId(category: CategoryItem | string | null | undefined): string | null {
+  if (!category) return null
+  if (typeof category === 'string') return category
+  return category.id
 }
 
 function OptionButton({
@@ -45,7 +53,7 @@ function OptionButton({
   )
 }
 
-export default function MethodFilters({ filters, onChange, availableOptions, allOptions, filterIcons, allFilterItems }: Props) {
+export default function MethodFilters({ filters, onChange, availableOptions, allOptions, filterIcons, allFilterItems, allCategoryItems, activeFilterKeys }: Props) {
   const locale = useLocale()
   const [openKeys, setOpenKeys] = useState<Set<FilterKey>>(new Set())
 
@@ -65,13 +73,14 @@ export default function MethodFilters({ filters, onChange, availableOptions, all
   return (
     <div className="bg-white border border-[#d8d9ff] rounded-xl overflow-hidden">
       <div className="divide-y divide-[#d8d9ff]">
-        {FILTER_CONFIGS.map(({ key, de, en, categories }) => {
+        {FILTER_CONFIGS.filter(({ key }) => !activeFilterKeys || activeFilterKeys.has(key)).map(({ key, de, en }) => {
           const label = locale === 'de' ? de : en
           const options = allOptions[key]
           const isEmpty = options.length === 0
           const isOpen = openKeys.has(key)
           const activeValue = filters[key]
           const items = allFilterItems?.[key] ?? []
+          const categories = allCategoryItems?.[key]
 
           if (isEmpty) return null
 
@@ -106,14 +115,13 @@ export default function MethodFilters({ filters, onChange, availableOptions, all
 
               {isOpen && (
                 <div className="px-4 pb-4">
-                  {categories ? (
-                    // Grouped by category — render as columns
+                  {categories && categories.length > 0 ? (
                     <div className={`grid gap-4`} style={{ gridTemplateColumns: `repeat(${categories.length}, minmax(0, 1fr))` }}>
                       {categories.map((cat) => {
-                        const catLabel = locale === 'de' ? cat.de : cat.en
-                        const catItems = items.filter((item) => item.category === cat.value)
+                        const catLabel = locale === 'de' ? cat.nameDe : cat.nameEn
+                        const catItems = items.filter((item) => getCategoryId(item.category) === cat.id)
                         return (
-                          <div key={cat.value} className="flex flex-col gap-1">
+                          <div key={cat.id} className="flex flex-col gap-1">
                             <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">
                               {catLabel}
                             </span>
@@ -142,7 +150,6 @@ export default function MethodFilters({ filters, onChange, availableOptions, all
                       })}
                     </div>
                   ) : (
-                    // Flat — render as wrapped pills
                     <div className="flex flex-wrap gap-2">
                       {options.map((opt) => {
                         const isActive = activeValue === opt

@@ -1,10 +1,17 @@
+export type CategoryItem = {
+  id: string
+  nameDe?: string | null
+  nameEn?: string | null
+  icon?: { id: string; url?: string | null; alt?: string | null } | string | null
+}
+
 export type FilterItem = {
   id: string
   nameDe?: string | null
   nameEn?: string | null
   labelDe?: string | null
   labelEn?: string | null
-  category?: string | null
+  category?: CategoryItem | string | null
 }
 
 export type MediaFile = {

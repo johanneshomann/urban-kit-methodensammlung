@@ -1,5 +1,5 @@
 import FilterableMethodList from '@/components/FilterableMethodList'
-import type { FilterItem, Methode } from '@/types'
+import type { CategoryItem, FilterItem, Methode } from '@/types'
 import { FILTER_CONFIGS, type FilterKey } from '@/lib/filterConfig'
 import { getTranslations } from 'next-intl/server'
 import { getPayload } from 'payload'
@@ -18,6 +18,17 @@ const COLLECTION_SLUGS: Record<FilterKey, string> = {
   characteristics: 'characteristics',
 }
 
+const SETTINGS_SLUGS: Record<FilterKey, string> = {
+  participationDepths: 'participation-depth-settings',
+  projectPhases: 'project-phase-settings',
+  goals: 'goal-settings',
+  formats: 'format-settings',
+  durations: 'duration-settings',
+  targetGroups: 'target-group-settings',
+  groupSizes: 'group-size-settings',
+  characteristics: 'characteristics-settings',
+}
+
 type Props = {
   params: Promise<{ locale: string }>
 }
@@ -27,7 +38,9 @@ export default async function HomePage({ params }: Props) {
   const payload = await getPayload({ config })
   const t = await getTranslations('home')
 
-  const [result, iconsDoc, ...filterResults] = await Promise.all([
+  const filterKeys = FILTER_CONFIGS.map((c) => c.key) as FilterKey[]
+
+  const [result, projectPhaseCategoriesResult, durationCategoriesResult, ...rest] = await Promise.all([
     payload.find({
       collection: 'methods',
       where: { status: { equals: 'published' } },
@@ -35,28 +48,40 @@ export default async function HomePage({ params }: Props) {
       limit: 100,
       sort: '-createdAt',
     }),
-    payload.findGlobal({ slug: 'filter-icons', depth: 1 }),
-    ...FILTER_CONFIGS.map(({ key }) =>
-      payload.find({ collection: COLLECTION_SLUGS[key] as any, limit: 200 })
+    payload.find({ collection: 'project-phase-categories' as any, limit: 100 }),
+    payload.find({ collection: 'duration-categories' as any, limit: 100 }),
+    ...filterKeys.map((key) =>
+      payload.find({ collection: COLLECTION_SLUGS[key] as any, limit: 200, depth: 1 })
+    ),
+    ...filterKeys.map((key) =>
+      payload.findGlobal({ slug: SETTINGS_SLUGS[key] as any, depth: 1 })
     ),
   ])
 
+  const filterResults = rest.slice(0, filterKeys.length)
+  const settingsResults = rest.slice(filterKeys.length)
+
   const allFilterItems: Record<FilterKey, FilterItem[]> = {} as Record<FilterKey, FilterItem[]>
-  FILTER_CONFIGS.forEach(({ key }, i) => {
+  filterKeys.forEach((key, i) => {
     allFilterItems[key] = filterResults[i].docs as unknown as FilterItem[]
   })
 
-  const methods = result.docs as unknown as Methode[]
-
-  type IconDoc = { url?: string } | null
-  const filterIcons: Record<string, string | undefined> = {}
-  const iconsGlobal = iconsDoc as Record<string, unknown> | undefined
-  if (iconsGlobal) {
-    for (const key of ['characteristics','durations','formats','goals','groupSizes','participationDepths','projectPhases','targetGroups'] as const) {
-      const doc = iconsGlobal[key] as IconDoc
-      if (doc?.url) filterIcons[key] = doc.url
-    }
+  const allCategoryItems: Partial<Record<FilterKey, CategoryItem[]>> = {
+    projectPhases: projectPhaseCategoriesResult.docs as unknown as CategoryItem[],
+    durations: durationCategoriesResult.docs as unknown as CategoryItem[],
   }
+
+  type SettingsDoc = { icon?: { url?: string } | null; active?: boolean | null }
+  const filterIcons: Record<string, string | undefined> = {}
+  const activeFilterKeys = new Set<FilterKey>()
+
+  filterKeys.forEach((key, i) => {
+    const doc = settingsResults[i] as SettingsDoc
+    if (doc?.icon?.url) filterIcons[key] = doc.icon.url
+    if (doc?.active !== false) activeFilterKeys.add(key)
+  })
+
+  const methods = result.docs as unknown as Methode[]
 
   return (
     <div>
@@ -71,7 +96,13 @@ export default async function HomePage({ params }: Props) {
         </div>
       </div>
 
-      <FilterableMethodList methods={methods} filterIcons={filterIcons} allFilterItems={allFilterItems} />
+      <FilterableMethodList
+        methods={methods}
+        filterIcons={filterIcons}
+        allFilterItems={allFilterItems}
+        allCategoryItems={allCategoryItems}
+        activeFilterKeys={activeFilterKeys}
+      />
     </div>
   )
 }

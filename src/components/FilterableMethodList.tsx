@@ -1,6 +1,6 @@
 'use client'
 
-import type { FilterItem, Methode } from '@/types'
+import type { CategoryItem, FilterItem, Methode } from '@/types'
 import { getLocalizedName } from '@/lib/localize'
 import { useLocale, useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
@@ -12,6 +12,8 @@ type Props = {
   methods: Methode[]
   filterIcons?: Record<string, string | undefined>
   allFilterItems?: Record<FilterKey, FilterItem[]>
+  allCategoryItems?: Partial<Record<FilterKey, CategoryItem[]>>
+  activeFilterKeys?: Set<FilterKey>
 }
 
 function getItems(method: Methode, key: FilterKey): FilterItem[] {
@@ -24,16 +26,20 @@ function getNames(method: Methode, key: FilterKey, locale: string): string[] {
   return getItems(method, key).map((item) => getLocalizedName(item, locale)).filter(Boolean)
 }
 
-export default function FilterableMethodList({ methods, filterIcons, allFilterItems }: Props) {
+export default function FilterableMethodList({ methods, filterIcons, allFilterItems, allCategoryItems, activeFilterKeys }: Props) {
   const t = useTranslations('methods')
   const tFilter = useTranslations('filter')
   const locale = useLocale()
   const [filters, setFilters] = useState<FilterState>({ ...EMPTY_FILTERS })
 
-  // All options per filter key — from pre-fetched collection items if available, else derived from methods
+  const activeConfigs = useMemo(
+    () => (activeFilterKeys ? FILTER_CONFIGS.filter((c) => activeFilterKeys.has(c.key)) : FILTER_CONFIGS),
+    [activeFilterKeys],
+  )
+
   const allOptions = useMemo(() => {
     const result = {} as Record<FilterKey, string[]>
-    for (const { key } of FILTER_CONFIGS) {
+    for (const { key } of activeConfigs) {
       if (allFilterItems?.[key]) {
         result[key] = allFilterItems[key]
           .map((item) => getLocalizedName(item, locale))
@@ -48,24 +54,22 @@ export default function FilterableMethodList({ methods, filterIcons, allFilterIt
       }
     }
     return result
-  }, [methods, allFilterItems, locale])
+  }, [methods, allFilterItems, locale, activeConfigs])
 
-  // Methods matching all active filters (AND logic)
   const filtered = useMemo(() => {
     return methods.filter((m) => {
-      return FILTER_CONFIGS.every(({ key }) => {
+      return activeConfigs.every(({ key }) => {
         const selected = filters[key]
         if (!selected) return true
         return getNames(m, key, locale).includes(selected)
       })
     })
-  }, [methods, filters, locale])
+  }, [methods, filters, locale, activeConfigs])
 
-  // Available options per key: which options exist in methods that match all OTHER active filters
   const availableOptions = useMemo(() => {
     const result = {} as Record<FilterKey, string[]>
-    for (const { key } of FILTER_CONFIGS) {
-      const otherFilters = FILTER_CONFIGS.filter((c) => c.key !== key)
+    for (const { key } of activeConfigs) {
+      const otherFilters = activeConfigs.filter((c) => c.key !== key)
       const subset = methods.filter((m) =>
         otherFilters.every(({ key: k }) => {
           const selected = filters[k]
@@ -80,7 +84,7 @@ export default function FilterableMethodList({ methods, filterIcons, allFilterIt
       result[key] = [...names]
     }
     return result
-  }, [methods, filters, locale])
+  }, [methods, filters, locale, activeConfigs])
 
   const hasAnyActive = Object.values(filters).some(Boolean)
 
@@ -99,12 +103,14 @@ export default function FilterableMethodList({ methods, filterIcons, allFilterIt
           )}
         </div>
         <MethodFilters
-        filters={filters}
-        onChange={setFilters}
-        allOptions={allOptions}
-        availableOptions={availableOptions}
-        filterIcons={filterIcons}
-        allFilterItems={allFilterItems}
+          filters={filters}
+          onChange={setFilters}
+          allOptions={allOptions}
+          availableOptions={availableOptions}
+          filterIcons={filterIcons}
+          allFilterItems={allFilterItems}
+          allCategoryItems={allCategoryItems}
+          activeFilterKeys={activeFilterKeys}
         />
       </div>
 

@@ -1,12 +1,16 @@
 import type { CollectionConfig } from 'payload'
 
-export const Durations: CollectionConfig = {
-  slug: 'durations',
+export const DurationCategories: CollectionConfig = {
+  slug: 'duration-categories',
   labels: {
-    singular: { en: 'Duration', de: 'Dauer' },
-    plural: { en: 'Durations', de: 'Zeitrahmen' },
+    singular: { en: 'Duration Category', de: 'Zeitrahmen-Kategorie' },
+    plural: { en: 'Duration Categories', de: 'Zeitrahmen-Kategorien' },
   },
-  admin: { useAsTitle: 'nameDe', defaultColumns: ['nameDe', 'category'], group: { en: 'Durations', de: 'Zeitrahmen' } },
+  admin: {
+    useAsTitle: 'nameDe',
+    defaultColumns: ['nameDe', 'nameEn'],
+    group: { en: 'Durations', de: 'Zeitrahmen' },
+  },
   fields: [
     {
       type: 'tabs',
@@ -22,11 +26,10 @@ export const Durations: CollectionConfig = {
       ],
     },
     {
-      name: 'category',
-      label: { en: 'Category', de: 'Kategorie' },
-      type: 'relationship',
-      relationTo: 'duration-categories',
-      required: true,
+      name: 'icon',
+      label: { en: 'Icon', de: 'Icon' },
+      type: 'upload',
+      relationTo: 'icons',
       admin: { position: 'sidebar' },
     },
   ],
