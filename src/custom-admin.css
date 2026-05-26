@@ -1,0 +1,33 @@
+/* Make the Lexical rich text editor container match the text field styling */
+.rich-text-lexical .editor-container {
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: var(--style-radius-s, 3px);
+  background: var(--theme-input-bg);
+  color: var(--theme-elevation-800);
+  font-family: var(--font-body);
+  letter-spacing: normal;
+  transition-property: border, box-shadow, background-color;
+  transition-duration: 100ms, 100ms, 500ms;
+  transition-timing-function: cubic-bezier(0, 0.2, 0.2, 1);
+}
+
+.rich-text-lexical .editor-container:hover {
+  border-color: var(--theme-elevation-250);
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.2);
+}
+
+.rich-text-lexical .editor-container:focus-within {
+  border-color: var(--theme-elevation-400);
+  outline: 0;
+}
+
+.rich-text-lexical .editor-container .ContentEditable__root {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: var(--theme-elevation-800);
+  letter-spacing: normal;
+  min-height: 40px;
+}

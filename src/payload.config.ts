@@ -29,6 +29,7 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    css: path.resolve(dirname, 'custom-admin.css'),
   },
   i18n: {
     supportedLanguages: { en, de },
