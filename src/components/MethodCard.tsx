@@ -2,7 +2,7 @@ import type { FilterItem, Methode } from '@/types'
 import { getLocalizedName } from '@/lib/localize'
 import { useTranslations, useLocale } from 'next-intl'
 import { Link } from '@/navigation'
-import CartButton from './CartButton'
+import SaveButton from './SaveButton'
 
 type Props = {
   method: Methode
@@ -24,7 +24,7 @@ export default function MethodCard({ method }: Props) {
         >
           {method.title}
         </Link>
-        <CartButton
+        <SaveButton
           item={{
             id: String(method.id),
             slug: method.slug ?? '',

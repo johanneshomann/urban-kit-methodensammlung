@@ -10,6 +10,7 @@ import MethodFilters, { EMPTY_FILTERS, FILTER_CONFIGS, type FilterKey, type Filt
 type Props = {
   methods: Methode[]
   filterIcons?: Record<string, string | undefined>
+  allFilterItems?: Record<FilterKey, FilterItem[]>
 }
 
 function getItems(method: Methode, key: FilterKey): FilterItem[] {
@@ -22,23 +23,30 @@ function getNames(method: Methode, key: FilterKey, locale: string): string[] {
   return getItems(method, key).map((item) => getLocalizedName(item, locale)).filter(Boolean)
 }
 
-export default function FilterableMethodList({ methods, filterIcons }: Props) {
+export default function FilterableMethodList({ methods, filterIcons, allFilterItems }: Props) {
   const t = useTranslations('methods')
   const locale = useLocale()
   const [filters, setFilters] = useState<FilterState>({ ...EMPTY_FILTERS })
 
-  // All options per filter key (from all methods)
+  // All options per filter key — from pre-fetched collection items if available, else derived from methods
   const allOptions = useMemo(() => {
     const result = {} as Record<FilterKey, string[]>
     for (const { key } of FILTER_CONFIGS) {
-      const names = new Set<string>()
-      for (const m of methods) {
-        for (const n of getNames(m, key, locale)) names.add(n)
+      if (allFilterItems?.[key]) {
+        result[key] = allFilterItems[key]
+          .map((item) => getLocalizedName(item, locale))
+          .filter(Boolean)
+          .sort()
+      } else {
+        const names = new Set<string>()
+        for (const m of methods) {
+          for (const n of getNames(m, key, locale)) names.add(n)
+        }
+        result[key] = [...names].sort()
       }
-      result[key] = [...names].sort()
     }
     return result
-  }, [methods, locale])
+  }, [methods, allFilterItems, locale])
 
   // Methods matching all active filters (AND logic)
   const filtered = useMemo(() => {

@@ -1,14 +1,14 @@
 'use client'
 
-import type { CartItem } from '@/lib/cart'
+import type { SavedItem } from '@/lib/saved'
 import { useTranslations } from 'next-intl'
 
 type Props = {
-  items: CartItem[]
+  items: SavedItem[]
 }
 
-export default function CartExport({ items }: Props) {
-  const t = useTranslations('cart')
+export default function SavedExport({ items }: Props) {
+  const t = useTranslations('saved')
 
   const handleExport = () => {
     const data = JSON.stringify(items, null, 2)

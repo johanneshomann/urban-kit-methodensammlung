@@ -1,4 +1,4 @@
-import CartButton from '@/components/CartButton'
+import SaveButton from '@/components/SaveButton'
 import RichTextRenderer from '@/components/RichTextRenderer'
 import type { FilterItem, Methode } from '@/types'
 import { getLocalizedName } from '@/lib/localize'
@@ -58,7 +58,7 @@ export default async function MethodDetailPage({ params }: Props) {
 
       <div className="flex items-start justify-between gap-4 mb-6">
         <h1 className="text-3xl font-bold text-gray-900">{method.title}</h1>
-        <CartButton
+        <SaveButton
           item={{
             id: String(method.id),
             slug: method.slug ?? '',

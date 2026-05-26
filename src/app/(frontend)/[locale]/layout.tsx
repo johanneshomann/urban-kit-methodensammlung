@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { Link } from '@/navigation'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
-import CartWidget from '@/components/CartWidget'
+import SavedWidget from '@/components/SavedWidget'
 import localFont from 'next/font/local'
 import '../globals.css'
 
@@ -78,7 +78,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <footer className="border-t border-[#d8d9ff] mt-auto">
             <FooterText />
           </footer>
-          <CartWidget />
+          <SavedWidget />
         </NextIntlClientProvider>
       </body>
     </html>
@@ -97,8 +97,19 @@ async function NavLinks() {
 async function FooterText() {
   const t = await getTranslations('footer')
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6 text-sm text-gray-500 text-center">
-      {t('text')}
+    <div className="max-w-6xl mx-auto px-4 py-6 text-sm text-gray-500 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <span>{t('text')}</span>
+      <nav className="flex gap-4">
+        <Link href="/impressum" className="hover:text-[#a0a2e8] transition-colors">
+          {t('impressum')}
+        </Link>
+        <Link href="/datenschutz" className="hover:text-[#a0a2e8] transition-colors">
+          {t('datenschutz')}
+        </Link>
+        <a href="/admin" className="hover:text-[#a0a2e8] transition-colors">
+          {t('login')}
+        </a>
+      </nav>
     </div>
   )
 }

@@ -1,13 +1,13 @@
 'use client'
 
-import CartExport from '@/components/CartExport'
-import { useCart } from '@/hooks/useCart'
+import SavedExport from '@/components/SavedExport'
+import { useSaved } from '@/hooks/useSaved'
 import { Link } from '@/navigation'
 import { useTranslations } from 'next-intl'
 
-export default function CartPage() {
-  const { cart, remove, mounted } = useCart()
-  const t = useTranslations('cart')
+export default function SavedPage() {
+  const { saved, remove, mounted } = useSaved()
+  const t = useTranslations('saved')
 
   if (!mounted) {
     return <div className="py-16 text-center text-gray-400"><LoadingText /></div>
@@ -19,13 +19,13 @@ export default function CartPage() {
         <div>
           <h1 className="text-3xl font-bold text-gray-900 mb-1">{t('title')}</h1>
           <p className="text-gray-500">
-            {cart.length === 1 ? t('countOne') : t('countMany', { count: cart.length })}
+            {saved.length === 1 ? t('countOne') : t('countMany', { count: saved.length })}
           </p>
         </div>
-        <CartExport items={cart} />
+        <SavedExport items={saved} />
       </div>
 
-      {cart.length === 0 ? (
+      {saved.length === 0 ? (
         <div className="text-center py-20 text-gray-400">
           <p className="text-lg mb-2">{t('empty')}</p>
           <Link href="/" className="text-blue-600 hover:underline text-sm">
@@ -34,7 +34,7 @@ export default function CartPage() {
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {cart.map((item) => (
+          {saved.map((item) => (
             <div
               key={item.id}
               className="bg-white rounded-xl border border-gray-200 p-5 flex flex-col gap-3"
@@ -76,7 +76,7 @@ export default function CartPage() {
         </div>
       )}
 
-      {cart.length > 1 && (
+      {saved.length > 1 && (
         <section className="mt-12">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">{t('comparison')}</h2>
           <div className="overflow-x-auto">
@@ -88,7 +88,7 @@ export default function CartPage() {
                 </tr>
               </thead>
               <tbody>
-                {cart.map((item) => (
+                {saved.map((item) => (
                   <tr key={item.id} className="hover:bg-gray-50">
                     <td className="p-3 border border-gray-200">
                       <Link href={`/methods/${item.slug}`} className="text-blue-600 hover:underline">

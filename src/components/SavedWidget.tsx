@@ -2,12 +2,12 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { useCart } from '@/hooks/useCart'
+import { useSaved } from '@/hooks/useSaved'
 import { Link } from '@/navigation'
 
-export default function CartWidget() {
-  const { cart, remove, mounted } = useCart()
-  const t = useTranslations('cartWidget')
+export default function SavedWidget() {
+  const { saved, remove, mounted } = useSaved()
+  const t = useTranslations('savedWidget')
   const [open, setOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -21,7 +21,7 @@ export default function CartWidget() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [open])
 
-  const count = mounted ? cart.length : 0
+  const count = mounted ? saved.length : 0
 
   return (
     <div ref={containerRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
@@ -47,7 +47,7 @@ export default function CartWidget() {
             <p className="text-sm text-gray-400 text-center py-8">{t('empty')}</p>
           ) : (
             <ul className="divide-y divide-gray-50">
-              {cart.map((item) => (
+              {saved.map((item) => (
                 <li key={item.id} className="flex items-center justify-between gap-2 px-4 py-3 hover:bg-gray-50 transition-colors">
                   <Link
                     href={`/methods/${item.slug}`}
@@ -74,7 +74,7 @@ export default function CartWidget() {
         {/* Footer CTA */}
         <div className="p-3 border-t border-gray-100">
           <Link
-            href="/cart"
+            href="/saved"
             onClick={() => setOpen(false)}
             className="block w-full text-center text-sm font-medium bg-[#a0a2e8] hover:bg-[#8082d0] text-white py-2.5 rounded-xl transition-colors"
           >

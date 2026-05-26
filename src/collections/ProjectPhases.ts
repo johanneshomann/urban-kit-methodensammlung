@@ -28,7 +28,7 @@ export const ProjectPhases: CollectionConfig = {
       required: true,
       options: [
         { label: { en: 'Preparation', de: 'Vorbereitung' }, value: 'preparation' },
-        { label: { en: 'Implementation', de: 'Umsetzung' }, value: 'implementation' },
+        { label: { en: 'Implementation', de: 'Durchführung' }, value: 'implementation' },
         { label: { en: 'Follow-up', de: 'Nachbereitung' }, value: 'follow-up' },
       ],
       admin: { position: 'sidebar' },

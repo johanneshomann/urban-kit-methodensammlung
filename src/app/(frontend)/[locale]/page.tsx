@@ -1,10 +1,22 @@
 import FilterableMethodList from '@/components/FilterableMethodList'
-import type { Methode } from '@/types'
+import type { FilterItem, Methode } from '@/types'
+import { FILTER_CONFIGS, type FilterKey } from '@/components/MethodFilters'
 import { getTranslations } from 'next-intl/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
 export const dynamic = 'force-dynamic'
+
+const COLLECTION_SLUGS: Record<FilterKey, string> = {
+  participationDepths: 'participation-depths',
+  projectPhases: 'project-phases',
+  goals: 'goals',
+  formats: 'formats',
+  durations: 'durations',
+  targetGroups: 'target-groups',
+  groupSizes: 'group-sizes',
+  characteristics: 'characteristics',
+}
 
 type Props = {
   params: Promise<{ locale: string }>
@@ -15,7 +27,7 @@ export default async function HomePage({ params }: Props) {
   const payload = await getPayload({ config })
   const t = await getTranslations('home')
 
-  const [result, iconsDoc] = await Promise.all([
+  const [result, iconsDoc, ...filterResults] = await Promise.all([
     payload.find({
       collection: 'methods',
       where: { status: { equals: 'published' } },
@@ -24,7 +36,15 @@ export default async function HomePage({ params }: Props) {
       sort: '-createdAt',
     }),
     payload.findGlobal({ slug: 'filter-icons', depth: 1 }),
+    ...FILTER_CONFIGS.map(({ key }) =>
+      payload.find({ collection: COLLECTION_SLUGS[key] as any, limit: 200 })
+    ),
   ])
+
+  const allFilterItems: Record<FilterKey, FilterItem[]> = {} as Record<FilterKey, FilterItem[]>
+  FILTER_CONFIGS.forEach(({ key }, i) => {
+    allFilterItems[key] = filterResults[i].docs as unknown as FilterItem[]
+  })
 
   const methods = result.docs as unknown as Methode[]
 
@@ -51,7 +71,7 @@ export default async function HomePage({ params }: Props) {
         </div>
       </div>
 
-      <FilterableMethodList methods={methods} filterIcons={filterIcons} />
+      <FilterableMethodList methods={methods} filterIcons={filterIcons} allFilterItems={allFilterItems} />
     </div>
   )
 }

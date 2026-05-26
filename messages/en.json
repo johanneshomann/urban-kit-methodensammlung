@@ -5,7 +5,10 @@
     "subtitle": "Method Archive"
   },
   "footer": {
-    "text": "Urban Kit Method Archive"
+    "text": "Urban Kit Method Archive",
+    "impressum": "Imprint",
+    "datenschutz": "Privacy Policy",
+    "login": "Login"
   },
   "meta": {
     "title": "Urban Kit – Method Archive",
@@ -36,7 +39,7 @@
     "description": "Description",
     "steps": "Steps"
   },
-  "cart": {
+  "saved": {
     "title": "Saved Methods",
     "countOne": "1 method saved",
     "countMany": "{count} methods saved",
@@ -49,11 +52,11 @@
     "characteristics": "Characteristics",
     "export": "↓ Export as JSON"
   },
-  "cartButton": {
+  "savedButton": {
     "saved": "✓ Saved",
     "save": "+ Save"
   },
-  "cartWidget": {
+  "savedWidget": {
     "title": "Saved Methods",
     "countOne": "1 method",
     "countMany": "{count} methods",
@@ -61,5 +64,21 @@
     "remove": "Remove",
     "viewAll": "View all saved →"
   },
-  "loading": "Loading…"
+  "loading": "Loading…",
+  "impressum": {
+    "title": "Imprint",
+    "responsible": "Responsible",
+    "placeholder": "Name, address and contact details will be added here.",
+    "contact": "Contact",
+    "contactPlaceholder": "Email and further contact details will be added here."
+  },
+  "datenschutz": {
+    "title": "Privacy Policy",
+    "generalTitle": "General Information",
+    "generalText": "This website only collects and processes personal data in accordance with applicable law. Details will be added here.",
+    "cookiesTitle": "Cookies",
+    "cookiesText": "This website uses technically necessary cookies. Information about cookies used will be added here.",
+    "contactTitle": "Contact",
+    "contactText": "For questions about data protection, please contact the responsible party."
+  }
 }
