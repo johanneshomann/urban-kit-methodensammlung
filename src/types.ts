@@ -4,6 +4,7 @@ export type FilterItem = {
   nameEn?: string | null
   labelDe?: string | null
   labelEn?: string | null
+  category?: string | null
 }
 
 export type MediaFile = {

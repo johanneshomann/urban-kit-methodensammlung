@@ -1,32 +1,12 @@
 'use client'
 
-import { useTranslations, useLocale } from 'next-intl'
+import { useLocale } from 'next-intl'
 import { useState } from 'react'
-
-export const FILTER_CONFIGS = [
-  { key: 'participationDepths', de: 'Beteiligungstiefe', en: 'Participation Depth' },
-  { key: 'projectPhases', de: 'Projektphase', en: 'Project Phase' },
-  { key: 'goals', de: 'Ziele', en: 'Goals' },
-  { key: 'formats', de: 'Format', en: 'Format' },
-  { key: 'durations', de: 'Zeitrahmen', en: 'Duration' },
-  { key: 'targetGroups', de: 'Zielgruppe', en: 'Target Group' },
-  { key: 'groupSizes', de: 'Gruppengröße', en: 'Group Size' },
-  { key: 'characteristics', de: 'Merkmale', en: 'Characteristics' },
-] as const
-
-export type FilterKey = (typeof FILTER_CONFIGS)[number]['key']
-export type FilterState = Record<FilterKey, string>
-
-export const EMPTY_FILTERS: FilterState = {
-  characteristics: '',
-  durations: '',
-  formats: '',
-  goals: '',
-  groupSizes: '',
-  participationDepths: '',
-  projectPhases: '',
-  targetGroups: '',
-}
+import { FILTER_CONFIGS, EMPTY_FILTERS, type FilterKey, type FilterState } from '@/lib/filterConfig'
+import type { FilterItem } from '@/types'
+import { getLocalizedName } from '@/lib/localize'
+export type { FilterKey, FilterState } from '@/lib/filterConfig'
+export { FILTER_CONFIGS, EMPTY_FILTERS }
 
 type Props = {
   filters: FilterState
@@ -34,14 +14,40 @@ type Props = {
   availableOptions: Record<FilterKey, string[]>
   allOptions: Record<FilterKey, string[]>
   filterIcons?: Record<string, string | undefined>
+  allFilterItems?: Record<FilterKey, FilterItem[]>
 }
 
-export default function MethodFilters({ filters, onChange, availableOptions, allOptions, filterIcons }: Props) {
-  const t = useTranslations('filter')
+function OptionButton({
+  label,
+  isActive,
+  isAvailable,
+  onClick,
+}: {
+  label: string
+  isActive: boolean
+  isAvailable: boolean
+  onClick: () => void
+}) {
+  return (
+    <button
+      type="button"
+      onClick={isAvailable || isActive ? onClick : undefined}
+      className={`px-3 py-1 rounded-full text-sm border transition-colors ${
+        isActive
+          ? 'bg-[#a0a2e8] text-white border-[#a0a2e8]'
+          : isAvailable
+            ? 'bg-white text-gray-700 border-[#d8d9ff] hover:border-[#a0a2e8] hover:text-[#7879c5]'
+            : 'bg-white text-gray-300 border-gray-100 cursor-default'
+      }`}
+    >
+      {label}
+    </button>
+  )
+}
+
+export default function MethodFilters({ filters, onChange, availableOptions, allOptions, filterIcons, allFilterItems }: Props) {
   const locale = useLocale()
   const [openKeys, setOpenKeys] = useState<Set<FilterKey>>(new Set())
-
-  const hasAnyActive = Object.values(filters).some(Boolean)
 
   function toggleAccordion(key: FilterKey) {
     setOpenKeys((prev) => {
@@ -58,37 +64,23 @@ export default function MethodFilters({ filters, onChange, availableOptions, all
 
   return (
     <div className="bg-white border border-[#d8d9ff] rounded-xl overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-3 border-b border-[#d8d9ff]">
-        <span className="text-sm font-medium text-gray-500">{t('label')}</span>
-        {hasAnyActive && (
-          <button
-            onClick={() => onChange({ ...EMPTY_FILTERS })}
-            className="text-xs text-[#a0a2e8] hover:text-[#7879c5] transition-colors"
-          >
-            {t('reset')}
-          </button>
-        )}
-      </div>
-
       <div className="divide-y divide-[#d8d9ff]">
-        {FILTER_CONFIGS.map(({ key, de, en }) => {
+        {FILTER_CONFIGS.map(({ key, de, en, categories }) => {
           const label = locale === 'de' ? de : en
           const options = allOptions[key]
           const isEmpty = options.length === 0
           const isOpen = openKeys.has(key)
           const activeValue = filters[key]
+          const items = allFilterItems?.[key] ?? []
+
+          if (isEmpty) return null
 
           return (
             <div key={key}>
               <button
                 type="button"
-                onClick={() => !isEmpty && toggleAccordion(key)}
-                disabled={isEmpty}
-                className={`w-full flex items-center justify-between px-4 py-3 text-left transition-colors ${
-                  isEmpty
-                    ? 'opacity-40 cursor-not-allowed'
-                    : 'hover:bg-[#f5f5ff] cursor-pointer'
-                }`}
+                onClick={() => toggleAccordion(key)}
+                className="w-full flex items-center justify-between px-4 py-3 text-left transition-colors hover:bg-[#f5f5ff] cursor-pointer"
               >
                 <span className="flex items-center gap-2">
                   {filterIcons?.[key] && (
@@ -113,28 +105,60 @@ export default function MethodFilters({ filters, onChange, availableOptions, all
               </button>
 
               {isOpen && (
-                <div className="px-4 pb-3 flex flex-wrap gap-2">
-                  {options.map((opt) => {
-                    const isActive = activeValue === opt
-                    const isAvailable = availableOptions[key].includes(opt)
-
-                    return (
-                      <button
-                        key={opt}
-                        type="button"
-                        onClick={() => isAvailable || isActive ? toggleOption(key, opt) : undefined}
-                        className={`px-3 py-1 rounded-full text-sm border transition-colors ${
-                          isActive
-                            ? 'bg-[#a0a2e8] text-white border-[#a0a2e8]'
-                            : isAvailable
-                              ? 'bg-white text-gray-700 border-[#d8d9ff] hover:border-[#a0a2e8] hover:text-[#7879c5]'
-                              : 'bg-white text-gray-300 border-gray-100 cursor-default'
-                        }`}
-                      >
-                        {opt}
-                      </button>
-                    )
-                  })}
+                <div className="px-4 pb-4">
+                  {categories ? (
+                    // Grouped by category — render as columns
+                    <div className={`grid gap-4`} style={{ gridTemplateColumns: `repeat(${categories.length}, minmax(0, 1fr))` }}>
+                      {categories.map((cat) => {
+                        const catLabel = locale === 'de' ? cat.de : cat.en
+                        const catItems = items.filter((item) => item.category === cat.value)
+                        return (
+                          <div key={cat.value} className="flex flex-col gap-1">
+                            <span className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">
+                              {catLabel}
+                            </span>
+                            <div className="flex flex-col gap-1">
+                              {catItems.map((item) => {
+                                const name = getLocalizedName(item, locale)
+                                if (!name) return null
+                                const isActive = activeValue === name
+                                const isAvailable = availableOptions[key].includes(name)
+                                return (
+                                  <OptionButton
+                                    key={item.id}
+                                    label={name}
+                                    isActive={isActive}
+                                    isAvailable={isAvailable}
+                                    onClick={() => toggleOption(key, name)}
+                                  />
+                                )
+                              })}
+                              {catItems.length === 0 && (
+                                <span className="text-xs text-gray-300 italic">—</span>
+                              )}
+                            </div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  ) : (
+                    // Flat — render as wrapped pills
+                    <div className="flex flex-wrap gap-2">
+                      {options.map((opt) => {
+                        const isActive = activeValue === opt
+                        const isAvailable = availableOptions[key].includes(opt)
+                        return (
+                          <OptionButton
+                            key={opt}
+                            label={opt}
+                            isActive={isActive}
+                            isAvailable={isAvailable}
+                            onClick={() => toggleOption(key, opt)}
+                          />
+                        )
+                      })}
+                    </div>
+                  )}
                 </div>
               )}
             </div>

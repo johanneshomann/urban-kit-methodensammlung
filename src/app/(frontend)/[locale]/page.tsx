@@ -1,6 +1,6 @@
 import FilterableMethodList from '@/components/FilterableMethodList'
 import type { FilterItem, Methode } from '@/types'
-import { FILTER_CONFIGS, type FilterKey } from '@/components/MethodFilters'
+import { FILTER_CONFIGS, type FilterKey } from '@/lib/filterConfig'
 import { getTranslations } from 'next-intl/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'

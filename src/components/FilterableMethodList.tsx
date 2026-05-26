@@ -5,7 +5,8 @@ import { getLocalizedName } from '@/lib/localize'
 import { useLocale, useTranslations } from 'next-intl'
 import { useMemo, useState } from 'react'
 import MethodCard from './MethodCard'
-import MethodFilters, { EMPTY_FILTERS, FILTER_CONFIGS, type FilterKey, type FilterState } from './MethodFilters'
+import MethodFilters from './MethodFilters'
+import { EMPTY_FILTERS, FILTER_CONFIGS, type FilterKey, type FilterState } from '@/lib/filterConfig'
 
 type Props = {
   methods: Methode[]
@@ -25,6 +26,7 @@ function getNames(method: Methode, key: FilterKey, locale: string): string[] {
 
 export default function FilterableMethodList({ methods, filterIcons, allFilterItems }: Props) {
   const t = useTranslations('methods')
+  const tFilter = useTranslations('filter')
   const locale = useLocale()
   const [filters, setFilters] = useState<FilterState>({ ...EMPTY_FILTERS })
 
@@ -80,15 +82,31 @@ export default function FilterableMethodList({ methods, filterIcons, allFilterIt
     return result
   }, [methods, filters, locale])
 
+  const hasAnyActive = Object.values(filters).some(Boolean)
+
   return (
     <div className="flex flex-col gap-6">
-      <MethodFilters
+      <div>
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-sm font-medium text-gray-500">{tFilter('label')}</span>
+          {hasAnyActive && (
+            <button
+              onClick={() => setFilters({ ...EMPTY_FILTERS })}
+              className="text-xs text-[#a0a2e8] hover:text-[#7879c5] transition-colors"
+            >
+              {tFilter('reset')}
+            </button>
+          )}
+        </div>
+        <MethodFilters
         filters={filters}
         onChange={setFilters}
         allOptions={allOptions}
         availableOptions={availableOptions}
         filterIcons={filterIcons}
-      />
+        allFilterItems={allFilterItems}
+        />
+      </div>
 
       <p className="text-sm text-gray-500">
         {filtered.length === 1 ? t('foundOne') : t('foundMany', { count: filtered.length })}

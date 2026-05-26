@@ -24,7 +24,7 @@ export default function SavedWidget() {
   const count = mounted ? saved.length : 0
 
   return (
-    <div ref={containerRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div ref={containerRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
       {/* Popup panel */}
       <div
         className={`w-80 bg-white rounded-2xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden transition-all duration-200 origin-bottom-right ${
@@ -86,7 +86,7 @@ export default function SavedWidget() {
       {/* FAB button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-14 h-14 rounded-full bg-[#a0a2e8] hover:bg-[#8082d0] text-white shadow-lg hover:shadow-xl transition-all duration-150 flex items-center justify-center relative"
+        className="w-14 h-14 rounded-full bg-[#a0a2e8] hover:bg-[#8082d0] text-white shadow-lg hover:shadow-xl transition-all duration-150 flex items-center justify-center relative pointer-events-auto"
         aria-label={t('title')}
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
