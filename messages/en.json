@@ -1,7 +1,8 @@
 {
   "nav": {
     "allMethods": "All Methods",
-    "saved": "Saved"
+    "saved": "Saved",
+    "subtitle": "Method Archive"
   },
   "footer": {
     "text": "Urban Kit Method Archive"
@@ -12,7 +13,12 @@
   },
   "home": {
     "title": "Method Archive",
-    "subtitle": "Discover and filter our collection of methods for urban projects."
+    "subtitle": "Discover and filter our collection of methods for urban projects.",
+    "intro1": "Ensure that all participants can communicate respectfully and on equal footing at every interaction.",
+    "intro2": "Clarify in advance whether support services such as interpreters are needed so that all participants can follow and contribute to the discussion.",
+    "intro3": "You can ask participants to write their names and pronouns on a name tag or tape and wear it visibly. This can support a respectful, open, and welcoming atmosphere. So always bring tape and markers.",
+    "intro4": "Make sure you always have a way to take notes (laptop, tablet, pen and paper) to document discussions.",
+    "intro5": "Suitable venue: sufficiently large room with good acoustics, seating available"
   },
   "filter": {
     "label": "Filter:",

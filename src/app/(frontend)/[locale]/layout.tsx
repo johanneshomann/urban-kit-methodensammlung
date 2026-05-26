@@ -51,6 +51,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   }
 
   const messages = await getMessages()
+  const tNav = await getTranslations({ locale, namespace: 'nav' })
 
   return (
     <html lang={locale} className={atkinson.variable}>
@@ -61,7 +62,7 @@ export default async function LocaleLayout({ children, params }: Props) {
               <Link href="/" className="transition-colors block leading-none">
                 <span className="font-bold text-black">Urban</span><span className="font-bold text-[#a0a2e8]">KIT</span>
                 <br />
-                <span className="font-normal text-gray-400 text-sm uppercase tracking-[0.1em]">Methodensammlung</span>
+                <span className="font-normal text-gray-400 text-sm uppercase tracking-[0.1em]">{tNav('subtitle')}</span>
               </Link>
               <nav className="flex items-center gap-4">
                 <NavLinks />
