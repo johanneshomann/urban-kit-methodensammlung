@@ -15,7 +15,7 @@ export default async function HomePage({ params }: Props) {
   const payload = await getPayload({ config })
   const t = await getTranslations('home')
 
-  const [result, iconsResult] = await Promise.all([
+  const [result, iconsDoc] = await Promise.all([
     payload.find({
       collection: 'methods',
       where: { status: { equals: 'published' } },
@@ -23,17 +23,17 @@ export default async function HomePage({ params }: Props) {
       limit: 100,
       sort: '-createdAt',
     }),
-    payload.find({ collection: 'filter-icons', depth: 1, limit: 1 }),
+    payload.findGlobal({ slug: 'filter-icons', depth: 1 }),
   ])
 
   const methods = result.docs as unknown as Methode[]
 
   type IconDoc = { url?: string } | null
   const filterIcons: Record<string, string | undefined> = {}
-  const iconsDoc = iconsResult.docs[0] as Record<string, unknown> | undefined
-  if (iconsDoc) {
+  const iconsGlobal = iconsDoc as Record<string, unknown> | undefined
+  if (iconsGlobal) {
     for (const key of ['characteristics','durations','formats','goals','groupSizes','participationDepths','projectPhases','targetGroups'] as const) {
-      const doc = iconsDoc[key] as IconDoc
+      const doc = iconsGlobal[key] as IconDoc
       if (doc?.url) filterIcons[key] = doc.url
     }
   }

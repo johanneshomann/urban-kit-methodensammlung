@@ -6,7 +6,7 @@ import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 
-import { FilterIcons } from './collections/FilterIcons'
+import { FilterIcons } from './globals/FilterIcons'
 import { Goals } from './collections/Goals'
 import { Characteristics } from './collections/Characteristics'
 import { Durations } from './collections/Durations'
@@ -42,10 +42,11 @@ export default buildConfig({
     ParticipationDepths, ProjectPhases, Goals, Formats, Durations, TargetGroups, GroupSizes, Characteristics,
     // Assets
     Icons, Media,
-    // Settings
-    FilterIcons,
     // Administration (last)
     Users,
+  ],
+  globals: [
+    FilterIcons,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET ?? 'fallback-secret-change-in-production',
