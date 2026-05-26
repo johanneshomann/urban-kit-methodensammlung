@@ -26,9 +26,9 @@ export const Methods: CollectionConfig = {
             },
             {
               name: 'auszug',
-              type: 'richText',
+              type: 'textarea',
               label: { en: 'Excerpt', de: 'Auszug' },
-                            admin: { description: { en: 'Short summary of the method', de: 'Kurze Zusammenfassung der Methode' } },
+              admin: { description: { en: 'Short summary of the method', de: 'Kurze Zusammenfassung der Methode' } },
             },
             {
               name: 'description',
@@ -47,9 +47,9 @@ export const Methods: CollectionConfig = {
             },
             {
               name: 'auszugEn',
-              type: 'richText',
+              type: 'textarea',
               label: { en: 'Excerpt', de: 'Auszug' },
-                            admin: { description: { en: 'Short summary of the method', de: 'Kurze Zusammenfassung der Methode' } },
+              admin: { description: { en: 'Short summary of the method', de: 'Kurze Zusammenfassung der Methode' } },
             },
             {
               name: 'descriptionEn',
