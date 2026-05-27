@@ -71,7 +71,7 @@ export default function MethodFilters({ filters, onChange, availableOptions, all
   }
 
   return (
-    <div className="bg-white border border-[#d8d9ff] rounded-xl overflow-hidden">
+    <div className="bg-white">
       <div className="divide-y divide-[#d8d9ff]">
         {FILTER_CONFIGS.filter(({ key }) => !activeFilterKeys || activeFilterKeys.has(key)).map(({ key, de, en }) => {
           const label = locale === 'de' ? de : en
@@ -95,7 +95,7 @@ export default function MethodFilters({ filters, onChange, availableOptions, all
                   {filterIcons?.[key] && (
                     <img src={filterIcons[key]} alt="" aria-hidden className="w-4 h-4 object-contain" />
                   )}
-                  <span className="text-sm font-medium text-gray-700">{label}</span>
+                  <span className="text-sm font-medium text-gray-900">{label}</span>
                   {activeValue && (
                     <span className="w-2 h-2 rounded-full bg-[#a0a2e8] inline-block" />
                   )}

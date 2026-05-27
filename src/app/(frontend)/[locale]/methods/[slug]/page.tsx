@@ -51,7 +51,7 @@ export default async function MethodDetailPage({ params }: Props) {
   ).filter(Boolean) as FilterItem[]
 
   return (
-    <div className="max-w-3xl">
+    <div className="max-w-3xl mx-auto w-full px-4 py-8">
       <Link href="/" className="text-sm text-blue-600 hover:underline mb-6 inline-block">
         {t('allMethods')}
       </Link>

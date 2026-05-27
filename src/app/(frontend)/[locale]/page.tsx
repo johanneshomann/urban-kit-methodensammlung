@@ -33,8 +33,7 @@ type Props = {
   params: Promise<{ locale: string }>
 }
 
-export default async function HomePage({ params }: Props) {
-  const { locale } = await params
+export default async function HomePage({ params: _params }: Props) {
   const payload = await getPayload({ config })
   const t = await getTranslations('home')
 
@@ -85,24 +84,40 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-6xl font-bold text-[#a0a2e8] mb-6">{t('title')}</h1>
-        <div className="max-w-2xl space-y-3 text-gray-600 text-sm leading-relaxed">
-          <p>{t('intro1')}</p>
-          <p>{t('intro2')}</p>
-          <p>{t('intro3')}</p>
-          <p>{t('intro4')}</p>
-          <p>{t('intro5')}</p>
+      <section
+        className="relative flex flex-col justify-center py-16 overflow-hidden"
+        style={{
+          minHeight: 'calc(100svh - 5rem)',
+          backgroundImage: 'radial-gradient(circle, #c8caff 1.5px, transparent 1.5px)',
+          backgroundSize: '28px 28px',
+        }}
+      >
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent from-60% to-white" />
+        <div className="relative max-w-6xl mx-auto w-full px-4">
+          <h1 className="font-bold text-[#a0a2e8] mb-8 leading-none" style={{ fontSize: 'clamp(3rem, 7vw, 6rem)' }}>
+            {t('title')}
+          </h1>
+          <div className="max-w-2xl space-y-3 text-gray-600 text-sm leading-relaxed">
+            <p>{t('intro1')}</p>
+            <p>{t('intro2')}</p>
+            <p>{t('intro3')}</p>
+            <p>{t('intro4')}</p>
+            <p>{t('intro5')}</p>
+          </div>
+        </div>
+      </section>
+
+      <div className="bg-white">
+        <div className="max-w-6xl mx-auto w-full px-4 py-8">
+          <FilterableMethodList
+            methods={methods}
+            filterIcons={filterIcons}
+            allFilterItems={allFilterItems}
+            allCategoryItems={allCategoryItems}
+            activeFilterKeys={activeFilterKeys}
+          />
         </div>
       </div>
-
-      <FilterableMethodList
-        methods={methods}
-        filterIcons={filterIcons}
-        allFilterItems={allFilterItems}
-        allCategoryItems={allCategoryItems}
-        activeFilterKeys={activeFilterKeys}
-      />
     </div>
   )
 }
