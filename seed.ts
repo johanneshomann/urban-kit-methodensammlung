@@ -78,7 +78,7 @@ async function seed() {
   })
   await upsert('target-groups', 'interessierte Öffentlichkeit', {
     nameDe: 'interessierte Öffentlichkeit', nameEn: 'Interested Public', lucideIcon: 'Eye',
-    explanation:   'Besteht Interesse am Thema, ohne dass eine direkte Betroffenheit vorliegt? Würde die Person sich informieren oder eine Meinung äußern, ohne selbst Konsequenzen zu tragen? Ist die Beteiligung eher freiwillig und nicht durch eigene Betroffenheit motiviert?',
+    explanation:   'Besteht Interesse am Thema, ohne dass eine direkte Betroffenheit vorliegt? Würde die Person sich informieren oder eine Meinung äußern, ohne selbst Konsequenzen zu tragen? Ist die Beteiligung freiwillig und nicht durch eigene Betroffenheit motiviert?',
     explanationEn: 'Is there interest in the topic without direct personal impact? Would the person seek information or express an opinion without bearing consequences themselves? Is participation more voluntary and not motivated by personal impact?',
   })
   await upsert('target-groups', 'schwer erreichbare Gruppen', {
