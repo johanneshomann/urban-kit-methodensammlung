@@ -12,6 +12,8 @@ export type FilterItem = {
   labelDe?: string | null
   labelEn?: string | null
   category?: CategoryItem | string | null
+  icon?: { id: string; url?: string | null } | string | null
+  lucideIcon?: string | null
 }
 
 export type MediaFile = {
@@ -25,9 +27,29 @@ export type MediaFile = {
 export type Methode = {
   id: string
   title: string
+  titleEn?: string | null
   slug?: string | null
   status?: 'draft' | 'published' | null
+  auszug?: string | null
+  auszugEn?: string | null
+  zielDerMethode?: unknown
+  zielDerMethodeEn?: unknown
+  wannSinnvoll?: unknown
+  wannSinnvollEn?: unknown
   description?: unknown
+  descriptionEn?: unknown
+  vorbereitung?: unknown
+  vorbereitungEn?: unknown
+  durchfuehrung?: unknown
+  durchfuehrungEn?: unknown
+  auswertung?: unknown
+  auswertungEn?: unknown
+  tipps?: unknown
+  tippsEn?: unknown
+  ungeeignetFuer?: unknown
+  ungeeignetFuerEn?: unknown
+  aehnlicheMethoden?: (Methode | string)[] | null
+  wieKannEsWeiterGehen?: (Methode | string)[] | null
   characteristics?: (FilterItem | string)[] | null
   durations?: (FilterItem | string)[] | null
   formats?: (FilterItem | string)[] | null

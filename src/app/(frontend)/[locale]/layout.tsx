@@ -5,8 +5,10 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import { Link } from '@/navigation'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
+import NavMenu from '@/components/NavMenu'
 import SavedWidget from '@/components/SavedWidget'
 import localFont from 'next/font/local'
+import { COLOR_DEFAULTS, colorsToCssVars } from '@/lib/theme'
 import '../globals.css'
 
 const atkinson = localFont({
@@ -53,21 +55,32 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages()
   const tNav = await getTranslations({ locale, namespace: 'nav' })
 
+  const cssVars = colorsToCssVars(COLOR_DEFAULTS)
+
   return (
     <html lang={locale} className={atkinson.variable}>
+      <head>
+        <style>{`:root { ${cssVars} }`}</style>
+      </head>
       <body className="min-h-screen flex flex-col font-sans">
         <NextIntlClientProvider messages={messages}>
-          <header className="bg-white border-b border-[#d8d9ff] sticky top-0 z-10 shadow-md">
-            <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-              <Link href="/" className="transition-colors block leading-none">
-                <span className="font-bold text-black">Urban</span><span className="font-bold text-[#a0a2e8]">KIT</span>
-                <br />
-                <span className="font-normal text-gray-400 text-sm uppercase tracking-[0.1em]">{tNav('subtitle')}</span>
-              </Link>
-              <nav className="flex items-center gap-4">
-                <NavLinks />
-                <LanguageSwitcher />
-              </nav>
+          <header className="h-14 border-b bg-white grid grid-cols-[1fr_auto_1fr] items-center px-6 md:px-10 sticky top-0 z-50 transition-shadow shadow-md">
+            <div>
+              <NavMenu />
+            </div>
+
+            <Link href="/" className="font-bold text-text">
+              <span className="inline-flex items-center gap-1.5">
+                <span>
+                  <span className="font-normal" style={{ color: 'var(--method-ink-accent)' }}>Urban</span>
+                  <span style={{ color: 'var(--method)' }}>KIT</span>
+                </span>
+                <span className="font-normal" style={{ color: 'var(--method-ink)' }}> – {tNav('subtitle')}</span>
+              </span>
+            </Link>
+
+            <div className="flex justify-end items-center gap-4">
+              <LanguageSwitcher />
             </div>
           </header>
 
@@ -75,7 +88,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             {children}
           </main>
 
-          <footer className="border-t border-[#d8d9ff] mt-auto">
+          <footer className="border-t mt-auto">
             <FooterText />
           </footer>
           <SavedWidget />
@@ -85,19 +98,10 @@ export default async function LocaleLayout({ children, params }: Props) {
   )
 }
 
-async function NavLinks() {
-  const t = await getTranslations('nav')
-  return (
-    <Link href="/" className="text-sm text-gray-500 hover:text-[#a0a2e8] transition-colors">
-      {t('allMethods')}
-    </Link>
-  )
-}
-
 async function FooterText() {
   const t = await getTranslations('footer')
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6 text-sm text-gray-500 flex flex-col sm:flex-row items-center justify-between gap-2">
+    <div className="max-w-6xl mx-auto px-4 py-6 text-small text-gray-500 flex flex-col sm:flex-row items-center justify-between gap-2">
       <span>{t('text')}</span>
       <nav className="flex gap-4">
         <Link href="/impressum" className="hover:text-[#a0a2e8] transition-colors">

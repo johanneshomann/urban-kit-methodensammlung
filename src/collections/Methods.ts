@@ -25,16 +25,66 @@ export const Methods: CollectionConfig = {
               required: true,
             },
             {
-              name: 'auszug',
-              type: 'textarea',
+              type: 'collapsible',
               label: { en: 'Excerpt', de: 'Auszug' },
-              admin: { description: { en: 'Short summary of the method', de: 'Kurze Zusammenfassung der Methode' } },
+              admin: { initCollapsed: true },
+              fields: [
+                {
+                  name: 'auszug',
+                  type: 'textarea',
+                  label: { en: 'Excerpt', de: 'Auszug' },
+                  admin: { description: { en: 'Short summary of the method', de: 'Kurze Zusammenfassung der Methode' } },
+                },
+              ],
             },
             {
-              name: 'description',
-              type: 'richText',
+              type: 'collapsible',
+              label: { en: 'Goal of the method', de: 'Ziel der Methode' },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'zielDerMethode', type: 'richText', label: { en: 'Goal of the method', de: 'Ziel der Methode' } }],
+            },
+            {
+              type: 'collapsible',
+              label: { en: 'When useful & when not?', de: 'Wann sinnvoll & wann nicht?' },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'wannSinnvoll', type: 'richText', label: { en: 'When useful & when not?', de: 'Wann sinnvoll & wann nicht?' } }],
+            },
+            {
+              type: 'collapsible',
               label: { en: 'Description', de: 'Beschreibung' },
-                          },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'description', type: 'richText', label: { en: 'Description', de: 'Beschreibung' } }],
+            },
+            {
+              type: 'collapsible',
+              label: { en: 'Preparation', de: 'Vorbereitung' },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'vorbereitung', type: 'richText', label: { en: 'Preparation', de: 'Vorbereitung' } }],
+            },
+            {
+              type: 'collapsible',
+              label: { en: 'Execution', de: 'Durchführung' },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'durchfuehrung', type: 'richText', label: { en: 'Execution', de: 'Durchführung' } }],
+            },
+            {
+              type: 'collapsible',
+              label: { en: 'Evaluation', de: 'Auswertung' },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'auswertung', type: 'richText', label: { en: 'Evaluation', de: 'Auswertung' } }],
+            },
+            {
+              type: 'collapsible',
+              label: { en: 'Tips', de: 'Tipps' },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'tipps', type: 'richText', label: { en: 'Tips', de: 'Tipps' } }],
+            },
+            {
+              type: 'collapsible',
+              label: { en: 'Not suitable for', de: 'Ungeeignet für' },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'ungeeignetFuer', type: 'richText', label: { en: 'Not suitable for', de: 'Ungeeignet für' } }],
+            },
           ],
         },
         {
@@ -46,17 +96,95 @@ export const Methods: CollectionConfig = {
               label: { en: 'Title', de: 'Titel' },
             },
             {
-              name: 'auszugEn',
-              type: 'textarea',
+              type: 'collapsible',
               label: { en: 'Excerpt', de: 'Auszug' },
-              admin: { description: { en: 'Short summary of the method', de: 'Kurze Zusammenfassung der Methode' } },
+              admin: { initCollapsed: true },
+              fields: [
+                {
+                  name: 'auszugEn',
+                  type: 'textarea',
+                  label: { en: 'Excerpt', de: 'Auszug' },
+                  admin: { description: { en: 'Short summary of the method', de: 'Kurze Zusammenfassung der Methode' } },
+                },
+              ],
             },
             {
-              name: 'descriptionEn',
-              type: 'richText',
+              type: 'collapsible',
+              label: { en: 'Goal of the method', de: 'Ziel der Methode' },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'zielDerMethodeEn', type: 'richText', label: { en: 'Goal of the method', de: 'Ziel der Methode' } }],
+            },
+            {
+              type: 'collapsible',
+              label: { en: 'When useful & when not?', de: 'Wann sinnvoll & wann nicht?' },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'wannSinnvollEn', type: 'richText', label: { en: 'When useful & when not?', de: 'Wann sinnvoll & wann nicht?' } }],
+            },
+            {
+              type: 'collapsible',
               label: { en: 'Description', de: 'Beschreibung' },
-                          },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'descriptionEn', type: 'richText', label: { en: 'Description', de: 'Beschreibung' } }],
+            },
+            {
+              type: 'collapsible',
+              label: { en: 'Preparation', de: 'Vorbereitung' },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'vorbereitungEn', type: 'richText', label: { en: 'Preparation', de: 'Vorbereitung' } }],
+            },
+            {
+              type: 'collapsible',
+              label: { en: 'Execution', de: 'Durchführung' },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'durchfuehrungEn', type: 'richText', label: { en: 'Execution', de: 'Durchführung' } }],
+            },
+            {
+              type: 'collapsible',
+              label: { en: 'Evaluation', de: 'Auswertung' },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'auswertungEn', type: 'richText', label: { en: 'Evaluation', de: 'Auswertung' } }],
+            },
+            {
+              type: 'collapsible',
+              label: { en: 'Tips', de: 'Tipps' },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'tippsEn', type: 'richText', label: { en: 'Tips', de: 'Tipps' } }],
+            },
+            {
+              type: 'collapsible',
+              label: { en: 'Not suitable for', de: 'Ungeeignet für' },
+              admin: { initCollapsed: true },
+              fields: [{ name: 'ungeeignetFuerEn', type: 'richText', label: { en: 'Not suitable for', de: 'Ungeeignet für' } }],
+            },
           ],
+        },
+      ],
+    },
+    {
+      type: 'collapsible',
+      label: { en: 'Similar methods', de: 'Ähnliche Methoden' },
+      admin: { initCollapsed: true },
+      fields: [
+        {
+          name: 'aehnlicheMethoden',
+          label: { en: 'Similar methods', de: 'Ähnliche Methoden' },
+          type: 'relationship',
+          relationTo: 'methods',
+          hasMany: true,
+        },
+      ],
+    },
+    {
+      type: 'collapsible',
+      label: { en: 'What can follow?', de: 'Wie kann es weiter gehen?' },
+      admin: { initCollapsed: true },
+      fields: [
+        {
+          name: 'wieKannEsWeiterGehen',
+          label: { en: 'What can follow?', de: 'Wie kann es weiter gehen?' },
+          type: 'relationship',
+          relationTo: 'methods',
+          hasMany: true,
         },
       ],
     },
@@ -72,15 +200,14 @@ export const Methods: CollectionConfig = {
       hooks: {
         beforeValidate: [
           ({ value, data }) => {
-            if (!value && data?.title) {
-              return (data.title as string)
-                .toLowerCase()
-                .replace(/[äöü]/g, (c) => ({ ä: 'ae', ö: 'oe', ü: 'ue' }[c] ?? c))
-                .replace(/ß/g, 'ss')
-                .replace(/[^a-z0-9]+/g, '-')
-                .replace(/^-|-$/g, '')
-            }
-            return value
+            const source = (value || data?.title) as string | undefined
+            if (!source) return value
+            return source
+              .toLowerCase()
+              .replace(/[äöü]/g, (c) => ({ ä: 'ae', ö: 'oe', ü: 'ue' }[c] ?? c))
+              .replace(/ß/g, 'ss')
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/^-|-$/g, '')
           },
         ],
       },

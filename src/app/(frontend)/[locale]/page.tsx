@@ -4,6 +4,8 @@ import { FILTER_CONFIGS, type FilterKey } from '@/lib/filterConfig'
 import { getTranslations } from 'next-intl/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
+import { ChevronDown, BookOpen } from 'lucide-react'
+import { EyebrowBadge } from '@/components/EyebrowBadge'
 
 export const dynamic = 'force-dynamic'
 
@@ -70,13 +72,15 @@ export default async function HomePage({ params: _params }: Props) {
     durations: durationCategoriesResult.docs as unknown as CategoryItem[],
   }
 
-  type SettingsDoc = { icon?: { url?: string } | null; active?: boolean | null }
+  type SettingsDoc = { icon?: { url?: string } | null; lucideIcon?: string | null; active?: boolean | null }
   const filterIcons: Record<string, string | undefined> = {}
+  const filterLucideIcons: Record<string, string | undefined> = {}
   const activeFilterKeys = new Set<FilterKey>()
 
   filterKeys.forEach((key, i) => {
     const doc = settingsResults[i] as SettingsDoc
     if (doc?.icon?.url) filterIcons[key] = doc.icon.url
+    if (doc?.lucideIcon) filterLucideIcons[key] = doc.lucideIcon
     if (doc?.active !== false) activeFilterKeys.add(key)
   })
 
@@ -85,33 +89,48 @@ export default async function HomePage({ params: _params }: Props) {
   return (
     <div>
       <section
-        className="relative flex flex-col justify-center py-16 overflow-hidden"
-        style={{
-          minHeight: 'calc(100svh - 5rem)',
-          backgroundImage: 'radial-gradient(circle, #c8caff 1.5px, transparent 1.5px)',
-          backgroundSize: '28px 28px',
-        }}
+        id="hero"
+        className="relative flex-1 min-h-[calc(100svh-3.5rem)] flex flex-col overflow-hidden"
+        style={{ background: 'var(--method-light)' }}
       >
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent from-60% to-white" />
-        <div className="relative max-w-6xl mx-auto w-full px-4">
-          <h1 className="font-bold text-[#a0a2e8] mb-8 leading-none" style={{ fontSize: 'clamp(3rem, 7vw, 6rem)' }}>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent from-75% to-[var(--method-very-light)]" />
+        <BookOpen
+          className="absolute right-8 md:right-16 top-1/2 -translate-y-1/2 h-[45%] w-auto pointer-events-none"
+          strokeWidth={1}
+          aria-hidden="true"
+          style={{ color: 'var(--method)', opacity: 0.15 }}
+        />
+
+        <a href="#methods" className="absolute bottom-6 left-6 md:left-1/2 md:-translate-x-1/2 z-20 flex flex-col items-center gap-1 opacity-40 hover:opacity-100 transition-opacity cursor-pointer">
+          <span className="text-text" style={{ color: 'var(--method)' }}>
+            Hier beginnen
+          </span>
+          <ChevronDown
+            className="w-14 h-14 animate-bounce"
+            style={{ color: 'var(--method)' }}
+            aria-label="Zu den Methoden"
+          />
+        </a>
+
+        <div className="relative z-10 flex-1 flex flex-col justify-start px-6 pt-20 md:pt-28 md:px-16 lg:px-24">
+          <EyebrowBadge label={t('eyebrow')} opacity={0.6} />
+
+          <h1 className="text-hero font-black leading-none tracking-tight mb-5" style={{ color: 'var(--method)' }}>
             {t('title')}
           </h1>
-          <div className="max-w-2xl space-y-3 text-gray-600 text-sm leading-relaxed">
-            <p>{t('intro1')}</p>
-            <p>{t('intro2')}</p>
-            <p>{t('intro3')}</p>
-            <p>{t('intro4')}</p>
-            <p>{t('intro5')}</p>
-          </div>
+
+          <p className="text-text leading-relaxed max-w-2xl" style={{ color: 'var(--method-ink)' }}>
+            {t('subtitle')}
+          </p>
         </div>
       </section>
 
-      <div className="bg-white">
-        <div className="max-w-6xl mx-auto w-full px-4 py-8">
+      <div id="methods" style={{ background: 'var(--method-very-light)' }}>
+        <div className="px-6 md:px-16 lg:px-24 py-12 md:py-16">
           <FilterableMethodList
             methods={methods}
             filterIcons={filterIcons}
+            filterLucideIcons={filterLucideIcons}
             allFilterItems={allFilterItems}
             allCategoryItems={allCategoryItems}
             activeFilterKeys={activeFilterKeys}

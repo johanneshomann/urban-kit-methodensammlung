@@ -1,17 +1,135 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@source inline("p-{8,10,12,14} px-{12,14} py-{8,10,12,14} h-{16,18,20} gap-{8,10,14} mt-{8,10,12,14} mb-{8,10,12,14} space-y-{8,10,12,14}");
 
-:root {
-  --foreground: #111827;
-  --background: #eef;
-  --accent: #a0a2e8;
-  --method-dark-1: #a0a2e8;
-  --method-light-1: #eef;
-  --method-accent: #d8d9ff;
+/*
+  Tailwind v4 — imported only in [locale]/layout.tsx.
+  NEVER imported in (payload)/layout.tsx to avoid leaking into Payload Admin.
+*/
+
+@theme {
+  --font-sans: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+
+  /* Fluid type scale */
+  --text-hero:              clamp(3.5rem,  8vw + 1rem,       8rem);
+  --text-hero--line-height: 1.1;
+  --text-display:              clamp(1.25rem, 1.5vw + 0.5rem, 1.75rem);
+  --text-display--line-height: 1.3;
+  --text-title:              clamp(2.5rem,  4vw + 1rem,    4.5rem);
+  --text-title--line-height: 1.1;
+  --text-text:              clamp(0.85rem, 0.5vw + 0.9rem, 1.35rem);
+  --text-text--line-height: 1.6;
+  --text-small:              clamp(0.8rem, 0.4vw + 0.73rem, 1rem);
+  --text-small--line-height: 1.4;
+  --text-cta:              clamp(0.95rem, 0.4vw + 0.85rem, 1.1rem);
+  --text-cta--line-height: 1;
+
+  /* Color tokens (populated via CSS vars injected in layout) */
+  --color-method:        var(--method);
+  --color-method-light:  var(--method-light);
+  --color-method-very-light: var(--method-very-light);
+  --color-method-accent: var(--method-accent);
+  --color-method-dark:   var(--method-dark);
+  --color-ink:           var(--method-ink);
+  --color-ink-accent:    var(--method-ink-accent);
+
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(222.2 84% 4.9%);
+  --color-primary: hsl(221.2 83.2% 53.3%);
+  --color-primary-foreground: hsl(210 40% 98%);
+  --color-secondary: hsl(210 40% 96%);
+  --color-secondary-foreground: hsl(222.2 84% 4.9%);
+  --color-muted: hsl(210 40% 96%);
+  --color-muted-foreground: hsl(215.4 16.3% 46.9%);
+  --color-border: #d8d9ff;
+  --color-destructive: hsl(0 84.2% 60.2%);
+  --radius: 0.5rem;
+}
+
+html {
+  scroll-padding-top: 3.5rem;
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  font-family: var(--font-sans);
+  color: var(--method-ink);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--method-ink-accent);
+}
+
+@keyframes nav-slide-down {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes nav-slide-up {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-100%); }
+}
+
+.nav-panel-enter {
+  animation: nav-slide-down 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.nav-panel-exit {
+  animation: nav-slide-up 0.28s cubic-bezier(0.4, 0, 0.6, 1) both;
+}
+
+@keyframes tooltip-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-100% + 6px)) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -100%) scale(1);
+  }
+}
+
+.tooltip-in {
+  animation: tooltip-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-in {
+  animation: card-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-in {
+    animation: none;
+  }
+}
+
+@keyframes popover-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.popover-in {
+  animation: popover-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: top right;
+}
+
+/* Clear header shadow when method sticky title bar is visible */
+body.method-sticky-active header {
+  box-shadow: none;
 }

@@ -1,5 +1,26 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import {
+  lexicalEditor,
+  AlignFeature,
+  BlockquoteFeature,
+  BoldFeature,
+  HeadingFeature,
+  HorizontalRuleFeature,
+  IndentFeature,
+  InlineCodeFeature,
+  InlineToolbarFeature,
+  ItalicFeature,
+  LinkFeature,
+  OrderedListFeature,
+  ParagraphFeature,
+  RelationshipFeature,
+  StrikethroughFeature,
+  SubscriptFeature,
+  SuperscriptFeature,
+  UnderlineFeature,
+  UnorderedListFeature,
+  UploadFeature,
+} from '@payloadcms/richtext-lexical'
 import { en } from '@payloadcms/translations/languages/en'
 import { de } from '@payloadcms/translations/languages/de'
 import path from 'path'
@@ -7,6 +28,7 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 
 import { CharacteristicsSettings } from './globals/CharacteristicsSettings'
+import { PlatformSettings } from './globals/PlatformSettings'
 import { DurationSettings } from './globals/DurationSettings'
 import { FormatSettings } from './globals/FormatSettings'
 import { GoalSettings } from './globals/GoalSettings'
@@ -62,6 +84,7 @@ export default buildConfig({
     Users,
   ],
   globals: [
+    PlatformSettings,
     ParticipationDepthSettings,
     ProjectPhaseSettings,
     GoalSettings,
@@ -71,7 +94,29 @@ export default buildConfig({
     GroupSizeSettings,
     CharacteristicsSettings,
   ],
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    features: [
+      AlignFeature(),
+      BlockquoteFeature(),
+      BoldFeature(),
+      HeadingFeature(),
+      HorizontalRuleFeature(),
+      IndentFeature(),
+      InlineCodeFeature(),
+      InlineToolbarFeature(),
+      ItalicFeature(),
+      LinkFeature(),
+      OrderedListFeature(),
+      ParagraphFeature(),
+      RelationshipFeature(),
+      StrikethroughFeature(),
+      SubscriptFeature(),
+      SuperscriptFeature(),
+      UnderlineFeature(),
+      UnorderedListFeature(),
+      UploadFeature(),
+    ],
+  }),
   secret: process.env.PAYLOAD_SECRET ?? 'fallback-secret-change-in-production',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

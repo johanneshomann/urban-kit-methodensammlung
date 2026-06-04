@@ -3,6 +3,9 @@ import path from 'path'
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  access: {
+    read: () => true,
+  },
   admin: {
     group: { en: 'Assets', de: 'Medien' },
   },

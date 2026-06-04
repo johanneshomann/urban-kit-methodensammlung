@@ -32,5 +32,15 @@ export const ProjectPhaseCategories: CollectionConfig = {
       relationTo: 'icons',
       admin: { position: 'sidebar' },
     },
+    {
+      name: 'lucideIcon',
+      label: { en: 'Lucide Icon', de: 'Lucide Icon' },
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+        description: { en: 'Icon name from lucide.dev (e.g. Clock). Fallback if no icon uploaded.', de: 'Icon-Name von lucide.dev (z.B. Clock). Fallback, wenn kein Icon hochgeladen.' },
+        components: { afterInput: ['@/components/admin/LucideIconPreview#LucideIconPreview'] },
+      },
+    },
   ],
 }

@@ -10,15 +10,15 @@ export const FILTER_CONFIGS = [
 ] as const
 
 export type FilterKey = (typeof FILTER_CONFIGS)[number]['key']
-export type FilterState = Record<FilterKey, string>
+export type FilterState = Record<FilterKey, string[]>
 
 export const EMPTY_FILTERS: FilterState = {
-  participationDepths: '',
-  projectPhases: '',
-  goals: '',
-  formats: '',
-  durations: '',
-  targetGroups: '',
-  groupSizes: '',
-  characteristics: '',
+  participationDepths: [],
+  projectPhases: [],
+  goals: [],
+  formats: [],
+  durations: [],
+  targetGroups: [],
+  groupSizes: [],
+  characteristics: [],
 }

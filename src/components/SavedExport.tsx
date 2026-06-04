@@ -25,7 +25,7 @@ export default function SavedExport({ items }: Props) {
     <button
       onClick={handleExport}
       disabled={items.length === 0}
-      className="text-sm px-4 py-2 rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+      className="text-small px-4 py-2 rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
     >
       {t('export')}
     </button>

@@ -74,7 +74,7 @@ function renderNode(node: LexicalNode, index: number): React.ReactNode {
       if (fmt & 2) content = <em>{content}</em>
       if (fmt & 8) content = <u>{content}</u>
       if (fmt & 4) content = <s>{content}</s>
-      if (fmt & 16) content = <code className="bg-gray-100 px-1 rounded text-sm font-mono">{content}</code>
+      if (fmt & 16) content = <code className="bg-gray-100 px-1 rounded text-small font-mono">{content}</code>
       return <React.Fragment key={index}>{content}</React.Fragment>
     }
     case 'linebreak':

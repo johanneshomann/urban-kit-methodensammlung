@@ -1,7 +1,10 @@
 {
   "nav": {
+    "menu": "Menu",
+    "home": "Method Archive",
     "allMethods": "All Methods",
-    "saved": "Saved",
+    "saved": "Saved Methods",
+    "contact": "Contact",
     "subtitle": "Method Archive"
   },
   "footer": {
@@ -15,13 +18,18 @@
     "description": "A collection of methods and tools for urban projects."
   },
   "home": {
+    "eyebrow": "Methods for participatory projects",
     "title": "Method Archive",
-    "subtitle": "Discover and filter our collection of methods for urban projects.",
-    "intro1": "Ensure that all participants can communicate respectfully and on equal footing at every interaction.",
-    "intro2": "Clarify in advance whether support services such as interpreters are needed so that all participants can follow and contribute to the discussion.",
-    "intro3": "You can ask participants to write their names and pronouns on a name tag or tape and wear it visibly. This can support a respectful, open, and welcoming atmosphere. So always bring tape and markers.",
-    "intro4": "Make sure you always have a way to take notes (laptop, tablet, pen and paper) to document discussions.",
-    "intro5": "Suitable venue: sufficiently large room with good acoustics, seating available"
+    "subtitle": "Find tried-and-tested methods for participatory urban projects. Filter by target group, timeframe or goal – and discover what fits your project."
+  },
+  "beforeYouBegin": {
+    "title": "Before you begin",
+    "item1": "Ensure that all participants can communicate respectfully and on equal footing at every interaction.",
+    "item2": "Clarify in advance whether support services such as interpreters are needed so that all participants can follow and contribute to the discussion.",
+    "item3": "You can ask participants to write their names and pronouns on a name tag or tape and wear it visibly. This can support a respectful, open, and welcoming atmosphere.\nSo always bring tape and markers.",
+    "item4": "Make sure you always have a way to take notes (laptop, tablet, pen and paper) to document discussions.",
+    "item5": "Suitable venue: sufficiently large room with good acoustics, seating available",
+    "timeNote": "The time indications for each method refer to the actual facilitation with participants. Preparation and follow-up require additional time."
   },
   "filter": {
     "label": "Filter:",
@@ -37,7 +45,12 @@
     "learnMore": "Learn more →",
     "allMethods": "← All Methods",
     "description": "Description",
-    "steps": "Steps"
+    "steps": "Steps",
+    "vorbereitung": "Preparation",
+    "durchfuehrung": "Execution",
+    "auswertung": "Evaluation",
+    "tipps": "Tips",
+    "ungeeignetFuer": "Not suitable for"
   },
   "saved": {
     "title": "Saved Methods",
@@ -50,7 +63,13 @@
     "comparison": "Comparison",
     "method": "Method",
     "characteristics": "Characteristics",
-    "export": "↓ Export as JSON"
+    "export": "↓ Export as JSON",
+    "scrollHint": "To your saved methods",
+    "cardsEyebrow": "Your selection",
+    "printPreview": "Save as PDF",
+    "print": "Print / Save as PDF",
+    "backToSaved": "← Saved Methods",
+    "printedOn": "Exported on"
   },
   "savedButton": {
     "saved": "✓ Saved",
@@ -66,19 +85,31 @@
   },
   "loading": "Loading…",
   "impressum": {
+    "metaTitle": "Imprint – Urban Kit Method Archive",
+    "eyebrow": "Legal",
     "title": "Imprint",
-    "responsible": "Responsible",
-    "placeholder": "Name, address and contact details will be added here.",
-    "contact": "Contact",
-    "contactPlaceholder": "Email and further contact details will be added here."
+    "subtitle": "Information in accordance with § 5 TMG — Responsible for the content of this website.",
+    "scrollHint": "To the imprint",
+    "placeholder": "The imprint will be added here."
+  },
+  "kontakt": {
+    "metaTitle": "Contact – Urban Kit Method Archive",
+    "eyebrow": "Contact",
+    "titleLine1": "Write to us",
+    "subtitle": "Missing a method, spotted an error, or want to contribute to the archive? Get in touch.",
+    "scrollHint": "Go to contact details",
+    "sectionEyebrow": "Contact details",
+    "sectionTitleLine1": "How to",
+    "sectionTitleLine2": "reach us",
+    "contactText": "Just send us an email – we'll get back to you as soon as possible.",
+    "placeholder": "Contact information will be added here."
   },
   "datenschutz": {
+    "metaTitle": "Privacy Policy – Urban Kit Method Archive",
+    "eyebrow": "Legal",
     "title": "Privacy Policy",
-    "generalTitle": "General Information",
-    "generalText": "This website only collects and processes personal data in accordance with applicable law. Details will be added here.",
-    "cookiesTitle": "Cookies",
-    "cookiesText": "This website uses technically necessary cookies. Information about cookies used will be added here.",
-    "contactTitle": "Contact",
-    "contactText": "For questions about data protection, please contact the responsible party."
+    "subtitle": "Privacy policy in accordance with Art. 13 GDPR — information on the processing of personal data on this website.",
+    "scrollHint": "To the privacy policy",
+    "placeholder": "The privacy policy will be added here."
   }
 }

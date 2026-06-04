@@ -15,7 +15,7 @@ export default function LanguageSwitcher() {
   return (
     <button
       onClick={toggle}
-      className="text-xs font-medium px-2.5 py-1.5 rounded-md border border-gray-300 text-gray-600 hover:border-blue-500 hover:text-blue-600 transition-colors"
+      className="flex items-center gap-1.5 text-text cursor-pointer transition-colors text-ink hover:text-method"
       aria-label="Switch language"
     >
       {locale === 'en' ? 'DE' : 'EN'}

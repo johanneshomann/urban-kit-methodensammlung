@@ -1,7 +1,10 @@
 {
   "nav": {
+    "menu": "Menü",
+    "home": "Methodensammlung",
     "allMethods": "Alle Methoden",
-    "saved": "Gespeichert",
+    "saved": "Gespeicherte Methoden",
+    "contact": "Kontakt",
     "subtitle": "Methodensammlung"
   },
   "footer": {
@@ -15,13 +18,18 @@
     "description": "Eine Sammlung von Methoden und Werkzeugen für urbane Projekte."
   },
   "home": {
+    "eyebrow": "Methoden für partizipative Projekte",
     "title": "Methodensammlung",
-    "subtitle": "Entdecken und filtern Sie unsere Sammlung von Methoden für urbane Projekte.",
-    "intro1": "Stelle bei jedem Kontakt sicher, dass sich alle auf Augenhöhe respektvoll verständigen (können).",
-    "intro2": "Kläre im Vorfeld, ob unterstützende Angebote wie z.B. Dolmetscher:innen notwendig sind, damit alle Teilnehmenden dem Gespräch folgen und sich einbringen können.",
-    "intro3": "Du kannst die Teilnehmenden bitten, ihre Namen und ihre Pronomen auf ein Namensschild/Klebeband zu schreiben und gut sichtbar an sich zu tragen. Das kann eine respektvolle, offene und zugewandte Gesprächsatmosphäre unterstützen. Du kannst also immer Tape und Stifte mitbringen.",
-    "intro4": "Sieh zu, dass du immer eine Dokumentationsmöglichkeit (Laptop, Tablett, Stift und Zettel) parat hast, um bei Diskussionen mitzuschreiben.",
-    "intro5": "Passende Räumlichkeiten: ausreichend großer Raum mit guter Akustik, Sitzmöglichkeiten"
+    "subtitle": "Hier findest du erprobte Methoden für partizipative Stadtprojekte. Filter nach Zielgruppe, Zeitrahmen oder Ziel – und entdecke, was zu deinem Vorhaben passt."
+  },
+  "beforeYouBegin": {
+    "title": "Bevor du beginnst",
+    "item1": "Stelle bei jedem Kontakt sicher, dass sich alle auf Augenhöhe respektvoll verständigen (können).",
+    "item2": "Kläre im Vorfeld, ob unterstützende Angebote wie z.B. Dolmetscher:innen notwendig sind, damit alle Teilnehmenden dem Gespräch folgen und sich einbringen können.",
+    "item3": "Du kannst die Teilnehmenden bitten, ihre Namen und Pronomen auf ein Namensschild/Klebeband zu schreiben und gut sichtbar an sich zu tragen. Das kann eine respektvolle, offene und zugewandte Gesprächsatmosphäre unterstützen.\nDu kannst also immer Tape und Stifte mitbringen.",
+    "item4": "Stelle sicher, dass du immer eine Dokumentationsmöglichkeit (Laptop, Tablett, Stift und Zettel) parat hast, um bei Diskussionen mitzuschreiben.",
+    "item5": "Passende Räumlichkeiten: ausreichend großer Raum mit guter Akustik, Sitzmöglichkeiten",
+    "timeNote": "Die Zeitangaben der jeweiligen Methoden beziehen sich auf die tatsächliche Durchführung mit den Beteiligten. Die Vor- und Nacharbeitung beansprucht extra Zeit."
   },
   "filter": {
     "label": "Filter:",
@@ -37,7 +45,12 @@
     "learnMore": "Mehr erfahren →",
     "allMethods": "← Alle Methoden",
     "description": "Beschreibung",
-    "steps": "Schritte"
+    "steps": "Schritte",
+    "vorbereitung": "Vorbereitung",
+    "durchfuehrung": "Durchführung",
+    "auswertung": "Auswertung",
+    "tipps": "Tipps",
+    "ungeeignetFuer": "Ungeeignet für"
   },
   "saved": {
     "title": "Gespeicherte Methoden",
@@ -50,7 +63,13 @@
     "comparison": "Vergleich",
     "method": "Methode",
     "characteristics": "Merkmale",
-    "export": "↓ Als JSON exportieren"
+    "export": "↓ Als JSON exportieren",
+    "scrollHint": "Zu den gespeicherten Methoden",
+    "cardsEyebrow": "Deine Auswahl",
+    "printPreview": "Als PDF",
+    "print": "Drucken / Als PDF speichern",
+    "backToSaved": "← Gespeicherte Methoden",
+    "printedOn": "Exportiert am"
   },
   "savedButton": {
     "saved": "✓ Gespeichert",
@@ -66,19 +85,31 @@
   },
   "loading": "Lädt…",
   "impressum": {
+    "metaTitle": "Impressum – Urban Kit Methodensammlung",
+    "eyebrow": "Rechtliches",
     "title": "Impressum",
-    "responsible": "Verantwortlich",
-    "placeholder": "Name, Adresse und Kontaktdaten werden hier eingetragen.",
-    "contact": "Kontakt",
-    "contactPlaceholder": "E-Mail und weitere Kontaktdaten werden hier eingetragen."
+    "subtitle": "Angaben gemäß § 5 TMG — Verantwortlich für den Inhalt dieser Website.",
+    "scrollHint": "Zum Impressum",
+    "placeholder": "Das Impressum wird hier ergänzt."
+  },
+  "kontakt": {
+    "metaTitle": "Kontakt – Urban Kit Methodensammlung",
+    "eyebrow": "Kontakt",
+    "titleLine1": "Schreib uns",
+    "subtitle": "Du vermisst eine Methode, hast einen Fehler entdeckt oder möchtest zur Sammlung beitragen? Meld dich gerne.",
+    "scrollHint": "Zu den Kontaktdaten",
+    "sectionEyebrow": "Kontaktdaten",
+    "sectionTitleLine1": "So erreichst",
+    "sectionTitleLine2": "du uns",
+    "contactText": "Schreib uns einfach eine E-Mail – wir antworten so schnell wie möglich.",
+    "placeholder": "Kontaktinformationen werden hier ergänzt."
   },
   "datenschutz": {
-    "title": "Datenschutzerklärung",
-    "generalTitle": "Allgemeine Hinweise",
-    "generalText": "Diese Website erhebt und verarbeitet personenbezogene Daten nur im Rahmen der gesetzlichen Bestimmungen. Details werden hier ergänzt.",
-    "cookiesTitle": "Cookies",
-    "cookiesText": "Diese Website verwendet technisch notwendige Cookies. Informationen zu eingesetzten Cookies werden hier ergänzt.",
-    "contactTitle": "Kontakt",
-    "contactText": "Bei Fragen zum Datenschutz wenden Sie sich bitte an die verantwortliche Stelle."
+    "metaTitle": "Datenschutzerklärung – Urban Kit Methodensammlung",
+    "eyebrow": "Rechtliches",
+    "title": "Datenschutz",
+    "subtitle": "Datenschutzerklärung gemäß Art. 13 DSGVO — Informationen zur Verarbeitung personenbezogener Daten auf dieser Website.",
+    "scrollHint": "Zur Datenschutzerklärung",
+    "placeholder": "Die Datenschutzerklärung wird hier ergänzt."
   }
 }

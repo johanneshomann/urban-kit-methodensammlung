@@ -3,29 +3,69 @@
 import { useSaved } from '@/hooks/useSaved'
 import type { SavedItem } from '@/lib/saved'
 import { useTranslations } from 'next-intl'
+import { Bookmark } from 'lucide-react'
+import { useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 
 type Props = {
   item: SavedItem
+  className?: string
+  style?: React.CSSProperties
 }
 
-export default function SaveButton({ item }: Props) {
+export default function SaveButton({ item, className, style: styleProp }: Props) {
   const { add, remove, inSaved, mounted } = useSaved()
   const t = useTranslations('savedButton')
   const isSaved = mounted && inSaved(item.id)
 
+  const btnRef = useRef<HTMLButtonElement>(null)
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null)
+
+  function handleMouseEnter() {
+    if (!btnRef.current) return
+    const rect = btnRef.current.getBoundingClientRect()
+    timerRef.current = setTimeout(() => {
+      setTooltipPos({ x: rect.left + rect.width / 2, y: rect.top })
+    }, 550)
+  }
+
+  function handleMouseLeave() {
+    if (timerRef.current) clearTimeout(timerRef.current)
+    setTooltipPos(null)
+  }
+
   return (
-    <button
-      onClick={() => (isSaved ? remove(item.id) : add(item))}
-      aria-label={isSaved ? t('saved') : t('save')}
-      className={`absolute top-3 right-3 w-8 h-8 rounded-lg flex items-center justify-center shadow-md transition-all duration-150 ${
-        isSaved
-          ? 'bg-[#a0a2e8] text-white opacity-100'
-          : 'bg-white text-gray-400 hover:text-[#a0a2e8] opacity-0 group-hover:opacity-100'
-      }`}
-    >
-      <svg width="16" height="16" viewBox="0 0 24 24" fill={isSaved ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
-      </svg>
-    </button>
+    <>
+      <button
+        ref={btnRef}
+        onClick={() => (isSaved ? remove(item.id) : add(item))}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        aria-label={isSaved ? t('saved') : t('save')}
+        className={className ?? `absolute top-3 right-3 z-20 text-display flex items-center justify-center p-2 rounded-xl transition-all duration-150 ${isSaved ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+        style={styleProp ?? { color: 'var(--method-ink)', background: 'var(--method-white)', cursor: isSaved ? 'pointer' : 'copy' }}
+      >
+        <Bookmark className="w-[1em] h-[1em]" fill={isSaved ? 'currentColor' : 'none'} />
+      </button>
+      {tooltipPos && createPortal(
+        <span
+          className="tooltip-in pointer-events-none text-small whitespace-nowrap px-2.5 py-1 rounded-lg border"
+          style={{
+            position: 'fixed',
+            left: tooltipPos.x,
+            top: tooltipPos.y - 8,
+            transform: 'translate(-50%, -100%)',
+            background: 'var(--method-white-transparent)',
+            color: 'var(--method-ink)',
+            zIndex: 9999,
+            backdropFilter: 'blur(6px)',
+          }}
+        >
+          {isSaved ? 'Nicht mehr speichern' : 'Speichern'}
+        </span>,
+        document.body
+      )}
+    </>
   )
 }
