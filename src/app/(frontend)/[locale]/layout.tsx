@@ -7,6 +7,8 @@ import { Link } from '@/navigation'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import NavMenu from '@/components/NavMenu'
 import SavedWidget from '@/components/SavedWidget'
+import { AccessibilityProvider } from '@/components/accessibility/AccessibilityProvider'
+import { AccessibilityButton } from '@/components/accessibility/AccessibilityButton'
 import localFont from 'next/font/local'
 import { COLOR_DEFAULTS, colorsToCssVars } from '@/lib/theme'
 import '../globals.css'
@@ -64,6 +66,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       </head>
       <body className="min-h-screen flex flex-col font-sans">
         <NextIntlClientProvider messages={messages}>
+          <AccessibilityProvider>
           <header className="relative h-14 border-b bg-white grid grid-cols-[1fr_auto_1fr] items-center px-6 md:px-10 sticky top-0 z-50 transition-shadow shadow-md">
             <div>
               <NavMenu />
@@ -99,6 +102,8 @@ export default async function LocaleLayout({ children, params }: Props) {
             <FooterText />
           </footer>
           <SavedWidget />
+          <AccessibilityButton />
+          </AccessibilityProvider>
         </NextIntlClientProvider>
       </body>
     </html>

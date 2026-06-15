@@ -143,3 +143,38 @@ body.method-sticky-active .method-brand {
   animation: popover-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
   transform-origin: top right;
 }
+
+/* ── Accessibility preferences (toggled by AccessibilityProvider) ───────── */
+
+html.a11y-reduce-motion {
+  scroll-behavior: auto !important;
+}
+html.a11y-reduce-motion *,
+html.a11y-reduce-motion *::before,
+html.a11y-reduce-motion *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+html.a11y-underline-links a {
+  text-decoration: underline !important;
+}
+
+/*
+  High-contrast preset. !important because the brand colors are injected via a
+  :root stylesheet block in the layout; this raises specificity to be safe.
+*/
+html.a11y-high-contrast {
+  --method: #000 !important;
+  --method-accent: #000 !important;
+  --method-dark: #000 !important;
+  --method-ink: #000 !important;
+  --method-ink-accent: #000 !important;
+  --method-black: #000 !important;
+  --method-light: #fff !important;
+  --method-very-light: #fff !important;
+  --method-white: #fff !important;
+  --method-white-transparent: #fff !important;
+}

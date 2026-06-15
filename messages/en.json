@@ -1,4 +1,16 @@
 {
+  "accessibility": {
+    "open": "Open accessibility settings",
+    "close": "Close",
+    "title": "Accessibility",
+    "fontSize": "Font size",
+    "fontSizeIncrease": "Increase font size",
+    "fontSizeDecrease": "Decrease font size",
+    "reduceMotion": "Reduce motion",
+    "highContrast": "High contrast",
+    "underlineLinks": "Underline links",
+    "reset": "Reset"
+  },
   "nav": {
     "menu": "Menu",
     "home": "Method Archive",
