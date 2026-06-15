@@ -122,8 +122,14 @@ function getCategoryId(category: CategoryItem | string | null | undefined): stri
   return category.id
 }
 
-function Chip({ label, isActive, isAvailable, onClick }: {
+function getItemIcon(item: FilterItem) {
+  const uploadUrl = typeof item.icon === 'object' && item.icon ? item.icon.url ?? undefined : undefined
+  return <FilterIcon uploadUrl={uploadUrl} lucideName={item.lucideIcon ?? undefined} className="w-[1em] h-[1em] object-contain shrink-0" />
+}
+
+function Chip({ label, icon, isActive, isAvailable, onClick }: {
   label: string
+  icon?: React.ReactNode
   isActive: boolean
   isAvailable: boolean
   onClick: () => void
@@ -157,7 +163,7 @@ function Chip({ label, isActive, isAvailable, onClick }: {
         onClick={unavailable ? undefined : onClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className="px-3 py-0.5 rounded-full text-text border transition-all"
+        className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-text border transition-all"
         style={
           isActive
             ? {
@@ -177,6 +183,7 @@ function Chip({ label, isActive, isAvailable, onClick }: {
                 }
         }
       >
+        {icon}
         {label}
       </button>
       {unavailable && tooltipPos && createPortal(
@@ -236,6 +243,7 @@ export default function MethodFilters({ filters, onChange, onClearKey, available
         const activeValues = filters[key]
         const items = allFilterItems?.[key] ?? []
         const categories = allCategoryItems?.[key]
+        const itemByName = new Map(items.map((it) => [getLocalizedName(it, locale), it] as const))
 
         if (!options || options.length === 0) return null
 
@@ -300,6 +308,7 @@ export default function MethodFilters({ filters, onChange, onClearKey, available
                                   <Chip
                                     key={item.id}
                                     label={name}
+                                    icon={getItemIcon(item)}
                                     isActive={activeValues.includes(name)}
                                     isAvailable={availableOptions[key].includes(name)}
                                     onClick={() => toggleOption(key, name)}
@@ -313,15 +322,19 @@ export default function MethodFilters({ filters, onChange, onClearKey, available
                     </div>
                   ) : (
                     <div className="flex flex-wrap gap-1.5">
-                      {options.map((opt) => (
-                        <Chip
-                          key={opt}
-                          label={opt}
-                          isActive={activeValues.includes(opt)}
-                          isAvailable={availableOptions[key].includes(opt)}
-                          onClick={() => toggleOption(key, opt)}
-                        />
-                      ))}
+                      {options.map((opt) => {
+                        const item = itemByName.get(opt)
+                        return (
+                          <Chip
+                            key={opt}
+                            label={opt}
+                            icon={item ? getItemIcon(item) : undefined}
+                            isActive={activeValues.includes(opt)}
+                            isAvailable={availableOptions[key].includes(opt)}
+                            onClick={() => toggleOption(key, opt)}
+                          />
+                        )
+                      })}
                     </div>
                   )}
                 </div>

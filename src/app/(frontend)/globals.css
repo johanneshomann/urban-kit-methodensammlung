@@ -107,6 +107,21 @@ h1, h2, h3, h4, h5, h6 {
   animation: card-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* When a method page scrolls past its hero, the brand fades out so the
+   portaled method title can crossfade into the header in its place. */
+body.method-sticky-active .method-brand {
+  opacity: 0;
+  pointer-events: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card-in {
     animation: none;
@@ -127,9 +142,4 @@ h1, h2, h3, h4, h5, h6 {
 .popover-in {
   animation: popover-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
   transform-origin: top right;
-}
-
-/* Clear header shadow when method sticky title bar is visible */
-body.method-sticky-active header {
-  box-shadow: none;
 }

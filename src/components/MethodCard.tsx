@@ -20,7 +20,7 @@ export default function MethodCard({ method, showAuszug }: Props) {
   const imageUrl = getMethodImageUrl(method.image, method.id)
 
   return (
-    <div className="relative group rounded-xl overflow-hidden flex flex-col hover:shadow-md transition-all" style={{ background: 'var(--method-white)' }}>
+    <div className="relative group rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all" style={{ background: 'var(--method-white)' }}>
       {/* Image strip with save button inside */}
       <div className="relative h-56 w-full overflow-hidden shrink-0">
         <img

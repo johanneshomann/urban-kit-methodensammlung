@@ -64,12 +64,12 @@ export default async function LocaleLayout({ children, params }: Props) {
       </head>
       <body className="min-h-screen flex flex-col font-sans">
         <NextIntlClientProvider messages={messages}>
-          <header className="h-14 border-b bg-white grid grid-cols-[1fr_auto_1fr] items-center px-6 md:px-10 sticky top-0 z-50 transition-shadow shadow-md">
+          <header className="relative h-14 border-b bg-white grid grid-cols-[1fr_auto_1fr] items-center px-6 md:px-10 sticky top-0 z-50 transition-shadow shadow-md">
             <div>
               <NavMenu />
             </div>
 
-            <Link href="/" className="font-bold text-text">
+            <Link href="/" className="method-brand font-bold text-text transition-opacity duration-300">
               <span className="inline-flex items-center gap-1.5">
                 <span>
                   <span className="font-normal" style={{ color: 'var(--method-ink-accent)' }}>Urban</span>
@@ -82,6 +82,13 @@ export default async function LocaleLayout({ children, params }: Props) {
             <div className="flex justify-end items-center gap-4">
               <LanguageSwitcher />
             </div>
+
+            {/* Method pages portal their sticky title here, crossfading with the brand.
+                Centered over the whole header with room between the side controls. */}
+            <div
+              id="method-title-portal"
+              className="pointer-events-none absolute left-1/2 top-0 h-full -translate-x-1/2 flex items-center justify-center px-4 w-[70%] md:w-[60%]"
+            />
           </header>
 
           <main className="flex-1">

@@ -16,6 +16,12 @@ export type FilterItem = {
   lucideIcon?: string | null
 }
 
+export type MethodSection = {
+  id?: string | null
+  sectionTitle?: string | null
+  content?: unknown
+}
+
 export type MediaFile = {
   id: string
   url?: string | null
@@ -36,14 +42,16 @@ export type Methode = {
   zielDerMethodeEn?: unknown
   wannSinnvoll?: unknown
   wannSinnvollEn?: unknown
+  wannNichtSinnvoll?: unknown
+  wannNichtSinnvollEn?: unknown
   description?: unknown
   descriptionEn?: unknown
-  vorbereitung?: unknown
-  vorbereitungEn?: unknown
-  durchfuehrung?: unknown
-  durchfuehrungEn?: unknown
-  auswertung?: unknown
-  auswertungEn?: unknown
+  vorbereitung?: MethodSection[] | null
+  vorbereitungEn?: MethodSection[] | null
+  durchfuehrung?: MethodSection[] | null
+  durchfuehrungEn?: MethodSection[] | null
+  auswertung?: MethodSection[] | null
+  auswertungEn?: MethodSection[] | null
   tipps?: unknown
   tippsEn?: unknown
   ungeeignetFuer?: unknown
@@ -59,6 +67,7 @@ export type Methode = {
   projectPhases?: (FilterItem | string)[] | null
   targetGroups?: (FilterItem | string)[] | null
   image?: MediaFile | string | null
+  gallery?: (MediaFile | string)[] | null
   createdAt: string
   updatedAt: string
 }
