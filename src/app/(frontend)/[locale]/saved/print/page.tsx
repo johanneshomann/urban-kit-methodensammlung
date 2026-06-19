@@ -10,8 +10,8 @@ function resolveItems(items: (FilterItem | string)[] | null | undefined): Filter
   return (items ?? []).map(i => typeof i === 'object' ? i : null).filter(Boolean) as FilterItem[]
 }
 
-function getName(item: FilterItem, locale: string): string {
-  return (locale === 'de' ? (item.nameDe ?? item.labelDe) : (item.nameEn ?? item.labelEn)) ?? ''
+function getName(item: FilterItem, _locale?: string): string {
+  return item.name ?? ''
 }
 
 export default function SavedPrintPage() {
@@ -22,7 +22,7 @@ export default function SavedPrintPage() {
   useEffect(() => {
     if (!mounted || saved.length === 0) { setMethods([]); return }
     const ids = saved.map(s => s.id).join(',')
-    fetch(`/api/methods-by-ids?ids=${ids}`)
+    fetch(`/api/methods-by-ids?ids=${ids}&locale=${locale}`)
       .then(r => r.json())
       .then(data => {
         const docs = (data?.docs ?? []) as Methode[]
@@ -64,8 +64,8 @@ export default function SavedPrintPage() {
             ))
           ) : (
             methods.map((m, i) => {
-              const title = locale === 'de' ? m.title : (m.titleEn ?? m.title)
-              const auszug = locale === 'de' ? m.auszug : (m.auszugEn ?? m.auszug)
+              const title = m.title
+              const auszug = m.auszug
               const phases = resolveItems(m.projectPhases).map(f => getName(f, locale)).filter(Boolean)
               const sizes = resolveItems(m.groupSizes).map(f => getName(f, locale)).filter(Boolean)
               const chars = resolveItems(m.characteristics).map(f => getName(f, locale)).filter(Boolean)

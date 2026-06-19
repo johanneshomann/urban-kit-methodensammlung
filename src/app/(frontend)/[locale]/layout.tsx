@@ -7,10 +7,13 @@ import { Link } from '@/navigation'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import NavMenu from '@/components/NavMenu'
 import SavedWidget from '@/components/SavedWidget'
+import { CurrentMethodProvider } from '@/components/CurrentMethodProvider'
 import { AccessibilityProvider } from '@/components/accessibility/AccessibilityProvider'
 import { AccessibilityButton } from '@/components/accessibility/AccessibilityButton'
 import localFont from 'next/font/local'
-import { COLOR_DEFAULTS, colorsToCssVars } from '@/lib/theme'
+import { getPayload } from 'payload'
+import config from '@payload-config'
+import { colorsToCssVars, resolveColors } from '@/lib/theme'
 import '../globals.css'
 
 const atkinson = localFont({
@@ -57,7 +60,9 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages()
   const tNav = await getTranslations({ locale, namespace: 'nav' })
 
-  const cssVars = colorsToCssVars(COLOR_DEFAULTS)
+  const payload = await getPayload({ config })
+  const settings = await payload.findGlobal({ slug: 'platform-settings' as any })
+  const cssVars = colorsToCssVars(resolveColors(settings))
 
   return (
     <html lang={locale} className={atkinson.variable}>
@@ -67,7 +72,8 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body className="min-h-screen flex flex-col font-sans">
         <NextIntlClientProvider messages={messages}>
           <AccessibilityProvider>
-          <header className="relative h-14 border-b bg-white grid grid-cols-[1fr_auto_1fr] items-center px-6 md:px-10 sticky top-0 z-50 transition-shadow shadow-md">
+          <CurrentMethodProvider>
+          <header className="relative h-14 border-b bg-method-white grid grid-cols-[1fr_auto_1fr] items-center px-6 md:px-10 sticky top-0 z-50 transition-shadow shadow-md">
             <div>
               <NavMenu />
             </div>
@@ -102,6 +108,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             <FooterText />
           </footer>
           <SavedWidget />
+          </CurrentMethodProvider>
           <AccessibilityButton />
           </AccessibilityProvider>
         </NextIntlClientProvider>
@@ -113,16 +120,16 @@ export default async function LocaleLayout({ children, params }: Props) {
 async function FooterText() {
   const t = await getTranslations('footer')
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6 text-small text-gray-500 flex flex-col sm:flex-row items-center justify-between gap-2">
+    <div className="max-w-6xl mx-auto px-4 py-6 text-small text-ink flex flex-col sm:flex-row items-center justify-between gap-2">
       <span>{t('text')}</span>
       <nav className="flex gap-4">
-        <Link href="/impressum" className="hover:text-[#a0a2e8] transition-colors">
+        <Link href="/impressum" className="hover:text-method transition-colors">
           {t('impressum')}
         </Link>
-        <Link href="/datenschutz" className="hover:text-[#a0a2e8] transition-colors">
+        <Link href="/datenschutz" className="hover:text-method transition-colors">
           {t('datenschutz')}
         </Link>
-        <a href="/admin" className="hover:text-[#a0a2e8] transition-colors">
+        <a href="/admin" className="hover:text-method transition-colors">
           {t('login')}
         </a>
       </nav>

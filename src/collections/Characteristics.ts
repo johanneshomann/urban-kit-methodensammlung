@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { requiredTextInDefaultLocale } from '../lib/requiredInDefaultLocale'
 
 export const Characteristics: CollectionConfig = {
   slug: 'characteristics',
@@ -6,20 +7,14 @@ export const Characteristics: CollectionConfig = {
     singular: { en: 'Characteristic', de: 'Merkmal' },
     plural: { en: 'Characteristics', de: 'Merkmale' },
   },
-  admin: { useAsTitle: 'nameDe', group: { en: 'Characteristics', de: 'Merkmale' } },
+  admin: { useAsTitle: 'name', group: { en: 'Filter: Characteristics', de: 'Filter: Merkmale' } },
   fields: [
     {
-      type: 'tabs',
-      tabs: [
-        {
-          label: 'DE',
-          fields: [{ name: 'nameDe', label: { en: 'Name', de: 'Name' }, type: 'text', required: true }],
-        },
-        {
-          label: 'EN',
-          fields: [{ name: 'nameEn', label: { en: 'Name', de: 'Name' }, type: 'text' }],
-        },
-      ],
+      name: 'name',
+      label: { en: 'Name', de: 'Name' },
+      type: 'text',
+      localized: true,
+      validate: requiredTextInDefaultLocale,
     },
     {
       name: 'icon',

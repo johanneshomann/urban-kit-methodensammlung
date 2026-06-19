@@ -19,9 +19,9 @@ export default async function KontaktPage({ params }: Props) {
   const t = await getTranslations({ locale, namespace: 'kontakt' })
 
   const payload = await getPayload({ config })
-  const settings = await payload.findGlobal({ slug: 'platform-settings' as any })
+  const settings = await payload.findGlobal({ slug: 'platform-settings' as any, locale: locale as 'de' | 'en', fallbackLocale: 'de' })
 
-  const content = locale === 'de' ? settings.kontaktDe : settings.kontaktEn
+  const content = settings.kontakt
   const email = settings.kontaktEmail as string | undefined
 
   return (
@@ -73,7 +73,7 @@ export default async function KontaktPage({ params }: Props) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           {/* Left — contact info */}
           <div className="flex flex-col gap-6">
-            <div className="bg-white rounded-xl border p-7 flex flex-col gap-5 hover:shadow-md transition-all">
+            <div className="bg-method-white rounded-xl border p-7 flex flex-col gap-5 hover:shadow-md transition-all">
               {content && (
                 <div className="text-text" style={{ color: 'var(--method-ink)' }}>
                   <RichTextRenderer content={content as any} />
@@ -102,7 +102,7 @@ export default async function KontaktPage({ params }: Props) {
           </div>
 
           {/* Right — form */}
-          <KontaktForm />
+          <KontaktForm disabled={!settings.mailEnabled} />
         </div>
       </section>
     </div>

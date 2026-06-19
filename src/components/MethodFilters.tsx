@@ -168,7 +168,7 @@ function Chip({ label, icon, isActive, isAvailable, onClick }: {
           isActive
             ? {
                 background: hovered ? 'var(--method-dark)' : 'var(--method)',
-                color: '#fff',
+                color: 'var(--method-white)',
                 borderColor: 'var(--method-black)',
                 cursor: 'pointer',
               }
@@ -176,7 +176,7 @@ function Chip({ label, icon, isActive, isAvailable, onClick }: {
               ? { background: 'var(--method-white)', color: 'var(--method-ink)', opacity: 0.3, cursor: 'default' }
               : {
                   background: hovered ? 'var(--method)' : 'var(--method-white)',
-                  color: 'var(--method-ink)',
+                  color: hovered ? 'var(--method-white)' : 'var(--method-ink)',
 
                   boxShadow: hovered ? '0 4px 12px rgba(0,0,0,0.08)' : 'none',
                   cursor: 'pointer',
@@ -294,7 +294,7 @@ export default function MethodFilters({ filters, onChange, onClearKey, available
                   {categories && categories.length > 0 ? (
                     <div className="flex flex-wrap gap-x-6 gap-y-3">
                       {categories.map((cat) => {
-                        const catLabel = locale === 'de' ? cat.nameDe : cat.nameEn
+                        const catLabel = cat.name
                         const catItems = items.filter((item) => getCategoryId(item.category) === cat.id)
                         if (catItems.length === 0) return null
                         return (

@@ -4,7 +4,7 @@ export const ParticipationDepthSettings: GlobalConfig = {
   slug: 'participation-depth-settings',
   label: { en: 'Settings', de: 'Einstellungen' },
   admin: {
-    group: { en: 'Participation Depth', de: 'Beteiligungstiefe' },
+    group: { en: 'Filter: Participation Depth', de: 'Filter: Beteiligungstiefe' },
   },
   fields: [
     {

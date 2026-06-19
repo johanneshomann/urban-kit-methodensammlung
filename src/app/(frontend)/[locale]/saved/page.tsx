@@ -18,7 +18,7 @@ export default function SavedPage() {
   useEffect(() => {
     if (!mounted || saved.length === 0) { setFullMethods([]); return }
     const ids = saved.map(s => s.id).join(',')
-    fetch(`/api/methods-by-ids?ids=${ids}`)
+    fetch(`/api/methods-by-ids?ids=${ids}&locale=${locale}`)
       .then(r => r.json())
       .then(data => {
         const docs = (data?.docs ?? []) as Methode[]
@@ -100,8 +100,8 @@ export default function SavedPage() {
                   href="/saved/print"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-small font-black border transition-all"
                   style={{ color: 'var(--method-ink)' }}
-                  onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-accent)')}
-                  onMouseLeave={e => (e.currentTarget.style.background = '')}
+                  onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-accent)'; e.currentTarget.style.color = 'var(--method-white)' }}
+                  onMouseLeave={e => { e.currentTarget.style.background = ''; e.currentTarget.style.color = 'var(--method-ink)' }}
                 >
                   <Printer className="w-[1em] h-[1em]" />
                   {t('printPreview')}
@@ -158,7 +158,7 @@ export default function SavedPage() {
                         <tr key={m.id} className={i < fullMethods.length - 1 ? 'border-b' : ''} style={{ borderColor: 'var(--method-light)' }}>
                           <td className="px-5 py-4 font-semibold sticky left-0" style={{ color: 'var(--method-ink-accent)', background: 'var(--method-white)' }}>
                             <Link href={`/methods/${m.slug}`} className="hover:underline">
-                              {locale === 'de' ? m.title : (m.titleEn ?? m.title)}
+                              {m.title}
                             </Link>
                           </td>
                           <td className="px-5 py-4" style={{ color: 'var(--method-ink)' }}>
@@ -188,8 +188,8 @@ function resolveItems(items: (FilterItem | string)[] | null | undefined): Filter
   return (items ?? []).map(i => typeof i === 'object' ? i : null).filter(Boolean) as FilterItem[]
 }
 
-function getLocalizedFilterName(item: FilterItem, locale: string): string {
-  return (locale === 'de' ? (item.nameDe ?? item.labelDe) : (item.nameEn ?? item.labelEn)) ?? ''
+function getLocalizedFilterName(item: FilterItem, _locale?: string): string {
+  return item.name ?? ''
 }
 
 function Tags({ items }: { items: string[] }) {

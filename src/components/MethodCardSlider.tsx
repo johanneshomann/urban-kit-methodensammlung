@@ -45,7 +45,7 @@ export default function MethodCardSlider({ methods, locale = 'de' }: { methods: 
       >
         {methods.map((m) => (
           <div key={m.id} className="snap-start shrink-0 basis-full md:basis-[calc(50%-0.75rem)]">
-            <MethodCard method={m} showAuszug />
+            <MethodCard method={m} showAuszug background="var(--method-very-light)" />
           </div>
         ))}
       </div>

@@ -17,7 +17,72 @@
     "allMethods": "All Methods",
     "saved": "Saved Methods",
     "contact": "Contact",
+    "help": "Guide",
     "subtitle": "Method Archive"
+  },
+  "help": {
+    "metaTitle": "Guide – Urban Kit Method Archive",
+    "eyebrow": "Help & Guide",
+    "title": "Guide",
+    "subtitle": "Here you'll learn how the Method Archive is structured and how to use it for your participatory urban project.",
+    "scrollHint": "Scroll to the guide",
+    "pagesTitle": "The pages at a glance",
+    "pages": [
+      {
+        "icon": "Home",
+        "title": "Method Archive",
+        "text": "The home page shows all methods. Use the filters to narrow them down by target group, timeframe, goal, format and more until the right ones remain."
+      },
+      {
+        "icon": "BookOpen",
+        "title": "Method detail page",
+        "text": "Every method has its own page with the procedure, required materials, tips, notes and related methods. Use the bookmark to save it."
+      },
+      {
+        "icon": "Bookmark",
+        "title": "Saved Methods",
+        "text": "Your bookmarked methods gather here in one place. You can export the selection as a list and share it with your team."
+      },
+      {
+        "icon": "Mail",
+        "title": "Contact",
+        "text": "Use the contact page to reach us – for example if a method is missing, you found an error, or you'd like to contribute to the archive."
+      }
+    ],
+    "faqTitle": "Frequently asked questions",
+    "faq": [
+      {
+        "q": "How do I find the right method?",
+        "a": "Use the filters on the home page. You can combine several criteria – the list updates instantly."
+      },
+      {
+        "q": "How do I save a method?",
+        "a": "Click the bookmark icon on a method card or detail page. The method then appears under “Saved Methods”."
+      },
+      {
+        "q": "Are my saved methods kept?",
+        "a": "Yes – they are stored locally in your browser. They won't be available on another device or after you clear your browser storage."
+      },
+      {
+        "q": "Can I export or share my selection?",
+        "a": "Yes. Under “Saved Methods” you can export your selection as a list – handy for coordinating within your team."
+      },
+      {
+        "q": "Is the archive available in English?",
+        "a": "Yes. Use the language switcher to switch between German and English at any time."
+      },
+      {
+        "q": "How do I adjust font size and contrast?",
+        "a": "Open the accessibility settings via the icon and set font size, contrast or reduced animations."
+      },
+      {
+        "q": "Who do I contact with questions?",
+        "a": "You can reach us directly via the contact page – we're happy to help."
+      }
+    ],
+    "footerTitle": "Still have questions?",
+    "footerText": "Get in touch – we're happy to help.",
+    "footerCta": "Contact us"
   },
   "footer": {
     "text": "Urban Kit Method Archive",
@@ -32,7 +97,7 @@
   "home": {
     "eyebrow": "Methods for participatory projects",
     "title": "Method Archive",
-    "subtitle": "Find tried-and-tested methods for participatory urban projects. Filter by target group, timeframe or goal – and discover what fits your project."
+    "subtitle": "Find tried-and-tested methods for participatory urban projects. Filter by target group, timeframe, goal and more – and discover what fits your project."
   },
   "beforeYouBegin": {
     "title": "Before you begin",
@@ -93,7 +158,9 @@
     "countMany": "{count} methods",
     "empty": "Nothing saved yet.",
     "remove": "Remove",
-    "viewAll": "View all saved →"
+    "viewAll": "View all saved →",
+    "saveThis": "Save this method",
+    "savedThis": "Saved"
   },
   "loading": "Loading…",
   "impressum": {
@@ -114,7 +181,23 @@
     "sectionTitleLine1": "How to",
     "sectionTitleLine2": "reach us",
     "contactText": "Just send us an email – we'll get back to you as soon as possible.",
-    "placeholder": "Contact information will be added here."
+    "placeholder": "Contact information will be added here.",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "What is it about?",
+      "message": "Message",
+      "messagePlaceholder": "Your message …",
+      "submit": "Send",
+      "sending": "Sending …",
+      "successTitle": "Thanks for your message",
+      "successText": "We'll get back to you as soon as possible.",
+      "errorGeneric": "Something went wrong. Please try again later.",
+      "errorDisabled": "The contact form is currently unavailable. Please email us directly."
+    }
   },
   "datenschutz": {
     "metaTitle": "Privacy Policy – Urban Kit Method Archive",

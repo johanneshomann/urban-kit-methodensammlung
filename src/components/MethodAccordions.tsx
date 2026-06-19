@@ -17,6 +17,7 @@ export type AccordionItem = {
 function SectionList({ sections, locale }: { sections: MethodSection[]; locale: string }) {
   const baseId = useId()
   const [openIndexes, setOpenIndexes] = useState<Set<number>>(() => new Set())
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   const toggle = (i: number) =>
     setOpenIndexes((prev) => {
@@ -47,9 +48,7 @@ function SectionList({ sections, locale }: { sections: MethodSection[]; locale: 
           <div
             key={section.id ?? i}
             className="overflow-hidden transition-colors duration-200"
-            style={{
-              borderTop: '1px solid var(--method)',
-            }}
+            style={i > 0 ? { borderTop: '1px solid var(--method-ink)' } : undefined}
           >
             <button
               id={buttonId}
@@ -57,20 +56,25 @@ function SectionList({ sections, locale }: { sections: MethodSection[]; locale: 
               aria-expanded={isOpen}
               aria-controls={panelId}
               onClick={() => toggle(i)}
+              onMouseEnter={() => setHoveredIndex(i)}
+              onMouseLeave={() => setHoveredIndex(null)}
               className="w-full flex items-center gap-4 px-6 py-4 text-left cursor-pointer transition-colors"
             >
-              <span className="w-8 text-center text-small font-bold tabular-nums shrink-0" style={{ color: 'var(--method)' }}>
+              <span
+                className="w-8 text-center text-small font-bold tabular-nums shrink-0 transition-colors duration-200"
+                style={{ color: isOpen || hoveredIndex === i ? 'var(--method)' : 'var(--method-light)' }}
+              >
                 {String(i + 1).padStart(2, '0')}
               </span>
               <span
                 className="text-text font-semibold flex-1 transition-colors duration-200"
-                style={{ color: isOpen ? 'var(--method-ink-accent)' : 'var(--method-ink)' }}
+                style={{ color: isOpen || hoveredIndex === i ? 'var(--method-ink-accent)' : 'var(--method-ink)' }}
               >
                 {title}
               </span>
               <ChevronDown
-                className={`w-4 h-4 shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-                style={{ color: 'var(--method)', opacity: isOpen ? 0.7 : 0.4 }}
+                className={`w-[1em] h-[1em] text-text shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+                style={{ color: isOpen || hoveredIndex === i ? 'var(--method)' : 'var(--method-light)' }}
                 aria-hidden
               />
             </button>
@@ -85,7 +89,7 @@ function SectionList({ sections, locale }: { sections: MethodSection[]; locale: 
               }}
             >
               <div style={{ overflow: 'hidden' }}>
-                <div className="pl-[4.5rem] pr-6 pb-4 pt-0 text-text" style={{ color: 'var(--method-ink)' }}>
+                <div className="pl-[4.5rem] pr-6 pb-4 pt-0 text-small" style={{ color: 'var(--method-ink)' }}>
                   <RichTextRenderer content={section.content} />
                 </div>
               </div>
@@ -123,23 +127,19 @@ export default function MethodAccordions({ items, locale = 'de' }: { items: Acco
         const isOpen = openIndex === i
         const isHovered = hoveredIndex === i
 
-        const bg = isOpen
-          ? 'var(--method-white)'
-          : isHovered
-            ? 'var(--method-white)'
-            : 'var(--method-light)'
-
-        const borderColor = isOpen || isHovered ? 'var(--method)' : 'transparent'
+        // Whole card tints on hover (closed); when open the card stays white
+        // and only the title row keeps the tint.
+        const bg = isHovered && !isOpen ? 'var(--method-light)' : 'var(--method-white)'
+        const headerBg = isOpen ? 'var(--method-light)' : 'transparent'
 
         return (
           <div
             key={i}
-            className="rounded-xl border overflow-hidden"
+            className="rounded-xl overflow-hidden"
             style={{
               background: bg,
-              borderColor,
               boxShadow: isHovered && !isOpen ? '0 4px 16px rgba(0,0,0,0.06)' : isOpen ? '0 2px 8px rgba(0,0,0,0.04)' : '0 1px 3px rgba(0,0,0,0.08)',
-              transition: 'background 0.2s, border-color 0.2s, box-shadow 0.2s',
+              transition: 'background 0.2s, box-shadow 0.2s',
             }}
           >
             {item.id && <div id={item.id} style={{ scrollMarginTop: '5rem' }} />}
@@ -150,6 +150,7 @@ export default function MethodAccordions({ items, locale = 'de' }: { items: Acco
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
               className="w-full flex items-center gap-4 px-6 py-4 text-left cursor-pointer"
+              style={{ background: headerBg, transition: 'background 0.2s' }}
             >
               <span
                 className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-small font-bold transition-transform duration-200"
@@ -167,7 +168,7 @@ export default function MethodAccordions({ items, locale = 'de' }: { items: Acco
               </span>
               <span
                 className="text-display font-semibold flex-1 transition-colors duration-200"
-                style={{ color: isHovered || isOpen ? 'var(--method-ink-accent)' : 'var(--method-ink)' }}
+                style={{ color: 'var(--method-ink-accent)' }}
               >
                 {item.label}
               </span>

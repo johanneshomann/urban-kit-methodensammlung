@@ -31,3 +31,31 @@
   letter-spacing: normal;
   min-height: 40px;
 }
+
+/* Sidebar section dividers: set off the "Filter:" groups from the section
+   above (Methodensammlung) and below (Medien / Administration …). Keyed off
+   the shared "Filter" prefix, so it works in both languages and regardless of
+   whether the groups are collapsed. */
+.nav-group[id^='nav-group-Filter'] {
+  border-top: 1px solid var(--theme-elevation-100);
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+}
+/* Only the first Filter group keeps the divider — drop it between consecutive ones. */
+.nav-group[id^='nav-group-Filter'] + .nav-group[id^='nav-group-Filter'] {
+  border-top: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+/* Divider after the last Filter group, before the next section. */
+.nav-group[id^='nav-group-Filter'] + .nav-group:not([id^='nav-group-Filter']) {
+  border-top: 1px solid var(--theme-elevation-100);
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+}
+/* Divider above the bottom section (Plattform-Einstellungen + Dokumentation). */
+.uk-bottom-nav {
+  border-top: 1px solid var(--theme-elevation-100);
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+}

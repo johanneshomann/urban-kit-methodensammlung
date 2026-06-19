@@ -1,96 +1,148 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { Send } from 'lucide-react'
 
-export function KontaktForm() {
-  const [sent, setSent] = useState(false)
+const inputClass =
+  'rounded-lg border px-3 py-2 text-text outline-none focus:ring-2 transition-all'
+const labelClass =
+  'text-small uppercase tracking-widest font-black'
 
-  const handleSubmit = (e: React.FormEvent) => {
+export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
+  const t = useTranslations('kontakt.form')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setSent(true)
+    if (status === 'sending') return
+
+    const data = new FormData(e.currentTarget)
+    setStatus('sending')
+    setErrorMsg('')
+
+    try {
+      const res = await fetch('/api/kontakt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: data.get('name'),
+          email: data.get('email'),
+          betreff: data.get('betreff'),
+          nachricht: data.get('nachricht'),
+        }),
+      })
+
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}))
+        setErrorMsg(body?.error === 'disabled' ? t('errorDisabled') : t('errorGeneric'))
+        setStatus('error')
+        return
+      }
+
+      setStatus('sent')
+    } catch {
+      setErrorMsg(t('errorGeneric'))
+      setStatus('error')
+    }
   }
 
-  if (sent) {
+  if (status === 'sent') {
     return (
-      <div className="bg-white rounded-xl border p-7 flex flex-col gap-3 hover:shadow-md transition-all">
+      <div className="bg-method-white rounded-xl border p-7 flex flex-col gap-3 hover:shadow-md transition-all">
         <p className="text-display font-black tracking-tight" style={{ color: 'var(--method)' }}>
-          Danke für deine Nachricht<span style={{ color: 'var(--method)' }}>.</span>
+          {t('successTitle')}<span style={{ color: 'var(--method)' }}>.</span>
         </p>
         <p className="text-text" style={{ color: 'var(--method-ink)' }}>
-          Wir melden uns so schnell wie möglich bei dir.
+          {t('successText')}
         </p>
       </div>
     )
   }
 
+  const isSending = status === 'sending'
+
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-xl border p-7 flex flex-col gap-4 hover:shadow-md transition-all">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <form onSubmit={handleSubmit} className="bg-method-white rounded-xl border p-7 flex flex-col gap-4 hover:shadow-md transition-all">
+      <fieldset disabled={disabled || isSending} className="contents">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass} style={{ color: 'var(--method-ink)' }}>
+              {t('name')}
+            </label>
+            <input
+              type="text"
+              name="name"
+              placeholder={t('namePlaceholder')}
+              required
+              className={inputClass}
+              style={{ color: 'var(--method-ink-accent)', '--tw-ring-color': 'var(--method)' } as React.CSSProperties}
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass} style={{ color: 'var(--method-ink)' }}>
+              {t('email')}
+            </label>
+            <input
+              type="email"
+              name="email"
+              placeholder={t('emailPlaceholder')}
+              required
+              className={inputClass}
+              style={{ color: 'var(--method-ink-accent)', '--tw-ring-color': 'var(--method)' } as React.CSSProperties}
+            />
+          </div>
+        </div>
+
         <div className="flex flex-col gap-1.5">
-          <label className="text-small uppercase tracking-widest font-black" style={{ color: 'var(--method-ink)' }}>
-            Name
+          <label className={labelClass} style={{ color: 'var(--method-ink)' }}>
+            {t('subject')}
           </label>
           <input
             type="text"
-            placeholder="Dein Name"
+            name="betreff"
+            placeholder={t('subjectPlaceholder')}
             required
-            className="rounded-lg border px-3 py-2 text-text outline-none focus:ring-2 transition-all"
+            className={inputClass}
             style={{ color: 'var(--method-ink-accent)', '--tw-ring-color': 'var(--method)' } as React.CSSProperties}
           />
         </div>
+
         <div className="flex flex-col gap-1.5">
-          <label className="text-small uppercase tracking-widest font-black" style={{ color: 'var(--method-ink)' }}>
-            E-Mail
+          <label className={labelClass} style={{ color: 'var(--method-ink)' }}>
+            {t('message')}
           </label>
-          <input
-            type="email"
-            placeholder="deine@email.de"
+          <textarea
+            rows={5}
+            name="nachricht"
+            placeholder={t('messagePlaceholder')}
             required
-            className="rounded-lg border px-3 py-2 text-text outline-none focus:ring-2 transition-all"
+            className={`${inputClass} resize-none`}
             style={{ color: 'var(--method-ink-accent)', '--tw-ring-color': 'var(--method)' } as React.CSSProperties}
           />
         </div>
-      </div>
 
-      <div className="flex flex-col gap-1.5">
-        <label className="text-small uppercase tracking-widest font-black" style={{ color: 'var(--method-ink)' }}>
-          Betreff
-        </label>
-        <input
-          type="text"
-          placeholder="Worum geht es?"
-          required
-          className="rounded-lg border px-3 py-2 text-text outline-none focus:ring-2 transition-all"
-          style={{ color: 'var(--method-ink-accent)', '--tw-ring-color': 'var(--method)' } as React.CSSProperties}
-        />
-      </div>
+        {status === 'error' && (
+          <p className="text-small" style={{ color: 'var(--method-dark)' }} role="alert">
+            {errorMsg}
+          </p>
+        )}
 
-      <div className="flex flex-col gap-1.5">
-        <label className="text-small uppercase tracking-widest font-black" style={{ color: 'var(--method-ink)' }}>
-          Nachricht
-        </label>
-        <textarea
-          rows={5}
-          placeholder="Deine Nachricht …"
-          required
-          className="rounded-lg border px-3 py-2 text-text outline-none focus:ring-2 transition-all resize-none"
-          style={{ color: 'var(--method-ink-accent)', '--tw-ring-color': 'var(--method)' } as React.CSSProperties}
-        />
-      </div>
-
-      <div className="flex">
-        <button
-          type="submit"
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-cta font-black transition-all"
-          style={{ background: 'var(--method)', color: 'white' }}
-          onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
-          onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
-        >
-          <Send className="w-[1em] h-[1em] shrink-0" />
-          Absenden
-        </button>
-      </div>
+        <div className="flex">
+          <button
+            type="submit"
+            disabled={disabled || isSending}
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-cta font-black transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+            style={{ background: 'var(--method)', color: 'var(--method-white)' }}
+            onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
+            onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
+          >
+            <Send className="w-[1em] h-[1em] shrink-0" />
+            {isSending ? t('sending') : t('submit')}
+          </button>
+        </div>
+      </fieldset>
     </form>
   )
 }

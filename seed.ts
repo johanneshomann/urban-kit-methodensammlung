@@ -3,22 +3,94 @@ dotenv.config({ path: '.env.local' })
 dotenv.config()
 
 import { getPayload } from 'payload'
-import config from './src/payload.config'
+
+// ── Lexical rich-text builders ────────────────────────────────
+// Minimal node factories matching what src/components/RichTextRenderer.tsx
+// understands (heading, paragraph, bullet list, bold/italic text).
+const txt = (text: string, format = 0) => ({ type: 'text', text, format, detail: 0, mode: 'normal', style: '', version: 1 })
+const b = (text: string) => txt(text, 1) // bold
+const h = (tag: 'h2' | 'h3', text: string) => ({ type: 'heading', tag, format: '', indent: 0, version: 1, direction: 'ltr', children: [txt(text)] })
+const p = (...children: any[]) => ({ type: 'paragraph', format: '', indent: 0, version: 1, direction: 'ltr', textFormat: 0, children })
+const ul = (items: any[][]) => ({
+  type: 'list', listType: 'bullet', tag: 'ul', start: 1, format: '', indent: 0, version: 1, direction: 'ltr',
+  children: items.map((children, i) => ({ type: 'listitem', value: i + 1, format: '', indent: 0, version: 1, direction: 'ltr', children })),
+})
+const doc = (children: any[]) => ({ root: { type: 'root', format: '', indent: 0, version: 1, direction: 'ltr', children } })
+
+// Default cookie / local-storage policy. Serves as an editable orientation for
+// what the platform actually stores; reflects the inventory in src/lib/saved.ts,
+// src/lib/accessibility.ts, next-intl (NEXT_LOCALE) and Payload auth.
+const cookiePolicyDe = doc([
+  h('h2', 'Cookies & lokale Speicherung'),
+  p(txt('Diese Website verwendet ausschließlich technisch notwendige bzw. funktionale Cookies sowie lokale Browser-Speicher. Es findet kein Tracking, keine Analyse und keine Weitergabe an Dritte statt. Eine Einwilligung ist daher in der Regel nicht erforderlich.')),
+  h('h3', 'Cookies'),
+  ul([
+    [b('NEXT_LOCALE'), txt(' – Speichert die von Ihnen gewählte Sprache (Deutsch/Englisch). Funktional, Erstanbieter, Laufzeit ca. 1 Jahr.')],
+    [b('payload-token'), txt(' – Anmelde-Sitzung für den Verwaltungsbereich (/admin). Wird nur für angemeldete Redakteur:innen gesetzt, ist httpOnly und technisch notwendig. Laufzeit ca. 2 Stunden.')],
+  ]),
+  h('h3', 'Lokale Speicherung (Local Storage)'),
+  p(txt('Die folgenden Daten werden ausschließlich lokal in Ihrem Browser gespeichert und nicht an den Server übertragen:')),
+  ul([
+    [b('uk-saved'), txt(' – Ihre gemerkten Methoden. Funktional, bleibt bis zum Löschen erhalten.')],
+    [b('uk-a11y'), txt(' – Ihre Barrierefreiheits-Einstellungen (Schriftgröße, reduzierte Bewegung, hoher Kontrast, unterstrichene Links). Funktional, bleibt bis zum Löschen erhalten.')],
+  ]),
+  h('h3', 'Ihre Kontrolle'),
+  p(txt('Sie können Cookies und lokale Speicherung jederzeit über die Einstellungen Ihres Browsers löschen. Das Entfernen der lokalen Speicherung löscht Ihre gemerkten Methoden und Ihre Barrierefreiheits-Einstellungen.')),
+])
+const cookiePolicyEn = doc([
+  h('h2', 'Cookies & local storage'),
+  p(txt('This website uses only technically necessary or functional cookies and local browser storage. There is no tracking, no analytics and no sharing with third parties. Consent is therefore generally not required.')),
+  h('h3', 'Cookies'),
+  ul([
+    [b('NEXT_LOCALE'), txt(' – Stores your chosen language (German/English). Functional, first-party, lifetime approx. 1 year.')],
+    [b('payload-token'), txt(' – Login session for the administration area (/admin). Set only for signed-in editors, httpOnly and technically necessary. Lifetime approx. 2 hours.')],
+  ]),
+  h('h3', 'Local storage'),
+  p(txt('The following data is stored only locally in your browser and is never transmitted to the server:')),
+  ul([
+    [b('uk-saved'), txt(' – Your saved methods. Functional, kept until cleared.')],
+    [b('uk-a11y'), txt(' – Your accessibility settings (font size, reduced motion, high contrast, underlined links). Functional, kept until cleared.')],
+  ]),
+  h('h3', 'Your control'),
+  p(txt('You can delete cookies and local storage at any time via your browser settings. Clearing local storage removes your saved methods and your accessibility settings.')),
+])
 
 async function seed() {
+  // Imported dynamically AFTER dotenv has run. A static `import` is hoisted and
+  // evaluated before the dotenv.config() calls above, so payload.config would
+  // read process.env.MONGODB_URI before .env.local is loaded and silently fall
+  // back to the localhost:27017 default.
+  const { default: config } = await import('./src/payload.config')
   const payload = await getPayload({ config })
 
+  // Call sites still pass { nameDe, nameEn, explanation?, explanationEn?, ... }.
+  // `name` and `explanation` are now localized: create in German, then set English.
   async function upsert(collection: string, nameDe: string, data: Record<string, unknown>) {
     const existing = await payload.find({
       collection: collection as any,
-      where: { nameDe: { equals: nameDe } },
+      where: { name: { equals: nameDe } },
       limit: 1,
+      locale: 'de',
     })
     if (existing.totalDocs > 0) {
       console.log(`  skip  ${collection} / ${nameDe}`)
       return existing.docs[0] as any
     }
-    const doc = await payload.create({ collection: collection as any, data: data as any, overrideAccess: true })
+    const { nameEn, explanationEn, nameDe: _nameDe, ...rest } = data as Record<string, unknown>
+    const createData = { ...rest, name: nameDe }
+    const doc = await payload.create({ collection: collection as any, data: createData as any, locale: 'de', overrideAccess: true })
+    if (nameEn || explanationEn) {
+      await payload.update({
+        collection: collection as any,
+        id: doc.id,
+        locale: 'en',
+        data: {
+          ...(nameEn ? { name: nameEn } : {}),
+          ...(explanationEn ? { explanation: explanationEn } : {}),
+        } as any,
+        overrideAccess: true,
+      })
+    }
     console.log(`  create ${collection} / ${nameDe}`)
     return doc
   }
@@ -104,6 +176,18 @@ async function seed() {
   await upsert('characteristics', 'Spielerisch',  { nameDe: 'Spielerisch',  nameEn: 'Playful',     lucideIcon: 'Gamepad2'   })
   await upsert('characteristics', 'Aktivierend',  { nameDe: 'Aktivierend',  nameEn: 'Activating',  lucideIcon: 'Zap'        })
   await upsert('characteristics', 'Kreativ',      { nameDe: 'Kreativ',      nameEn: 'Creative',    lucideIcon: 'Sparkles'   })
+
+  console.log('\n── Cookie Policy (platform-settings) ─────────')
+  {
+    const settings = await payload.findGlobal({ slug: 'platform-settings' as any, locale: 'de' })
+    if (settings?.datenschutz) {
+      console.log('  skip  platform-settings / datenschutz (already set)')
+    } else {
+      await payload.updateGlobal({ slug: 'platform-settings' as any, locale: 'de', data: { datenschutz: cookiePolicyDe } as any, overrideAccess: true })
+      await payload.updateGlobal({ slug: 'platform-settings' as any, locale: 'en', data: { datenschutz: cookiePolicyEn } as any, overrideAccess: true })
+      console.log('  create platform-settings / datenschutz (default cookie policy)')
+    }
+  }
 
   console.log('\n✓ Seed complete\n')
   process.exit(0)

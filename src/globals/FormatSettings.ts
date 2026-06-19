@@ -4,7 +4,7 @@ export const FormatSettings: GlobalConfig = {
   slug: 'format-settings',
   label: { en: 'Settings', de: 'Einstellungen' },
   admin: {
-    group: { en: 'Formats', de: 'Formate' },
+    group: { en: 'Filter: Formats', de: 'Filter: Formate' },
   },
   fields: [
     {

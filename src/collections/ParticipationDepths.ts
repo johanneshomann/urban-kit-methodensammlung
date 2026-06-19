@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { requiredTextInDefaultLocale } from '../lib/requiredInDefaultLocale'
 
 export const ParticipationDepths: CollectionConfig = {
   slug: 'participation-depths',
@@ -6,20 +7,14 @@ export const ParticipationDepths: CollectionConfig = {
     singular: { en: 'Participation Depth', de: 'Beteiligungstiefe' },
     plural: { en: 'Participation Depths', de: 'Beteiligungstiefen' },
   },
-  admin: { useAsTitle: 'nameDe', group: { en: 'Participation Depth', de: 'Beteiligungstiefe' } },
+  admin: { useAsTitle: 'name', group: { en: 'Filter: Participation Depth', de: 'Filter: Beteiligungstiefe' } },
   fields: [
     {
-      type: 'tabs',
-      tabs: [
-        {
-          label: 'DE',
-          fields: [{ name: 'nameDe', label: { en: 'Name', de: 'Name' }, type: 'text', required: true }],
-        },
-        {
-          label: 'EN',
-          fields: [{ name: 'nameEn', label: { en: 'Name', de: 'Name' }, type: 'text' }],
-        },
-      ],
+      name: 'name',
+      label: { en: 'Name', de: 'Name' },
+      type: 'text',
+      localized: true,
+      validate: requiredTextInDefaultLocale,
     },
     {
       name: 'icon',

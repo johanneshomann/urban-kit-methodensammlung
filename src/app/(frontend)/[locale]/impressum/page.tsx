@@ -18,9 +18,9 @@ export default async function ImpressumPage({ params }: Props) {
   const t = await getTranslations({ locale, namespace: 'impressum' })
 
   const payload = await getPayload({ config })
-  const settings = await payload.findGlobal({ slug: 'platform-settings' as any })
+  const settings = await payload.findGlobal({ slug: 'platform-settings' as any, locale: locale as 'de' | 'en', fallbackLocale: 'de' })
 
-  const content = locale === 'de' ? settings.impressumDe : settings.impressumEn
+  const content = settings.impressum
 
   return (
     <div>

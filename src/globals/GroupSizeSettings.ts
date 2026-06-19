@@ -4,7 +4,7 @@ export const GroupSizeSettings: GlobalConfig = {
   slug: 'group-size-settings',
   label: { en: 'Settings', de: 'Einstellungen' },
   admin: {
-    group: { en: 'Group Sizes', de: 'Gruppengrößen' },
+    group: { en: 'Filter: Group Sizes', de: 'Filter: Gruppengrößen' },
   },
   fields: [
     {

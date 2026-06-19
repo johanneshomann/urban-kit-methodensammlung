@@ -4,7 +4,7 @@ export const CharacteristicsSettings: GlobalConfig = {
   slug: 'characteristics-settings',
   label: { en: 'Settings', de: 'Einstellungen' },
   admin: {
-    group: { en: 'Characteristics', de: 'Merkmale' },
+    group: { en: 'Filter: Characteristics', de: 'Filter: Merkmale' },
   },
   fields: [
     {

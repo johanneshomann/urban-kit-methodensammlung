@@ -174,11 +174,13 @@ function Toggle({
       <span>{label}</span>
       <span
         aria-hidden="true"
+        data-a11y-switch-track
         className="relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors"
         style={{ background: checked ? 'var(--method)' : 'var(--method-light)' }}
       >
         <span
-          className="inline-block h-4 w-4 rounded-full bg-white transition-transform"
+          data-a11y-switch-knob
+          className="inline-block h-4 w-4 rounded-full bg-method-white transition-transform"
           style={{ transform: checked ? 'translateX(1.125rem)' : 'translateX(0.125rem)' }}
         />
       </span>

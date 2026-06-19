@@ -1,8 +1,10 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import * as LucideIcons from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
-export type DotItem = { id: string; label: string }
+export type DotItem = { id: string; label: string; icon?: string }
 
 export default function SectionDotsNav({ items, label = 'Abschnitte' }: { items: DotItem[]; label?: string }) {
   const [activeId, setActiveId] = useState<string | null>(items[0]?.id ?? null)
@@ -63,6 +65,7 @@ export default function SectionDotsNav({ items, label = 'Abschnitte' }: { items:
       {items.map((item) => {
         const isActive = activeId === item.id
         const showLabel = hoveredId === item.id || revealId === item.id
+        const Icon = item.icon ? (LucideIcons as unknown as Record<string, LucideIcon>)[item.icon] : null
 
         return (
           <a
@@ -76,16 +79,17 @@ export default function SectionDotsNav({ items, label = 'Abschnitte' }: { items:
           >
             {/* Reveal label */}
             <span
-              className="absolute right-full mr-1 top-1/2 -translate-y-1/2 text-small whitespace-nowrap px-2.5 py-1 rounded-lg pointer-events-none"
+              className="absolute right-full mr-1 top-1/2 -translate-y-1/2 inline-flex items-center gap-1.5 text-small whitespace-nowrap px-2.5 py-1 rounded-lg pointer-events-none"
               style={{
-                background: 'var(--method-white-transparent)',
-                color: 'var(--method-ink)',
-                backdropFilter: 'blur(6px)',
+                background: 'var(--method-dark)',
+                color: 'var(--method-white)',
+                boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
                 opacity: showLabel ? 1 : 0,
                 transform: showLabel ? 'translateX(0)' : 'translateX(6px)',
                 transition: 'opacity 0.3s ease, transform 0.3s cubic-bezier(0.22,1,0.36,1)',
               }}
             >
+              {Icon && <Icon className="w-[1em] h-[1em] shrink-0" aria-hidden />}
               {item.label}
             </span>
 
@@ -94,12 +98,12 @@ export default function SectionDotsNav({ items, label = 'Abschnitte' }: { items:
               aria-hidden
               className="block rounded-full"
               style={{
-                background: 'var(--method)',
-                width: isActive ? 11 : 7,
-                height: isActive ? 11 : 7,
-                opacity: isActive ? 1 : 0.3,
+                background: isActive ? 'var(--method-dark)' : 'var(--method)',
+                width: isActive ? 14 : 10,
+                height: isActive ? 14 : 10,
+                opacity: isActive ? 1 : 0.5,
                 transform: !isActive && hoveredId === item.id ? 'scale(1.3)' : 'scale(1)',
-                transition: 'width 0.25s, height 0.25s, opacity 0.25s, transform 0.2s',
+                transition: 'width 0.25s, height 0.25s, opacity 0.25s, transform 0.2s, background 0.25s',
               }}
             />
           </a>

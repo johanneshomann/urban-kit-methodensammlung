@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { requiredTextInDefaultLocale } from '../lib/requiredInDefaultLocale'
 
 export const GroupSizes: CollectionConfig = {
   slug: 'group-sizes',
@@ -6,20 +7,14 @@ export const GroupSizes: CollectionConfig = {
     singular: { en: 'Group Size', de: 'Gruppengröße' },
     plural: { en: 'Group Sizes', de: 'Gruppengrößen' },
   },
-  admin: { useAsTitle: 'nameDe', group: { en: 'Group Sizes', de: 'Gruppengrößen' } },
+  admin: { useAsTitle: 'name', group: { en: 'Filter: Group Sizes', de: 'Filter: Gruppengrößen' } },
   fields: [
     {
-      type: 'tabs',
-      tabs: [
-        {
-          label: 'DE',
-          fields: [{ name: 'nameDe', label: { en: 'Name', de: 'Name' }, type: 'text', required: true }],
-        },
-        {
-          label: 'EN',
-          fields: [{ name: 'nameEn', label: { en: 'Name', de: 'Name' }, type: 'text' }],
-        },
-      ],
+      name: 'name',
+      label: { en: 'Name', de: 'Name' },
+      type: 'text',
+      localized: true,
+      validate: requiredTextInDefaultLocale,
     },
     {
       name: 'icon',

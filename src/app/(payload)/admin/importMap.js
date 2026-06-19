@@ -22,6 +22,12 @@ import { BlockquoteFeatureClient as BlockquoteFeatureClient_e70f5e05f09f93e00b99
 import { AlignFeatureClient as AlignFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { SectionRowLabel as SectionRowLabel_76f6ffac4c9b5e6b3dc508ff293e95b2 } from '@/components/admin/SectionRowLabel'
 import { LucideIconPreview as LucideIconPreview_8f77f4fd74eb674f350efbcfd30ffee9 } from '@/components/admin/LucideIconPreview'
+import { ColorPicker as ColorPicker_818c03bd2d1805855e4e5373b5a37a82 } from '@/components/admin/ColorPicker'
+import { ColorResetButton as ColorResetButton_493f1d4b3556ddb70c0040d0c474eebc } from '@/components/admin/ColorResetButton'
+import { BottomNav as BottomNav_083c90a4994fb43d1ac5835a9498cf65 } from '@/components/admin/BottomNav'
+import { TopNav as TopNav_a28dff12e0044c40b6eb3b130fe4a826 } from '@/components/admin/TopNav'
+import { CollapseFilterGroups as CollapseFilterGroups_d16eb9c4688864213d4868b236334d89 } from '@/components/admin/CollapseFilterGroups'
+import { Documentation as Documentation_b6ed1ac419d7eef4163f26654d93c077 } from '@/components/admin/views/Documentation'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -50,5 +56,11 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#AlignFeatureClient": AlignFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@/components/admin/SectionRowLabel#SectionRowLabel": SectionRowLabel_76f6ffac4c9b5e6b3dc508ff293e95b2,
   "@/components/admin/LucideIconPreview#LucideIconPreview": LucideIconPreview_8f77f4fd74eb674f350efbcfd30ffee9,
+  "@/components/admin/ColorPicker#ColorPicker": ColorPicker_818c03bd2d1805855e4e5373b5a37a82,
+  "@/components/admin/ColorResetButton#ColorResetButton": ColorResetButton_493f1d4b3556ddb70c0040d0c474eebc,
+  "@/components/admin/BottomNav#BottomNav": BottomNav_083c90a4994fb43d1ac5835a9498cf65,
+  "@/components/admin/TopNav#TopNav": TopNav_a28dff12e0044c40b6eb3b130fe4a826,
+  "@/components/admin/CollapseFilterGroups#CollapseFilterGroups": CollapseFilterGroups_d16eb9c4688864213d4868b236334d89,
+  "@/components/admin/views/Documentation#Documentation": Documentation_b6ed1ac419d7eef4163f26654d93c077,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

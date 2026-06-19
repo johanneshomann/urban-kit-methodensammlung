@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { requiredTextInDefaultLocale } from '../lib/requiredInDefaultLocale'
 
 export const Durations: CollectionConfig = {
   slug: 'durations',
@@ -6,20 +7,14 @@ export const Durations: CollectionConfig = {
     singular: { en: 'Duration', de: 'Dauer' },
     plural: { en: 'Durations', de: 'Zeitrahmen' },
   },
-  admin: { useAsTitle: 'nameDe', defaultColumns: ['nameDe', 'category'], group: { en: 'Durations', de: 'Zeitrahmen' } },
+  admin: { useAsTitle: 'name', defaultColumns: ['name', 'category'], group: { en: 'Filter: Durations', de: 'Filter: Zeitrahmen' } },
   fields: [
     {
-      type: 'tabs',
-      tabs: [
-        {
-          label: 'DE',
-          fields: [{ name: 'nameDe', label: { en: 'Name', de: 'Name' }, type: 'text', required: true }],
-        },
-        {
-          label: 'EN',
-          fields: [{ name: 'nameEn', label: { en: 'Name', de: 'Name' }, type: 'text' }],
-        },
-      ],
+      name: 'name',
+      label: { en: 'Name', de: 'Name' },
+      type: 'text',
+      localized: true,
+      validate: requiredTextInDefaultLocale,
     },
     {
       name: 'category',

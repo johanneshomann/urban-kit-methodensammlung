@@ -35,7 +35,8 @@ type Props = {
   params: Promise<{ locale: string }>
 }
 
-export default async function HomePage({ params: _params }: Props) {
+export default async function HomePage({ params }: Props) {
+  const { locale } = await params
   const payload = await getPayload({ config })
   const t = await getTranslations('home')
 
@@ -48,11 +49,13 @@ export default async function HomePage({ params: _params }: Props) {
       depth: 2,
       limit: 100,
       sort: '-createdAt',
+      locale: locale as 'de' | 'en',
+      fallbackLocale: 'de',
     }),
-    payload.find({ collection: 'project-phase-categories' as any, limit: 100 }),
-    payload.find({ collection: 'duration-categories' as any, limit: 100 }),
+    payload.find({ collection: 'project-phase-categories' as any, limit: 100, locale: locale as 'de' | 'en', fallbackLocale: 'de' }),
+    payload.find({ collection: 'duration-categories' as any, limit: 100, locale: locale as 'de' | 'en', fallbackLocale: 'de' }),
     ...filterKeys.map((key) =>
-      payload.find({ collection: COLLECTION_SLUGS[key] as any, limit: 200, depth: 1 })
+      payload.find({ collection: COLLECTION_SLUGS[key] as any, limit: 200, depth: 1, locale: locale as 'de' | 'en', fallbackLocale: 'de' })
     ),
     ...filterKeys.map((key) =>
       payload.findGlobal({ slug: SETTINGS_SLUGS[key] as any, depth: 1 })
@@ -115,7 +118,7 @@ export default async function HomePage({ params: _params }: Props) {
         <div className="relative z-10 flex-1 flex flex-col justify-start px-6 pt-20 md:pt-28 md:px-16 lg:px-24">
           <EyebrowBadge label={t('eyebrow')} opacity={0.6} />
 
-          <h1 className="text-hero font-black leading-none tracking-tight mb-5" style={{ color: 'var(--method)' }}>
+          <h1 className="text-hero font-black leading-none tracking-tight mb-5" style={{ color: 'var(--method-ink-accent)' }}>
             {t('title')}
           </h1>
 

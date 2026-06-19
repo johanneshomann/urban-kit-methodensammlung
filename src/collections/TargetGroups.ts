@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { requiredTextInDefaultLocale } from '../lib/requiredInDefaultLocale'
 
 export const TargetGroups: CollectionConfig = {
   slug: 'target-groups',
@@ -6,26 +7,22 @@ export const TargetGroups: CollectionConfig = {
     singular: { en: 'Target Group', de: 'Zielgruppe' },
     plural: { en: 'Target Groups', de: 'Zielgruppen' },
   },
-  admin: { useAsTitle: 'nameDe', group: { en: 'Target Groups', de: 'Zielgruppen' } },
+  admin: { useAsTitle: 'name', group: { en: 'Filter: Target Groups', de: 'Filter: Zielgruppen' } },
   fields: [
     {
-      type: 'tabs',
-      tabs: [
-        {
-          label: 'DE',
-          fields: [
-            { name: 'nameDe', label: { en: 'Name', de: 'Name' }, type: 'text', required: true },
-            { name: 'explanation', type: 'textarea', label: { en: 'Explanation', de: 'Erläuterung' }, maxLength: 250, admin: { description: { en: 'Max. 250 characters', de: 'Max. 250 Zeichen' } } },
-          ],
-        },
-        {
-          label: 'EN',
-          fields: [
-            { name: 'nameEn', label: { en: 'Name', de: 'Name' }, type: 'text' },
-            { name: 'explanationEn', type: 'textarea', label: { en: 'Explanation', de: 'Erläuterung' }, maxLength: 250, admin: { description: { en: 'Max. 250 characters', de: 'Max. 250 Zeichen' } } },
-          ],
-        },
-      ],
+      name: 'name',
+      label: { en: 'Name', de: 'Name' },
+      type: 'text',
+      localized: true,
+      validate: requiredTextInDefaultLocale,
+    },
+    {
+      name: 'explanation',
+      type: 'textarea',
+      label: { en: 'Explanation', de: 'Erläuterung' },
+      localized: true,
+      maxLength: 250,
+      admin: { description: { en: 'Max. 250 characters', de: 'Max. 250 Zeichen' } },
     },
     {
       name: 'icon',

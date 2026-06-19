@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback } from 'react'
 import { Link, usePathname } from '@/navigation'
 import { useTranslations } from 'next-intl'
-import { ChevronRight, Home, Bookmark, Mail, FileText, Shield, Menu, X } from 'lucide-react'
+import { ChevronRight, Home, Bookmark, Mail, FileText, Shield, Signpost, Menu, X } from 'lucide-react'
 
 const CLOSE_DURATION = 280
 const CLOSE_DELAY = 220
@@ -57,6 +57,7 @@ export default function NavMenu() {
   const links = [
     { href: '/',            label: t('home'),              icon: Home },
     { href: '/saved',       label: t('saved'),             icon: Bookmark },
+    { href: '/hilfe',       label: t('help'),              icon: Signpost },
     { href: '/kontakt',     label: t('contact'),           icon: Mail },
     { href: '/impressum',   label: tFooter('impressum'),   icon: FileText },
     { href: '/datenschutz', label: tFooter('datenschutz'), icon: Shield },
@@ -101,7 +102,7 @@ export default function NavMenu() {
           onMouseLeave={closeDelayed}
           className="hidden md:block fixed top-14 left-10 overflow-hidden z-50 w-max rounded-b-xl"
         >
-          <div className={`${closing ? 'nav-panel-exit' : 'nav-panel-enter'} bg-white border border-t-0 rounded-b-xl shadow-md`}>
+          <div className={`${closing ? 'nav-panel-exit' : 'nav-panel-enter'} bg-method-white border border-t-0 rounded-b-xl shadow-md`}>
             <div className="px-6 py-6 flex flex-col gap-1">
               {links.map(({ href, label, icon: Icon }) => {
                 const active = pathname === href
@@ -128,7 +129,7 @@ export default function NavMenu() {
       {/* Mobile panel */}
       {open && (
         <div className="md:hidden fixed top-14 inset-x-0 z-40 overflow-hidden">
-          <div className={`bg-white border-b shadow-md ${closing ? 'nav-panel-exit' : 'nav-panel-enter'}`}>
+          <div className={`bg-method-white border-b shadow-md ${closing ? 'nav-panel-exit' : 'nav-panel-enter'}`}>
             <div className="px-6 py-4 flex flex-col gap-0">
               {links.map(({ href, label, icon: Icon }) => {
                 const active = pathname === href

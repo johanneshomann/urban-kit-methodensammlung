@@ -4,7 +4,7 @@ export const ProjectPhaseSettings: GlobalConfig = {
   slug: 'project-phase-settings',
   label: { en: 'Settings', de: 'Einstellungen' },
   admin: {
-    group: { en: 'Project Phases', de: 'Projektphasen' },
+    group: { en: 'Filter: Project Phases', de: 'Filter: Projektphasen' },
   },
   fields: [
     {

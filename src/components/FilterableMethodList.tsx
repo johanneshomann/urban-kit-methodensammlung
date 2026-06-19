@@ -238,7 +238,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
       <div className="flex flex-col gap-2" ref={filterAreaRef}>
       <div className="flex gap-2">
         {/* Search */}
-        <div className="flex-1 flex items-center gap-2 px-4 py-2.5 rounded-xl text-text hover:shadow-md transition-shadow" style={{ background: 'var(--method-white)' }}>
+        <div className="flex-1 flex items-center gap-2 px-4 py-2.5 rounded-xl text-text shadow-sm hover:shadow-md transition-shadow" style={{ background: 'var(--method-white)' }}>
           <Search className="w-[1em] h-[1em] shrink-0 opacity-40" style={{ color: 'var(--method-ink)' }} />
           <input
             type="search"
@@ -264,10 +264,11 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
             background: filterOpen ? 'var(--method-light)' : 'var(--method-white)',
             color: 'var(--method-ink)',
             minWidth: filterOpen ? '16rem' : '12rem',
-            transition: 'background 0.2s, min-width 0.4s cubic-bezier(0.22,1,0.36,1)',
+            boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
+            transition: 'background 0.2s, box-shadow 0.2s, min-width 0.4s cubic-bezier(0.22,1,0.36,1)',
           }}
           onMouseEnter={e => { if (!filterOpen) { (e.currentTarget as HTMLButtonElement).style.background = 'var(--method-light)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' } }}
-          onMouseLeave={e => { if (!filterOpen) { (e.currentTarget as HTMLButtonElement).style.background = 'var(--method-white)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = 'none' } }}
+          onMouseLeave={e => { if (!filterOpen) { (e.currentTarget as HTMLButtonElement).style.background = 'var(--method-white)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)' } }}
         >
           <SlidersHorizontal className="w-[1em] h-[1em] shrink-0" style={{ color: 'var(--method-ink)' }} />
           <span>{tFilter('label').replace(':', '')}</span>
@@ -293,7 +294,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
           <button
             type="button"
             onClick={() => setSettingsOpen(v => !v)}
-            className="h-full flex items-center justify-center px-3.5 rounded-xl cursor-pointer transition-all hover:shadow-md text-display"
+            className="h-full flex items-center justify-center px-3.5 rounded-xl cursor-pointer transition-all shadow-sm hover:shadow-md text-display"
             style={{
               background: settingsOpen ? 'var(--method-light)' : 'var(--method-white)',
               color: 'var(--method-ink)',
@@ -322,7 +323,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
                       className="flex-1 flex items-center justify-center p-2 rounded-lg transition-all cursor-pointer text-text"
                       style={{
                         background: gridCols === n ? 'var(--method)' : 'var(--method-light)',
-                        color: gridCols === n ? '#fff' : 'var(--method-ink)',
+                        color: gridCols === n ? 'var(--method-white)' : 'var(--method-ink)',
                       }}
                       aria-label={`${n} Spalte${n !== 1 ? 'n' : ''}`}
                     >
@@ -342,7 +343,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
                     className="flex-1 px-2 py-1.5 rounded-lg text-small transition-all cursor-pointer"
                     style={{
                       background: showAuszug ? 'var(--method)' : 'var(--method-light)',
-                      color: showAuszug ? '#fff' : 'var(--method-ink)',
+                      color: showAuszug ? 'var(--method-white)' : 'var(--method-ink)',
                     }}
                   >
                     Anzeigen
@@ -353,7 +354,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
                     className="flex-1 px-2 py-1.5 rounded-lg text-small transition-all cursor-pointer"
                     style={{
                       background: !showAuszug ? 'var(--method)' : 'var(--method-light)',
-                      color: !showAuszug ? '#fff' : 'var(--method-ink)',
+                      color: !showAuszug ? 'var(--method-white)' : 'var(--method-ink)',
                     }}
                   >
                     Ausblenden

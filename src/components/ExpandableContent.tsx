@@ -62,7 +62,7 @@ export default function ExpandableContent({
           aria-expanded={expanded}
           aria-label={expanded ? (locale === 'de' ? 'Weniger anzeigen' : 'Show less') : (locale === 'de' ? 'Mehr anzeigen' : 'Show more')}
           className="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 z-10 flex items-center justify-center w-9 h-9 rounded-full shadow-md cursor-pointer transition-transform hover:scale-110"
-          style={{ background: 'var(--method-very-light)', color: 'var(--method-ink-accent)' }}
+          style={{ background: 'var(--method-light)', color: 'var(--method-ink-accent)' }}
         >
           <ChevronDown
             className={`w-5 h-5 transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}

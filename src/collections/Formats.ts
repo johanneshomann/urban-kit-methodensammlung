@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { requiredTextInDefaultLocale } from '../lib/requiredInDefaultLocale'
 
 export const Formats: CollectionConfig = {
   slug: 'formats',
@@ -6,20 +7,14 @@ export const Formats: CollectionConfig = {
     singular: { en: 'Format', de: 'Format' },
     plural: { en: 'Formats', de: 'Formate' },
   },
-  admin: { useAsTitle: 'nameDe', group: { en: 'Formats', de: 'Formate' } },
+  admin: { useAsTitle: 'name', group: { en: 'Filter: Formats', de: 'Filter: Formate' } },
   fields: [
     {
-      type: 'tabs',
-      tabs: [
-        {
-          label: 'DE',
-          fields: [{ name: 'nameDe', label: { en: 'Name', de: 'Name' }, type: 'text', required: true }],
-        },
-        {
-          label: 'EN',
-          fields: [{ name: 'nameEn', label: { en: 'Name', de: 'Name' }, type: 'text' }],
-        },
-      ],
+      name: 'name',
+      label: { en: 'Name', de: 'Name' },
+      type: 'text',
+      localized: true,
+      validate: requiredTextInDefaultLocale,
     },
     {
       name: 'icon',

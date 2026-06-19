@@ -17,7 +17,72 @@
     "allMethods": "Alle Methoden",
     "saved": "Gespeicherte Methoden",
     "contact": "Kontakt",
+    "help": "Anleitung",
     "subtitle": "Methodensammlung"
+  },
+  "help": {
+    "metaTitle": "Anleitung – Urban Kit Methodensammlung",
+    "eyebrow": "Hilfe & Anleitung",
+    "title": "Anleitung",
+    "subtitle": "Diese Anleitung erklärt, wie die Methodensammlung aufgebaut ist und wie sie sich für partizipative Stadtprojekte nutzen lässt.",
+    "scrollHint": "Zur Anleitung scrollen",
+    "pagesTitle": "Die Seiten im Überblick",
+    "pages": [
+      {
+        "icon": "Home",
+        "title": "Methodensammlung",
+        "text": "Die Startseite zeigt alle Methoden. Über die Filter lassen sie sich nach Zielgruppe, Zeitrahmen, Ziel, Format und weiteren Kriterien eingrenzen, bis die passenden übrig bleiben."
+      },
+      {
+        "icon": "BookOpen",
+        "title": "Methoden-Detailseite",
+        "text": "Jede Methode hat eine eigene Seite mit Ablauf, benötigtem Material, Tipps, Hinweisen und ähnlichen Methoden. Über das Lesezeichen lässt sie sich speichern."
+      },
+      {
+        "icon": "Bookmark",
+        "title": "Gespeicherte Methoden",
+        "text": "Die gemerkten Methoden sammeln sich hier an einem Ort. Die Auswahl lässt sich als Liste exportieren und im Team teilen."
+      },
+      {
+        "icon": "Mail",
+        "title": "Kontakt",
+        "text": "Über die Kontaktseite kannst du uns erreichen – etwa wenn du eine Methode vermisst, einen Fehler entdeckt hast oder zur Sammlung beitragen möchtest."
+      }
+    ],
+    "faqTitle": "Häufige Fragen",
+    "faq": [
+      {
+        "q": "Wie finde ich die passende Methode?",
+        "a": "Am besten über die Filter auf der Startseite. Mehrere Kriterien lassen sich kombinieren – die Liste aktualisiert sich sofort."
+      },
+      {
+        "q": "Wie speichere ich eine Methode?",
+        "a": "Ein Klick auf das Lesezeichen-Symbol auf einer Methodenkarte oder Detailseite genügt. Die Methode erscheint dann unter „Gespeicherte Methoden“."
+      },
+      {
+        "q": "Bleiben meine gespeicherten Methoden erhalten?",
+        "a": "Ja – sie werden lokal im Browser gespeichert. Auf einem anderen Gerät oder nach dem Leeren des Browser-Speichers sind sie nicht mehr verfügbar."
+      },
+      {
+        "q": "Kann ich meine Auswahl exportieren oder teilen?",
+        "a": "Ja. Unter „Gespeicherte Methoden“ lässt sich die Auswahl als Liste exportieren – praktisch für die Abstimmung im Team."
+      },
+      {
+        "q": "Gibt es die Sammlung auch auf Englisch?",
+        "a": "Ja. Über den Sprachumschalter lässt sich jederzeit zwischen Deutsch und Englisch wechseln."
+      },
+      {
+        "q": "Wie passe ich Schrift und Kontrast an?",
+        "a": "Über das Symbol öffnen sich die Barrierefreiheit-Einstellungen; dort lassen sich Schriftgröße, Kontrast oder reduzierte Animationen einstellen."
+      },
+      {
+        "q": "An wen wende ich mich bei Fragen?",
+        "a": "Über die Kontaktseite sind wir direkt erreichbar – wir helfen gerne weiter."
+      }
+    ],
+    "footerTitle": "Noch Fragen?",
+    "footerText": "Schreiben Sie uns gerne – wir helfen weiter.",
+    "footerCta": "Zum Kontakt"
   },
   "footer": {
     "text": "Urban Kit Methodensammlung",
@@ -32,14 +97,14 @@
   "home": {
     "eyebrow": "Methoden für partizipative Projekte",
     "title": "Methodensammlung",
-    "subtitle": "Hier findest du erprobte Methoden für partizipative Stadtprojekte. Filter nach Zielgruppe, Zeitrahmen oder Ziel – und entdecke, was zu deinem Vorhaben passt."
+    "subtitle": "Hier finden sich erprobte Methoden für partizipative Stadtprojekte. Über die Filter nach Zielgruppe, Zeitrahmen, Ziel und weiteren Kriterien zeigt sich, was zum jeweiligen Vorhaben passt."
   },
   "beforeYouBegin": {
-    "title": "Bevor du beginnst",
-    "item1": "Stelle bei jedem Kontakt sicher, dass sich alle auf Augenhöhe respektvoll verständigen (können).",
-    "item2": "Kläre im Vorfeld, ob unterstützende Angebote wie z.B. Dolmetscher:innen notwendig sind, damit alle Teilnehmenden dem Gespräch folgen und sich einbringen können.",
-    "item3": "Du kannst die Teilnehmenden bitten, ihre Namen und Pronomen auf ein Namensschild/Klebeband zu schreiben und gut sichtbar an sich zu tragen. Das kann eine respektvolle, offene und zugewandte Gesprächsatmosphäre unterstützen.\nDu kannst also immer Tape und Stifte mitbringen.",
-    "item4": "Stelle sicher, dass du immer eine Dokumentationsmöglichkeit (Laptop, Tablett, Stift und Zettel) parat hast, um bei Diskussionen mitzuschreiben.",
+    "title": "Vor dem Start",
+    "item1": "Bei jedem Kontakt sicherstellen, dass sich alle auf Augenhöhe respektvoll verständigen (können).",
+    "item2": "Im Vorfeld klären, ob unterstützende Angebote wie z. B. Dolmetscher:innen notwendig sind, damit alle Teilnehmenden dem Gespräch folgen und sich einbringen können.",
+    "item3": "Die Teilnehmenden können gebeten werden, ihre Namen und Pronomen auf ein Namensschild/Klebeband zu schreiben und gut sichtbar an sich zu tragen. Das kann eine respektvolle, offene und zugewandte Gesprächsatmosphäre unterstützen.\nTape und Stifte gehören daher immer ins Gepäck.",
+    "item4": "Immer eine Dokumentationsmöglichkeit (Laptop, Tablet, Stift und Zettel) bereithalten, um bei Diskussionen mitzuschreiben.",
     "item5": "Passende Räumlichkeiten: ausreichend großer Raum mit guter Akustik, Sitzmöglichkeiten",
     "timeNote": "Die Zeitangaben der jeweiligen Methoden beziehen sich auf die tatsächliche Durchführung mit den Beteiligten. Die Vor- und Nacharbeitung beansprucht extra Zeit."
   },
@@ -77,7 +142,7 @@
     "characteristics": "Merkmale",
     "export": "↓ Als JSON exportieren",
     "scrollHint": "Zu den gespeicherten Methoden",
-    "cardsEyebrow": "Deine Auswahl",
+    "cardsEyebrow": "Ihre Auswahl",
     "printPreview": "Als PDF",
     "print": "Drucken / Als PDF speichern",
     "backToSaved": "← Gespeicherte Methoden",
@@ -93,7 +158,9 @@
     "countMany": "{count} Methoden",
     "empty": "Noch nichts gespeichert.",
     "remove": "Entfernen",
-    "viewAll": "Alle gespeicherten ansehen →"
+    "viewAll": "Alle gespeicherten ansehen →",
+    "saveThis": "Diese Methode speichern",
+    "savedThis": "Gespeichert"
   },
   "loading": "Lädt…",
   "impressum": {
@@ -107,14 +174,30 @@
   "kontakt": {
     "metaTitle": "Kontakt – Urban Kit Methodensammlung",
     "eyebrow": "Kontakt",
-    "titleLine1": "Schreib uns",
-    "subtitle": "Du vermisst eine Methode, hast einen Fehler entdeckt oder möchtest zur Sammlung beitragen? Meld dich gerne.",
+    "titleLine1": "Kontakt aufnehmen",
+    "subtitle": "Fehlt eine Methode, ist ein Fehler aufgefallen oder soll etwas zur Sammlung beigetragen werden? Eine Nachricht genügt.",
     "scrollHint": "Zu den Kontaktdaten",
     "sectionEyebrow": "Kontaktdaten",
-    "sectionTitleLine1": "So erreichst",
-    "sectionTitleLine2": "du uns",
-    "contactText": "Schreib uns einfach eine E-Mail – wir antworten so schnell wie möglich.",
-    "placeholder": "Kontaktinformationen werden hier ergänzt."
+    "sectionTitleLine1": "So erreichen",
+    "sectionTitleLine2": "Sie uns",
+    "contactText": "Eine E-Mail genügt – wir antworten so schnell wie möglich.",
+    "placeholder": "Kontaktinformationen werden hier ergänzt.",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Ihr Name",
+      "email": "E-Mail",
+      "emailPlaceholder": "ihre@email.de",
+      "subject": "Betreff",
+      "subjectPlaceholder": "Worum geht es?",
+      "message": "Nachricht",
+      "messagePlaceholder": "Ihre Nachricht …",
+      "submit": "Absenden",
+      "sending": "Wird gesendet …",
+      "successTitle": "Danke für Ihre Nachricht",
+      "successText": "Wir melden uns so schnell wie möglich bei Ihnen.",
+      "errorGeneric": "Etwas ist schiefgelaufen. Bitte später erneut versuchen.",
+      "errorDisabled": "Das Kontaktformular ist derzeit nicht verfügbar. Bitte schreiben Sie uns direkt eine E-Mail."
+    }
   },
   "datenschutz": {
     "metaTitle": "Datenschutzerklärung – Urban Kit Methodensammlung",

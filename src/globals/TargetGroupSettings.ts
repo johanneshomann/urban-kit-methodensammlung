@@ -4,7 +4,7 @@ export const TargetGroupSettings: GlobalConfig = {
   slug: 'target-group-settings',
   label: { en: 'Settings', de: 'Einstellungen' },
   admin: {
-    group: { en: 'Target Groups', de: 'Zielgruppen' },
+    group: { en: 'Filter: Target Groups', de: 'Filter: Zielgruppen' },
   },
   fields: [
     {

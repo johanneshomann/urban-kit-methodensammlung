@@ -3,11 +3,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { useSaved } from '@/hooks/useSaved'
+import { useCurrentMethod } from '@/components/CurrentMethodProvider'
 import { Link } from '@/navigation'
 import { Bookmark, X } from 'lucide-react'
 
 export default function SavedWidget() {
-  const { saved, remove, mounted } = useSaved()
+  const { saved, add, remove, inSaved, mounted } = useSaved()
+  const { current } = useCurrentMethod()
   const t = useTranslations('savedWidget')
   const [open, setOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -23,12 +25,14 @@ export default function SavedWidget() {
   }, [open])
 
   const count = mounted ? saved.length : 0
+  const onMethodPage = mounted && current != null
+  const currentSaved = onMethodPage && current ? inSaved(current.id) : false
 
   return (
     <div ref={containerRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
       {/* Popup panel */}
       <div
-        className={`w-80 bg-white rounded-2xl shadow-2xl border flex flex-col overflow-hidden transition-all duration-200 origin-bottom-right ${
+        className={`w-80 bg-method-white rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-200 origin-bottom-right ${
           open
             ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
             : 'opacity-0 scale-95 translate-y-2 pointer-events-none'
@@ -74,25 +78,47 @@ export default function SavedWidget() {
           )}
         </div>
 
-        {/* Footer CTA */}
-        <div className="p-3 border-t">
-          <Link
-            href="/saved"
-            onClick={() => setOpen(false)}
-            className="block w-full text-center text-small font-bold py-2.5 rounded-xl transition-colors"
-            style={{ background: 'var(--method)', color: 'white' }}
-            onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
-            onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
-          >
-            {t('viewAll')}
-          </Link>
-        </div>
+        {/* Footer CTA — only when there's an action to offer */}
+        {(onMethodPage || count > 0) && (
+          <div className="p-3 border-t flex flex-col gap-2">
+            {/* Save the currently viewed method — only if it isn't already in the list */}
+            {onMethodPage && current && !currentSaved && (
+              <button
+                onClick={() => add(current)}
+                className="flex items-center justify-center gap-1.5 w-full text-center text-small font-bold py-2.5 rounded-xl transition-colors"
+                style={{ background: 'var(--method)', color: 'var(--method-white)' }}
+                onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
+              >
+                <Bookmark className="w-4 h-4" />{t('saveThis')}
+              </button>
+            )}
+
+            {/* View all — whenever something is saved */}
+            {count > 0 && (
+              <Link
+                href="/saved"
+                onClick={() => setOpen(false)}
+                className="block w-full text-center text-small font-bold py-2.5 rounded-xl transition-colors"
+                style={
+                  onMethodPage
+                    ? { background: 'transparent', color: 'var(--method)' }
+                    : { background: 'var(--method)', color: 'var(--method-white)' }
+                }
+                onMouseEnter={e => (e.currentTarget.style.background = onMethodPage ? 'var(--method-very-light)' : 'var(--method-dark)')}
+                onMouseLeave={e => (e.currentTarget.style.background = onMethodPage ? 'transparent' : 'var(--method)')}
+              >
+                {t('viewAll')}
+              </Link>
+            )}
+          </div>
+        )}
       </div>
 
       {/* FAB button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-14 h-14 rounded-full text-white shadow-lg hover:shadow-xl transition-all duration-150 flex items-center justify-center relative pointer-events-auto"
+        className="w-14 h-14 rounded-full text-method-white shadow-lg hover:shadow-xl transition-all duration-150 flex items-center justify-center relative pointer-events-auto"
         style={{ background: 'var(--method)' }}
         onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
         onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
@@ -102,7 +128,7 @@ export default function SavedWidget() {
         {count > 0 && (
           <span
             className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-xs font-bold flex items-center justify-center shadow border"
-            style={{ background: 'white', color: 'var(--method)' }}
+            style={{ background: 'var(--method-white)', color: 'var(--method)' }}
           >
             {count > 9 ? '9+' : count}
           </span>

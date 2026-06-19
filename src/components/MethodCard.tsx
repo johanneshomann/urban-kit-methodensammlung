@@ -8,11 +8,12 @@ import SaveButton from './SaveButton'
 type Props = {
   method: Methode
   showAuszug?: boolean
+  background?: string
 }
 
-export default function MethodCard({ method, showAuszug }: Props) {
+export default function MethodCard({ method, showAuszug, background = 'var(--method-white)' }: Props) {
   const locale = useLocale()
-  const auszug = locale === 'de' ? method.auszug : (method.auszugEn ?? method.auszug)
+  const auszug = method.auszug
   const characteristics = Array.isArray(method.characteristics)
     ? method.characteristics.map((c) => (typeof c === 'object' ? c : null)).filter(Boolean) as FilterItem[]
     : []
@@ -20,7 +21,7 @@ export default function MethodCard({ method, showAuszug }: Props) {
   const imageUrl = getMethodImageUrl(method.image, method.id)
 
   return (
-    <div className="relative group rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all" style={{ background: 'var(--method-white)' }}>
+    <div className="relative group rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all" style={{ background }}>
       {/* Image strip with save button inside */}
       <div className="relative h-56 w-full overflow-hidden shrink-0">
         <img
@@ -41,12 +42,12 @@ export default function MethodCard({ method, showAuszug }: Props) {
 
       {/* Content */}
       <div className="pointer-events-none flex flex-col gap-4 p-8 flex-1">
-        <p className="text-display font-black leading-tight transition-colors text-ink-accent group-hover:text-ink">
+        <p className="text-display font-black leading-tight transition-colors text-ink group-hover:text-ink-accent">
           {method.title}
         </p>
 
         {showAuszug && auszug && (
-          <p className="text-small line-clamp-3" style={{ color: 'var(--method-ink)', opacity: 0.7 }}>
+          <p className="text-small line-clamp-3 text-ink">
             {auszug}
           </p>
         )}

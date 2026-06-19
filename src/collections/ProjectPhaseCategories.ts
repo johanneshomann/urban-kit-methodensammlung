@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { requiredTextInDefaultLocale } from '../lib/requiredInDefaultLocale'
 
 export const ProjectPhaseCategories: CollectionConfig = {
   slug: 'project-phase-categories',
@@ -7,23 +8,17 @@ export const ProjectPhaseCategories: CollectionConfig = {
     plural: { en: 'Project Phase Categories', de: 'Projektphasen-Kategorien' },
   },
   admin: {
-    useAsTitle: 'nameDe',
-    defaultColumns: ['nameDe', 'nameEn'],
-    group: { en: 'Project Phases', de: 'Projektphasen' },
+    useAsTitle: 'name',
+    defaultColumns: ['name'],
+    group: { en: 'Filter: Project Phases', de: 'Filter: Projektphasen' },
   },
   fields: [
     {
-      type: 'tabs',
-      tabs: [
-        {
-          label: 'DE',
-          fields: [{ name: 'nameDe', label: { en: 'Name', de: 'Name' }, type: 'text', required: true }],
-        },
-        {
-          label: 'EN',
-          fields: [{ name: 'nameEn', label: { en: 'Name', de: 'Name' }, type: 'text' }],
-        },
-      ],
+      name: 'name',
+      label: { en: 'Name', de: 'Name' },
+      type: 'text',
+      localized: true,
+      validate: requiredTextInDefaultLocale,
     },
     {
       name: 'icon',

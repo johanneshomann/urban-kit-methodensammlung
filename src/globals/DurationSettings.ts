@@ -4,7 +4,7 @@ export const DurationSettings: GlobalConfig = {
   slug: 'duration-settings',
   label: { en: 'Settings', de: 'Einstellungen' },
   admin: {
-    group: { en: 'Durations', de: 'Zeitrahmen' },
+    group: { en: 'Filter: Durations', de: 'Filter: Zeitrahmen' },
   },
   fields: [
     {

@@ -1,4 +1,29 @@
 import type { CollectionConfig } from 'payload'
+import {
+  requiredArrayInDefaultLocale,
+  requiredTextInDefaultLocale,
+  requiredValueInDefaultLocale,
+} from '../lib/requiredInDefaultLocale'
+
+const sectionFields = [
+  {
+    name: 'sectionTitle',
+    type: 'text' as const,
+    label: { en: 'Title', de: 'Titel' },
+    admin: { description: { en: 'Heading for this section (e.g. “Step 1”).', de: 'Überschrift des Abschnitts (z. B. „Schritt 1“).' } },
+  },
+  {
+    name: 'content',
+    type: 'richText' as const,
+    label: { en: 'Content', de: 'Inhalt' },
+    admin: { description: { en: 'Content of this section.', de: 'Inhalt dieses Abschnitts.' } },
+  },
+]
+
+const sectionArrayAdmin = {
+  initCollapsed: true,
+  components: { RowLabel: '@/components/admin/SectionRowLabel#SectionRowLabel' },
+}
 
 export const Methods: CollectionConfig = {
   slug: 'methods',
@@ -9,265 +34,180 @@ export const Methods: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'characteristics', 'status', 'updatedAt'],
-    group: { en: 'Methods Archive', de: 'Methodensammlung' },
+    // Rendered as a plain link via TopNav (beforeNavLinks); `false` removes it
+    // from the default nav grouping while keeping its route accessible.
+    group: false,
   },
   fields: [
     {
       type: 'tabs',
       tabs: [
+        // ── Allgemein ───────────────────────────────────────────────────────
         {
-          label: 'DE',
+          label: { en: 'General', de: 'Allgemein' },
           fields: [
             {
               name: 'title',
               type: 'text',
               label: { en: 'Title', de: 'Titel' },
-              required: true,
+              localized: true,
+              validate: requiredTextInDefaultLocale,
+              admin: { description: { en: 'Name of the method — shown on the card, the detail page and in the URL.', de: 'Name der Methode – erscheint auf der Karte, der Detailseite und in der URL.' } },
             },
             {
-              type: 'collapsible',
+              name: 'auszug',
+              type: 'textarea',
               label: { en: 'Excerpt', de: 'Auszug' },
-              admin: { initCollapsed: true },
-              fields: [
-                {
-                  name: 'auszug',
-                  type: 'textarea',
-                  label: { en: 'Excerpt', de: 'Auszug' },
-                  admin: { description: { en: 'Short summary of the method', de: 'Kurze Zusammenfassung der Methode' } },
-                },
-              ],
+              localized: true,
+              validate: requiredTextInDefaultLocale,
+              admin: { description: { en: 'Short 1–2 sentence summary for the method card.', de: 'Kurze Zusammenfassung in 1–2 Sätzen für die Methodenkarte.' } },
             },
             {
-              type: 'collapsible',
+              name: 'zielDerMethode',
+              type: 'richText',
               label: { en: 'Goal of the method', de: 'Ziel der Methode' },
-              admin: { initCollapsed: true },
-              fields: [{ name: 'zielDerMethode', type: 'richText', label: { en: 'Goal of the method', de: 'Ziel der Methode' } }],
+              localized: true,
+              validate: requiredValueInDefaultLocale,
+              admin: { description: { en: 'What the method helps you achieve — in 1–2 sentences.', de: 'Was sich mit der Methode erreichen lässt – in 1–2 Sätzen.' } },
             },
-            {
-              type: 'collapsible',
-              label: { en: 'When useful & when not?', de: 'Wann sinnvoll & wann nicht?' },
-              admin: { initCollapsed: true },
-              fields: [
-                { name: 'wannSinnvoll', type: 'richText', label: { en: 'When useful?', de: 'Wann sinnvoll?' } },
-                { name: 'wannNichtSinnvoll', type: 'richText', label: { en: 'When not useful?', de: 'Wann nicht sinnvoll?' } },
-              ],
-            },
+          ],
+        },
+        // ── Ablauf ──────────────────────────────────────────────────────────
+        {
+          label: { en: 'Procedure', de: 'Ablauf' },
+          fields: [
             {
               name: 'vorbereitung',
               type: 'array',
               label: { en: 'Preparation', de: 'Vorbereitung' },
+              localized: true,
+              validate: requiredArrayInDefaultLocale,
               labels: { singular: { en: 'Section', de: 'Abschnitt' }, plural: { en: 'Sections', de: 'Abschnitte' } },
-              admin: {
-                initCollapsed: true,
-                components: { RowLabel: '@/components/admin/SectionRowLabel#SectionRowLabel' },
-              },
-              fields: [
-                { name: 'sectionTitle', type: 'text', label: { en: 'Title', de: 'Titel' } },
-                { name: 'content', type: 'richText', label: { en: 'Content', de: 'Inhalt' } },
-              ],
+              admin: { ...sectionArrayAdmin, description: { en: 'What to do beforehand. Each section has a title + content; reorder by drag-and-drop.', de: 'Was vorab zu tun ist. Pro Abschnitt Titel + Inhalt, per Drag-and-drop sortierbar.' } },
+              fields: sectionFields,
             },
             {
               name: 'durchfuehrung',
               type: 'array',
               label: { en: 'Execution', de: 'Durchführung' },
+              localized: true,
+              validate: requiredArrayInDefaultLocale,
               labels: { singular: { en: 'Section', de: 'Abschnitt' }, plural: { en: 'Sections', de: 'Abschnitte' } },
-              admin: {
-                initCollapsed: true,
-                components: { RowLabel: '@/components/admin/SectionRowLabel#SectionRowLabel' },
-              },
-              fields: [
-                { name: 'sectionTitle', type: 'text', label: { en: 'Title', de: 'Titel' } },
-                { name: 'content', type: 'richText', label: { en: 'Content', de: 'Inhalt' } },
-              ],
+              admin: { ...sectionArrayAdmin, description: { en: 'The actual procedure of the method, step by step.', de: 'Der eigentliche Ablauf der Methode, Schritt für Schritt.' } },
+              fields: sectionFields,
             },
             {
               name: 'auswertung',
               type: 'array',
               label: { en: 'Evaluation', de: 'Auswertung' },
+              localized: true,
+              validate: requiredArrayInDefaultLocale,
               labels: { singular: { en: 'Section', de: 'Abschnitt' }, plural: { en: 'Sections', de: 'Abschnitte' } },
-              admin: {
-                initCollapsed: true,
-                components: { RowLabel: '@/components/admin/SectionRowLabel#SectionRowLabel' },
-              },
-              fields: [
-                { name: 'sectionTitle', type: 'text', label: { en: 'Title', de: 'Titel' } },
-                { name: 'content', type: 'richText', label: { en: 'Content', de: 'Inhalt' } },
-              ],
-            },
-            {
-              type: 'collapsible',
-              label: { en: 'Tips', de: 'Tipps' },
-              admin: { initCollapsed: true },
-              fields: [{ name: 'tipps', type: 'richText', label: { en: 'Tips', de: 'Tipps' } }],
-            },
-            {
-              type: 'collapsible',
-              label: { en: 'Not suitable for', de: 'Ungeeignet für' },
-              admin: { initCollapsed: true },
-              fields: [{ name: 'ungeeignetFuer', type: 'richText', label: { en: 'Not suitable for', de: 'Ungeeignet für' } }],
+              admin: { ...sectionArrayAdmin, description: { en: 'Follow-up, reflection and securing the results.', de: 'Nachbereitung, Reflexion und Sicherung der Ergebnisse.' } },
+              fields: sectionFields,
             },
           ],
         },
+        // ── Hinweise ────────────────────────────────────────────────────────
         {
-          label: 'EN',
+          label: { en: 'Notes', de: 'Hinweise' },
           fields: [
             {
-              name: 'titleEn',
+              type: 'row',
+              fields: [
+                { name: 'wannSinnvoll', type: 'richText', label: { en: 'When useful?', de: 'Wann sinnvoll?' }, localized: true, admin: { description: { en: 'Situations where the method works particularly well.', de: 'In welchen Situationen die Methode besonders gut passt.' } } },
+                { name: 'wannNichtSinnvoll', type: 'richText', label: { en: 'When not useful?', de: 'Wann nicht sinnvoll?' }, localized: true, admin: { description: { en: 'When the method is rather unsuitable.', de: 'Wann die Methode eher ungeeignet ist.' } } },
+              ],
+            },
+            { name: 'tipps', type: 'richText', label: { en: 'Tips', de: 'Tipps' }, localized: true, admin: { description: { en: 'Practical hints for a successful run.', de: 'Praktische Hinweise für eine gelungene Umsetzung.' } } },
+            { name: 'ungeeignetFuer', type: 'richText', label: { en: 'Not suitable for', de: 'Ungeeignet für' }, localized: true, admin: { description: { en: 'Contexts or target groups the method is not intended for.', de: 'Kontexte oder Zielgruppen, für die die Methode nicht gedacht ist.' } } },
+          ],
+        },
+        // ── Verknüpfungen & Medien ──────────────────────────────────────────
+        {
+          label: { en: 'Links & media', de: 'Verknüpfungen & Medien' },
+          fields: [
+            {
+              name: 'aehnlicheMethoden',
+              label: { en: 'Similar methods', de: 'Ähnliche Methoden' },
+              type: 'relationship',
+              relationTo: 'methods',
+              hasMany: true,
+              admin: { description: { en: 'Related methods — linked on the detail page.', de: 'Verwandte Methoden – werden auf der Detailseite verlinkt.' } },
+            },
+            {
+              name: 'wieKannEsWeiterGehen',
+              label: { en: 'What can follow?', de: 'Wie kann es weiter gehen?' },
+              type: 'relationship',
+              relationTo: 'methods',
+              hasMany: true,
+              admin: { description: { en: 'Methods that can sensibly follow (the “Afterwards” section).', de: 'Methoden, die sich sinnvoll anschließen (Abschnitt „Im Anschluss“).' } },
+            },
+            {
+              name: 'gallery',
+              label: { en: 'Gallery', de: 'Galerie' },
+              type: 'upload',
+              relationTo: 'media',
+              hasMany: true,
+              admin: { description: { en: 'Additional images for the gallery on the detail page.', de: 'Weitere Bilder zur Methode für die Galerie auf der Detailseite.' } },
+            },
+          ],
+        },
+        // ── Zuordnung (Filter) ──────────────────────────────────────────────
+        {
+          label: { en: 'Classification', de: 'Zuordnung' },
+          description: { en: 'Filters this method appears under on the website. Multiple selection; values come from the “Filter: …” collections.', de: 'Filter, unter denen die Methode auf der Website erscheint. Mehrfachauswahl möglich; Werte stammen aus den „Filter: …“-Sammlungen.' },
+          fields: [
+            { name: 'participationDepths', label: { en: 'Participation Depths', de: 'Beteiligungstiefen' }, type: 'relationship', relationTo: 'participation-depths', hasMany: true, admin: { description: { en: 'How strongly participants are involved (from informing to co-deciding).', de: 'Wie stark Beteiligte einbezogen werden (informieren bis mitbestimmen).' } } },
+            { name: 'projectPhases', label: { en: 'Project Phases', de: 'Projektphasen' }, type: 'relationship', relationTo: 'project-phases', hasMany: true, admin: { description: { en: 'Which project phase the method can be used in.', de: 'In welcher Projektphase die Methode einsetzbar ist.' } } },
+            { name: 'goals', label: { en: 'Goals', de: 'Ziele' }, type: 'relationship', relationTo: 'goals', hasMany: true, admin: { description: { en: 'Which goal the method supports.', de: 'Welches Ziel die Methode unterstützt.' } } },
+            { name: 'formats', label: { en: 'Formats', de: 'Formate' }, type: 'relationship', relationTo: 'formats', hasMany: true, admin: { description: { en: 'Analogue, digital or hybrid.', de: 'Analog, digital oder hybrid.' } } },
+            { name: 'durations', label: { en: 'Durations', de: 'Zeitrahmen' }, type: 'relationship', relationTo: 'durations', hasMany: true, admin: { description: { en: 'Roughly how much time the method needs.', de: 'Wie viel Zeit die Methode ungefähr braucht.' } } },
+            { name: 'targetGroups', label: { en: 'Target Groups', de: 'Zielgruppen' }, type: 'relationship', relationTo: 'target-groups', hasMany: true, admin: { description: { en: 'Which target groups the method suits.', de: 'Für welche Zielgruppen die Methode geeignet ist.' } } },
+            { name: 'groupSizes', label: { en: 'Group Sizes', de: 'Gruppengrößen' }, type: 'relationship', relationTo: 'group-sizes', hasMany: true, admin: { description: { en: 'Which group size the method works for.', de: 'Für welche Gruppengröße die Methode passt.' } } },
+            { name: 'characteristics', label: { en: 'Characteristics', de: 'Merkmale' }, type: 'relationship', relationTo: 'characteristics', hasMany: true, admin: { description: { en: 'Character of the method (e.g. playful, structured).', de: 'Charakter der Methode (z. B. spielerisch, strukturiert).' } } },
+          ],
+        },
+        // ── Weiteres ────────────────────────────────────────────────────────
+        {
+          label: { en: 'More', de: 'Weiteres' },
+          fields: [
+            {
+              name: 'slug',
               type: 'text',
-              label: { en: 'Title', de: 'Titel' },
-            },
-            {
-              type: 'collapsible',
-              label: { en: 'Excerpt', de: 'Auszug' },
-              admin: { initCollapsed: true },
-              fields: [
-                {
-                  name: 'auszugEn',
-                  type: 'textarea',
-                  label: { en: 'Excerpt', de: 'Auszug' },
-                  admin: { description: { en: 'Short summary of the method', de: 'Kurze Zusammenfassung der Methode' } },
+              label: { en: 'Slug (auto-generated)', de: 'Slug (automatisch generiert)' },
+              unique: true,
+              index: true,
+              admin: {
+                description: {
+                  en: 'Generated automatically from the title — used in the page URL. You can override it.',
+                  de: 'Wird automatisch aus dem Titel generiert – Teil der Seiten-URL. Kann überschrieben werden.',
                 },
-              ],
-            },
-            {
-              type: 'collapsible',
-              label: { en: 'Goal of the method', de: 'Ziel der Methode' },
-              admin: { initCollapsed: true },
-              fields: [{ name: 'zielDerMethodeEn', type: 'richText', label: { en: 'Goal of the method', de: 'Ziel der Methode' } }],
-            },
-            {
-              type: 'collapsible',
-              label: { en: 'When useful & when not?', de: 'Wann sinnvoll & wann nicht?' },
-              admin: { initCollapsed: true },
-              fields: [
-                { name: 'wannSinnvollEn', type: 'richText', label: { en: 'When useful?', de: 'Wann sinnvoll?' } },
-                { name: 'wannNichtSinnvollEn', type: 'richText', label: { en: 'When not useful?', de: 'Wann nicht sinnvoll?' } },
-              ],
-            },
-            {
-              name: 'vorbereitungEn',
-              type: 'array',
-              label: { en: 'Preparation', de: 'Vorbereitung' },
-              labels: { singular: { en: 'Section', de: 'Abschnitt' }, plural: { en: 'Sections', de: 'Abschnitte' } },
-              admin: {
-                initCollapsed: true,
-                components: { RowLabel: '@/components/admin/SectionRowLabel#SectionRowLabel' },
               },
-              fields: [
-                { name: 'sectionTitle', type: 'text', label: { en: 'Title', de: 'Titel' } },
-                { name: 'content', type: 'richText', label: { en: 'Content', de: 'Inhalt' } },
-              ],
-            },
-            {
-              name: 'durchfuehrungEn',
-              type: 'array',
-              label: { en: 'Execution', de: 'Durchführung' },
-              labels: { singular: { en: 'Section', de: 'Abschnitt' }, plural: { en: 'Sections', de: 'Abschnitte' } },
-              admin: {
-                initCollapsed: true,
-                components: { RowLabel: '@/components/admin/SectionRowLabel#SectionRowLabel' },
+              hooks: {
+                beforeValidate: [
+                  ({ value, data, req }) => {
+                    // Only (re)generate from the German title, and never while editing a non-default locale.
+                    const localization = req?.payload?.config?.localization
+                    const defaultLocale = (localization && localization.defaultLocale) || 'de'
+                    if ((req?.locale ?? defaultLocale) !== defaultLocale) return value
+                    const source = (value || data?.title) as string | undefined
+                    if (!source) return value
+                    return source
+                      .toLowerCase()
+                      .replace(/[äöü]/g, (c) => ({ ä: 'ae', ö: 'oe', ü: 'ue' }[c] ?? c))
+                      .replace(/ß/g, 'ss')
+                      .replace(/[^a-z0-9]+/g, '-')
+                      .replace(/^-|-$/g, '')
+                  },
+                ],
               },
-              fields: [
-                { name: 'sectionTitle', type: 'text', label: { en: 'Title', de: 'Titel' } },
-                { name: 'content', type: 'richText', label: { en: 'Content', de: 'Inhalt' } },
-              ],
-            },
-            {
-              name: 'auswertungEn',
-              type: 'array',
-              label: { en: 'Evaluation', de: 'Auswertung' },
-              labels: { singular: { en: 'Section', de: 'Abschnitt' }, plural: { en: 'Sections', de: 'Abschnitte' } },
-              admin: {
-                initCollapsed: true,
-                components: { RowLabel: '@/components/admin/SectionRowLabel#SectionRowLabel' },
-              },
-              fields: [
-                { name: 'sectionTitle', type: 'text', label: { en: 'Title', de: 'Titel' } },
-                { name: 'content', type: 'richText', label: { en: 'Content', de: 'Inhalt' } },
-              ],
-            },
-            {
-              type: 'collapsible',
-              label: { en: 'Tips', de: 'Tipps' },
-              admin: { initCollapsed: true },
-              fields: [{ name: 'tippsEn', type: 'richText', label: { en: 'Tips', de: 'Tipps' } }],
-            },
-            {
-              type: 'collapsible',
-              label: { en: 'Not suitable for', de: 'Ungeeignet für' },
-              admin: { initCollapsed: true },
-              fields: [{ name: 'ungeeignetFuerEn', type: 'richText', label: { en: 'Not suitable for', de: 'Ungeeignet für' } }],
             },
           ],
         },
       ],
     },
-    {
-      type: 'collapsible',
-      label: { en: 'Similar methods', de: 'Ähnliche Methoden' },
-      admin: { initCollapsed: true },
-      fields: [
-        {
-          name: 'aehnlicheMethoden',
-          label: { en: 'Similar methods', de: 'Ähnliche Methoden' },
-          type: 'relationship',
-          relationTo: 'methods',
-          hasMany: true,
-        },
-      ],
-    },
-    {
-      type: 'collapsible',
-      label: { en: 'What can follow?', de: 'Wie kann es weiter gehen?' },
-      admin: { initCollapsed: true },
-      fields: [
-        {
-          name: 'wieKannEsWeiterGehen',
-          label: { en: 'What can follow?', de: 'Wie kann es weiter gehen?' },
-          type: 'relationship',
-          relationTo: 'methods',
-          hasMany: true,
-        },
-      ],
-    },
-    {
-      type: 'collapsible',
-      label: { en: 'Gallery', de: 'Galerie' },
-      admin: { initCollapsed: true },
-      fields: [
-        {
-          name: 'gallery',
-          label: { en: 'Gallery', de: 'Galerie' },
-          type: 'upload',
-          relationTo: 'media',
-          hasMany: true,
-        },
-      ],
-    },
-    {
-      name: 'slug',
-      type: 'text',
-      unique: true,
-      index: true,
-      admin: {
-        position: 'sidebar',
-        description: { en: 'Auto-generated from title. You can override it.', de: 'Automatisch aus dem Titel generiert. Kann überschrieben werden.' },
-      },
-      hooks: {
-        beforeValidate: [
-          ({ value, data }) => {
-            const source = (value || data?.title) as string | undefined
-            if (!source) return value
-            return source
-              .toLowerCase()
-              .replace(/[äöü]/g, (c) => ({ ä: 'ae', ö: 'oe', ü: 'ue' }[c] ?? c))
-              .replace(/ß/g, 'ss')
-              .replace(/[^a-z0-9]+/g, '-')
-              .replace(/^-|-$/g, '')
-          },
-        ],
-      },
-    },
+    // ── Sidebar (meta) ────────────────────────────────────────────────────
     {
       name: 'status',
       type: 'select',
@@ -277,77 +217,20 @@ export const Methods: CollectionConfig = {
       ],
       defaultValue: 'draft',
       required: true,
-      admin: { position: 'sidebar' },
+      admin: {
+        position: 'sidebar',
+        description: { en: 'Only “Published” appears on the website; “Draft” stays hidden.', de: 'Nur „Veröffentlicht“ erscheint auf der Website; „Entwurf“ bleibt verborgen.' },
+      },
     },
     {
       name: 'image',
       type: 'upload',
       relationTo: 'media',
-      admin: { position: 'sidebar' },
-    },
-    {
-      name: 'participationDepths',
-      label: { en: 'Participation Depths', de: 'Beteiligungstiefen' },
-      type: 'relationship',
-      relationTo: 'participation-depths',
-      hasMany: true,
-      admin: { position: 'sidebar' },
-    },
-    {
-      name: 'projectPhases',
-      label: { en: 'Project Phases', de: 'Projektphasen' },
-      type: 'relationship',
-      relationTo: 'project-phases',
-      hasMany: true,
-      admin: { position: 'sidebar' },
-    },
-    {
-      name: 'goals',
-      label: { en: 'Goals', de: 'Ziele' },
-      type: 'relationship',
-      relationTo: 'goals',
-      hasMany: true,
-      admin: { position: 'sidebar' },
-    },
-    {
-      name: 'formats',
-      label: { en: 'Formats', de: 'Formate' },
-      type: 'relationship',
-      relationTo: 'formats',
-      hasMany: true,
-      admin: { position: 'sidebar' },
-    },
-    {
-      name: 'durations',
-      label: { en: 'Durations', de: 'Zeitrahmen' },
-      type: 'relationship',
-      relationTo: 'durations',
-      hasMany: true,
-      admin: { position: 'sidebar' },
-    },
-    {
-      name: 'targetGroups',
-      label: { en: 'Target Groups', de: 'Zielgruppen' },
-      type: 'relationship',
-      relationTo: 'target-groups',
-      hasMany: true,
-      admin: { position: 'sidebar' },
-    },
-    {
-      name: 'groupSizes',
-      label: { en: 'Group Sizes', de: 'Gruppengrößen' },
-      type: 'relationship',
-      relationTo: 'group-sizes',
-      hasMany: true,
-      admin: { position: 'sidebar' },
-    },
-    {
-      name: 'characteristics',
-      label: { en: 'Characteristics', de: 'Merkmale' },
-      type: 'relationship',
-      relationTo: 'characteristics',
-      hasMany: true,
-      admin: { position: 'sidebar' },
+      label: { en: 'Cover image', de: 'Titelbild' },
+      admin: {
+        position: 'sidebar',
+        description: { en: 'Cover image of the method (card and detail-page hero).', de: 'Titelbild der Methode (Karte und Detailseite-Hero).' },
+      },
     },
   ],
 }

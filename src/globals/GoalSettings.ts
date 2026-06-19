@@ -4,7 +4,7 @@ export const GoalSettings: GlobalConfig = {
   slug: 'goal-settings',
   label: { en: 'Settings', de: 'Einstellungen' },
   admin: {
-    group: { en: 'Goals', de: 'Ziele' },
+    group: { en: 'Filter: Goals', de: 'Filter: Ziele' },
   },
   fields: [
     {

@@ -31,6 +31,8 @@
   --color-method-dark:   var(--method-dark);
   --color-ink:           var(--method-ink);
   --color-ink-accent:    var(--method-ink-accent);
+  --color-method-white:  var(--method-white);
+  --color-method-black:  var(--method-black);
 
   --color-background: hsl(0 0% 100%);
   --color-foreground: hsl(222.2 84% 4.9%);
@@ -40,7 +42,7 @@
   --color-secondary-foreground: hsl(222.2 84% 4.9%);
   --color-muted: hsl(210 40% 96%);
   --color-muted-foreground: hsl(215.4 16.3% 46.9%);
-  --color-border: #d8d9ff;
+  --color-border: var(--method-border);
   --color-destructive: hsl(0 84.2% 60.2%);
   --radius: 0.5rem;
 }
@@ -144,6 +146,34 @@ body.method-sticky-active .method-brand {
   transform-origin: top right;
 }
 
+@keyframes lightbox-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox-fade {
+  animation: lightbox-fade 0.2s ease both;
+}
+
+@keyframes lightbox-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.lightbox-zoom {
+  animation: lightbox-zoom 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 /* ── Accessibility preferences (toggled by AccessibilityProvider) ───────── */
 
 html.a11y-reduce-motion {
@@ -174,7 +204,30 @@ html.a11y-high-contrast {
   --method-ink-accent: #000 !important;
   --method-black: #000 !important;
   --method-light: #fff !important;
-  --method-very-light: #fff !important;
+  /* Recessed/section surface: a faint neutral so white cards layer above it.
+     Black-on-#f2f2f2 is ~19:1, still far past WCAG AAA. */
+  --method-very-light: #f2f2f2 !important;
   --method-white: #fff !important;
   --method-white-transparent: #fff !important;
+  /* Borders/outlines must stay black so shapes are distinguishable on the
+     all-white surfaces (cards, panels, inputs, the export button, etc.). */
+  --method-border: #000 !important;
+}
+
+/*
+  The accessibility toggle switch is the one control that still collapses:
+  in the OFF state both the track (--method-light → #fff) and the knob
+  (--method-white → #fff) become white. Force visible black outlines on both
+  so the knob and track read against each other and against the panel.
+*/
+html.a11y-high-contrast [data-a11y-switch-track],
+html.a11y-high-contrast [data-a11y-switch-knob] {
+  border: 1px solid #000;
+}
+
+/* Desaturate imagery so it doesn't reintroduce low-contrast color noise. */
+html.a11y-high-contrast img,
+html.a11y-high-contrast video,
+html.a11y-high-contrast picture {
+  filter: grayscale(100%);
 }
