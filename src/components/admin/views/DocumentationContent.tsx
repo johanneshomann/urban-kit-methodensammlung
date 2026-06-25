@@ -122,6 +122,13 @@ const CATEGORIES: Category[] = [
             heading: { de: 'Reiter „Allgemein“', en: '“General” tab' },
             fields: [
               {
+                name: { de: 'Status', en: 'Status' },
+                desc: {
+                  de: '„Entwurf“ oder „Veröffentlicht“. Nur veröffentlichte Methoden erscheinen auf der Website (Standard: Entwurf).',
+                  en: '“Draft” or “Published”. Only published methods appear on the website (default: Draft).',
+                },
+              },
+              {
                 name: { de: 'Titel', en: 'Title' },
                 desc: {
                   de: 'Name der Methode – erscheint auf der Karte und der Detailseite. Aus ihm wird automatisch der Slug (URL) erzeugt.',
@@ -183,27 +190,39 @@ const CATEGORIES: Category[] = [
             ],
           },
           {
-            heading: { de: 'Reiter „Verknüpfungen & Medien“', en: '“Links & media” tab' },
+            heading: { de: 'Reiter „Verknüpfungen“', en: '“Links” tab' },
             fields: [
               {
                 name: { de: 'Ähnliche Methoden', en: 'Similar methods' },
                 desc: {
-                  de: 'Verweise auf verwandte Methoden (Mehrfachauswahl).',
-                  en: 'Links to related methods (multiple selection).',
+                  de: 'Verweise auf verwandte Methoden (Mehrfachauswahl). Die Verknüpfung ist beidseitig: Eine hier hinzugefügte Methode erhält diese automatisch ebenfalls in ihren „Ähnlichen Methoden“ – das Entfernen wirkt auf beiden Seiten.',
+                  en: 'Links to related methods (multiple selection). The link is mutual: a method added here automatically gets this one in its own “Similar methods” too – removing it works on both sides.',
                 },
               },
               {
                 name: { de: 'Wie kann es weiter gehen?', en: 'What can follow?' },
                 desc: {
-                  de: 'Methoden, die sich sinnvoll anschließen können.',
-                  en: 'Methods that can sensibly follow on.',
+                  de: 'Methoden, die sich sinnvoll anschließen können (einseitig, nur hier gesetzt).',
+                  en: 'Methods that can sensibly follow on (one-directional, set here only).',
+                },
+              },
+            ],
+          },
+          {
+            heading: { de: 'Reiter „Bilder“', en: '“Images” tab' },
+            fields: [
+              {
+                name: { de: 'Titelbild', en: 'Cover image' },
+                desc: {
+                  de: 'Titelbild der Methode aus der Medien-Bibliothek (Karte und Detailseite-Hero).',
+                  en: 'The method’s cover image from the media library (card and detail-page hero).',
                 },
               },
               {
                 name: { de: 'Galerie', en: 'Gallery' },
                 desc: {
-                  de: 'Mehrere Bilder aus der Medien-Bibliothek.',
-                  en: 'Several images from the media library.',
+                  de: 'Mehrere weitere Bilder aus der Medien-Bibliothek für die Galerie auf der Detailseite.',
+                  en: 'Several additional images from the media library for the gallery on the detail page.',
                 },
               },
             ],
@@ -231,25 +250,6 @@ const CATEGORIES: Category[] = [
                 desc: {
                   de: 'Wird automatisch aus dem deutschen Titel erzeugt und bildet die Seiten-URL – kann bei Bedarf überschrieben werden.',
                   en: 'Generated automatically from the German title and forms the page URL – can be overridden if needed.',
-                },
-              },
-            ],
-          },
-          {
-            heading: { de: 'Seitenleiste', en: 'Sidebar' },
-            fields: [
-              {
-                name: { de: 'Status', en: 'Status' },
-                desc: {
-                  de: '„Entwurf“ oder „Veröffentlicht“. Nur veröffentlichte Methoden erscheinen auf der Website (Standard: Entwurf).',
-                  en: '“Draft” or “Published”. Only published methods appear on the website (default: Draft).',
-                },
-              },
-              {
-                name: { de: 'Bild', en: 'Image' },
-                desc: {
-                  de: 'Titelbild der Methode aus der Medien-Bibliothek.',
-                  en: 'The method’s cover image from the media library.',
                 },
               },
             ],
