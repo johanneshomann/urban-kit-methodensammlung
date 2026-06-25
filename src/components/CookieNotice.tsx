@@ -86,41 +86,49 @@ export default function CookieNotice() {
 
   return (
     <div
-      role="dialog"
-      aria-label={t('title')}
-      className="notice-in fixed bottom-24 left-6 right-6 sm:right-auto sm:max-w-sm z-50 rounded-2xl border p-4 shadow-2xl"
-      style={{ background: 'var(--method-white)', color: 'var(--method-ink)' }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ background: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(2px)' }}
+      onClick={dismiss}
     >
-      <button
-        onClick={dismiss}
-        aria-label={t('close')}
-        className="absolute top-3 right-3 inline-flex items-center justify-center rounded-md p-1 transition-opacity opacity-50 hover:opacity-100"
-        style={{ color: 'var(--method-ink)' }}
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={t('title')}
+        onClick={e => e.stopPropagation()}
+        className="notice-in relative w-full max-w-xl rounded-2xl border p-6 shadow-2xl"
+        style={{ background: 'var(--method-white)', color: 'var(--method-ink)' }}
       >
-        <X className="h-4 w-4" />
-      </button>
+        <button
+          onClick={dismiss}
+          aria-label={t('close')}
+          className="absolute top-3 right-3 inline-flex items-center justify-center rounded-md p-1 transition-opacity opacity-50 hover:opacity-100"
+          style={{ color: 'var(--method-ink)' }}
+        >
+          <X className="h-4 w-4" />
+        </button>
 
-      <div className="flex items-start gap-3">
-        <Cookie className="h-5 w-5 shrink-0 mt-0.5" style={{ color: 'var(--method)' }} aria-hidden />
-        <div className="pr-4">
-          <p className="text-small font-bold mb-1" style={{ color: 'var(--method-ink-accent)' }}>{t('title')}</p>
-          <p className="text-small leading-relaxed">{t('text')}</p>
-          <div className="mt-3 flex items-center gap-4">
-            <button
-              onClick={dismiss}
-              className="text-small font-bold px-3 py-1.5 rounded-xl transition-colors"
-              style={{ background: 'var(--method)', color: 'var(--method-white)' }}
-            >
-              {t('dismiss')}
-            </button>
-            <Link
-              href="/cookies"
-              onClick={dismiss}
-              className="text-small underline transition-colors hover:opacity-70"
-              style={{ color: 'var(--method)' }}
-            >
-              {t('more')}
-            </Link>
+        <div className="flex items-start gap-3">
+          <Cookie className="h-6 w-6 shrink-0 mt-0.5" style={{ color: 'var(--method)' }} aria-hidden />
+          <div className="pr-4">
+            <p className="text-text font-bold mb-1" style={{ color: 'var(--method-ink-accent)' }}>{t('title')}</p>
+            <p className="text-small leading-relaxed">{t('text')}</p>
+            <div className="mt-4 flex items-center gap-4">
+              <button
+                onClick={dismiss}
+                className="text-small font-bold px-4 py-2 rounded-xl transition-colors"
+                style={{ background: 'var(--method)', color: 'var(--method-white)' }}
+              >
+                {t('dismiss')}
+              </button>
+              <Link
+                href="/cookies"
+                onClick={dismiss}
+                className="text-small underline transition-colors hover:opacity-70"
+                style={{ color: 'var(--method)' }}
+              >
+                {t('more')}
+              </Link>
+            </div>
           </div>
         </div>
       </div>
