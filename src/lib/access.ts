@@ -1,4 +1,4 @@
-import type { Access } from 'payload'
+import type { Access, FieldAccess } from 'payload'
 
 /**
  * Access control for admin users and API-key clients.
@@ -35,6 +35,25 @@ export const adminOrEditor: Access = ({ req }) => {
   return isAdminUser(user) && (user?.role === 'admin' || user?.role === 'editor')
 }
 
+/**
+ * Admins may read/manage any user; everyone else (e.g. editors) is scoped to
+ * their own record only — so the `/admin/account` page works for them without
+ * exposing other users.
+ */
+export const selfOrAdmin: Access = ({ req }) => {
+  const user = req?.user as UserLike
+  if (!isAdminUser(user)) return false
+  if (user?.role === 'admin') return true
+  const id = (user as { id?: string | number } | null | undefined)?.id
+  return id != null ? { id: { equals: id } } : false
+}
+
+/** Field-level: only admins (returns a boolean, as required for field access). */
+export const adminFieldAccess: FieldAccess = ({ req }) => {
+  const user = req?.user as UserLike
+  return isAdminUser(user) && user?.role === 'admin'
+}
+
 /** Content & filter writes: admins and editors; `read` left at Payload's default. */
 export const lockWritesToEditors = {
   create: adminOrEditor,
@@ -59,10 +78,23 @@ export const lockGlobalWritesToAdmins = {
   update: adminOnly,
 }
 
-/** Fully admin-only — read + writes (e.g. Users, API Clients). */
+/** Fully admin-only — read + writes (e.g. API Clients). */
 export const adminOnlyCollection = {
   read: adminOnly,
   create: adminOnly,
   update: adminOnly,
+  delete: adminOnly,
+}
+
+/**
+ * Users collection: admins manage everyone; a non-admin (editor) may read and
+ * update only their own record (needed for the account page / password change).
+ * Creating and deleting users stays admin-only, and the `role` field is locked
+ * to admins via field access so an editor cannot escalate their own role.
+ */
+export const usersCollectionAccess = {
+  read: selfOrAdmin,
+  create: adminOnly,
+  update: selfOrAdmin,
   delete: adminOnly,
 }
