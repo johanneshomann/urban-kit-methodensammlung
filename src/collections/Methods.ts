@@ -143,7 +143,15 @@ export const Methods: CollectionConfig = {
               relationTo: 'methods',
               hasMany: true,
               filterOptions: ({ id }) => (id ? { id: { not_equals: id } } : true),
-              admin: { description: { en: 'Related methods — linked on the detail page.', de: 'Verwandte Methoden – werden auf der Detailseite verlinkt.' } },
+              admin: { description: { en: 'Related methods — shown on both detail pages. The link is mutual: you only set it on one side, and the other method automatically shows this one under “Also marked as similar by” (and on its public page).', de: 'Verwandte Methoden – erscheinen auf beiden Detailseiten. Die Verknüpfung ist beidseitig: Sie wird nur auf einer Seite gesetzt, die andere Methode zeigt diese automatisch unter „Auch als ähnlich markiert von“ (und auf ihrer öffentlichen Seite).' } },
+            },
+            {
+              name: 'aehnlichMarkiertVon',
+              label: { en: 'Also marked as similar by', de: 'Auch als ähnlich markiert von' },
+              type: 'join',
+              collection: 'methods',
+              on: 'aehnlicheMethoden',
+              admin: { description: { en: 'Other methods that listed this one under “Similar methods”. Automatically kept in sync — read-only.', de: 'Andere Methoden, die diese unter „Ähnliche Methoden“ aufgeführt haben. Wird automatisch synchron gehalten – nur lesbar.' } },
             },
             {
               name: 'wieKannEsWeiterGehen',

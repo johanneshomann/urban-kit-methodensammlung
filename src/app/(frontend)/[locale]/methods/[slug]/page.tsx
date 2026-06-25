@@ -136,7 +136,15 @@ export default async function MethodDetailPage({ params }: Props) {
   const tipps = method.tipps
   const ungeeignet = method.ungeeignetFuer
 
-  const aehnliche = (method.aehnlicheMethoden ?? []).map(resolveMethod).filter(Boolean) as Methode[]
+  // "Similar methods" is mutual: combine the directly-set links with the reverse
+  // side (methods that listed this one) surfaced by the `aehnlichMarkiertVon` join.
+  const aehnlicheDirect = (method.aehnlicheMethoden ?? []).map(resolveMethod).filter(Boolean) as Methode[]
+  const aehnlicheReverse = (method.aehnlichMarkiertVon?.docs ?? [])
+    .map(resolveMethod)
+    .filter((m): m is Methode => !!m && m.status === 'published')
+  const aehnliche = [...aehnlicheDirect, ...aehnlicheReverse].filter(
+    (m, i, arr) => arr.findIndex(o => o.id === m.id) === i,
+  )
   const weitergehen = (method.wieKannEsWeiterGehen ?? []).map(resolveMethod).filter(Boolean) as Methode[]
   const gallery = (method.gallery ?? [])
     .map((g) => (typeof g === 'object' && g ? g : null))

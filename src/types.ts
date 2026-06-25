@@ -43,6 +43,7 @@ export type Methode = {
   tipps?: unknown
   ungeeignetFuer?: unknown
   aehnlicheMethoden?: (Methode | string)[] | null
+  aehnlichMarkiertVon?: { docs?: (Methode | string)[] | null } | null
   wieKannEsWeiterGehen?: (Methode | string)[] | null
   characteristics?: (FilterItem | string)[] | null
   durations?: (FilterItem | string)[] | null
