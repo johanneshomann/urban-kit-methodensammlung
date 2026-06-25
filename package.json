@@ -10,7 +10,8 @@
     "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "seed": "npx tsx seed.ts",
-    "migrate:localization": "npx tsx scripts/migrate-localization.ts"
+    "migrate:localization": "npx tsx scripts/migrate-localization.ts",
+    "backfill:similar": "npx tsx scripts/backfill-similar-methods.ts"
   },
   "dependencies": {
     "@payloadcms/db-mongodb": "3.84.1",
