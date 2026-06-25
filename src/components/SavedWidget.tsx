@@ -118,7 +118,7 @@ export default function SavedWidget() {
       {/* FAB button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-12 h-12 rounded-2xl text-method-white shadow-lg hover:shadow-xl transition-all duration-150 flex items-center justify-center relative pointer-events-auto"
+        className="w-12 h-12 rounded-2xl text-method-white shadow-lg hover:shadow-xl transition-all duration-150 flex items-center justify-center relative pointer-events-auto cursor-pointer"
         style={{ background: 'var(--method)' }}
         onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
         onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}

@@ -119,7 +119,7 @@ export default function CookieNotice() {
             <div className="mt-4 flex items-center gap-4">
               <button
                 onClick={dismiss}
-                className="text-small font-bold px-4 py-2 rounded-xl transition-colors"
+                className="text-small font-bold px-4 py-2 rounded-xl transition-colors cursor-pointer"
                 style={{ background: 'var(--method)', color: 'var(--method-white)' }}
                 onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
                 onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
