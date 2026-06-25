@@ -62,7 +62,7 @@ export default function SaveButton({ item, className, style: styleProp }: Props)
             backdropFilter: 'blur(6px)',
           }}
         >
-          {isSaved ? 'Nicht mehr speichern' : 'Speichern'}
+          {isSaved ? t('tooltipRemove') : t('tooltipSave')}
         </span>,
         document.body
       )}

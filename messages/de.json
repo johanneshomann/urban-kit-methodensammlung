@@ -15,7 +15,7 @@
     "menu": "Menü",
     "home": "Methodensammlung",
     "allMethods": "Alle Methoden",
-    "saved": "Gespeicherte Methoden",
+    "saved": "Gemerkte Methoden",
     "contact": "Kontakt",
     "help": "Anleitung",
     "subtitle": "Methodensammlung"
@@ -36,11 +36,11 @@
       {
         "icon": "BookOpen",
         "title": "Methoden-Detailseite",
-        "text": "Jede Methode hat eine eigene Seite mit Ablauf, benötigtem Material, Tipps, Hinweisen und ähnlichen Methoden. Über das Lesezeichen lässt sie sich speichern."
+        "text": "Jede Methode hat eine eigene Seite mit Ablauf, benötigtem Material, Tipps, Hinweisen und ähnlichen Methoden. Über das Lesezeichen lässt sie sich merken."
       },
       {
         "icon": "Bookmark",
-        "title": "Gespeicherte Methoden",
+        "title": "Gemerkte Methoden",
         "text": "Die gemerkten Methoden sammeln sich hier an einem Ort. Die Auswahl lässt sich als Liste exportieren und im Team teilen."
       },
       {
@@ -56,16 +56,16 @@
         "a": "Am besten über die Filter auf der Startseite. Mehrere Kriterien lassen sich kombinieren – die Liste aktualisiert sich sofort."
       },
       {
-        "q": "Wie speichere ich eine Methode?",
-        "a": "Ein Klick auf das Lesezeichen-Symbol auf einer Methodenkarte oder Detailseite genügt. Die Methode erscheint dann unter „Gespeicherte Methoden“."
+        "q": "Wie merke ich mir eine Methode?",
+        "a": "Ein Klick auf das Lesezeichen-Symbol auf einer Methodenkarte oder Detailseite genügt. Die Methode erscheint dann unter „Gemerkte Methoden“."
       },
       {
-        "q": "Bleiben meine gespeicherten Methoden erhalten?",
+        "q": "Bleiben meine gemerkten Methoden erhalten?",
         "a": "Ja – sie werden lokal im Browser gespeichert. Auf einem anderen Gerät oder nach dem Leeren des Browser-Speichers sind sie nicht mehr verfügbar."
       },
       {
         "q": "Kann ich meine Auswahl exportieren oder teilen?",
-        "a": "Ja. Unter „Gespeicherte Methoden“ lässt sich die Auswahl als Liste exportieren – praktisch für die Abstimmung im Team."
+        "a": "Ja. Unter „Gemerkte Methoden“ lässt sich die Auswahl als Liste exportieren – praktisch für die Abstimmung im Team."
       },
       {
         "q": "Gibt es die Sammlung auch auf Englisch?",
@@ -130,10 +130,10 @@
     "ungeeignetFuer": "Ungeeignet für"
   },
   "saved": {
-    "title": "Gespeicherte Methoden",
-    "countOne": "1 Methode gespeichert",
-    "countMany": "{count} Methoden gespeichert",
-    "empty": "Ihre gespeicherte Liste ist leer.",
+    "title": "Gemerkte Methoden",
+    "countOne": "1 Methode gemerkt",
+    "countMany": "{count} Methoden gemerkt",
+    "empty": "Ihre Merkliste ist leer.",
     "discover": "Methoden entdecken →",
     "remove": "Entfernen",
     "viewDetails": "Details anzeigen →",
@@ -141,26 +141,28 @@
     "method": "Methode",
     "characteristics": "Merkmale",
     "export": "↓ Als JSON exportieren",
-    "scrollHint": "Zu den gespeicherten Methoden",
+    "scrollHint": "Zu den gemerkten Methoden",
     "cardsEyebrow": "Ihre Auswahl",
     "printPreview": "Als PDF",
     "print": "Drucken / Als PDF speichern",
-    "backToSaved": "← Gespeicherte Methoden",
+    "backToSaved": "← Gemerkte Methoden",
     "printedOn": "Exportiert am"
   },
   "savedButton": {
-    "saved": "✓ Gespeichert",
-    "save": "+ Speichern"
+    "saved": "✓ Gemerkt",
+    "save": "+ Merken",
+    "tooltipSave": "Merken",
+    "tooltipRemove": "Nicht mehr merken"
   },
   "savedWidget": {
-    "title": "Gespeicherte Methoden",
+    "title": "Gemerkte Methoden",
     "countOne": "1 Methode",
     "countMany": "{count} Methoden",
-    "empty": "Noch nichts gespeichert.",
+    "empty": "Noch nichts gemerkt.",
     "remove": "Entfernen",
-    "viewAll": "Alle gespeicherten ansehen →",
-    "saveThis": "Diese Methode speichern",
-    "savedThis": "Gespeichert"
+    "viewAll": "Alle gemerkten ansehen →",
+    "saveThis": "Diese Methode merken",
+    "savedThis": "Gemerkt"
   },
   "loading": "Lädt…",
   "impressum": {

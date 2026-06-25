@@ -15,7 +15,7 @@
     "menu": "Menu",
     "home": "Method Archive",
     "allMethods": "All Methods",
-    "saved": "Saved Methods",
+    "saved": "Bookmarked Methods",
     "contact": "Contact",
     "help": "Guide",
     "subtitle": "Method Archive"
@@ -36,11 +36,11 @@
       {
         "icon": "BookOpen",
         "title": "Method detail page",
-        "text": "Every method has its own page with the procedure, required materials, tips, notes and related methods. Use the bookmark to save it."
+        "text": "Every method has its own page with the procedure, required materials, tips, notes and related methods. Use the bookmark icon to add it to your bookmarks."
       },
       {
         "icon": "Bookmark",
-        "title": "Saved Methods",
+        "title": "Bookmarked Methods",
         "text": "Your bookmarked methods gather here in one place. You can export the selection as a list and share it with your team."
       },
       {
@@ -56,16 +56,16 @@
         "a": "Use the filters on the home page. You can combine several criteria – the list updates instantly."
       },
       {
-        "q": "How do I save a method?",
-        "a": "Click the bookmark icon on a method card or detail page. The method then appears under “Saved Methods”."
+        "q": "How do I bookmark a method?",
+        "a": "Click the bookmark icon on a method card or detail page. The method then appears under “Bookmarked Methods”."
       },
       {
-        "q": "Are my saved methods kept?",
+        "q": "Are my bookmarked methods kept?",
         "a": "Yes – they are stored locally in your browser. They won't be available on another device or after you clear your browser storage."
       },
       {
         "q": "Can I export or share my selection?",
-        "a": "Yes. Under “Saved Methods” you can export your selection as a list – handy for coordinating within your team."
+        "a": "Yes. Under “Bookmarked Methods” you can export your selection as a list – handy for coordinating within your team."
       },
       {
         "q": "Is the archive available in English?",
@@ -130,10 +130,10 @@
     "ungeeignetFuer": "Not suitable for"
   },
   "saved": {
-    "title": "Saved Methods",
-    "countOne": "1 method saved",
-    "countMany": "{count} methods saved",
-    "empty": "Your saved list is empty.",
+    "title": "Bookmarked Methods",
+    "countOne": "1 method bookmarked",
+    "countMany": "{count} methods bookmarked",
+    "empty": "Your bookmark list is empty.",
     "discover": "Discover methods →",
     "remove": "Remove",
     "viewDetails": "View details →",
@@ -141,26 +141,28 @@
     "method": "Method",
     "characteristics": "Characteristics",
     "export": "↓ Export as JSON",
-    "scrollHint": "To your saved methods",
+    "scrollHint": "To your bookmarked methods",
     "cardsEyebrow": "Your selection",
     "printPreview": "Save as PDF",
     "print": "Print / Save as PDF",
-    "backToSaved": "← Saved Methods",
+    "backToSaved": "← Bookmarked Methods",
     "printedOn": "Exported on"
   },
   "savedButton": {
-    "saved": "✓ Saved",
-    "save": "+ Save"
+    "saved": "✓ Bookmarked",
+    "save": "+ Bookmark",
+    "tooltipSave": "Bookmark",
+    "tooltipRemove": "Remove bookmark"
   },
   "savedWidget": {
-    "title": "Saved Methods",
+    "title": "Bookmarked Methods",
     "countOne": "1 method",
     "countMany": "{count} methods",
-    "empty": "Nothing saved yet.",
+    "empty": "Nothing bookmarked yet.",
     "remove": "Remove",
-    "viewAll": "View all saved →",
-    "saveThis": "Save this method",
-    "savedThis": "Saved"
+    "viewAll": "View all bookmarks →",
+    "saveThis": "Bookmark this method",
+    "savedThis": "Bookmarked"
   },
   "loading": "Loading…",
   "impressum": {
