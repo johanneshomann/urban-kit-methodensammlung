@@ -47,6 +47,20 @@ export const Methods: CollectionConfig = {
           label: { en: 'General', de: 'Allgemein' },
           fields: [
             {
+              name: 'status',
+              type: 'select',
+              label: { en: 'Status', de: 'Status' },
+              options: [
+                { label: { en: 'Draft', de: 'Entwurf' }, value: 'draft' },
+                { label: { en: 'Published', de: 'Veröffentlicht' }, value: 'published' },
+              ],
+              defaultValue: 'draft',
+              required: true,
+              admin: {
+                description: { en: 'Only “Published” appears on the website; “Draft” stays hidden.', de: 'Nur „Veröffentlicht“ erscheint auf der Website; „Entwurf“ bleibt verborgen.' },
+              },
+            },
+            {
               name: 'title',
               type: 'text',
               label: { en: 'Title', de: 'Titel' },
@@ -112,20 +126,15 @@ export const Methods: CollectionConfig = {
         {
           label: { en: 'Notes', de: 'Hinweise' },
           fields: [
-            {
-              type: 'row',
-              fields: [
-                { name: 'wannSinnvoll', type: 'richText', label: { en: 'When useful?', de: 'Wann sinnvoll?' }, localized: true, admin: { description: { en: 'Situations where the method works particularly well.', de: 'In welchen Situationen die Methode besonders gut passt.' } } },
-                { name: 'wannNichtSinnvoll', type: 'richText', label: { en: 'When not useful?', de: 'Wann nicht sinnvoll?' }, localized: true, admin: { description: { en: 'When the method is rather unsuitable.', de: 'Wann die Methode eher ungeeignet ist.' } } },
-              ],
-            },
+            { name: 'wannSinnvoll', type: 'richText', label: { en: 'When useful?', de: 'Wann sinnvoll?' }, localized: true, admin: { description: { en: 'Situations where the method works particularly well.', de: 'In welchen Situationen die Methode besonders gut passt.' } } },
+            { name: 'wannNichtSinnvoll', type: 'richText', label: { en: 'When not useful?', de: 'Wann nicht sinnvoll?' }, localized: true, admin: { description: { en: 'When the method is rather unsuitable.', de: 'Wann die Methode eher ungeeignet ist.' } } },
             { name: 'tipps', type: 'richText', label: { en: 'Tips', de: 'Tipps' }, localized: true, admin: { description: { en: 'Practical hints for a successful run.', de: 'Praktische Hinweise für eine gelungene Umsetzung.' } } },
             { name: 'ungeeignetFuer', type: 'richText', label: { en: 'Not suitable for', de: 'Ungeeignet für' }, localized: true, admin: { description: { en: 'Contexts or target groups the method is not intended for.', de: 'Kontexte oder Zielgruppen, für die die Methode nicht gedacht ist.' } } },
           ],
         },
-        // ── Verknüpfungen & Medien ──────────────────────────────────────────
+        // ── Verknüpfungen ───────────────────────────────────────────────────
         {
-          label: { en: 'Links & media', de: 'Verknüpfungen & Medien' },
+          label: { en: 'Links', de: 'Verknüpfungen' },
           fields: [
             {
               name: 'aehnlicheMethoden',
@@ -142,6 +151,19 @@ export const Methods: CollectionConfig = {
               relationTo: 'methods',
               hasMany: true,
               admin: { description: { en: 'Methods that can sensibly follow (the “Afterwards” section).', de: 'Methoden, die sich sinnvoll anschließen (Abschnitt „Im Anschluss“).' } },
+            },
+          ],
+        },
+        // ── Bilder ──────────────────────────────────────────────────────────
+        {
+          label: { en: 'Images', de: 'Bilder' },
+          fields: [
+            {
+              name: 'image',
+              type: 'upload',
+              relationTo: 'media',
+              label: { en: 'Cover image', de: 'Titelbild' },
+              admin: { description: { en: 'Cover image of the method (card and detail-page hero).', de: 'Titelbild der Methode (Karte und Detailseite-Hero).' } },
             },
             {
               name: 'gallery',
@@ -206,31 +228,6 @@ export const Methods: CollectionConfig = {
           ],
         },
       ],
-    },
-    // ── Sidebar (meta) ────────────────────────────────────────────────────
-    {
-      name: 'status',
-      type: 'select',
-      options: [
-        { label: { en: 'Draft', de: 'Entwurf' }, value: 'draft' },
-        { label: { en: 'Published', de: 'Veröffentlicht' }, value: 'published' },
-      ],
-      defaultValue: 'draft',
-      required: true,
-      admin: {
-        position: 'sidebar',
-        description: { en: 'Only “Published” appears on the website; “Draft” stays hidden.', de: 'Nur „Veröffentlicht“ erscheint auf der Website; „Entwurf“ bleibt verborgen.' },
-      },
-    },
-    {
-      name: 'image',
-      type: 'upload',
-      relationTo: 'media',
-      label: { en: 'Cover image', de: 'Titelbild' },
-      admin: {
-        position: 'sidebar',
-        description: { en: 'Cover image of the method (card and detail-page hero).', de: 'Titelbild der Methode (Karte und Detailseite-Hero).' },
-      },
     },
   ],
 }
