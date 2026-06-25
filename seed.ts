@@ -189,6 +189,29 @@ async function seed() {
     }
   }
 
+  console.log('\n── Filter Settings Icons ─────────────────────')
+  {
+    const filterSettingsIcons: Array<[string, string]> = [
+      ['participation-depth-settings', 'Layers'],
+      ['project-phase-settings',       'Milestone'],
+      ['goal-settings',                'Target'],
+      ['format-settings',              'Shapes'],
+      ['duration-settings',            'Clock'],
+      ['target-group-settings',        'Users'],
+      ['group-size-settings',          'UsersRound'],
+      ['characteristics-settings',     'Tags'],
+    ]
+    for (const [slug, lucideIcon] of filterSettingsIcons) {
+      const current = await payload.findGlobal({ slug: slug as any })
+      if (current?.lucideIcon) {
+        console.log(`  skip  ${slug} / lucideIcon (already "${current.lucideIcon}")`)
+      } else {
+        await payload.updateGlobal({ slug: slug as any, data: { lucideIcon } as any, overrideAccess: true })
+        console.log(`  set   ${slug} / lucideIcon = "${lucideIcon}"`)
+      }
+    }
+  }
+
   console.log('\n✓ Seed complete\n')
   process.exit(0)
 }
