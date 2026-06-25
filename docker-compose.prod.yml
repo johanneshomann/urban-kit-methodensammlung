@@ -1,0 +1,32 @@
+# Production override for docker-compose.yml
+#
+# Deploy on the VPS with:
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+#
+# Assumptions (chosen for this setup):
+#   - TLS is terminated by an EXTERNAL reverse proxy already running on the host
+#     (nginx/Caddy/Traefik). This stack only exposes the app on loopback, so the
+#     proxy reaches it at http://127.0.0.1:3040 and nothing is open to the internet.
+#   - MongoDB runs in this stack with root authentication enabled.
+#
+# Reads its values from the project .env file (Compose auto-loads it). Copy
+# .env.production.example -> .env on the server and fill in real secrets first.
+
+services:
+  app:
+    # Bind to loopback only — the external reverse proxy forwards to this.
+    # !override REPLACES the base port list (without it, Compose appends and the
+    # base 0.0.0.0:3040 mapping would still expose the app to the internet).
+    ports: !override
+      - "127.0.0.1:3040:3000"
+    restart: always
+
+  mongodb:
+    # Do not publish Mongo at all in prod; only `app` (same compose network) talks to it.
+    ports: !reset []
+    environment:
+      # First-boot creates this root user. NOTE: only applied on an EMPTY data
+      # volume — see the migration note in the deploy docs if mongodb_data already exists.
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER:?set MONGO_ROOT_USER in .env}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:?set MONGO_ROOT_PASSWORD in .env}
+    restart: always
