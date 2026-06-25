@@ -14,6 +14,7 @@ RUN apk add --no-cache libc6-compat
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run generate:importmap
+RUN npm run generate:types
 RUN npm run build
 
 # Production runner — copies full node_modules for reliable module resolution
