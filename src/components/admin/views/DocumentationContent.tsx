@@ -42,8 +42,8 @@ const CATEGORIES: Category[] = [
       {
         q: { de: 'Wie ist der Admin aufgebaut?', en: 'How is the admin structured?' },
         a: {
-          de: ['Die Seitenleiste gliedert sich in: „Methodensammlung“ (die Methoden), die Gruppen „Filter: …“ (die Filter-Kategorien), „Administration“ (Nutzer) und „Plattform-Einstellungen“. Ganz unten steht diese Anleitung.'],
-          en: ['The sidebar is divided into: “Method Archive” (the methods), the “Filter: …” groups (the filter categories), “Administration” (users) and “Platform Settings”. This guide sits at the very bottom.'],
+          de: ['Die Seitenleiste gliedert sich in: „Methodensammlung“ (die Methoden), die Gruppen „Filter: …“ (die Filter-Kategorien), „Administration“ (Nutzer), „Plattform-Einstellungen“ und „Rechtliches“. Ganz unten steht diese Anleitung.'],
+          en: ['The sidebar is divided into: “Method Archive” (the methods), the “Filter: …” groups (the filter categories), “Administration” (users), “Platform Settings” and “Legal”. This guide sits at the very bottom.'],
         },
       },
       {
@@ -73,8 +73,8 @@ const CATEGORIES: Category[] = [
       {
         q: { de: 'Welche Inhalte sind zweisprachig – und welche nicht?', en: 'Which content is bilingual – and which isn’t?' },
         a: {
-          de: ['Zweisprachig sind die Methoden (Titel, Auszug, Ziel, Ablauf, Tipps …), die Filterwerte (je ein deutsches und ein englisches Namensfeld) sowie die Plattform-Texte (Impressum, Datenschutz, Kontakt). Gemeinsam für beide Sprachen gelten dagegen Verknüpfungen, Bilder, der Slug und der Status.'],
-          en: ['Bilingual: methods (title, excerpt, goal, procedure, tips …), the filter values (a German and an English name field each) and the platform texts (imprint, privacy, contact). Shared across both languages: relationships, images, the slug and the status.'],
+          de: ['Zweisprachig sind die Methoden (Titel, Auszug, Ziel, Ablauf, Tipps …), die Filterwerte (je ein deutsches und ein englisches Namensfeld), die Rechtstexte (Impressum, Datenschutz, Cookie-Richtlinie) sowie die Kontaktangaben. Gemeinsam für beide Sprachen gelten dagegen Verknüpfungen, Bilder, der Slug und der Status.'],
+          en: ['Bilingual: methods (title, excerpt, goal, procedure, tips …), the filter values (a German and an English name field each), the legal texts (imprint, privacy, cookie policy) and the contact details. Shared across both languages: relationships, images, the slug and the status.'],
         },
       },
       {
@@ -354,31 +354,70 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    key: 'legal',
+    label: { de: 'Rechtliches', en: 'Legal' },
+    intro: {
+      de: 'Die Rechtstexte der Website: Impressum, Datenschutz und Cookie-Richtlinie.',
+      en: 'The website’s legal texts: imprint, privacy policy and cookie policy.',
+    },
+    items: [
+      {
+        q: { de: 'Was steht unter „Rechtliches“?', en: 'What is under “Legal”?' },
+        a: {
+          de: ['Hier liegen die drei Rechtstexte der Website – jeweils in einem eigenen Reiter: „Impressum“, „Datenschutz“ und „Cookie-Richtlinie“. Jeder Text hat eine eigene öffentliche Seite, die im Footer verlinkt ist.'],
+          en: ['This holds the website’s three legal texts – each in its own tab: “Imprint”, “Privacy Policy” and “Cookie Policy”. Each text has its own public page, linked in the footer.'],
+        },
+      },
+      {
+        q: { de: 'Wie bearbeite ich einen Rechtstext?', en: 'How do I edit a legal text?' },
+        a: {
+          de: [
+            '„Rechtliches“ in der Seitenleiste öffnen.',
+            'Den passenden Reiter wählen (Impressum / Datenschutz / Cookie-Richtlinie).',
+            'Den Text im Editor bearbeiten – jeweils für Deutsch und Englisch – und speichern.',
+          ],
+          en: [
+            'Open “Legal” in the sidebar.',
+            'Choose the relevant tab (Imprint / Privacy Policy / Cookie Policy).',
+            'Edit the text in the editor – for German and English – and save.',
+          ],
+        },
+      },
+      {
+        q: { de: 'Sind die Rechtstexte zweisprachig?', en: 'Are the legal texts bilingual?' },
+        a: {
+          de: ['Ja. Jeder Reiter hat ein Feld für Deutsch und eines für Englisch. Beide pflegen, damit die Seiten in beiden Sprachen vollständig sind.'],
+          en: ['Yes. Each tab has a field for German and one for English. Maintain both so the pages are complete in both languages.'],
+        },
+      },
+    ],
+  },
+  {
     key: 'platform',
     label: { de: 'Plattformeinstellungen', en: 'Platform settings' },
     intro: {
-      de: 'Die einmaligen Inhalte der Website.',
-      en: 'The website’s one-off content.',
+      de: 'Übergreifende Einstellungen der Website.',
+      en: 'The website’s cross-cutting settings.',
     },
     items: [
       {
         q: { de: 'Was sind die Plattform-Einstellungen?', en: 'What are the platform settings?' },
         a: {
-          de: ['Hier liegen die einmaligen Inhalte der Website: Impressum, Datenschutzerklärung und die Kontaktangaben.'],
-          en: ['This is where the website’s one-off content lives: imprint, privacy policy and the contact details.'],
+          de: ['Hier liegen die übergreifenden Einstellungen der Website: die Farben (Design), die Kontaktangaben und die E-Mail-Einstellungen für das Kontaktformular. Die Rechtstexte (Impressum, Datenschutz, Cookie-Richtlinie) stehen separat unter „Rechtliches“.'],
+          en: ['This is where the website’s cross-cutting settings live: the colors (design), the contact details and the email settings for the contact form. The legal texts (imprint, privacy, cookie policy) sit separately under “Legal”.'],
         },
       },
       {
-        q: { de: 'Wie bearbeite ich Impressum, Datenschutz oder Kontakt?', en: 'How do I edit the imprint, privacy policy or contact?' },
+        q: { de: 'Wie bearbeite ich die Kontaktangaben?', en: 'How do I edit the contact details?' },
         a: {
           de: [
             '„Plattform-Einstellungen“ öffnen.',
-            'Den passenden Reiter wählen (Impressum / Datenschutz / Kontakt).',
+            'Den Reiter „Kontakt“ wählen.',
             'Den Text im Editor bearbeiten – jeweils für Deutsch und Englisch – und speichern.',
           ],
           en: [
             'Open “Platform Settings”.',
-            'Choose the relevant tab (Imprint / Privacy / Contact).',
+            'Choose the “Contact” tab.',
             'Edit the text in the editor – for German and English – and save.',
           ],
         },
@@ -386,8 +425,8 @@ const CATEGORIES: Category[] = [
       {
         q: { de: 'Sind die Inhalte zweisprachig?', en: 'Is the content bilingual?' },
         a: {
-          de: ['Ja. Jeder Bereich hat ein Feld für Deutsch und eines für Englisch. Beide pflegen, damit die Website in beiden Sprachen vollständig ist.'],
-          en: ['Yes. Each area has a field for German and one for English. Maintain both so the website is complete in both languages.'],
+          de: ['Ja. Die Text-Bereiche haben je ein Feld für Deutsch und eines für Englisch. Beide pflegen, damit die Website in beiden Sprachen vollständig ist.'],
+          en: ['Yes. The text areas each have a field for German and one for English. Maintain both so the website is complete in both languages.'],
         },
       },
     ],

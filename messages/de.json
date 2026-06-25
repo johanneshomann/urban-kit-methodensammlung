@@ -88,6 +88,7 @@
     "text": "Urban Kit Methodensammlung",
     "impressum": "Impressum",
     "datenschutz": "Datenschutzerklärung",
+    "cookies": "Cookie-Richtlinie",
     "login": "Login"
   },
   "meta": {
@@ -208,5 +209,13 @@
     "subtitle": "Datenschutzerklärung gemäß Art. 13 DSGVO — Informationen zur Verarbeitung personenbezogener Daten auf dieser Website.",
     "scrollHint": "Zur Datenschutzerklärung",
     "placeholder": "Die Datenschutzerklärung wird hier ergänzt."
+  },
+  "cookies": {
+    "metaTitle": "Cookie-Richtlinie – Urban Kit Methodensammlung",
+    "eyebrow": "Rechtliches",
+    "title": "Cookie-Richtlinie",
+    "subtitle": "Informationen zu Cookies und lokaler Speicherung auf dieser Website.",
+    "scrollHint": "Zur Cookie-Richtlinie",
+    "placeholder": "Die Cookie-Richtlinie wird hier ergänzt."
   }
 }

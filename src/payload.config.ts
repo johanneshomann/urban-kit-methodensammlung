@@ -30,6 +30,7 @@ import { fileURLToPath } from 'url'
 
 import { CharacteristicsSettings } from './globals/CharacteristicsSettings'
 import { PlatformSettings } from './globals/PlatformSettings'
+import { Legal } from './globals/Legal'
 import { DurationSettings } from './globals/DurationSettings'
 import { FormatSettings } from './globals/FormatSettings'
 import { GoalSettings } from './globals/GoalSettings'
@@ -116,8 +117,10 @@ export default buildConfig({
     ApiClients,
   ],
   globals: [
-    // Legal platform texts (imprint, privacy, contact) — admin-only.
+    // Platform texts (contact, colors, mail) — admin-only.
     { ...PlatformSettings, access: { ...lockGlobalWritesToAdmins, ...PlatformSettings.access } },
+    // Legal texts (imprint, privacy, cookie policy) — admin-only.
+    { ...Legal, access: { ...lockGlobalWritesToAdmins, ...Legal.access } },
     // Filter settings (icons etc.) — editable by admins + editors.
     ...[
       ParticipationDepthSettings,

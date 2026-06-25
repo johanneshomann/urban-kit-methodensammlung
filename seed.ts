@@ -177,15 +177,31 @@ async function seed() {
   await upsert('characteristics', 'Aktivierend',  { nameDe: 'Aktivierend',  nameEn: 'Activating',  lucideIcon: 'Zap'        })
   await upsert('characteristics', 'Kreativ',      { nameDe: 'Kreativ',      nameEn: 'Creative',    lucideIcon: 'Sparkles'   })
 
-  console.log('\n── Cookie Policy (platform-settings) ─────────')
+  console.log('\n── Legal texts (migrate + cookie policy) ─────')
   {
-    const settings = await payload.findGlobal({ slug: 'platform-settings' as any, locale: 'de' })
-    if (settings?.datenschutz) {
-      console.log('  skip  platform-settings / datenschutz (already set)')
+    const ps = await payload.findGlobal({ slug: 'platform-settings' as any, locale: 'all' as any })
+    const legal = await payload.findGlobal({ slug: 'legal' as any, locale: 'all' as any })
+
+    // One-time migration: move imprint + privacy from their old platform-settings
+    // location into the new "Legal" global, preserving both locales.
+    for (const field of ['impressum', 'datenschutz'] as const) {
+      if ((legal as any)?.[field]) { console.log(`  skip  legal / ${field} (already set)`); continue }
+      const value = (ps as any)?.[field]
+      if (!value) { console.log(`  skip  legal / ${field} (nothing to migrate)`); continue }
+      for (const loc of ['de', 'en'] as const) {
+        const v = value?.[loc]
+        if (v) await payload.updateGlobal({ slug: 'legal' as any, locale: loc, data: { [field]: v } as any, overrideAccess: true })
+      }
+      console.log(`  migrate legal / ${field} (from platform-settings)`)
+    }
+
+    // Seed the default cookie policy if none exists yet.
+    if ((legal as any)?.cookies) {
+      console.log('  skip  legal / cookies (already set)')
     } else {
-      await payload.updateGlobal({ slug: 'platform-settings' as any, locale: 'de', data: { datenschutz: cookiePolicyDe } as any, overrideAccess: true })
-      await payload.updateGlobal({ slug: 'platform-settings' as any, locale: 'en', data: { datenschutz: cookiePolicyEn } as any, overrideAccess: true })
-      console.log('  create platform-settings / datenschutz (default cookie policy)')
+      await payload.updateGlobal({ slug: 'legal' as any, locale: 'de', data: { cookies: cookiePolicyDe } as any, overrideAccess: true })
+      await payload.updateGlobal({ slug: 'legal' as any, locale: 'en', data: { cookies: cookiePolicyEn } as any, overrideAccess: true })
+      console.log('  create legal / cookies (default cookie policy)')
     }
   }
 

@@ -88,6 +88,7 @@
     "text": "Urban Kit Method Archive",
     "impressum": "Imprint",
     "datenschutz": "Privacy Policy",
+    "cookies": "Cookie Policy",
     "login": "Login"
   },
   "meta": {
@@ -208,5 +209,13 @@
     "subtitle": "Privacy policy in accordance with Art. 13 GDPR — information on the processing of personal data on this website.",
     "scrollHint": "To the privacy policy",
     "placeholder": "The privacy policy will be added here."
+  },
+  "cookies": {
+    "metaTitle": "Cookie Policy – Urban Kit Method Archive",
+    "eyebrow": "Legal",
+    "title": "Cookie Policy",
+    "subtitle": "Information about cookies and local storage on this website.",
+    "scrollHint": "To the cookie policy",
+    "placeholder": "The cookie policy will be added here."
   }
 }

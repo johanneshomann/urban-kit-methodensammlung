@@ -3,24 +3,24 @@ import config from '@payload-config'
 import { getTranslations } from 'next-intl/server'
 import { EyebrowBadge } from '@/components/EyebrowBadge'
 import RichTextRenderer from '@/components/RichTextRenderer'
-import { ScrollText, ChevronDown } from 'lucide-react'
+import { Cookie, ChevronDown } from 'lucide-react'
 
 type Props = { params: Promise<{ locale: string }> }
 
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'impressum' })
+  const t = await getTranslations({ locale, namespace: 'cookies' })
   return { title: t('metaTitle') }
 }
 
-export default async function ImpressumPage({ params }: Props) {
+export default async function CookiesPage({ params }: Props) {
   const { locale } = await params
-  const t = await getTranslations({ locale, namespace: 'impressum' })
+  const t = await getTranslations({ locale, namespace: 'cookies' })
 
   const payload = await getPayload({ config })
   const settings = await payload.findGlobal({ slug: 'legal' as any, locale: locale as 'de' | 'en', fallbackLocale: 'de' })
 
-  const content = settings.impressum
+  const content = settings.cookies
 
   return (
     <div>
@@ -30,14 +30,14 @@ export default async function ImpressumPage({ params }: Props) {
         style={{ background: 'var(--method-light)' }}
       >
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent from-75% to-[var(--method-very-light)]" />
-        <ScrollText
+        <Cookie
           className="absolute right-8 md:right-16 top-1/2 -translate-y-1/2 h-[45%] w-auto pointer-events-none"
           strokeWidth={1}
           aria-hidden="true"
           style={{ color: 'var(--method)', opacity: 0.1 }}
         />
 
-        <a href="#impressum-content">
+        <a href="#cookies-content">
           <ChevronDown
             className="absolute bottom-8 left-6 md:left-1/2 md:-translate-x-1/2 z-20 w-14 h-14 animate-bounce opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
             style={{ color: 'var(--method)' }}
@@ -58,7 +58,7 @@ export default async function ImpressumPage({ params }: Props) {
 
       {/* Content */}
       <section
-        id="impressum-content"
+        id="cookies-content"
         className="flex-1 px-6 md:px-16 lg:px-24 py-12 md:py-24"
         style={{ background: 'var(--method-very-light)' }}
       >

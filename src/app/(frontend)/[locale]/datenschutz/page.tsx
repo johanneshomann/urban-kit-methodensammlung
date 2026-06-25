@@ -18,7 +18,7 @@ export default async function DatenschutzPage({ params }: Props) {
   const t = await getTranslations({ locale, namespace: 'datenschutz' })
 
   const payload = await getPayload({ config })
-  const settings = await payload.findGlobal({ slug: 'platform-settings' as any, locale: locale as 'de' | 'en', fallbackLocale: 'de' })
+  const settings = await payload.findGlobal({ slug: 'legal' as any, locale: locale as 'de' | 'en', fallbackLocale: 'de' })
 
   const content = settings.datenschutz
 

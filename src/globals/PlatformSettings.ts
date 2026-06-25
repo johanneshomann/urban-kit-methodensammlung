@@ -78,28 +78,6 @@ export const PlatformSettings: GlobalConfig = {
           ],
         },
         {
-          label: { en: 'Impressum', de: 'Impressum' },
-          fields: [
-            {
-              name: 'impressum',
-              type: 'richText',
-              localized: true,
-              label: { en: 'Content', de: 'Inhalt' },
-            },
-          ],
-        },
-        {
-          label: { en: 'Privacy Policy', de: 'Datenschutz' },
-          fields: [
-            {
-              name: 'datenschutz',
-              type: 'richText',
-              localized: true,
-              label: { en: 'Content', de: 'Inhalt' },
-            },
-          ],
-        },
-        {
           label: { en: 'Contact', de: 'Kontakt' },
           fields: [
             {

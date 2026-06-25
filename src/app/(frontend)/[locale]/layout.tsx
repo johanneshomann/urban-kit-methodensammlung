@@ -129,6 +129,9 @@ async function FooterText() {
         <Link href="/datenschutz" className="hover:text-method transition-colors">
           {t('datenschutz')}
         </Link>
+        <Link href="/cookies" className="hover:text-method transition-colors">
+          {t('cookies')}
+        </Link>
         <a href="/admin" className="hover:text-method transition-colors">
           {t('login')}
         </a>

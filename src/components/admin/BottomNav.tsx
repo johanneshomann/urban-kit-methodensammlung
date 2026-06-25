@@ -19,13 +19,18 @@ export function BottomNav() {
   const isAdmin = (user as { role?: string } | null)?.role === 'admin'
 
   const items = [
-    // Platform Settings holds the legal texts — admins only.
+    // Platform Settings and the legal texts — admins only.
     ...(isAdmin
       ? [
           {
             id: 'nav-platform-settings',
             href: `${admin}/globals/platform-settings`,
             label: de ? 'Plattform-Einstellungen' : 'Platform Settings',
+          },
+          {
+            id: 'nav-legal',
+            href: `${admin}/globals/legal`,
+            label: de ? 'Rechtliches' : 'Legal',
           },
         ]
       : []),
