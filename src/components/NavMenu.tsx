@@ -3,14 +3,13 @@
 import { useState, useRef, useCallback } from 'react'
 import { Link, usePathname } from '@/navigation'
 import { useTranslations } from 'next-intl'
-import { ChevronRight, Home, Bookmark, Mail, FileText, Shield, Signpost, Menu, X } from 'lucide-react'
+import { ChevronRight, Home, Bookmark, Mail, Signpost, Menu, X } from 'lucide-react'
 
 const CLOSE_DURATION = 280
 const CLOSE_DELAY = 220
 
 export default function NavMenu() {
   const t = useTranslations('nav')
-  const tFooter = useTranslations('footer')
   const [open, setOpen] = useState(false)
   const [closing, setClosing] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -59,8 +58,6 @@ export default function NavMenu() {
     { href: '/saved',       label: t('saved'),             icon: Bookmark },
     { href: '/hilfe',       label: t('help'),              icon: Signpost },
     { href: '/kontakt',     label: t('contact'),           icon: Mail },
-    { href: '/impressum',   label: tFooter('impressum'),   icon: FileText },
-    { href: '/datenschutz', label: tFooter('datenschutz'), icon: Shield },
   ]
 
   return (
