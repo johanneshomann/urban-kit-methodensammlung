@@ -1,4 +1,6 @@
 import FilterableMethodList from '@/components/FilterableMethodList'
+import MethodAssistant from '@/components/MethodAssistant'
+import { loadAssistantSettings } from '@/lib/methodAssistant/settings'
 import type { CategoryItem, FilterItem, Methode } from '@/types'
 import { FILTER_CONFIGS, type FilterKey } from '@/lib/filterConfig'
 import { getTranslations } from 'next-intl/server'
@@ -39,6 +41,7 @@ export default async function HomePage({ params }: Props) {
   const { locale } = await params
   const payload = await getPayload({ config })
   const t = await getTranslations('home')
+  const assistant = await loadAssistantSettings(locale as 'de' | 'en')
 
   const filterKeys = FILTER_CONFIGS.map((c) => c.key) as FilterKey[]
 
@@ -137,6 +140,9 @@ export default async function HomePage({ params }: Props) {
             allFilterItems={allFilterItems}
             allCategoryItems={allCategoryItems}
             activeFilterKeys={activeFilterKeys}
+            assistantSlot={
+              assistant.configured ? <MethodAssistant enabled greeting={assistant.greeting} /> : null
+            }
           />
         </div>
       </div>

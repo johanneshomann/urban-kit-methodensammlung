@@ -3,7 +3,7 @@
 import type { CategoryItem, FilterItem, Methode } from '@/types'
 import { getLocalizedName } from '@/lib/localize'
 import { useLocale, useTranslations } from 'next-intl'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { ChevronDown, SlidersHorizontal, Search, X, RotateCcw, Settings, LayoutGrid, Columns2, Rows3 } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
@@ -130,6 +130,8 @@ type Props = {
   allFilterItems?: Record<FilterKey, FilterItem[]>
   allCategoryItems?: Partial<Record<FilterKey, CategoryItem[]>>
   activeFilterKeys?: Set<FilterKey>
+  /** Rendered between the filter bar and the results (e.g. the chat assistant). */
+  assistantSlot?: ReactNode
 }
 
 function getItems(method: Methode, key: FilterKey): FilterItem[] {
@@ -143,7 +145,7 @@ function getNames(method: Methode, key: FilterKey, locale: string): string[] {
 }
 
 
-export default function FilterableMethodList({ methods, filterIcons, filterLucideIcons, allFilterItems, allCategoryItems, activeFilterKeys }: Props) {
+export default function FilterableMethodList({ methods, filterIcons, filterLucideIcons, allFilterItems, allCategoryItems, activeFilterKeys, assistantSlot }: Props) {
   const t = useTranslations('methods')
   const tFilter = useTranslations('filter')
   const locale = useLocale()
@@ -392,6 +394,8 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
         </div>
       </div>
       </div>
+
+      {assistantSlot && <div>{assistantSlot}</div>}
 
       {/* Result count + active filter tags */}
       <div className="flex flex-col gap-1 pt-2">

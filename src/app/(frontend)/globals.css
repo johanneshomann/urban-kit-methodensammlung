@@ -246,3 +246,31 @@ html.a11y-high-contrast video,
 html.a11y-high-contrast picture {
   filter: grayscale(100%);
 }
+
+/* Assistant chat: render the LLM's Markdown compactly inside chat bubbles.
+   Colors inherit from the bubble (no hard-coded colors). */
+.chat-md > :first-child { margin-top: 0; }
+.chat-md > :last-child { margin-bottom: 0; }
+.chat-md p { margin: 0 0 0.5em; }
+.chat-md ul,
+.chat-md ol { margin: 0 0 0.5em; padding-left: 1.25em; }
+.chat-md ul { list-style: disc; }
+.chat-md ol { list-style: decimal; }
+.chat-md li { margin: 0.15em 0; }
+.chat-md li::marker { color: currentColor; }
+.chat-md h1,
+.chat-md h2,
+.chat-md h3,
+.chat-md h4,
+.chat-md h5,
+.chat-md h6 { font-weight: 800; font-size: 1em; margin: 0.5em 0 0.2em; }
+.chat-md strong { font-weight: 800; }
+.chat-md em { font-style: italic; }
+.chat-md a { text-decoration: underline; }
+.chat-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.9em;
+  background: color-mix(in oklab, currentColor 12%, transparent);
+  padding: 0.05em 0.3em;
+  border-radius: 0.3em;
+}
