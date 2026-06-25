@@ -17,6 +17,7 @@ export const CharacteristicsSettings: GlobalConfig = {
       name: 'lucideIcon',
       label: { en: 'Lucide Icon', de: 'Lucide Icon' },
       type: 'text',
+      defaultValue: 'Tags',
       admin: {
         description: { en: 'Fallback icon name from lucide.dev (e.g. "Star")', de: 'Fallback Icon-Name von lucide.dev (z.B. "Star")' },
         components: { afterInput: ['@/components/admin/LucideIconPreview#LucideIconPreview'] },
