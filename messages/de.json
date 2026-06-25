@@ -217,5 +217,12 @@
     "subtitle": "Informationen zu Cookies und lokaler Speicherung auf dieser Website.",
     "scrollHint": "Zur Cookie-Richtlinie",
     "placeholder": "Die Cookie-Richtlinie wird hier ergänzt."
+  },
+  "cookieNotice": {
+    "title": "Cookies & lokale Speicherung",
+    "text": "Diese Website nutzt nur technisch notwendige Cookies und lokale Speicherung – für Sprache, gemerkte Methoden und Barrierefreiheit. Kein Tracking, keine Analyse, keine Weitergabe an Dritte.",
+    "more": "Mehr in der Cookie-Richtlinie",
+    "dismiss": "Verstanden",
+    "close": "Schließen"
   }
 }

@@ -7,6 +7,7 @@ import { Link } from '@/navigation'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import NavMenu from '@/components/NavMenu'
 import SavedWidget from '@/components/SavedWidget'
+import CookieNotice from '@/components/CookieNotice'
 import { CurrentMethodProvider } from '@/components/CurrentMethodProvider'
 import { AccessibilityProvider } from '@/components/accessibility/AccessibilityProvider'
 import { AccessibilityButton } from '@/components/accessibility/AccessibilityButton'
@@ -110,6 +111,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <SavedWidget />
           </CurrentMethodProvider>
           <AccessibilityButton />
+          <CookieNotice />
           </AccessibilityProvider>
         </NextIntlClientProvider>
       </body>

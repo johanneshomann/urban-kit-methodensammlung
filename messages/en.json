@@ -217,5 +217,12 @@
     "subtitle": "Information about cookies and local storage on this website.",
     "scrollHint": "To the cookie policy",
     "placeholder": "The cookie policy will be added here."
+  },
+  "cookieNotice": {
+    "title": "Cookies & local storage",
+    "text": "This website only uses technically necessary cookies and local storage – for language, bookmarked methods and accessibility. No tracking, no analytics, no sharing with third parties.",
+    "more": "More in the cookie policy",
+    "dismiss": "Got it",
+    "close": "Close"
   }
 }
