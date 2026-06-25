@@ -142,6 +142,7 @@ export const Methods: CollectionConfig = {
               type: 'relationship',
               relationTo: 'methods',
               hasMany: true,
+              filterOptions: ({ id }) => (id ? { id: { not_equals: id } } : true),
               admin: { description: { en: 'Related methods — linked on the detail page.', de: 'Verwandte Methoden – werden auf der Detailseite verlinkt.' } },
             },
             {
@@ -150,6 +151,7 @@ export const Methods: CollectionConfig = {
               type: 'relationship',
               relationTo: 'methods',
               hasMany: true,
+              filterOptions: ({ id }) => (id ? { id: { not_equals: id } } : true),
               admin: { description: { en: 'Methods that can sensibly follow (the “Afterwards” section).', de: 'Methoden, die sich sinnvoll anschließen (Abschnitt „Im Anschluss“).' } },
             },
           ],
