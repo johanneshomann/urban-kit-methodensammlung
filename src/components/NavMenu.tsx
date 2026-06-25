@@ -3,12 +3,12 @@
 import { useState, useRef, useCallback } from 'react'
 import { Link, usePathname } from '@/navigation'
 import { useTranslations } from 'next-intl'
-import { ChevronRight, Home, Bookmark, Mail, Signpost, Menu, X } from 'lucide-react'
+import { ChevronRight, Home, Bookmark, Mail, Signpost, Menu, X, Sparkles } from 'lucide-react'
 
 const CLOSE_DURATION = 280
 const CLOSE_DELAY = 220
 
-export default function NavMenu() {
+export default function NavMenu({ assistantEnabled = false }: { assistantEnabled?: boolean }) {
   const t = useTranslations('nav')
   const [open, setOpen] = useState(false)
   const [closing, setClosing] = useState(false)
@@ -55,6 +55,9 @@ export default function NavMenu() {
 
   const links = [
     { href: '/',            label: t('home'),              icon: Home },
+    ...(assistantEnabled
+      ? [{ href: '/assistant', label: t('assistant'), icon: Sparkles }]
+      : []),
     { href: '/saved',       label: t('saved'),             icon: Bookmark },
     { href: '/hilfe',       label: t('help'),              icon: Signpost },
     { href: '/kontakt',     label: t('contact'),           icon: Mail },

@@ -6,6 +6,7 @@ import { routing } from '@/i18n/routing'
 import { Link } from '@/navigation'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import NavMenu from '@/components/NavMenu'
+import { loadAssistantSettings } from '@/lib/methodAssistant/settings'
 import SavedWidget from '@/components/SavedWidget'
 import CookieNotice from '@/components/CookieNotice'
 import { CurrentMethodProvider } from '@/components/CurrentMethodProvider'
@@ -73,6 +74,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const payload = await getPayload({ config })
   const settings = await payload.findGlobal({ slug: 'platform-settings' as any })
   const cssVars = colorsToCssVars(resolveColors(settings))
+  const assistant = await loadAssistantSettings(locale as 'de' | 'en')
 
   return (
     <html lang={locale} className={atkinson.variable}>
@@ -85,7 +87,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <CurrentMethodProvider>
           <header className="relative h-14 border-b bg-method-white grid grid-cols-[1fr_auto_1fr] items-center px-6 md:px-10 sticky top-0 z-50 transition-shadow shadow-md">
             <div>
-              <NavMenu />
+              <NavMenu assistantEnabled={assistant.configured} />
             </div>
 
             <Link href="/" className="method-brand font-bold text-text transition-opacity duration-300">
