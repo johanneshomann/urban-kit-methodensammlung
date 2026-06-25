@@ -3,9 +3,10 @@
 import type { CategoryItem, FilterItem, Methode } from '@/types'
 import { getLocalizedName } from '@/lib/localize'
 import { useLocale, useTranslations } from 'next-intl'
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { ChevronDown, SlidersHorizontal, Search, X, RotateCcw, Settings, LayoutGrid, Columns2, Rows3 } from 'lucide-react'
+import { Link } from '@/navigation'
+import { ChevronDown, SlidersHorizontal, Search, X, RotateCcw, Settings, LayoutGrid, Columns2, Rows3, Sparkles } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
@@ -130,8 +131,8 @@ type Props = {
   allFilterItems?: Record<FilterKey, FilterItem[]>
   allCategoryItems?: Partial<Record<FilterKey, CategoryItem[]>>
   activeFilterKeys?: Set<FilterKey>
-  /** Rendered between the filter bar and the results (e.g. the chat assistant). */
-  assistantSlot?: ReactNode
+  /** Show a button in the toolbar linking to the assistant page. */
+  assistantEnabled?: boolean
 }
 
 function getItems(method: Methode, key: FilterKey): FilterItem[] {
@@ -145,9 +146,10 @@ function getNames(method: Methode, key: FilterKey, locale: string): string[] {
 }
 
 
-export default function FilterableMethodList({ methods, filterIcons, filterLucideIcons, allFilterItems, allCategoryItems, activeFilterKeys, assistantSlot }: Props) {
+export default function FilterableMethodList({ methods, filterIcons, filterLucideIcons, allFilterItems, allCategoryItems, activeFilterKeys, assistantEnabled }: Props) {
   const t = useTranslations('methods')
   const tFilter = useTranslations('filter')
+  const tAssistant = useTranslations('assistant')
   const locale = useLocale()
 
   const [filters, setFilters] = useState<FilterState>({ ...EMPTY_FILTERS })
@@ -291,6 +293,22 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
           />
         </button>
 
+        {/* Assistant CTA → dedicated page */}
+        {assistantEnabled && (
+          <Link
+            href="/assistant"
+            className="shrink-0 self-stretch flex items-center gap-2 px-4 rounded-xl cursor-pointer transition-all shadow-sm hover:shadow-md text-display"
+            style={{ background: 'var(--method)', color: 'var(--method-white)' }}
+            aria-label={tAssistant('title')}
+            title={tAssistant('title')}
+            onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
+            onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
+          >
+            <Sparkles className="w-[1em] h-[1em] shrink-0" />
+            <span className="hidden lg:inline whitespace-nowrap">{tAssistant('title')}</span>
+          </Link>
+        )}
+
         {/* Settings button + popover */}
         <div className="relative shrink-0 self-stretch" ref={settingsAreaRef}>
           <button
@@ -394,8 +412,6 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
         </div>
       </div>
       </div>
-
-      {assistantSlot && <div>{assistantSlot}</div>}
 
       {/* Result count + active filter tags */}
       <div className="flex flex-col gap-1 pt-2">
