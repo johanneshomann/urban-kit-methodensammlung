@@ -95,8 +95,12 @@ export default function CookieNotice() {
         aria-modal="true"
         aria-label={t('title')}
         onClick={e => e.stopPropagation()}
-        className="notice-in relative w-full max-w-xl rounded-2xl border p-6 shadow-2xl"
-        style={{ background: 'var(--method-white)', color: 'var(--method-ink)' }}
+        className="notice-in relative w-full max-w-xl rounded-2xl p-6"
+        style={{
+          background: 'var(--method-white)',
+          color: 'var(--method-ink)',
+          boxShadow: '0 10px 25px rgba(0,0,0,0.12), 0 4px 10px rgba(0,0,0,0.08)',
+        }}
       >
         <button
           onClick={dismiss}
@@ -117,6 +121,8 @@ export default function CookieNotice() {
                 onClick={dismiss}
                 className="text-small font-bold px-4 py-2 rounded-xl transition-colors"
                 style={{ background: 'var(--method)', color: 'var(--method-white)' }}
+                onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
               >
                 {t('dismiss')}
               </button>
