@@ -30,6 +30,7 @@ import { fileURLToPath } from 'url'
 
 import { CharacteristicsSettings } from './globals/CharacteristicsSettings'
 import { PlatformSettings } from './globals/PlatformSettings'
+import { Assistant } from './globals/Assistant'
 import { Legal } from './globals/Legal'
 import { DurationSettings } from './globals/DurationSettings'
 import { FormatSettings } from './globals/FormatSettings'
@@ -125,6 +126,8 @@ export default buildConfig({
     { ...PlatformSettings, access: { ...lockGlobalWritesToAdmins, ...PlatformSettings.access } },
     // Legal texts (imprint, privacy, cookie policy) — admin-only.
     { ...Legal, access: { ...lockGlobalWritesToAdmins, ...Legal.access } },
+    // Method assistant settings — admin-only (read locked: holds the API key).
+    { ...Assistant, access: { ...lockGlobalWritesToAdmins, ...Assistant.access } },
     // Filter settings (icons etc.) — editable by admins + editors.
     ...[
       ParticipationDepthSettings,

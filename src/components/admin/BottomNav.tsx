@@ -32,6 +32,11 @@ export function BottomNav() {
             href: `${admin}/globals/legal`,
             label: de ? 'Rechtliches' : 'Legal',
           },
+          {
+            id: 'nav-assistant',
+            href: `${admin}/globals/assistant`,
+            label: de ? 'Assistent' : 'Assistant',
+          },
         ]
       : []),
     {
