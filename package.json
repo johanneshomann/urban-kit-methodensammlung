@@ -11,7 +11,9 @@
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "seed": "npx tsx seed.ts",
     "migrate:localization": "npx tsx scripts/migrate-localization.ts",
-    "backfill:similar": "npx tsx scripts/backfill-similar-methods.ts"
+    "backfill:similar": "npx tsx scripts/backfill-similar-methods.ts",
+    "backup": "bash scripts/backup.sh",
+    "restore": "bash scripts/restore.sh"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.86",
