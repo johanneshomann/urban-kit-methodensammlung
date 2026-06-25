@@ -5,6 +5,13 @@ import {
   requiredValueInDefaultLocale,
 } from '../lib/requiredInDefaultLocale'
 
+// Normalise a relationship value (id or populated doc) to a bare id string.
+const toId = (v: unknown): string | null =>
+  v && typeof v === 'object' ? String((v as { id: string | number }).id ?? '') || null : (v != null ? String(v) : null)
+
+const idList = (v: unknown): string[] =>
+  Array.isArray(v) ? v.map(toId).filter((x): x is string => x != null) : []
+
 const sectionFields = [
   {
     name: 'sectionTitle',
@@ -143,15 +150,7 @@ export const Methods: CollectionConfig = {
               relationTo: 'methods',
               hasMany: true,
               filterOptions: ({ id }) => (id ? { id: { not_equals: id } } : true),
-              admin: { description: { en: 'Related methods — shown on both detail pages. The link is mutual: you only set it on one side, and the other method automatically shows this one under “Also marked as similar by” (and on its public page).', de: 'Verwandte Methoden – erscheinen auf beiden Detailseiten. Die Verknüpfung ist beidseitig: Sie wird nur auf einer Seite gesetzt, die andere Methode zeigt diese automatisch unter „Auch als ähnlich markiert von“ (und auf ihrer öffentlichen Seite).' } },
-            },
-            {
-              name: 'aehnlichMarkiertVon',
-              label: { en: 'Also marked as similar by', de: 'Auch als ähnlich markiert von' },
-              type: 'join',
-              collection: 'methods',
-              on: 'aehnlicheMethoden',
-              admin: { description: { en: 'Other methods that listed this one under “Similar methods”. Automatically kept in sync — read-only.', de: 'Andere Methoden, die diese unter „Ähnliche Methoden“ aufgeführt haben. Wird automatisch synchron gehalten – nur lesbar.' } },
+              admin: { description: { en: 'Related methods — shown on the detail page. The link is mutual: a method added here automatically gets this one in its own “Similar methods” too (and removing it works both ways).', de: 'Verwandte Methoden – erscheinen auf der Detailseite. Die Verknüpfung ist beidseitig: Eine hier hinzugefügte Methode erhält diese automatisch ebenfalls in ihren eigenen „Ähnlichen Methoden“ (und das Entfernen wirkt auf beiden Seiten).' } },
             },
             {
               name: 'wieKannEsWeiterGehen',
@@ -240,4 +239,69 @@ export const Methods: CollectionConfig = {
       ],
     },
   ],
+  hooks: {
+    // Keep `aehnlicheMethoden` reciprocal: linking A→B also links B→A, and
+    // removing the link on one side removes it on the other. Only this field
+    // is mutual; `wieKannEsWeiterGehen` stays one-directional.
+    afterChange: [
+      async ({ doc, previousDoc, req, context }) => {
+        if (context?.skipSimilarSync) return doc
+
+        const selfId = toId(doc.id)
+        if (!selfId) return doc
+        const currentIds = idList(doc.aehnlicheMethoden)
+        const prevIds = idList(previousDoc?.aehnlicheMethoden)
+
+        const added = currentIds.filter((id) => !prevIds.includes(id) && id !== selfId)
+        const removed = prevIds.filter((id) => !currentIds.includes(id) && id !== selfId)
+        if (added.length === 0 && removed.length === 0) return doc
+
+        const syncTarget = async (targetId: string, shouldContain: boolean) => {
+          const target = await req.payload.findByID({ collection: 'methods', id: targetId, depth: 0, req }).catch(() => null)
+          if (!target) return
+          const ids = idList(target.aehnlicheMethoden)
+          const has = ids.includes(selfId)
+          if (shouldContain === has) return
+          const next = shouldContain ? [...ids, selfId] : ids.filter((id) => id !== selfId)
+          await req.payload.update({
+            collection: 'methods',
+            id: targetId,
+            data: { aehnlicheMethoden: next },
+            req,
+            overrideAccess: true,
+            context: { skipSimilarSync: true },
+          })
+        }
+
+        for (const id of added) await syncTarget(id, true)
+        for (const id of removed) await syncTarget(id, false)
+        return doc
+      },
+    ],
+    // When a method is deleted, strip it from every other method's list.
+    afterDelete: [
+      async ({ id, req }) => {
+        const deletedId = toId(id)
+        if (!deletedId) return
+        const referencing = await req.payload.find({
+          collection: 'methods',
+          where: { aehnlicheMethoden: { in: [deletedId] } },
+          depth: 0,
+          limit: 1000,
+          req,
+        })
+        for (const m of referencing.docs) {
+          const next = idList(m.aehnlicheMethoden).filter((x) => x !== deletedId)
+          await req.payload.update({
+            collection: 'methods',
+            id: m.id,
+            data: { aehnlicheMethoden: next },
+            req,
+            overrideAccess: true,
+            context: { skipSimilarSync: true },
+          })
+        }
+      },
+    ],
+  },
 }
