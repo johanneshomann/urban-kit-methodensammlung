@@ -18,6 +18,7 @@
     "saved": "Gemerkte Methoden",
     "contact": "Kontakt",
     "help": "Anleitung",
+    "assistant": "Assistent",
     "subtitle": "Methodensammlung"
   },
   "help": {
@@ -114,6 +115,21 @@
     "characteristic": "Merkmal",
     "all": "Alle",
     "reset": "Zurücksetzen"
+  },
+  "assistant": {
+    "title": "Methoden-Assistent",
+    "subtitle": "Beschreibe dein Projekt – oder lass dich Schritt für Schritt zur passenden Methode führen.",
+    "greeting": "Hallo! Ich helfe dir, passende Methoden für dein Vorhaben zu finden. Beschreib mir gern dein Projekt in eigenen Worten – oder wir gehen es Schritt für Schritt durch. Was hast du vor?",
+    "placeholder": "Projekt beschreiben oder antworten …",
+    "send": "Senden",
+    "error": "Etwas ist schiefgelaufen. Bitte versuche es noch einmal oder nutze die Filter unten.",
+    "errorRate": "Etwas zu viele Anfragen gerade. Bitte warte einen Moment und nutze solange die Filter unten."
+  },
+  "assistantPage": {
+    "metaTitle": "Methoden-Assistent – Urban Kit Methodensammlung",
+    "eyebrow": "Methoden-Assistent",
+    "title": "Methoden-Assistent",
+    "subtitle": "Beschreibe dein Projekt – der Assistent schlägt passende Methoden vor und erklärt, warum sie passen."
   },
   "methods": {
     "foundOne": "1 Methode gefunden",

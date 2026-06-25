@@ -18,6 +18,7 @@
     "saved": "Bookmarked Methods",
     "contact": "Contact",
     "help": "Guide",
+    "assistant": "Assistant",
     "subtitle": "Method Archive"
   },
   "help": {
@@ -114,6 +115,21 @@
     "characteristic": "Characteristic",
     "all": "All",
     "reset": "Reset"
+  },
+  "assistant": {
+    "title": "Method assistant",
+    "subtitle": "Describe your project — or let me guide you to a fitting method step by step.",
+    "greeting": "Hi! I'll help you find methods that fit your project. Describe it in your own words — or we can go through it step by step. What are you planning?",
+    "placeholder": "Describe your project or reply …",
+    "send": "Send",
+    "error": "Something went wrong. Please try again or use the filters below.",
+    "errorRate": "A few too many requests right now. Please wait a moment and use the filters below in the meantime."
+  },
+  "assistantPage": {
+    "metaTitle": "Method Assistant – Urban Kit Method Archive",
+    "eyebrow": "Method Assistant",
+    "title": "Method Assistant",
+    "subtitle": "Describe your project — the assistant suggests fitting methods and explains why they fit."
   },
   "methods": {
     "foundOne": "1 method found",
