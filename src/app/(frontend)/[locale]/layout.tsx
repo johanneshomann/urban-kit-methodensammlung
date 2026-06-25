@@ -15,6 +15,7 @@ import localFont from 'next/font/local'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { colorsToCssVars, resolveColors } from '@/lib/theme'
+import { getPlatformIdentity } from '@/lib/platformIdentity'
 import '../globals.css'
 
 const atkinson = localFont({
@@ -41,9 +42,17 @@ type Props = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'meta' })
+  const { favicon, ogImage } = await getPlatformIdentity()
+  const base = process.env.NEXT_PUBLIC_SERVER_URL
+  const title = t('title')
+  const description = t('description')
   return {
-    title: t('title'),
-    description: t('description'),
+    ...(base ? { metadataBase: new URL(base) } : {}),
+    title,
+    description,
+    icons: { icon: favicon, apple: favicon },
+    openGraph: { title, description, type: 'website', images: [ogImage] },
+    twitter: { card: 'summary_large_image', title, description, images: [ogImage] },
   }
 }
 

@@ -24,6 +24,8 @@ import { SectionRowLabel as SectionRowLabel_76f6ffac4c9b5e6b3dc508ff293e95b2 } f
 import { LucideIconPreview as LucideIconPreview_8f77f4fd74eb674f350efbcfd30ffee9 } from '@/components/admin/LucideIconPreview'
 import { ColorPicker as ColorPicker_818c03bd2d1805855e4e5373b5a37a82 } from '@/components/admin/ColorPicker'
 import { ColorResetButton as ColorResetButton_493f1d4b3556ddb70c0040d0c474eebc } from '@/components/admin/ColorResetButton'
+import { BrandIcon as BrandIcon_d9087a380941d12f95aff168665b00b4 } from '@/components/admin/BrandIcon'
+import { BrandLogo as BrandLogo_fd0a9bbb35693e340bbbfa9596236d37 } from '@/components/admin/BrandLogo'
 import { BottomNav as BottomNav_083c90a4994fb43d1ac5835a9498cf65 } from '@/components/admin/BottomNav'
 import { TopNav as TopNav_a28dff12e0044c40b6eb3b130fe4a826 } from '@/components/admin/TopNav'
 import { CollapseFilterGroups as CollapseFilterGroups_d16eb9c4688864213d4868b236334d89 } from '@/components/admin/CollapseFilterGroups'
@@ -58,6 +60,8 @@ export const importMap = {
   "@/components/admin/LucideIconPreview#LucideIconPreview": LucideIconPreview_8f77f4fd74eb674f350efbcfd30ffee9,
   "@/components/admin/ColorPicker#ColorPicker": ColorPicker_818c03bd2d1805855e4e5373b5a37a82,
   "@/components/admin/ColorResetButton#ColorResetButton": ColorResetButton_493f1d4b3556ddb70c0040d0c474eebc,
+  "@/components/admin/BrandIcon#BrandIcon": BrandIcon_d9087a380941d12f95aff168665b00b4,
+  "@/components/admin/BrandLogo#BrandLogo": BrandLogo_fd0a9bbb35693e340bbbfa9596236d37,
   "@/components/admin/BottomNav#BottomNav": BottomNav_083c90a4994fb43d1ac5835a9498cf65,
   "@/components/admin/TopNav#TopNav": TopNav_a28dff12e0044c40b6eb3b130fe4a826,
   "@/components/admin/CollapseFilterGroups#CollapseFilterGroups": CollapseFilterGroups_d16eb9c4688864213d4868b236334d89,

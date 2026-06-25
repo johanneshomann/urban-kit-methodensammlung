@@ -70,6 +70,10 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     components: {
+      graphics: {
+        Logo: '@/components/admin/BrandLogo#BrandLogo',
+        Icon: '@/components/admin/BrandIcon#BrandIcon',
+      },
       beforeNavLinks: [
         '@/components/admin/TopNav#TopNav',
         '@/components/admin/CollapseFilterGroups#CollapseFilterGroups',

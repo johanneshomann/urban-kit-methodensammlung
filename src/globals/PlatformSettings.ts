@@ -78,6 +78,51 @@ export const PlatformSettings: GlobalConfig = {
           ],
         },
         {
+          label: { en: 'Branding', de: 'Identität' },
+          description: {
+            en: 'Logo, favicon and sharing image. Leave a field empty to use the built-in default.',
+            de: 'Logo, Favicon und Vorschaubild. Ein leeres Feld nutzt den mitgelieferten Standardwert.',
+          },
+          fields: [
+            {
+              name: 'adminLogo',
+              type: 'upload',
+              relationTo: 'media',
+              label: { en: 'Admin logo', de: 'Admin-Logo' },
+              admin: {
+                description: {
+                  en: 'Shown in the admin panel (login screen + navigation). SVG or PNG recommended. Default: built-in Urban Kit logo.',
+                  de: 'Wird im Admin-Bereich angezeigt (Login + Navigation). SVG oder PNG empfohlen. Standard: integriertes Urban-Kit-Logo.',
+                },
+              },
+            },
+            {
+              name: 'favicon',
+              type: 'upload',
+              relationTo: 'media',
+              label: { en: 'Favicon', de: 'Favicon' },
+              admin: {
+                description: {
+                  en: 'Browser tab icon for the public site. Square SVG or PNG (e.g. 64×64 or 512×512). Default: built-in icon.',
+                  de: 'Symbol im Browser-Tab der öffentlichen Seite. Quadratisches SVG oder PNG (z. B. 64×64 oder 512×512). Standard: integriertes Symbol.',
+                },
+              },
+            },
+            {
+              name: 'ogImage',
+              type: 'upload',
+              relationTo: 'media',
+              label: { en: 'Sharing image (Open Graph)', de: 'Vorschaubild (Open Graph)' },
+              admin: {
+                description: {
+                  en: 'Preview image shown when a page is shared (social / chat). JPG or PNG at 1200×630 recommended. Default: built-in image.',
+                  de: 'Vorschaubild beim Teilen einer Seite (Social / Chat). JPG oder PNG mit 1200×630 empfohlen. Standard: integriertes Bild.',
+                },
+              },
+            },
+          ],
+        },
+        {
           label: { en: 'Contact', de: 'Kontakt' },
           fields: [
             {
