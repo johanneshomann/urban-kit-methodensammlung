@@ -1,4 +1,3 @@
-import SaveButton from '@/components/SaveButton'
 import RichTextRenderer from '@/components/RichTextRenderer'
 import MethodAccordions from '@/components/MethodAccordions'
 import GalleryLightbox from '@/components/GalleryLightbox'
@@ -188,15 +187,6 @@ export default async function MethodDetailPage({ params }: Props) {
         <div className="absolute inset-0" style={{ background: 'var(--method-light)', opacity: 0.75 }} />
         {/* Fade into page background */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent from-75% to-white" />
-
-        {/* Save button */}
-        <div className="absolute top-0 right-0 z-30 px-6 md:px-16 lg:px-24 pt-8">
-          <SaveButton
-            item={savedItem}
-            className="text-display flex items-center justify-center p-2 rounded-xl transition-all duration-150 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 cursor-pointer"
-            style={{ color: 'var(--method-ink)', background: 'var(--method-white)', opacity: 0.85 }}
-          />
-        </div>
 
         {/* Hero content */}
         <div className="relative z-10 flex-1 flex flex-col px-6 md:px-16 lg:px-24 pt-20 md:pt-28">
