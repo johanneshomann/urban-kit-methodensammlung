@@ -132,19 +132,19 @@ export default function SavedPage() {
                 {t('comparison')}<span style={{ color: 'var(--method)' }}>.</span>
               </h2>
               <div className="overflow-x-auto -mx-6 md:-mx-0 px-6 md:px-0">
-                <table className="text-small border-collapse rounded-xl overflow-hidden" style={{ minWidth: '600px', width: '100%', background: 'var(--method-white)' }}>
+                <table className="text-small border-collapse rounded-xl overflow-hidden" style={{ minWidth: '520px', width: '100%', background: 'var(--method-white)' }}>
                   <thead>
                     <tr style={{ background: 'var(--method-light)' }}>
-                      <th className="text-left px-5 py-4 border-b font-semibold sticky left-0" style={{ color: 'var(--method-ink-accent)', background: 'var(--method-light)', minWidth: '160px' }}>
+                      <th className="text-left px-5 py-4 border-b font-semibold sticky left-0" style={{ color: 'var(--method-ink-accent)', background: 'var(--method-light)', minWidth: '140px' }}>
                         {locale === 'de' ? 'Methode' : 'Method'}
                       </th>
-                      <th className="text-left px-5 py-4 border-b font-semibold" style={{ color: 'var(--method-ink-accent)', minWidth: '160px' }}>
+                      <th className="text-left px-5 py-4 border-b font-semibold" style={{ color: 'var(--method-ink-accent)', minWidth: '130px' }}>
                         {locale === 'de' ? 'Projektphase' : 'Project Phase'}
                       </th>
-                      <th className="text-left px-5 py-4 border-b font-semibold" style={{ color: 'var(--method-ink-accent)', minWidth: '140px' }}>
+                      <th className="text-left px-5 py-4 border-b font-semibold" style={{ color: 'var(--method-ink-accent)', minWidth: '120px' }}>
                         {locale === 'de' ? 'Gruppengröße' : 'Group Size'}
                       </th>
-                      <th className="text-left px-5 py-4 border-b font-semibold" style={{ color: 'var(--method-ink-accent)', minWidth: '180px' }}>
+                      <th className="text-left px-5 py-4 border-b font-semibold" style={{ color: 'var(--method-ink-accent)', minWidth: '150px' }}>
                         {locale === 'de' ? 'Merkmale' : 'Characteristics'}
                       </th>
                     </tr>
