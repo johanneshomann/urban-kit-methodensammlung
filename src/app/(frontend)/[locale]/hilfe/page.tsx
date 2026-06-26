@@ -33,7 +33,7 @@ export default async function HelpPage({ params }: Props) {
       >
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent from-75% to-[var(--method-very-light)]" />
         <Signpost
-          className="absolute right-8 md:right-16 top-1/2 -translate-y-1/2 h-[45%] w-auto pointer-events-none"
+          className="absolute right-2 sm:right-8 md:right-16 top-1/2 -translate-y-1/2 h-[25%] sm:h-[45%] w-auto pointer-events-none"
           strokeWidth={1}
           aria-hidden="true"
           style={{ color: 'var(--method)', opacity: 0.1 }}
@@ -65,7 +65,7 @@ export default async function HelpPage({ params }: Props) {
         style={{ background: 'var(--method-very-light)' }}
       >
         <LayoutGrid
-          className="absolute right-8 md:right-16 top-1/2 -translate-y-1/2 h-[40%] w-auto pointer-events-none"
+          className="absolute right-2 sm:right-8 md:right-16 top-1/2 -translate-y-1/2 h-[22%] sm:h-[40%] w-auto pointer-events-none"
           strokeWidth={1}
           aria-hidden="true"
           style={{ color: 'var(--method)', opacity: 0.07 }}
@@ -116,7 +116,7 @@ export default async function HelpPage({ params }: Props) {
         style={{ background: 'var(--method-very-light)' }}
       >
         <HelpCircle
-          className="absolute right-8 md:right-16 top-1/2 -translate-y-1/2 h-[40%] w-auto pointer-events-none"
+          className="absolute right-2 sm:right-8 md:right-16 top-1/2 -translate-y-1/2 h-[22%] sm:h-[40%] w-auto pointer-events-none"
           strokeWidth={1}
           aria-hidden="true"
           style={{ color: 'var(--method)', opacity: 0.07 }}

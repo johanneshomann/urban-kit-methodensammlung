@@ -48,7 +48,7 @@ function Section({ children, id, background = 'var(--method-white)', icon: Icon,
     <section id={id} className={`relative w-full py-16 scroll-mt-20 flex flex-col ${align === 'start' ? 'justify-start' : 'justify-center'} overflow-hidden ${className}`} style={{ background, minHeight }}>
       {Icon && (
         <Icon
-          className="absolute right-8 md:right-16 top-1/2 -translate-y-1/2 h-[40%] w-auto pointer-events-none"
+          className="absolute right-2 sm:right-8 md:right-16 top-1/2 -translate-y-1/2 h-[22%] sm:h-[40%] w-auto pointer-events-none"
           strokeWidth={1}
           aria-hidden
           style={{ color: 'var(--method)', opacity: 0.07 }}
