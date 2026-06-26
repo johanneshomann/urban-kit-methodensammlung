@@ -30,7 +30,7 @@ function SectionList({ sections, locale }: { sections: MethodSection[]; locale: 
   // Single untitled section → render flat, no nested accordion needed
   if (sections.length === 1 && !sections[0]?.sectionTitle?.trim()) {
     return (
-      <div className="pl-[4.5rem] pr-6">
+      <div className="pl-6 sm:pl-[4.5rem] pr-6">
         <RichTextRenderer content={sections[0]?.content} />
       </div>
     )
@@ -89,7 +89,7 @@ function SectionList({ sections, locale }: { sections: MethodSection[]; locale: 
               }}
             >
               <div style={{ overflow: 'hidden' }}>
-                <div className="pl-[4.5rem] pr-6 pb-4 pt-0 text-small" style={{ color: 'var(--method-ink)' }}>
+                <div className="pl-6 sm:pl-[4.5rem] pr-6 pb-4 pt-0 text-small" style={{ color: 'var(--method-ink)' }}>
                   <RichTextRenderer content={section.content} />
                 </div>
               </div>
