@@ -43,7 +43,7 @@ export default function SaveButton({ item, className, style: styleProp }: Props)
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         aria-label={isSaved ? t('saved') : t('save')}
-        className={className ?? `absolute top-3 right-3 z-20 text-display flex items-center justify-center p-2 rounded-xl transition-all duration-150 hover:shadow-md hover:scale-105 active:scale-95 ${isSaved ? 'opacity-100 shadow-md' : 'opacity-0 group-hover:opacity-100'}`}
+        className={className ?? `absolute top-3 right-3 z-20 text-display flex items-center justify-center p-2 rounded-xl transition-all duration-150 hover:shadow-md hover:scale-105 active:scale-95 ${isSaved ? 'opacity-100 shadow-md' : 'opacity-100 shadow-md [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:shadow-none [@media(hover:hover)]:group-hover:opacity-100'}`}
         style={styleProp ?? { color: 'var(--method-ink)', background: 'var(--method-white)', cursor: isSaved ? 'pointer' : 'copy' }}
       >
         <Bookmark className="w-[1em] h-[1em]" fill={isSaved ? 'currentColor' : 'none'} />
