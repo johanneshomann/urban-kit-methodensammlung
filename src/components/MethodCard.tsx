@@ -23,7 +23,7 @@ export default function MethodCard({ method, showAuszug, background = 'var(--met
   return (
     <div className="relative group rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all" style={{ background }}>
       {/* Image strip with save button inside */}
-      <div className="relative h-56 w-full overflow-hidden shrink-0">
+      <div className="relative h-44 sm:h-56 w-full overflow-hidden shrink-0">
         <img
           src={imageUrl}
           alt=""
