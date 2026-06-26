@@ -274,3 +274,16 @@ html.a11y-high-contrast picture {
   padding: 0.05em 0.3em;
   border-radius: 0.3em;
 }
+
+/* Assistant page: fade out the site chrome (header + floating buttons) when the
+   user scrolls to the very bottom, so the chat fills the whole view.
+   Toggled by AssistantImmersive via `html.chat-immersive`. */
+#site-header { transition: opacity 0.3s ease, box-shadow 0.2s ease; }
+.saved-widget,
+.accessibility-fab { transition: opacity 0.3s ease; }
+html.chat-immersive #site-header,
+html.chat-immersive .saved-widget,
+html.chat-immersive .accessibility-fab {
+  opacity: 0;
+  pointer-events: none;
+}

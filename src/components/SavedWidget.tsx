@@ -29,7 +29,7 @@ export default function SavedWidget() {
   const currentSaved = onMethodPage && current ? inSaved(current.id) : false
 
   return (
-    <div ref={containerRef} className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
+    <div ref={containerRef} className="saved-widget fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
       {/* Popup panel */}
       <div
         className={`w-80 max-w-[calc(100vw-3rem)] bg-method-white rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-200 origin-bottom-right ${

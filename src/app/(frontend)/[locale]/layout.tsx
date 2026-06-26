@@ -6,6 +6,7 @@ import { routing } from '@/i18n/routing'
 import { Link } from '@/navigation'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import NavMenu from '@/components/NavMenu'
+import SiteFooter from '@/components/SiteFooter'
 import { loadAssistantSettings } from '@/lib/methodAssistant/settings'
 import SavedWidget from '@/components/SavedWidget'
 import CookieNotice from '@/components/CookieNotice'
@@ -85,7 +86,7 @@ export default async function LocaleLayout({ children, params }: Props) {
         <NextIntlClientProvider messages={messages}>
           <AccessibilityProvider>
           <CurrentMethodProvider>
-          <header className="relative h-14 border-b bg-method-white grid grid-cols-[1fr_auto_1fr] items-center px-6 md:px-10 sticky top-0 z-50 transition-shadow shadow-md">
+          <header id="site-header" className="relative h-14 border-b bg-method-white grid grid-cols-[1fr_auto_1fr] items-center px-6 md:px-10 sticky top-0 z-50 transition-shadow shadow-md">
             <div>
               <NavMenu assistantEnabled={assistant.configured} />
             </div>
@@ -118,9 +119,9 @@ export default async function LocaleLayout({ children, params }: Props) {
             {children}
           </main>
 
-          <footer className="border-t mt-auto">
+          <SiteFooter>
             <FooterText />
-          </footer>
+          </SiteFooter>
           <SavedWidget />
           </CurrentMethodProvider>
           <AccessibilityButton />
