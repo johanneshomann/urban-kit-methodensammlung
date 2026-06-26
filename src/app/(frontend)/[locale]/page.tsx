@@ -122,7 +122,7 @@ export default async function HomePage({ params }: Props) {
           style={{ color: 'var(--method)', opacity: 0.15 }}
         />
 
-        <a href="#methods" className="absolute bottom-6 left-6 md:left-1/2 md:-translate-x-1/2 z-20 flex flex-col items-center gap-1 opacity-40 hover:opacity-100 transition-opacity cursor-pointer">
+        <a href="#methods" className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 opacity-40 hover:opacity-100 transition-opacity cursor-pointer">
           <span className="text-text" style={{ color: 'var(--method)' }}>
             Hier beginnen
           </span>

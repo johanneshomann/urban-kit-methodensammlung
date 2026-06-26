@@ -42,7 +42,7 @@ export default async function HelpPage({ params }: Props) {
 
         <a href="#help-content">
           <ChevronDown
-            className="absolute bottom-8 left-6 md:left-1/2 md:-translate-x-1/2 z-20 w-14 h-14 animate-bounce opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-14 h-14 animate-bounce opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
             style={{ color: 'var(--method)' }}
             aria-label={t('scrollHint')}
           />
