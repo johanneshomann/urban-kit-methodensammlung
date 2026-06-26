@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
+import { Link } from '@/navigation'
 import { Sparkles, Send, ChevronDown } from 'lucide-react'
 import Markdown from 'react-markdown'
 import type { Methode } from '@/types'
@@ -48,12 +49,18 @@ export default function MethodAssistant({
     }
   }, [open, messages.length, t, greeting])
 
+  // Always follow the conversation — jump to the newest message (and the typing
+  // indicator) so the user never misses a reply.
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
+    const el = scrollRef.current
+    if (!el) return
+    el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' })
   }, [messages, loading])
 
+  // Focus without scrolling — the page variant's input sits a screen below the
+  // hero, so a plain focus() would yank the page down to it.
   useEffect(() => {
-    if (open) inputRef.current?.focus()
+    if (open) inputRef.current?.focus({ preventScroll: true })
   }, [open, loading])
 
   async function send() {
@@ -144,10 +151,33 @@ export default function MethodAssistant({
     </>
   )
 
+  const privacyNotice = (
+    <p className="text-small opacity-60" style={{ color: 'var(--method-ink)' }}>
+      {t.rich('privacyNotice', {
+        link: (chunks) => (
+          <Link href="/datenschutz" className="underline hover:opacity-100 transition-opacity">
+            {chunks}
+          </Link>
+        ),
+      })}
+      {' · '}
+      <Link href="/impressum" className="underline hover:opacity-100 transition-opacity">
+        {t('imprint')}
+      </Link>
+    </p>
+  )
+
+  // Page variant: fade the transcript's top & bottom edges so bubbles ease in/out
+  // of view as they scroll (mirrors the section fade). ~one bubble tall.
+  const FADE = '1rem'
+  const fadeMask = `linear-gradient(to bottom, transparent 0, #000 ${FADE}, #000 calc(100% - ${FADE}), transparent 100%)`
+  const maskStyle = isPage ? { maskImage: fadeMask, WebkitMaskImage: fadeMask } : undefined
+
   // Shared transcript + composer, rendered for both variants.
   const transcript = (
     <div
       ref={scrollRef}
+      style={maskStyle}
       className={`overflow-y-auto flex flex-col ${isPage ? 'flex-1 min-h-0 py-6 gap-6' : 'max-h-[26rem] px-5 py-4 gap-4'}`}
     >
       {messages.map((m, i) => (
@@ -156,7 +186,7 @@ export default function MethodAssistant({
             m.role === 'user' ? (
               <div className="flex justify-end">
                 <div
-                  className="max-w-[80%] px-4 py-2.5 rounded-2xl whitespace-pre-wrap text-text shadow-sm"
+                  className="max-w-[80%] md:max-w-[calc(80%-60px)] px-4 py-2.5 rounded-2xl whitespace-pre-wrap text-text shadow-sm"
                   style={{ background: 'var(--method-white)', color: 'var(--method-ink)' }}
                 >
                   {m.content}
@@ -165,7 +195,7 @@ export default function MethodAssistant({
             ) : (
               <div className="flex justify-start">
                 <div
-                  className="max-w-[80%] px-4 py-2.5 rounded-2xl text-text"
+                  className="max-w-[80%] md:max-w-[calc(80%-60px)] px-4 py-2.5 rounded-2xl text-text"
                   style={{ background: 'var(--method)', color: 'var(--method-white)' }}
                 >
                   <ChatMarkdown>{m.content}</ChatMarkdown>
@@ -248,6 +278,7 @@ export default function MethodAssistant({
           >
             {composerControls}
           </div>
+          <div className="mt-2 text-center">{privacyNotice}</div>
         </div>
       </div>
     )
@@ -281,6 +312,7 @@ export default function MethodAssistant({
             >
               {composerControls}
             </div>
+            <div className="px-4 pb-3">{privacyNotice}</div>
           </div>
         </div>
       </div>
