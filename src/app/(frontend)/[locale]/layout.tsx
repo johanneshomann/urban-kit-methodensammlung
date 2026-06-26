@@ -92,11 +92,13 @@ export default async function LocaleLayout({ children, params }: Props) {
 
             <Link href="/" className="method-brand font-bold text-text transition-opacity duration-300">
               <span className="inline-flex items-center gap-1.5">
-                <span>
+                <span className="hidden sm:inline">
                   <span className="font-normal" style={{ color: 'var(--method-ink-accent)' }}>Urban</span>
                   <span style={{ color: 'var(--method)' }}>KIT</span>
                 </span>
-                <span className="font-normal" style={{ color: 'var(--method-ink)' }}> – {tNav('subtitle')}</span>
+                <span className="font-normal" style={{ color: 'var(--method-ink)' }}>
+                  <span className="hidden sm:inline"> – </span>{tNav('subtitle')}
+                </span>
               </span>
             </Link>
 
