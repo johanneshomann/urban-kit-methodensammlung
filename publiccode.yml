@@ -1,0 +1,74 @@
+# SPDX-FileCopyrightText: 2026 Johannes Homann
+#
+# SPDX-License-Identifier: EUPL-1.2
+
+# publiccode.yml — metadata for the openCode Softwareverzeichnis and other
+# public-software catalogues. Spec: https://yml.publiccode.tools
+# Validate at https://publiccode-editor.developers.italia.it or the openCode editor.
+
+publiccodeYmlVersion: "0.4.0"
+
+name: Urban Kit – Methodensammlung
+url: "https://gitlab.opencode.de/CHANGE-ME/urban-kit-methodensammlung" # TODO: set to the canonical repository URL once published
+landingURL: "https://methoden.urbankit.de" # TODO: confirm public landing page
+
+softwareVersion: "1.0.0"
+releaseDate: "2026-06-26"
+
+developmentStatus: stable
+softwareType: standalone/web
+
+platforms:
+  - web
+
+categories:
+  - knowledge-management
+  - collaboration
+
+description:
+  de:
+    shortDescription: >-
+      Zweisprachige Sammlung von Beteiligungsmethoden für die Stadt- und
+      Quartiersentwicklung.
+    longDescription: >-
+      Urban Kit – Methodensammlung ist ein durchsuchbarer, zweisprachiger Katalog
+      (Deutsch/Englisch) von Methoden für die Beteiligung in der Stadtplanung.
+      Redakteur:innen pflegen Methoden und deren Filter-Taxonomien in einem Payload-CMS;
+      die öffentliche Next.js-Website ermöglicht Stöbern, Filtern, Merken und – optional –
+      eine KI-gestützte Methodenempfehlung anhand einer freien Projektbeschreibung.
+    features:
+      - Methodenkatalog mit Volltext und Schritt-für-Schritt-Ablauf
+      - Facettenfilter über acht Taxonomien
+      - KI-Assistent (anbieterunabhängig, im Admin konfigurierbar)
+      - Barrierearme Oberfläche (Schriftgröße, Kontrast, reduzierte Bewegung)
+  en:
+    shortDescription: >-
+      Bilingual catalogue of participation methods for urban and neighbourhood planning.
+    longDescription: >-
+      Urban Kit – Methodensammlung is a searchable, bilingual (German/English) catalogue
+      of methods for citizen participation in urban planning. Editors maintain methods and
+      their filter taxonomies in a Payload CMS; the public Next.js site lets visitors browse,
+      filter, save and — optionally — receive AI-assisted method suggestions from a free-text
+      project description.
+    features:
+      - Method catalogue with full text and step-by-step procedures
+      - Faceted filtering across eight taxonomies
+      - AI assistant (provider-agnostic, admin-configurable)
+      - Accessible UI (font scaling, contrast, reduced motion)
+
+legal:
+  license: EUPL-1.2
+  mainCopyrightOwner: Johannes Homann
+  repoOwner: Johannes Homann
+
+maintenance:
+  type: internal
+  contacts:
+    - name: Johannes Homann
+      email: "hi@johanneshomann.de"
+
+localisation:
+  localisationReady: true
+  availableLanguages:
+    - de
+    - en
