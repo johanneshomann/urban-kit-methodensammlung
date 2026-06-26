@@ -137,19 +137,6 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 | `localize.ts` | i18n helper |
 | `saved.ts` | localStorage API for saved methods |
 
-## Orphan / unregistered files
-
-These exist in the tree but are **not** wired into `payload.config.ts` and are
-referenced nowhere else — treat as legacy/unused, not part of the live model.
-**They are candidates for deletion** (left in place for now; removing them is a safe
-cleanup task):
-
-- `src/collections/FilterIcons.ts` and `src/globals/FilterIcons.ts`
-- Empty leftover route dirs: `src/app/(frontend)/cart/`, `src/app/(frontend)/methods/[slug]/`
-  (the live method route is the localized `src/app/(frontend)/[locale]/methods/[slug]/`).
-- `src/app/(frontend)/[locale]/layout 2.tsx` (stray duplicate) and a second PostCSS
-  config (`postcss.config.js` alongside `postcss.config.mjs`).
-
 ## Data / scripts
 
 - `seed.ts` — idempotent seed of taxonomies + `platform-settings`. `npm run seed`.
