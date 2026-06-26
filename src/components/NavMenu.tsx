@@ -138,7 +138,7 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
                     key={href}
                     href={href}
                     onClick={closeImmediate}
-                    className={`flex items-center gap-2 py-2 text-text transition-colors ${active ? 'font-bold' : 'font-normal'}`}
+                    className={`flex items-center gap-2 py-2.5 text-text transition-colors ${active ? 'font-bold' : 'font-normal'}`}
                     style={{ color: active ? 'var(--method-ink-accent)' : 'var(--method-ink)' }}
                     onMouseEnter={e => (e.currentTarget.style.color = 'var(--method)')}
                     onMouseLeave={e => (e.currentTarget.style.color = active ? 'var(--method-ink-accent)' : 'var(--method-ink)')}
