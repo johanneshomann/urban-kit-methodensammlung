@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Johannes Homann
+ *
+ * SPDX-License-Identifier: EUPL-1.2
+ */
+
 @import "tailwindcss";
 @source inline("p-{8,10,12,14} px-{12,14} py-{8,10,12,14} h-{16,18,20} gap-{8,10,14} mt-{8,10,12,14} mb-{8,10,12,14} space-y-{8,10,12,14}");
 

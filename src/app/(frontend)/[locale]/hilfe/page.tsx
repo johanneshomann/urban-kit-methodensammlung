@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/navigation'
 import { EyebrowBadge } from '@/components/EyebrowBadge'

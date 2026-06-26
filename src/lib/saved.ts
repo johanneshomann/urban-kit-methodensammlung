@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 /**
  * "Saved methods" persistence — a bookmark list kept entirely in the browser
  * (localStorage, no account needed). Every mutation dispatches a `uk-saved-change`

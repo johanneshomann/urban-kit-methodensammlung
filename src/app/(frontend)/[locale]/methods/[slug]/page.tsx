@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 /**
  * Method detail page — one published method, rendered as a full-height scrolling
  * story (hero → overview → goal → process → notes → afterwards → gallery).

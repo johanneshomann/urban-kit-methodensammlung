@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+
+# SPDX-FileCopyrightText: 2026 Johannes Homann
+#
+# SPDX-License-Identifier: EUPL-1.2
+
 #
 # Database + uploaded-media backup for the urban-kit methodensammlung stack.
 #

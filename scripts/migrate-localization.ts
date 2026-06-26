@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 /**
  * One-off migration: reshape manual DE/EN field pairs into Payload's localized
  * storage (`field: { de, en }`), then drop the old `*De`/`*En` keys.

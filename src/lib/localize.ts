@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 /**
  * Reads a taxonomy item's display name. Trivial today because Payload already
  * resolves localized fields to the query locale (with DE fallback) server-side —

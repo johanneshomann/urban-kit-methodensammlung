@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 /**
  * Minimal renderer for Payload's Lexical rich-text JSON. Walks the node tree and
  * maps the handful of node types we actually enable in the editor

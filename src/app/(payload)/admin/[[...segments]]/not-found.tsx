@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 import config from '@payload-config'
 import { NotFoundPage } from '@payloadcms/next/views'
 import { importMap } from '../importMap'

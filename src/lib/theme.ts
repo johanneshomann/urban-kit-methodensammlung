@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 /**
  * The site's theme palette. `COLOR_DEFAULTS` is the fallback; admins can override
  * these in the PlatformSettings global, and the active values are emitted as the

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
@@ -56,12 +60,6 @@ export default function MethodAssistant({
     if (!el) return
     el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' })
   }, [messages, loading])
-
-  // Focus without scrolling — the page variant's input sits a screen below the
-  // hero, so a plain focus() would yank the page down to it.
-  useEffect(() => {
-    if (open) inputRef.current?.focus({ preventScroll: true })
-  }, [open, loading])
 
   async function send() {
     const text = input.trim()

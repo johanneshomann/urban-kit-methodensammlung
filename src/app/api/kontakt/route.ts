@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 /**
  * POST /api/kontakt — contact form handler. Validates the payload, then sends mail
  * via Payload's configured Nodemailer transport. Recipient, from-name and the

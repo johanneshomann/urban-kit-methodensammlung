@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 /**
  * GET /api/methods-by-ids?ids=a,b,c&locale=de — batch-fetches published+draft
  * methods by id for the client-rendered "saved" view (which only holds ids in

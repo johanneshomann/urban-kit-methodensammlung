@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 /**
  * Minimal in-memory IP rate limiter — the single biggest cost guard for a
  * public LLM endpoint. Per-process only (resets on redeploy / doesn't span

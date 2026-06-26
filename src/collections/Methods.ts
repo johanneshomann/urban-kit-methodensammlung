@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 /**
  * `methods` — the core content collection. Each method is organised into admin
  * tabs (General / Procedure / Notes / Links / Images / Classification / More);

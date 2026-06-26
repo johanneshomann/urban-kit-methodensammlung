@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 /**
  * Validation helpers for localized fields: enforce a value ONLY when the
  * document is saved in the default locale (German). Other locales stay optional

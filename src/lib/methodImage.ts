@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2026 Johannes Homann
+//
+// SPDX-License-Identifier: EUPL-1.2
+
 // Number of fallback cover images in /public/method-defaults (1.jpg … 7.jpg).
 const POOL_SIZE = 7
 
