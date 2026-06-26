@@ -64,6 +64,21 @@ import {
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+// Payload's signing secret. Fail fast at production *runtime* if it's missing —
+// booting a live server with a known/default secret would let anyone forge auth
+// tokens. The check is skipped during `next build` (NEXT_PHASE) and in dev, where
+// a throwaway value is fine, so building the image without the secret still works.
+const PAYLOAD_SECRET = process.env.PAYLOAD_SECRET
+if (
+  !PAYLOAD_SECRET &&
+  process.env.NODE_ENV === 'production' &&
+  process.env.NEXT_PHASE !== 'phase-production-build'
+) {
+  throw new Error(
+    'PAYLOAD_SECRET is required in production (min 32 characters). Set it in your environment.',
+  )
+}
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -185,7 +200,8 @@ export default buildConfig({
         }
       : undefined,
   }),
-  secret: process.env.PAYLOAD_SECRET ?? 'fallback-secret-change-in-production',
+  // Guarded above: a non-production/build fallback only; production runtime requires the env var.
+  secret: PAYLOAD_SECRET ?? 'dev-only-insecure-secret-do-not-use-in-production',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
