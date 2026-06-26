@@ -1,3 +1,8 @@
+/**
+ * The site's theme palette. `COLOR_DEFAULTS` is the fallback; admins can override
+ * these in the PlatformSettings global, and the active values are emitted as the
+ * `--method-*` CSS custom properties used throughout the frontend styles.
+ */
 export interface MethodensammlungColors {
   methodMain: string
   methodLight: string

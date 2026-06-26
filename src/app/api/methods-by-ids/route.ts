@@ -1,3 +1,11 @@
+/**
+ * GET /api/methods-by-ids?ids=a,b,c&locale=de — batch-fetches published+draft
+ * methods by id for the client-rendered "saved" view (which only holds ids in
+ * localStorage). Locale-aware with a DE fallback.
+ *
+ * NOTE: no try/catch and no cap beyond `limit: 100` — a DB error surfaces as an
+ * unhandled 500. Worth hardening to match /api/method-assistant before launch.
+ */
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { NextRequest, NextResponse } from 'next/server'

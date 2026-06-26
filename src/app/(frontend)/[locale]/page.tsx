@@ -1,3 +1,11 @@
+/**
+ * Public homepage: hero + the filterable method catalogue.
+ *
+ * Server component. Loads every published method plus all filter taxonomies and
+ * their display settings (icons / active flag) via Payload's local API, then hands
+ * them to the client-side `FilterableMethodList`. All reads pass the requested
+ * `locale` with a `de` fallback (empty English fields read through to German).
+ */
 import FilterableMethodList from '@/components/FilterableMethodList'
 import { loadAssistantSettings } from '@/lib/methodAssistant/settings'
 import type { CategoryItem, FilterItem, Methode } from '@/types'
@@ -10,6 +18,9 @@ import { EyebrowBadge } from '@/components/EyebrowBadge'
 
 export const dynamic = 'force-dynamic'
 
+// Maps each frontend FilterKey to its Payload collection slug and settings-global
+// slug. We loop over these dynamically, so the slugs reach Payload as plain strings
+// and need an `as any` below to satisfy Payload's literal-union slug types.
 const COLLECTION_SLUGS: Record<FilterKey, string> = {
   participationDepths: 'participation-depths',
   projectPhases: 'project-phases',
@@ -44,6 +55,9 @@ export default async function HomePage({ params }: Props) {
 
   const filterKeys = FILTER_CONFIGS.map((c) => c.key) as FilterKey[]
 
+  // One batched round-trip. Order matters for the destructuring below: methods,
+  // the two parent-category lists, then `...rest` = the per-filter option docs
+  // followed by the per-filter settings globals (same `filterKeys` order each).
   const [result, projectPhaseCategoriesResult, durationCategoriesResult, ...rest] = await Promise.all([
     payload.find({
       collection: 'methods',
@@ -64,6 +78,7 @@ export default async function HomePage({ params }: Props) {
     ),
   ])
 
+  // Split `rest` back into its two halves: option docs first, settings globals second.
   const filterResults = rest.slice(0, filterKeys.length)
   const settingsResults = rest.slice(filterKeys.length)
 
@@ -86,6 +101,7 @@ export default async function HomePage({ params }: Props) {
     const doc = settingsResults[i] as SettingsDoc
     if (doc?.icon?.url) filterIcons[key] = doc.icon.url
     if (doc?.lucideIcon) filterLucideIcons[key] = doc.lucideIcon
+    // Active unless an editor explicitly switched it off — default-on (undefined ⇒ shown).
     if (doc?.active !== false) activeFilterKeys.add(key)
   })
 

@@ -1,5 +1,12 @@
 'use client'
 
+/**
+ * React binding over the localStorage `saved.ts` API. Subscribes to the
+ * `uk-saved-change` event so every component using this hook stays in sync after
+ * any add/remove. `mounted` guards against SSR hydration mismatch — `inSaved`
+ * returns false until the client has read localStorage.
+ */
+
 import { useCallback, useEffect, useState } from 'react'
 import {
   type SavedItem,

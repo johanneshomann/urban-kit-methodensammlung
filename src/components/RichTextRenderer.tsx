@@ -1,4 +1,19 @@
+/**
+ * Minimal renderer for Payload's Lexical rich-text JSON. Walks the node tree and
+ * maps the handful of node types we actually enable in the editor
+ * (payload.config.ts) to HTML. Unknown node types render nothing.
+ */
 import React from 'react'
+
+// Lexical encodes inline text styles as a bitmask on `format`. These are the bits
+// for the marks we enable; combine with `&` (a run can be bold *and* italic, etc.).
+const TEXT_FORMAT = {
+  BOLD: 1,
+  ITALIC: 2,
+  STRIKETHROUGH: 4,
+  UNDERLINE: 8,
+  CODE: 16,
+} as const
 
 type LexicalNode = {
   type: string
@@ -70,11 +85,11 @@ function renderNode(node: LexicalNode, index: number): React.ReactNode {
     case 'text': {
       let content: React.ReactNode = node.text ?? ''
       const fmt = node.format ?? 0
-      if (fmt & 1) content = <strong>{content}</strong>
-      if (fmt & 2) content = <em>{content}</em>
-      if (fmt & 8) content = <u>{content}</u>
-      if (fmt & 4) content = <s>{content}</s>
-      if (fmt & 16) content = <code className="bg-method-very-light px-1 rounded text-small font-mono">{content}</code>
+      if (fmt & TEXT_FORMAT.BOLD) content = <strong>{content}</strong>
+      if (fmt & TEXT_FORMAT.ITALIC) content = <em>{content}</em>
+      if (fmt & TEXT_FORMAT.UNDERLINE) content = <u>{content}</u>
+      if (fmt & TEXT_FORMAT.STRIKETHROUGH) content = <s>{content}</s>
+      if (fmt & TEXT_FORMAT.CODE) content = <code className="bg-method-very-light px-1 rounded text-small font-mono">{content}</code>
       return <React.Fragment key={index}>{content}</React.Fragment>
     }
     case 'linebreak':

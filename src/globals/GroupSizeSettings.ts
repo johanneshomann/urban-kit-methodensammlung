@@ -1,5 +1,7 @@
 import type { GlobalConfig } from 'payload'
 
+// Per-filter display settings — same shape as the other `*Settings` globals.
+// See CharacteristicsSettings.ts for the shared rationale + factory note.
 export const GroupSizeSettings: GlobalConfig = {
   slug: 'group-size-settings',
   label: { en: 'Settings', de: 'Einstellungen' },

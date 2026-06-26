@@ -1,3 +1,10 @@
+/**
+ * Single source of truth for the eight method filter taxonomies: their stable
+ * `key` (used throughout the frontend), DE/EN labels, Payload collection `slug`,
+ * and—for the two with a parent grouping—the category collection. `FilterKey` and
+ * the `EMPTY_FILTERS` baseline are derived from this list, so adding a filter here
+ * (plus its collection/global) wires it through the typed state automatically.
+ */
 export const FILTER_CONFIGS = [
   { key: 'participationDepths', de: 'Beteiligungstiefe', en: 'Participation Depth', slug: 'participation-depths' },
   { key: 'projectPhases', de: 'Projektphase', en: 'Project Phase', slug: 'project-phases', categoryCollectionSlug: 'project-phase-categories' },

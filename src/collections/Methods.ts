@@ -1,3 +1,13 @@
+/**
+ * `methods` — the core content collection. Each method is organised into admin
+ * tabs (General / Procedure / Notes / Links / Images / Classification / More);
+ * see docs/CONTENT-MODEL.md for the full field map.
+ *
+ * Localization is DE-first: localized fields are required only in German via the
+ * `requiredInDefaultLocale` validators (never Payload's `required: true`, which
+ * would force English too). The `slug` auto-derives from the German title, and an
+ * `afterChange` hook keeps `aehnlicheMethoden` (similar methods) reciprocal.
+ */
 import type { CollectionConfig } from 'payload'
 import {
   requiredArrayInDefaultLocale,

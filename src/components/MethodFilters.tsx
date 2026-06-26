@@ -1,5 +1,11 @@
 'use client'
 
+/**
+ * The filter panel itself (one collapsible group per taxonomy) rendered inside
+ * FilterableMethodList. Receives the per-group options + the current selection and
+ * reports changes back up; it owns no filtering logic, only the panel UI/state.
+ */
+
 import { useLocale } from 'next-intl'
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
@@ -7,6 +13,8 @@ import * as LucideIcons from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { ChevronDown, X } from 'lucide-react'
 
+// NOTE: duplicated near-verbatim from FilterableMethodList.tsx — extracting a shared
+// ClearDot is a known cleanup (see OSS review notes). Keep the two in sync until then.
 function ClearDot({ onClear, tooltip = 'Zurücksetzen' }: { onClear: (e: React.MouseEvent) => void; tooltip?: string }) {
   const [hovered, setHovered] = useState(false)
   const btnRef = useRef<HTMLButtonElement>(null)

@@ -1,5 +1,12 @@
 'use client'
 
+/**
+ * Holds the user's accessibility preferences (font scale, reduced motion, …) in
+ * React context and persists them to localStorage via `lib/accessibility.ts`.
+ * `applySettings` writes the active values onto the document so CSS can react;
+ * preferences survive reloads and are exposed through the `useAccessibility` hook.
+ */
+
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import {
   A11Y_DEFAULTS,

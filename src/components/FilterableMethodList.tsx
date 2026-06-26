@@ -1,5 +1,16 @@
 'use client'
 
+/**
+ * Client-side catalogue: search box, filter panel, grid-layout controls, and the
+ * resulting method cards. Receives the full method list + taxonomies from the
+ * homepage server component and does all filtering in the browser (the catalogue
+ * is small enough that there's no server round-trip per filter change).
+ *
+ * Two option sets are derived per filter: `allOptions` (everything, for the panel)
+ * and `availableOptions` (only values still reachable given the *other* active
+ * filters, so we can grey out dead-end choices).
+ */
+
 import type { CategoryItem, FilterItem, Methode } from '@/types'
 import { getLocalizedName } from '@/lib/localize'
 import { useLocale, useTranslations } from 'next-intl'
@@ -10,6 +21,9 @@ import { ChevronDown, SlidersHorizontal, Search, X, RotateCcw, Settings, LayoutG
 import * as LucideIcons from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
+// NOTE: `ClearDot` is duplicated near-verbatim in MethodFilters.tsx. Kept inline
+// for now; a shared component is a known cleanup (see the OSS review notes).
+// The portal-rendered tooltip escapes the filter panel's `overflow`/stacking context.
 function ClearDot({ onClear, tooltip = 'Zurücksetzen' }: { onClear: (e: React.MouseEvent) => void; tooltip?: string }) {
   const [hovered, setHovered] = useState(false)
   const btnRef = useRef<HTMLButtonElement>(null)
@@ -178,6 +192,8 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
     return result
   }, [methods, allFilterItems, locale, activeConfigs])
 
+  // A method passes if its title matches the search AND, for every active filter
+  // group, it has at least one of the selected values (AND across groups, OR within).
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase()
     return methods.filter((m) => {
@@ -190,6 +206,8 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
     })
   }, [methods, filters, search, locale, activeConfigs])
 
+  // For each filter group, which values are still reachable given the *other*
+  // groups' current selections — used to disable options that would yield 0 results.
   const availableOptions = useMemo(() => {
     const result = {} as Record<FilterKey, string[]>
     for (const { key } of activeConfigs) {
@@ -213,6 +231,8 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
   const filterAreaRef = useRef<HTMLDivElement>(null)
   const settingsAreaRef = useRef<HTMLDivElement>(null)
 
+  // Close the filter / settings popovers on an outside click. Listeners are only
+  // attached while a popover is open, and torn down on close/unmount.
   useEffect(() => {
     if (!filterOpen) return
     function handleClickOutside(e: MouseEvent) {

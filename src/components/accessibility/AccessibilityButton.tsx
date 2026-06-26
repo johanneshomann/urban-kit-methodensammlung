@@ -1,5 +1,11 @@
 'use client'
 
+/**
+ * Floating accessibility control: a toggle button that opens a small panel for
+ * adjusting font size, reduced motion, etc. Reads and updates the shared state
+ * from `AccessibilityProvider` — this component is presentation only.
+ */
+
 import { useEffect, useId, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Accessibility, Minus, Plus, RotateCcw, X } from 'lucide-react'

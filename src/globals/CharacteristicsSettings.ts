@@ -1,5 +1,11 @@
 import type { GlobalConfig } from 'payload'
 
+/**
+ * Public-site display settings for one filter group: its icon (upload or Lucide
+ * fallback) and an `active` toggle. The eight `*Settings` globals are intentional
+ * per-filter mirrors of this same shape — a `createFilterSettingsGlobal()` factory
+ * could collapse them (noted as a cleanup in the OSS review).
+ */
 export const CharacteristicsSettings: GlobalConfig = {
   slug: 'characteristics-settings',
   label: { en: 'Settings', de: 'Einstellungen' },

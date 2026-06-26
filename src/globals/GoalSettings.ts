@@ -1,5 +1,7 @@
 import type { GlobalConfig } from 'payload'
 
+// Per-filter display settings — same shape as the other `*Settings` globals.
+// See CharacteristicsSettings.ts for the shared rationale + factory note.
 export const GoalSettings: GlobalConfig = {
   slug: 'goal-settings',
   label: { en: 'Settings', de: 'Einstellungen' },

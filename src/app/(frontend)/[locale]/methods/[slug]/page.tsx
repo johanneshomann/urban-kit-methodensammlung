@@ -1,3 +1,13 @@
+/**
+ * Method detail page — one published method, rendered as a full-height scrolling
+ * story (hero → overview → goal → process → notes → afterwards → gallery).
+ *
+ * Server component. Reads the method by `slug` via Payload's local API (which
+ * bypasses access control, so we filter `status: published` ourselves) in the
+ * requested locale with a `de` fallback. `force-dynamic` keeps content fresh
+ * without rebuilds. The visible section list (`navSections`) is derived from
+ * which fields actually have content, so empty fields don't produce empty sections.
+ */
 import RichTextRenderer from '@/components/RichTextRenderer'
 import MethodAccordions from '@/components/MethodAccordions'
 import GalleryLightbox from '@/components/GalleryLightbox'
@@ -89,6 +99,8 @@ function hasContent(val: unknown): boolean {
   return root.children.some(nodeHasContent)
 }
 
+// A procedure section counts as "present" if it has either a title or real body
+// content — drop fully empty rows so they don't render as blank steps.
 function getSections(val: unknown): MethodSection[] {
   if (!Array.isArray(val)) return []
   return (val as MethodSection[]).filter(
@@ -96,6 +108,8 @@ function getSections(val: unknown): MethodSection[] {
   )
 }
 
+// Relationship fields arrive either populated (object, depth>0) or as a bare id
+// (string) — keep only the populated ones so we can read their fields directly.
 function resolveMethod(item: Methode | string): Methode | null {
   return typeof item === 'object' ? item : null
 }
@@ -152,6 +166,8 @@ export default async function MethodDetailPage({ params }: Props) {
     characteristics: characteristics.map(c => getLocalizedName(c, locale)),
   }
 
+  // Per-section presence flags drive both the section dots nav and whether each
+  // <Section> renders at all — a method with no "Hinweise" simply omits that block.
   const hasZiel = hasContent(ziel) || hasContent(wann) || hasContent(wannNicht)
   const hasAblauf = vorbereitung.length > 0 || durchfuehrung.length > 0 || auswertung.length > 0
   const hasHinweise = hasContent(tipps) || hasContent(ungeeignet)

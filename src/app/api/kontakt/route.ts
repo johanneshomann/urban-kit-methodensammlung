@@ -1,3 +1,9 @@
+/**
+ * POST /api/kontakt — contact form handler. Validates the payload, then sends mail
+ * via Payload's configured Nodemailer transport. Recipient, from-name and the
+ * enable toggle come from the PlatformSettings global; SMTP credentials come from
+ * env (see AGENTS.md "Email config is split").
+ */
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { NextRequest, NextResponse } from 'next/server'
