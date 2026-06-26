@@ -35,7 +35,7 @@ export default async function AssistantPage({ params }: Props) {
       {/* 1. Hero */}
       <section
         className="relative flex flex-col justify-start overflow-hidden px-6 md:px-16 lg:px-24 pt-20 md:pt-28 pb-10 md:pb-20"
-        style={{ minHeight: 'calc(100svh - 3.5rem)', background: 'var(--method-light)' }}
+        style={{ minHeight: 'calc(100dvh - 3.5rem)', background: 'var(--method-light)' }}
       >
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent from-75% to-[var(--method-very-light)]" />
         <Sparkles
@@ -73,7 +73,7 @@ export default async function AssistantPage({ params }: Props) {
       <section
         id="assistant-chat"
         className="scroll-mt-14 px-6 md:px-16 lg:px-24 py-8 md:py-12 flex flex-col"
-        style={{ height: 'calc(100svh - 3.5rem)', background: 'var(--method-very-light)' }}
+        style={{ height: 'calc(100dvh - 3.5rem)', background: 'var(--method-very-light)' }}
       >
         <div className="flex-1 min-h-0">
           <MethodAssistant enabled variant="page" greeting={settings.greeting} />
