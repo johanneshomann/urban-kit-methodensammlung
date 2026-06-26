@@ -33,7 +33,7 @@ export default async function AssistantPage({ params }: Props) {
       <div className="relative z-10 flex flex-col flex-1 min-h-0 px-6 md:px-16 lg:px-24 pt-20 md:pt-28 pb-8">
         <EyebrowBadge label={t('eyebrow')} opacity={0.6} />
         <h1
-          className="text-hero font-black leading-none tracking-tight mb-4"
+          className="text-hero font-black leading-none tracking-tight mb-4 hyphens-auto [overflow-wrap:anywhere]"
           style={{ color: 'var(--method-ink-accent)' }}
         >
           {t('title')}

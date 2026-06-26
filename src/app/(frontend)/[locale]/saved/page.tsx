@@ -68,7 +68,7 @@ export default function SavedPage() {
             label={saved.length === 1 ? t('countOne') : t('countMany', { count: saved.length })}
             opacity={0.6}
           />
-          <h1 className="text-hero font-black leading-none tracking-tight mb-5" style={{ color: 'var(--method-ink-accent)' }}>
+          <h1 className="text-hero font-black leading-none tracking-tight mb-5 hyphens-auto [overflow-wrap:anywhere]" style={{ color: 'var(--method-ink-accent)' }}>
             {t('title')}<span style={{ color: 'var(--method)' }}>.</span>
           </h1>
 
