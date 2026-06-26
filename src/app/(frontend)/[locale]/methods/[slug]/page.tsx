@@ -12,11 +12,12 @@ import config from '@payload-config'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Link } from '@/navigation'
-import { ChevronDown, Info, Flag, ListChecks, Lightbulb, Check, X, ArrowLeft, ArrowRight, Images, Layers } from 'lucide-react'
+import { ChevronDown, Info, Flag, ListChecks, Lightbulb, Check, X, ArrowRight, Images, Layers } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { EyebrowBadge } from '@/components/EyebrowBadge'
 import MethodStickyTitle from '@/components/MethodStickyTitle'
+import BackButton from '@/components/BackButton'
 import SectionDotsNav from '@/components/SectionDotsNav'
 import MethodCardSlider from '@/components/MethodCardSlider'
 import ExpandableContent from '@/components/ExpandableContent'
@@ -193,15 +194,7 @@ export default async function MethodDetailPage({ params }: Props) {
         {/* Hero content */}
         <div className="relative z-10 flex-1 flex flex-col px-6 md:px-16 lg:px-24 pt-20 md:pt-28">
           <div className="flex items-center gap-2 mb-4">
-            <Link
-              href="/#methods"
-              aria-label={locale === 'de' ? 'Zurück zur Übersicht' : 'Back to overview'}
-              title={locale === 'de' ? 'Zurück zur Übersicht' : 'Back to overview'}
-              className="inline-flex items-center justify-center px-2 py-1 rounded-md text-small leading-none shrink-0 transition-opacity hover:opacity-100 cursor-pointer"
-              style={{ color: 'var(--method-white)', background: 'var(--method-ink)', opacity: 0.6 }}
-            >
-              <ArrowLeft className="w-[1em] h-[1em]" aria-hidden />
-            </Link>
+            <BackButton locale={locale} fallback="/#methods" />
             <EyebrowBadge label={locale === 'de' ? 'Methode' : 'Method'} opacity={0.6} className="!mb-0" />
           </div>
 
