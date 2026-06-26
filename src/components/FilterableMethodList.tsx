@@ -334,8 +334,8 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
               className="popover-in absolute right-0 top-full mt-2 rounded-xl p-3 flex flex-col gap-3 z-50 max-w-[calc(100vw-2rem)]"
               style={{ background: 'var(--method-white)', boxShadow: '0 8px 24px rgba(0,0,0,0.12)', minWidth: '11rem' }}
             >
-              {/* Grid columns */}
-              <div className="flex flex-col gap-1.5">
+              {/* Grid columns — hidden on mobile where the grid is always single-column */}
+              <div className="hidden sm:flex flex-col gap-1.5">
                 <span className="text-small opacity-50" style={{ color: 'var(--method-ink)' }}>Spalten</span>
                 <div className="flex gap-1">
                   {([3, 2, 1] as const).map(n => (
