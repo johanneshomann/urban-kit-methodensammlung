@@ -240,7 +240,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
 
       {/* Search + Filter row + panel */}
       <div className="flex flex-col gap-2" ref={filterAreaRef}>
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         {/* Search */}
         <div className="flex-1 flex items-center gap-2 px-4 py-2.5 rounded-xl text-text shadow-sm hover:shadow-md transition-shadow" style={{ background: 'var(--method-white)' }}>
           <Search className="w-[1em] h-[1em] shrink-0 opacity-40" style={{ color: 'var(--method-ink)' }} />
@@ -259,15 +259,18 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
           )}
         </div>
 
+        {/* Controls: filter + assistant + settings.
+            On mobile this wrapper keeps them together on a second row below the
+            search; `sm:contents` dissolves it so the desktop row is unchanged. */}
+        <div className="flex gap-2 sm:contents">
         {/* Filter toggle button */}
         <button
           type="button"
           onClick={() => setFilterOpen(v => !v)}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-display cursor-pointer shrink-0"
+          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-display cursor-pointer flex-1 sm:flex-none ${filterOpen ? 'sm:min-w-[16rem]' : 'sm:min-w-[12rem]'}`}
           style={{
             background: filterOpen ? 'var(--method-light)' : 'var(--method-white)',
             color: 'var(--method-ink)',
-            minWidth: filterOpen ? '16rem' : '12rem',
             boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
             transition: 'background 0.2s, box-shadow 0.2s, min-width 0.4s cubic-bezier(0.22,1,0.36,1)',
           }}
@@ -328,7 +331,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
 
           {settingsOpen && (
             <div
-              className="popover-in absolute right-0 top-full mt-2 rounded-xl p-3 flex flex-col gap-3 z-50"
+              className="popover-in absolute right-0 top-full mt-2 rounded-xl p-3 flex flex-col gap-3 z-50 max-w-[calc(100vw-2rem)]"
               style={{ background: 'var(--method-white)', boxShadow: '0 8px 24px rgba(0,0,0,0.12)', minWidth: '11rem' }}
             >
               {/* Grid columns */}
@@ -383,6 +386,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
               </div>
             </div>
           )}
+        </div>
         </div>
       </div>
 
