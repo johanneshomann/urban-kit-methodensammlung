@@ -123,13 +123,16 @@
     "placeholder": "Describe your project or reply …",
     "send": "Send",
     "error": "Something went wrong. Please try again or use the filters below.",
-    "errorRate": "A few too many requests right now. Please wait a moment and use the filters below in the meantime."
+    "errorRate": "A few too many requests right now. Please wait a moment and use the filters below in the meantime.",
+    "privacyNotice": "By using the assistant you agree to the <link>privacy policy</link>.",
+    "imprint": "Imprint"
   },
   "assistantPage": {
     "metaTitle": "Method Assistant – Urban Kit Method Archive",
     "eyebrow": "Method Assistant",
     "title": "Method Assistant",
-    "subtitle": "Describe your project — the assistant suggests fitting methods and explains why they fit."
+    "subtitle": "Describe your project — the assistant suggests fitting methods and explains why they fit.",
+    "scrollHint": "Scroll to the chat"
   },
   "methods": {
     "foundOne": "1 method found",

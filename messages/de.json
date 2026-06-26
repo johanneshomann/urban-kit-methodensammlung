@@ -123,13 +123,16 @@
     "placeholder": "Projekt beschreiben oder antworten …",
     "send": "Senden",
     "error": "Etwas ist schiefgelaufen. Bitte versuche es noch einmal oder nutze die Filter unten.",
-    "errorRate": "Etwas zu viele Anfragen gerade. Bitte warte einen Moment und nutze solange die Filter unten."
+    "errorRate": "Etwas zu viele Anfragen gerade. Bitte warte einen Moment und nutze solange die Filter unten.",
+    "privacyNotice": "Mit der Nutzung des Assistenten stimmst du der <link>Datenschutzerklärung</link> zu.",
+    "imprint": "Impressum"
   },
   "assistantPage": {
     "metaTitle": "Methoden-Assistent – Urban Kit Methodensammlung",
     "eyebrow": "Methoden-Assistent",
     "title": "Methoden-Assistent",
-    "subtitle": "Beschreibe dein Projekt – der Assistent schlägt passende Methoden vor und erklärt, warum sie passen."
+    "subtitle": "Beschreibe dein Projekt – der Assistent schlägt passende Methoden vor und erklärt, warum sie passen.",
+    "scrollHint": "Zum Chat scrollen"
   },
   "methods": {
     "foundOne": "1 Methode gefunden",
