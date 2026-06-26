@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { redirect } from '@/navigation'
 import { EyebrowBadge } from '@/components/EyebrowBadge'
+import BackButton from '@/components/BackButton'
 import MethodAssistant from '@/components/MethodAssistant'
 import { loadAssistantSettings } from '@/lib/methodAssistant/settings'
 
@@ -31,7 +32,10 @@ export default async function AssistantPage({ params }: Props) {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent from-75% to-[var(--method-very-light)]" />
 
       <div className="relative z-10 flex flex-col flex-1 min-h-0 px-6 md:px-16 lg:px-24 pt-20 md:pt-28 pb-8">
-        <EyebrowBadge label={t('eyebrow')} opacity={0.6} />
+        <div className="flex items-center gap-2 mb-4">
+          <BackButton locale={locale} />
+          <EyebrowBadge label={t('eyebrow')} opacity={0.6} className="!mb-0" />
+        </div>
         <h1
           className="text-hero font-black leading-none tracking-tight mb-4 hyphens-auto [overflow-wrap:anywhere]"
           style={{ color: 'var(--method-ink-accent)' }}

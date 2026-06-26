@@ -2,6 +2,7 @@
 
 import MethodCard from '@/components/MethodCard'
 import { EyebrowBadge } from '@/components/EyebrowBadge'
+import BackButton from '@/components/BackButton'
 import { useSaved } from '@/hooks/useSaved'
 import { Link } from '@/navigation'
 import { useTranslations, useLocale } from 'next-intl'
@@ -64,10 +65,14 @@ export default function SavedPage() {
         )}
 
         <div className="relative z-10 max-w-2xl">
-          <EyebrowBadge
-            label={saved.length === 1 ? t('countOne') : t('countMany', { count: saved.length })}
-            opacity={0.6}
-          />
+          <div className="flex items-center gap-2 mb-4">
+            <BackButton locale={locale} />
+            <EyebrowBadge
+              label={saved.length === 1 ? t('countOne') : t('countMany', { count: saved.length })}
+              opacity={0.6}
+              className="!mb-0"
+            />
+          </div>
           <h1 className="text-hero font-black leading-none tracking-tight mb-5 hyphens-auto [overflow-wrap:anywhere]" style={{ color: 'var(--method-ink-accent)' }}>
             {t('title')}<span style={{ color: 'var(--method)' }}>.</span>
           </h1>

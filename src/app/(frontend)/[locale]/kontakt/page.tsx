@@ -2,6 +2,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { getTranslations } from 'next-intl/server'
 import { EyebrowBadge } from '@/components/EyebrowBadge'
+import BackButton from '@/components/BackButton'
 import RichTextRenderer from '@/components/RichTextRenderer'
 import { Mail, ChevronDown } from 'lucide-react'
 import { KontaktForm } from './KontaktForm'
@@ -48,7 +49,10 @@ export default async function KontaktPage({ params }: Props) {
         </a>
 
         <div className="relative z-10">
-          <EyebrowBadge label={t('eyebrow')} opacity={0.6} />
+          <div className="flex items-center gap-2 mb-4">
+            <BackButton locale={locale} />
+            <EyebrowBadge label={t('eyebrow')} opacity={0.6} className="!mb-0" />
+          </div>
           <h1 className="text-hero font-black leading-none tracking-tight mb-5 hyphens-auto [overflow-wrap:anywhere]" style={{ color: 'var(--method-ink-accent)' }}>
             {t('titleLine1')}<span style={{ color: 'var(--method)' }}>.</span>
           </h1>

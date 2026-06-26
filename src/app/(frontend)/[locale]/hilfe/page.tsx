@@ -1,6 +1,7 @@
 import { getTranslations } from 'next-intl/server'
 import { Link } from '@/navigation'
 import { EyebrowBadge } from '@/components/EyebrowBadge'
+import BackButton from '@/components/BackButton'
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion'
 import { Signpost, ChevronDown, Home, BookOpen, Bookmark, Accessibility, Mail, LayoutGrid, HelpCircle } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
@@ -48,7 +49,10 @@ export default async function HelpPage({ params }: Props) {
         </a>
 
         <div className="relative z-10 max-w-2xl">
-          <EyebrowBadge label={t('eyebrow')} opacity={0.6} />
+          <div className="flex items-center gap-2 mb-4">
+            <BackButton locale={locale} />
+            <EyebrowBadge label={t('eyebrow')} opacity={0.6} className="!mb-0" />
+          </div>
           <h1 className="text-hero font-black leading-none tracking-tight mb-5 hyphens-auto [overflow-wrap:anywhere]" style={{ color: 'var(--method-ink-accent)' }}>
             {t('title')}<span style={{ color: 'var(--method)' }}>.</span>
           </h1>
