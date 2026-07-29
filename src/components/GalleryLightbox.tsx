@@ -4,18 +4,52 @@
 
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 
-type GalleryImage = { url?: string | null; alt?: string | null }
+type GalleryImage = { url?: string | null; alt?: string | null; caption?: string | null }
 
-export default function GalleryLightbox({ images }: { images: GalleryImage[] }) {
-  const items = images.filter((img) => img.url) as { url: string; alt?: string | null }[]
+/**
+ * Image gallery with a fullscreen lightbox (keyboard nav, scroll lock).
+ * Two thumbnail layouts: `grid` (the detail page's gallery section) and
+ * `strip` — a horizontally scrollable row used inside accordion panels.
+ * The lightbox caption prefers `caption` (localized, per-use) over `alt`.
+ */
+export default function GalleryLightbox({ images, variant = 'grid' }: { images: GalleryImage[]; variant?: 'grid' | 'strip' }) {
+  const items = images.filter((img) => img.url) as { url: string; alt?: string | null; caption?: string | null }[]
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const [mounted, setMounted] = useState(false)
 
+  // Strip variant: scroll-arrow state (mirrors MethodCardSlider)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const [canPrev, setCanPrev] = useState(false)
+  const [canNext, setCanNext] = useState(false)
+
   useEffect(() => setMounted(true), [])
+
+  useEffect(() => {
+    if (variant !== 'strip') return
+    const el = trackRef.current
+    if (!el) return
+    const update = () => {
+      setCanPrev(el.scrollLeft > 4)
+      setCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 4)
+    }
+    update()
+    el.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      el.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
+  }, [variant, items.length])
+
+  const scrollTrack = (dir: 1 | -1) => {
+    const el = trackRef.current
+    if (!el) return
+    el.scrollBy({ left: dir * el.clientWidth * 0.9, behavior: 'smooth' })
+  }
 
   const close = useCallback(() => setOpenIndex(null), [])
   const prev = useCallback(
@@ -46,23 +80,61 @@ export default function GalleryLightbox({ images }: { images: GalleryImage[] }) 
 
   return (
     <>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {items.map((img, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => setOpenIndex(i)}
-            aria-label={img.alt || `Bild ${i + 1}`}
-            className="group relative overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-zoom-in"
-          >
-            <img
-              src={img.url}
-              alt={img.alt ?? ''}
-              className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-105"
-              loading="lazy"
-            />
-          </button>
-        ))}
+      <div className="relative">
+        <div
+          ref={trackRef}
+          className={
+            variant === 'strip'
+              ? 'no-scrollbar flex gap-4 overflow-x-auto snap-x -mx-1 px-1 py-2'
+              : 'grid grid-cols-2 md:grid-cols-3 gap-4'
+          }
+        >
+          {items.map((img, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setOpenIndex(i)}
+              aria-label={img.caption || img.alt || `Bild ${i + 1}`}
+              className={`group relative overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-zoom-in ${
+                variant === 'strip' ? 'snap-start shrink-0' : ''
+              }`}
+            >
+              <img
+                src={img.url}
+                alt={img.alt ?? img.caption ?? ''}
+                className={`object-cover transition-transform duration-300 group-hover:scale-105 ${
+                  variant === 'strip' ? 'h-44 w-64 sm:h-48 sm:w-72' : 'w-full h-56'
+                }`}
+                loading="lazy"
+              />
+            </button>
+          ))}
+        </div>
+
+        {variant === 'strip' && (canPrev || canNext) && (
+          <>
+            <button
+              type="button"
+              onClick={() => scrollTrack(-1)}
+              disabled={!canPrev}
+              aria-label="Zurück"
+              className="absolute left-2 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-9 h-9 rounded-full shadow-md transition-all hover:scale-110 disabled:opacity-0 disabled:pointer-events-none cursor-pointer"
+              style={{ background: 'var(--method-white)', color: 'var(--method-ink-accent)' }}
+            >
+              <ChevronLeft className="w-5 h-5" aria-hidden />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollTrack(1)}
+              disabled={!canNext}
+              aria-label="Weiter"
+              className="absolute right-2 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-9 h-9 rounded-full shadow-md transition-all hover:scale-110 disabled:opacity-0 disabled:pointer-events-none cursor-pointer"
+              style={{ background: 'var(--method-white)', color: 'var(--method-ink-accent)' }}
+            >
+              <ChevronRight className="w-5 h-5" aria-hidden />
+            </button>
+          </>
+        )}
       </div>
 
       {mounted && openIndex !== null &&
@@ -114,9 +186,9 @@ export default function GalleryLightbox({ images }: { images: GalleryImage[] }) 
                 alt={items[openIndex].alt ?? ''}
                 className="max-w-full max-h-[80vh] object-contain rounded-xl shadow-lg"
               />
-              {items[openIndex].alt && (
+              {(items[openIndex].caption || items[openIndex].alt) && (
                 <figcaption className="text-small text-center px-4" style={{ color: 'var(--method-white)' }}>
-                  {items[openIndex].alt}
+                  {items[openIndex].caption || items[openIndex].alt}
                 </figcaption>
               )}
             </figure>

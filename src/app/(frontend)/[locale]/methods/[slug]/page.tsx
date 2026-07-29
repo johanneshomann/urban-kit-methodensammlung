@@ -152,6 +152,18 @@ export default async function MethodDetailPage({ params }: Props) {
   const durchfuehrung = getSections(method.durchfuehrung)
   const auswertung = getSections(method.auswertung)
 
+  // Best practices: optional sections + an image gallery rendered as the item's
+  // final "Galerie" section. Rows arrive with the media doc populated (depth 2);
+  // drop rows whose upload is missing/unpopulated.
+  const bestPractices = getSections(method.bestPractices)
+  const bpGallery = (method.bestPracticesGallery ?? [])
+    .map((row) => {
+      const img = row?.image
+      if (!img || typeof img !== 'object' || !img.url) return null
+      return { url: img.url, alt: img.alt ?? null, caption: row.caption ?? null }
+    })
+    .filter(Boolean) as { url: string; alt: string | null; caption: string | null }[]
+
   const tipps = method.tipps
   const ungeeignet = method.ungeeignetFuer
 
@@ -173,7 +185,7 @@ export default async function MethodDetailPage({ params }: Props) {
   // Per-section presence flags drive both the section dots nav and whether each
   // <Section> renders at all — a method with no "Hinweise" simply omits that block.
   const hasZiel = hasContent(ziel) || hasContent(wann) || hasContent(wannNicht)
-  const hasAblauf = vorbereitung.length > 0 || durchfuehrung.length > 0 || auswertung.length > 0
+  const hasAblauf = vorbereitung.length > 0 || bestPractices.length > 0 || bpGallery.length > 0 || durchfuehrung.length > 0 || auswertung.length > 0
   const hasHinweise = hasContent(tipps) || hasContent(ungeeignet)
   const hasWeitergehen = weitergehen.length > 0
   const hasWeiteres = aehnliche.length > 0
@@ -342,6 +354,7 @@ export default async function MethodDetailPage({ params }: Props) {
             locale={locale}
             items={[
               { id: 'vorbereitung', iconName: 'ClipboardList', label: locale === 'de' ? 'Vorbereitung' : 'Preparation', sections: vorbereitung },
+              { id: 'praxisbeispiele', iconName: 'Award', label: locale === 'de' ? 'Praxisbeispiele' : 'Best Practices', sections: bestPractices, gallery: bpGallery },
               { id: 'durchfuehrung', iconName: 'Workflow', label: locale === 'de' ? 'Durchführung' : 'Execution', sections: durchfuehrung },
               { id: 'auswertung', iconName: 'BarChart2', label: locale === 'de' ? 'Auswertung' : 'Evaluation', sections: auswertung },
             ]}

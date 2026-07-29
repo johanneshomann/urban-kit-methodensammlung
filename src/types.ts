@@ -31,6 +31,12 @@ export type MediaFile = {
   height?: number | null
 }
 
+export type GalleryRow = {
+  id?: string | null
+  image?: MediaFile | string | null
+  caption?: string | null
+}
+
 export type Methode = {
   id: string
   // Localized fields — Payload returns the value for the requested locale (DE fallback).
@@ -42,6 +48,8 @@ export type Methode = {
   wannSinnvoll?: unknown
   wannNichtSinnvoll?: unknown
   vorbereitung?: MethodSection[] | null
+  bestPractices?: MethodSection[] | null
+  bestPracticesGallery?: GalleryRow[] | null
   durchfuehrung?: MethodSection[] | null
   auswertung?: MethodSection[] | null
   tipps?: unknown

@@ -32,6 +32,8 @@ Slug `methods`, `useAsTitle: 'title'`, admin columns
 | **Ablauf** / Procedure | `vorbereitung` | array | ✓ | ✓ (≥1) | sections: `sectionTitle` + `content` (richText) |
 | | `durchfuehrung` | array | ✓ | ✓ (≥1) | step-by-step execution |
 | | `auswertung` | array | ✓ | ✓ (≥1) | follow-up / reflection |
+| **Praxisbeispiele** / Best Practices | `bestPractices` | array | ✓ | – | optional real-world example sections (same `sectionFields` shape) |
+| | `bestPracticesGallery` | array | caption only | – | rows of `image` (upload→media, required) + localized `caption`; always visible as a horizontal strip (with fullscreen lightbox) below the sections while the accordion item is open |
 | **Hinweise** / Notes | `wannSinnvoll` | richText | ✓ | – | when useful |
 | | `wannNichtSinnvoll` | richText | ✓ | – | when not useful |
 | | `tipps` | richText | ✓ | – | practical tips |
@@ -43,9 +45,11 @@ Slug `methods`, `useAsTitle: 'title'`, admin columns
 | **Zuordnung** / Classification | 8 relationship fields | relationship (hasMany) | – | – | the filter taxonomies, see below |
 | **Weiteres** / More | `slug` | text | – | – | unique, indexed, auto-generated |
 
-**Procedure sections** (`vorbereitung`/`durchfuehrung`/`auswertung`) share
-`sectionFields` = `sectionTitle` (text) + `content` (richText), rendered with a custom
-`SectionRowLabel` admin row label and collapsed by default.
+**Procedure sections** (`vorbereitung`/`durchfuehrung`/`auswertung`, plus the
+optional `bestPractices`) share `sectionFields` = `sectionTitle` (text) + `content`
+(richText), rendered with a custom `SectionRowLabel` admin row label and collapsed by
+default. Only the three Ablauf arrays are required (DE); `bestPractices` is optional —
+the frontend accordion item appears only when it has sections or gallery images.
 
 **Slug generation** (`beforeValidate` hook on `slug`): derives from the **German**
 title — lowercases, maps `ä/ö/ü`→`ae/oe/ue`, `ß`→`ss`, non-alphanumerics→`-`, trims

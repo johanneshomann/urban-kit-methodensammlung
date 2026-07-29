@@ -4,8 +4,8 @@
 
 /**
  * `methods` — the core content collection. Each method is organised into admin
- * tabs (General / Procedure / Notes / Links / Images / Classification / More);
- * see docs/CONTENT-MODEL.md for the full field map.
+ * tabs (General / Procedure / Best Practices / Notes / Links / Images /
+ * Classification / More); see docs/CONTENT-MODEL.md for the full field map.
  *
  * Localization is DE-first: localized fields are required only in German via the
  * `requiredInDefaultLocale` validators (never Payload's `required: true`, which
@@ -140,6 +140,46 @@ export const Methods: CollectionConfig = {
               labels: { singular: { en: 'Section', de: 'Abschnitt' }, plural: { en: 'Sections', de: 'Abschnitte' } },
               admin: { ...sectionArrayAdmin, description: { en: 'Follow-up, reflection and securing the results.', de: 'Nachbereitung, Reflexion und Sicherung der Ergebnisse.' } },
               fields: sectionFields,
+            },
+          ],
+        },
+        // ── Praxisbeispiele ─────────────────────────────────────────────────
+        {
+          label: { en: 'Best Practices', de: 'Praxisbeispiele' },
+          fields: [
+            {
+              name: 'bestPractices',
+              type: 'array',
+              label: { en: 'Best Practices', de: 'Praxisbeispiele' },
+              localized: true,
+              labels: { singular: { en: 'Section', de: 'Abschnitt' }, plural: { en: 'Sections', de: 'Abschnitte' } },
+              admin: { ...sectionArrayAdmin, description: { en: 'Real-world examples of the method in use. Optional — the tab only appears on the website when it has content.', de: 'Beispiele aus der Praxis, wie die Methode eingesetzt wurde. Optional – der Bereich erscheint nur auf der Website, wenn Inhalte vorhanden sind.' } },
+              fields: sectionFields,
+            },
+            {
+              // NOTE: the array itself is not localized (images are shared across
+              // locales); only the caption inside each row is per-language.
+              name: 'bestPracticesGallery',
+              type: 'array',
+              label: { en: 'Gallery', de: 'Galerie' },
+              labels: { singular: { en: 'Image', de: 'Bild' }, plural: { en: 'Images', de: 'Bilder' } },
+              admin: { initCollapsed: true, description: { en: 'Images of the best-practice examples — shown as a horizontally scrollable gallery at the end of the section, with a fullscreen view.', de: 'Bilder zu den Praxisbeispielen – erscheinen als horizontal scrollbare Galerie am Ende des Bereichs, mit Vollbildansicht.' } },
+              fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                  label: { en: 'Image', de: 'Bild' },
+                },
+                {
+                  name: 'caption',
+                  type: 'text',
+                  localized: true,
+                  label: { en: 'Caption', de: 'Bildunterschrift' },
+                  admin: { description: { en: 'Shown below the image in the fullscreen view.', de: 'Erscheint unter dem Bild in der Vollbildansicht.' } },
+                },
+              ],
             },
           ],
         },

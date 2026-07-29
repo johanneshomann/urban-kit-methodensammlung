@@ -9,16 +9,21 @@ import { ChevronDown } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import RichTextRenderer from './RichTextRenderer'
+import GalleryLightbox from './GalleryLightbox'
 import type { MethodSection } from '@/types'
+
+export type AccordionGalleryImage = { url?: string | null; alt?: string | null; caption?: string | null }
 
 export type AccordionItem = {
   label: string
   sections: MethodSection[]
+  /** Optional images shown below the sections while the item is open (horizontal strip + lightbox). */
+  gallery?: AccordionGalleryImage[]
   id?: string
   iconName?: string
 }
 
-function SectionList({ sections, locale }: { sections: MethodSection[]; locale: string }) {
+function SectionList({ sections, locale, gallery }: { sections: MethodSection[]; locale: string; gallery?: AccordionGalleryImage[] }) {
   const baseId = useId()
   const [openIndexes, setOpenIndexes] = useState<Set<number>>(() => new Set())
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
@@ -31,26 +36,42 @@ function SectionList({ sections, locale }: { sections: MethodSection[]; locale: 
       return next
     })
 
+  const galleryImages = (gallery ?? []).filter((g) => g.url)
+
+  // Images sit below the section list, always visible while the item is open
+  // (not behind their own collapsible row).
+  const galleryStrip =
+    galleryImages.length > 0 ? <GalleryLightbox images={galleryImages} variant="strip" /> : null
+
   // Single untitled section → render flat, no nested accordion needed
   if (sections.length === 1 && !sections[0]?.sectionTitle?.trim()) {
     return (
-      <div className="pl-6 sm:pl-[4.5rem] pr-6">
-        <RichTextRenderer content={sections[0]?.content} />
-      </div>
+      <>
+        <div className="pl-6 sm:pl-[4.5rem] pr-6">
+          <RichTextRenderer content={sections[0]?.content} />
+        </div>
+        {galleryStrip && <div className="px-6 pt-2 pb-4">{galleryStrip}</div>}
+      </>
     )
   }
 
+  const rows: { key: string; title: string; body: React.ReactNode }[] = sections.map((section, i) => ({
+    key: String(section.id ?? i),
+    title: section.sectionTitle?.trim() || `${locale === 'de' ? 'Abschnitt' : 'Section'} ${i + 1}`,
+    body: <RichTextRenderer content={section.content} />,
+  }))
+
   return (
     <div className="flex flex-col">
-      {sections.map((section, i) => {
+      {rows.map((row, i) => {
         const isOpen = openIndexes.has(i)
         const panelId = `${baseId}-panel-${i}`
         const buttonId = `${baseId}-button-${i}`
-        const title = section.sectionTitle?.trim() || `${locale === 'de' ? 'Abschnitt' : 'Section'} ${i + 1}`
+        const title = row.title
 
         return (
           <div
-            key={section.id ?? i}
+            key={row.key}
             className="overflow-hidden transition-colors duration-200"
             style={i > 0 ? { borderTop: '1px solid var(--method-ink)' } : undefined}
           >
@@ -94,19 +115,27 @@ function SectionList({ sections, locale }: { sections: MethodSection[]; locale: 
             >
               <div style={{ overflow: 'hidden' }}>
                 <div className="pl-6 sm:pl-[4.5rem] pr-6 pb-4 pt-0 text-small" style={{ color: 'var(--method-ink)' }}>
-                  <RichTextRenderer content={section.content} />
+                  {row.body}
                 </div>
               </div>
             </div>
           </div>
         )
       })}
+      {galleryStrip && (
+        <div
+          className="px-6 pb-6 pt-4"
+          style={rows.length > 0 ? { borderTop: '1px solid var(--method-ink)' } : undefined}
+        >
+          {galleryStrip}
+        </div>
+      )}
     </div>
   )
 }
 
 export default function MethodAccordions({ items, locale = 'de' }: { items: AccordionItem[]; locale?: string }) {
-  const filtered = items.filter(item => item.sections.length > 0)
+  const filtered = items.filter(item => item.sections.length > 0 || (item.gallery?.length ?? 0) > 0)
   const [openIndex, setOpenIndex] = useState<number | null>(0)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const headerRefs = useRef<(HTMLButtonElement | null)[]>([])
@@ -197,7 +226,7 @@ export default function MethodAccordions({ items, locale = 'de' }: { items: Acco
                     transition: isOpen ? 'opacity 0.25s ease 0.1s' : 'opacity 0.15s ease',
                   }}
                 >
-                  <SectionList sections={item.sections} locale={locale} />
+                  <SectionList sections={item.sections} locale={locale} gallery={item.gallery} />
                 </div>
               </div>
             </div>

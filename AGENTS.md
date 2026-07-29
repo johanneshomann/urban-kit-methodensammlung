@@ -120,8 +120,8 @@ Method assistant (chatbot) design: [`docs/CHATBOT.md`](docs/CHATBOT.md).
    uploaded `icon` and a `lucideIcon` **string** (a name from lucide.dev, e.g.
    `"Clock"`). The UI uses the upload if present, else renders the Lucide icon by name.
 
-5. **`Methods` is the core entity**, organized into tabs (General / Procedure / Notes
-   / Links / Images / Classification / More). The `slug` auto-generates from the
+5. **`Methods` is the core entity**, organized into tabs (General / Procedure /
+   Best Practices / Notes / Links / Images / Classification / More). The `slug` auto-generates from the
    **German** title via a `beforeValidate` hook (umlauts → `ae/oe/ue`, `ß` → `ss`);
    it only regenerates while editing the default locale. See
    [`src/collections/Methods.ts`](src/collections/Methods.ts).
