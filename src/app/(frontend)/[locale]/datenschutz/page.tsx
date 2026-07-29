@@ -51,7 +51,7 @@ export default async function DatenschutzPage({ params }: Props) {
 
         <div className="relative z-10 max-w-2xl">
           <EyebrowBadge label={t('eyebrow')} opacity={0.6} />
-          <h1 className="text-hero font-black leading-none tracking-tight mb-5" style={{ color: 'var(--method-ink-accent)' }}>
+          <h1 className="text-hero font-bold leading-none tracking-tight mb-5" style={{ color: 'var(--method-ink-accent)' }}>
             {t('title')}<span style={{ color: 'var(--method)' }}>.</span>
           </h1>
           <p className="text-text leading-relaxed" style={{ color: 'var(--method-ink)' }}>

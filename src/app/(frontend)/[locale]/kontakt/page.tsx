@@ -57,7 +57,7 @@ export default async function KontaktPage({ params }: Props) {
             <BackButton locale={locale} />
             <EyebrowBadge label={t('eyebrow')} opacity={0.6} className="!mb-0" />
           </div>
-          <h1 className="text-hero font-black leading-none tracking-tight mb-5 hyphens-auto [overflow-wrap:anywhere]" style={{ color: 'var(--method-ink-accent)' }}>
+          <h1 className="text-hero font-bold leading-none tracking-tight mb-5 hyphens-auto [overflow-wrap:anywhere]" style={{ color: 'var(--method-ink-accent)' }}>
             {t('titleLine1')}<span style={{ color: 'var(--method)' }}>.</span>
           </h1>
           <p className="text-text leading-relaxed max-w-2xl" style={{ color: 'var(--method-ink)' }}>
@@ -73,7 +73,7 @@ export default async function KontaktPage({ params }: Props) {
         style={{ background: 'var(--method-very-light)' }}
       >
         <EyebrowBadge label={t('sectionEyebrow')} opacity={0.6} />
-        <h2 className="text-title font-black tracking-tight mb-10" style={{ color: 'var(--method-ink-accent)' }}>
+        <h2 className="text-title font-bold tracking-tight mb-10" style={{ color: 'var(--method-ink-accent)' }}>
           {t('sectionTitleLine1')}<br />
           {t('sectionTitleLine2')}<span style={{ color: 'var(--method)' }}>.</span>
         </h2>
@@ -89,7 +89,7 @@ export default async function KontaktPage({ params }: Props) {
               )}
               {email && (
                 <div>
-                  <p className="text-small uppercase tracking-widest font-black mb-1" style={{ color: 'var(--method-ink)' }}>
+                  <p className="text-small uppercase tracking-widest font-bold mb-1" style={{ color: 'var(--method-ink)' }}>
                     E-Mail
                   </p>
                   <a

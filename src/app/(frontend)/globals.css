@@ -269,8 +269,8 @@ html.a11y-high-contrast picture {
 .chat-md h3,
 .chat-md h4,
 .chat-md h5,
-.chat-md h6 { font-weight: 800; font-size: 1em; margin: 0.5em 0 0.2em; }
-.chat-md strong { font-weight: 800; }
+.chat-md h6 { font-weight: 700; font-size: 1em; margin: 0.5em 0 0.2em; }
+.chat-md strong { font-weight: 700; }
 .chat-md em { font-style: italic; }
 .chat-md a { text-decoration: underline; }
 .chat-md code {

@@ -101,7 +101,7 @@ export function AccessibilityButton() {
 
           {/* Font size */}
           <div className="mb-4">
-            <span className="text-small font-medium">{t('fontSize')}</span>
+            <span className="text-small font-normal">{t('fontSize')}</span>
             <div className="mt-2 flex items-center gap-2">
               <button
                 type="button"

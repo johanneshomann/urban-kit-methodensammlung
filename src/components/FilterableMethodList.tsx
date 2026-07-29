@@ -443,7 +443,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
 
       {/* Result count + active filter tags */}
       <div className="flex flex-col gap-1 pt-2">
-        <p className="text-small font-medium" style={{ color: 'var(--method-ink)' }}>
+        <p className="text-small font-normal" style={{ color: 'var(--method-ink)' }}>
           {filtered.length === 1 ? t('foundOne') : t('foundMany', { count: filtered.length })}
         </p>
         {hasAnyActive && (
@@ -484,7 +484,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
       {/* Results */}
       {filtered.length === 0 ? (
         <div className="py-20 text-center">
-          <p className="text-display font-black mb-2" style={{ color: 'var(--method-ink-accent)' }}>
+          <p className="text-display font-bold mb-2" style={{ color: 'var(--method-ink-accent)' }}>
             {t('notFound')}
           </p>
           <p className="text-text" style={{ color: 'var(--method-ink)' }}>{t('adjustFilters')}</p>

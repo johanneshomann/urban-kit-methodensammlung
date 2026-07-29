@@ -11,7 +11,7 @@ import { Send } from 'lucide-react'
 const inputClass =
   'rounded-lg border px-3 py-2 text-text outline-none focus:ring-2 transition-all'
 const labelClass =
-  'text-small uppercase tracking-widest font-black'
+  'text-small uppercase tracking-widest font-bold'
 
 export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
   const t = useTranslations('kontakt.form')
@@ -55,7 +55,7 @@ export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
   if (status === 'sent') {
     return (
       <div className="bg-method-white rounded-xl border p-7 flex flex-col gap-3 hover:shadow-md transition-all">
-        <p className="text-display font-black tracking-tight" style={{ color: 'var(--method)' }}>
+        <p className="text-display font-bold tracking-tight" style={{ color: 'var(--method)' }}>
           {t('successTitle')}<span style={{ color: 'var(--method)' }}>.</span>
         </p>
         <p className="text-text" style={{ color: 'var(--method-ink)' }}>
@@ -137,7 +137,7 @@ export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
           <button
             type="submit"
             disabled={disabled || isSending}
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-cta font-black transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-cta font-bold transition-all disabled:opacity-60 disabled:cursor-not-allowed"
             style={{ background: 'var(--method)', color: 'var(--method-white)' }}
             onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
             onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}

@@ -71,7 +71,7 @@ function SectionList({ sections, locale }: { sections: MethodSection[]; locale: 
                 {String(i + 1).padStart(2, '0')}
               </span>
               <span
-                className="text-text font-semibold flex-1 transition-colors duration-200"
+                className="text-text font-bold flex-1 transition-colors duration-200"
                 style={{ color: isOpen || hoveredIndex === i ? 'var(--method-ink-accent)' : 'var(--method-ink)' }}
               >
                 {title}
@@ -171,7 +171,7 @@ export default function MethodAccordions({ items, locale = 'de' }: { items: Acco
                 })()}
               </span>
               <span
-                className="text-display font-semibold flex-1 transition-colors duration-200"
+                className="text-display font-bold flex-1 transition-colors duration-200"
                 style={{ color: 'var(--method-ink-accent)' }}
               >
                 {item.label}

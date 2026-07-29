@@ -108,7 +108,7 @@ export default function MethodAssistant({
         <Sparkles className="w-[1.1em] h-[1.1em]" />
       </span>
       <span className="flex flex-col flex-1 min-w-0">
-        <span className="text-display font-black leading-tight" style={{ color: 'var(--method-ink-accent)' }}>
+        <span className="text-display font-bold leading-tight" style={{ color: 'var(--method-ink-accent)' }}>
           {t('title')}
         </span>
         <span className="text-small opacity-60" style={{ color: 'var(--method-ink)' }}>

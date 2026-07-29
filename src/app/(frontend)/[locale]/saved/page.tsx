@@ -77,7 +77,7 @@ export default function SavedPage() {
               className="!mb-0"
             />
           </div>
-          <h1 className="text-hero font-black leading-none tracking-tight mb-5 hyphens-auto [overflow-wrap:anywhere]" style={{ color: 'var(--method-ink-accent)' }}>
+          <h1 className="text-hero font-bold leading-none tracking-tight mb-5 hyphens-auto [overflow-wrap:anywhere]" style={{ color: 'var(--method-ink-accent)' }}>
             {t('title')}<span style={{ color: 'var(--method)' }}>.</span>
           </h1>
 
@@ -88,7 +88,7 @@ export default function SavedPage() {
               </p>
               <Link
                 href="/"
-                className="text-text font-semibold"
+                className="text-text font-bold"
                 style={{ color: 'var(--method)' }}
               >
                 {t('discover')}
@@ -107,7 +107,7 @@ export default function SavedPage() {
               <div className="flex items-center gap-3">
                 <Link
                   href="/saved/print"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-small font-black border transition-all"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-small font-bold border transition-all"
                   style={{ color: 'var(--method-ink)' }}
                   onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-accent)'; e.currentTarget.style.color = 'var(--method-white)' }}
                   onMouseLeave={e => { e.currentTarget.style.background = ''; e.currentTarget.style.color = 'var(--method-ink)' }}
@@ -137,23 +137,23 @@ export default function SavedPage() {
           {fullMethods.length > 1 && (
             <section className="px-6 md:px-16 lg:px-24 py-12 md:py-16" style={{ background: 'var(--method-very-light)' }}>
               <EyebrowBadge label={t('comparison')} opacity={0.6} />
-              <h2 className="text-title font-black tracking-tight mb-10" style={{ color: 'var(--method-ink-accent)' }}>
+              <h2 className="text-title font-bold tracking-tight mb-10" style={{ color: 'var(--method-ink-accent)' }}>
                 {t('comparison')}<span style={{ color: 'var(--method)' }}>.</span>
               </h2>
               <div className="overflow-x-auto -mx-6 md:-mx-0 px-6 md:px-0">
                 <table className="text-small border-collapse rounded-xl overflow-hidden" style={{ minWidth: '520px', width: '100%', background: 'var(--method-white)' }}>
                   <thead>
                     <tr style={{ background: 'var(--method-light)' }}>
-                      <th className="text-left px-5 py-4 border-b font-semibold sticky left-0" style={{ color: 'var(--method-ink-accent)', background: 'var(--method-light)', minWidth: '140px' }}>
+                      <th className="text-left px-5 py-4 border-b font-bold sticky left-0" style={{ color: 'var(--method-ink-accent)', background: 'var(--method-light)', minWidth: '140px' }}>
                         {locale === 'de' ? 'Methode' : 'Method'}
                       </th>
-                      <th className="text-left px-5 py-4 border-b font-semibold" style={{ color: 'var(--method-ink-accent)', minWidth: '130px' }}>
+                      <th className="text-left px-5 py-4 border-b font-bold" style={{ color: 'var(--method-ink-accent)', minWidth: '130px' }}>
                         {locale === 'de' ? 'Projektphase' : 'Project Phase'}
                       </th>
-                      <th className="text-left px-5 py-4 border-b font-semibold" style={{ color: 'var(--method-ink-accent)', minWidth: '120px' }}>
+                      <th className="text-left px-5 py-4 border-b font-bold" style={{ color: 'var(--method-ink-accent)', minWidth: '120px' }}>
                         {locale === 'de' ? 'Gruppengröße' : 'Group Size'}
                       </th>
-                      <th className="text-left px-5 py-4 border-b font-semibold" style={{ color: 'var(--method-ink-accent)', minWidth: '150px' }}>
+                      <th className="text-left px-5 py-4 border-b font-bold" style={{ color: 'var(--method-ink-accent)', minWidth: '150px' }}>
                         {locale === 'de' ? 'Merkmale' : 'Characteristics'}
                       </th>
                     </tr>
@@ -165,7 +165,7 @@ export default function SavedPage() {
                       const chars = resolveItems(m.characteristics).map(f => getLocalizedFilterName(f, locale)).filter(Boolean)
                       return (
                         <tr key={m.id} className={i < fullMethods.length - 1 ? 'border-b' : ''} style={{ borderColor: 'var(--method-light)' }}>
-                          <td className="px-5 py-4 font-semibold sticky left-0" style={{ color: 'var(--method-ink-accent)', background: 'var(--method-white)' }}>
+                          <td className="px-5 py-4 font-bold sticky left-0" style={{ color: 'var(--method-ink-accent)', background: 'var(--method-white)' }}>
                             <Link href={`/methods/${m.slug}`} className="hover:underline">
                               {m.title}
                             </Link>

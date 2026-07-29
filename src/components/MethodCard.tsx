@@ -46,7 +46,7 @@ export default function MethodCard({ method, showAuszug, background = 'var(--met
 
       {/* Content */}
       <div className="pointer-events-none flex flex-col gap-4 p-8 flex-1">
-        <p className="text-display font-black leading-tight transition-colors text-ink group-hover:text-ink-accent">
+        <p className="text-display font-bold leading-tight transition-colors text-ink group-hover:text-ink-accent">
           {method.title}
         </p>
 

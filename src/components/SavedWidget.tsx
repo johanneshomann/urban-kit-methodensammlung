@@ -44,7 +44,7 @@ export default function SavedWidget() {
       >
         {/* Header */}
         <div className="px-4 py-3 border-b flex items-center justify-between">
-          <span className="font-semibold text-small" style={{ color: 'var(--method-ink-accent)' }}>{t('title')}</span>
+          <span className="font-bold text-small" style={{ color: 'var(--method-ink-accent)' }}>{t('title')}</span>
           <span className="text-small" style={{ color: 'var(--method-ink)' }}>
             {count === 1 ? t('countOne') : t('countMany', { count })}
           </span>

@@ -48,12 +48,12 @@ function renderNode(node: LexicalNode, index: number): React.ReactNode {
       const Tag = (node.tag ?? 'h2') as keyof React.JSX.IntrinsicElements
       const classes: Record<string, string> = {
         h1: 'text-2xl font-bold mb-4 mt-6',
-        h2: 'text-xl font-semibold mb-3 mt-5',
-        h3: 'text-lg font-semibold mb-2 mt-4',
-        h4: 'text-base font-semibold mb-2 mt-3',
+        h2: 'text-xl font-bold mb-3 mt-5',
+        h3: 'text-lg font-bold mb-2 mt-4',
+        h4: 'text-base font-bold mb-2 mt-3',
       }
       return (
-        <Tag key={index} className={classes[node.tag ?? 'h2'] ?? 'font-semibold mb-2'}>
+        <Tag key={index} className={classes[node.tag ?? 'h2'] ?? 'font-bold mb-2'}>
           {node.children?.map((child, i) => renderNode(child, i))}
         </Tag>
       )

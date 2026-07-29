@@ -57,7 +57,7 @@ export default async function HelpPage({ params }: Props) {
             <BackButton locale={locale} />
             <EyebrowBadge label={t('eyebrow')} opacity={0.6} className="!mb-0" />
           </div>
-          <h1 className="text-hero font-black leading-none tracking-tight mb-5 hyphens-auto [overflow-wrap:anywhere]" style={{ color: 'var(--method-ink-accent)' }}>
+          <h1 className="text-hero font-bold leading-none tracking-tight mb-5 hyphens-auto [overflow-wrap:anywhere]" style={{ color: 'var(--method-ink-accent)' }}>
             {t('title')}<span style={{ color: 'var(--method)' }}>.</span>
           </h1>
           <p className="text-text leading-relaxed" style={{ color: 'var(--method-ink)' }}>
@@ -79,7 +79,7 @@ export default async function HelpPage({ params }: Props) {
           style={{ color: 'var(--method)', opacity: 0.07 }}
         />
         <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-16 w-full">
-          <h2 className="text-title font-black mb-6" style={{ color: 'var(--method-ink-accent)' }}>
+          <h2 className="text-title font-bold mb-6" style={{ color: 'var(--method-ink-accent)' }}>
             {t('pagesTitle')}
           </h2>
 
@@ -100,7 +100,7 @@ export default async function HelpPage({ params }: Props) {
                     >
                       <Icon className="w-4 h-4" />
                     </span>
-                    <h3 className="text-display font-semibold" style={{ color: 'var(--method-ink-accent)' }}>
+                    <h3 className="text-display font-bold" style={{ color: 'var(--method-ink-accent)' }}>
                       {title}
                     </h3>
                   </div>
@@ -130,7 +130,7 @@ export default async function HelpPage({ params }: Props) {
           style={{ color: 'var(--method)', opacity: 0.07 }}
         />
         <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-16 w-full">
-          <h2 className="text-title font-black mb-6" style={{ color: 'var(--method-ink-accent)' }}>
+          <h2 className="text-title font-bold mb-6" style={{ color: 'var(--method-ink-accent)' }}>
             {t('faqTitle')}
           </h2>
 

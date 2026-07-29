@@ -44,7 +44,7 @@ export default function FaqAccordion({ items }: { items: FaqItem[] }) {
                 onMouseLeave={() => setHovered(null)}
                 className="w-full flex items-center gap-4 px-5 md:px-6 py-4 md:py-5 text-left cursor-pointer transition-colors"
               >
-                <span className="flex-1 text-display font-semibold transition-colors" style={{ color: accent }}>
+                <span className="flex-1 text-display font-bold transition-colors" style={{ color: accent }}>
                   {item.q}
                 </span>
                 <ChevronDown

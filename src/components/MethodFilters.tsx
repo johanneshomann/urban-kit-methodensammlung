@@ -282,7 +282,7 @@ export default function MethodFilters({ filters, onChange, onClearKey, available
             >
               <span className="flex items-center gap-2 text-text" style={{ color: 'var(--method-ink)' }}>
                 <FilterIcon uploadUrl={filterIcons?.[key]} lucideName={filterLucideIcons?.[key]} className="w-[1em] h-[1em] object-contain" />
-                <span className="font-medium">{label}</span>
+                <span className="font-normal">{label}</span>
                 {hasActive && (
                   <ClearDot tooltip={`${label} zurücksetzen`} onClear={(e) => { e.stopPropagation(); onClearKey?.(key) }} />
                 )}

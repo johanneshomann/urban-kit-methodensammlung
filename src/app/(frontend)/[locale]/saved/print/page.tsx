@@ -52,7 +52,7 @@ export default function SavedPrintPage() {
           <div className="no-print flex justify-end">
             <button
               onClick={() => window.print()}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-small font-black transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-small font-bold transition-all cursor-pointer"
               style={{ background: 'var(--method)', color: 'white' }}
               onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
               onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
@@ -88,7 +88,7 @@ export default function SavedPrintPage() {
                     >
                       {i + 1}
                     </span>
-                    <h2 className="text-display font-black flex-1" style={{ color: 'var(--method-ink-accent)' }}>
+                    <h2 className="text-display font-bold flex-1" style={{ color: 'var(--method-ink-accent)' }}>
                       {title}
                     </h2>
                   </div>
@@ -102,7 +102,7 @@ export default function SavedPrintPage() {
                     <div className="flex flex-col gap-3">
                       {phases.length > 0 && (
                         <div className="flex flex-wrap items-baseline gap-2">
-                          <span className="text-small font-semibold shrink-0" style={{ color: 'var(--method-ink-accent)', opacity: 0.5, minWidth: '9rem' }}>
+                          <span className="text-small font-bold shrink-0" style={{ color: 'var(--method-ink-accent)', opacity: 0.5, minWidth: '9rem' }}>
                             {locale === 'de' ? 'Projektphase' : 'Project Phase'}
                           </span>
                           <div className="flex flex-wrap gap-1.5">
@@ -114,7 +114,7 @@ export default function SavedPrintPage() {
                       )}
                       {sizes.length > 0 && (
                         <div className="flex flex-wrap items-baseline gap-2">
-                          <span className="text-small font-semibold shrink-0" style={{ color: 'var(--method-ink-accent)', opacity: 0.5, minWidth: '9rem' }}>
+                          <span className="text-small font-bold shrink-0" style={{ color: 'var(--method-ink-accent)', opacity: 0.5, minWidth: '9rem' }}>
                             {locale === 'de' ? 'Gruppengröße' : 'Group Size'}
                           </span>
                           <div className="flex flex-wrap gap-1.5">
@@ -126,7 +126,7 @@ export default function SavedPrintPage() {
                       )}
                       {chars.length > 0 && (
                         <div className="flex flex-wrap items-baseline gap-2">
-                          <span className="text-small font-semibold shrink-0" style={{ color: 'var(--method-ink-accent)', opacity: 0.5, minWidth: '9rem' }}>
+                          <span className="text-small font-bold shrink-0" style={{ color: 'var(--method-ink-accent)', opacity: 0.5, minWidth: '9rem' }}>
                             {locale === 'de' ? 'Merkmale' : 'Characteristics'}
                           </span>
                           <div className="flex flex-wrap gap-1.5">

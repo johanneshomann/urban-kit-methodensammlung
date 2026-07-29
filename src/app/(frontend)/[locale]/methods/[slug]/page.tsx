@@ -78,7 +78,7 @@ function Section({ children, id, background = 'var(--method-white)', icon: Icon,
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="text-title font-black mb-6" style={{ color: 'var(--method-ink-accent)' }}>
+    <h2 className="text-title font-bold mb-6" style={{ color: 'var(--method-ink-accent)' }}>
       {children}
     </h2>
   )
@@ -221,7 +221,7 @@ export default async function MethodDetailPage({ params }: Props) {
             <EyebrowBadge label={locale === 'de' ? 'Methode' : 'Method'} opacity={0.6} className="!mb-0" />
           </div>
 
-          <h1 className="text-hero font-black mb-6 max-w-3xl" style={{ color: 'var(--method-ink-accent)' }}>{title}</h1>
+          <h1 className="text-hero font-bold mb-6 max-w-3xl" style={{ color: 'var(--method-ink-accent)' }}>{title}</h1>
 
           {/* Filter pills */}
           <div className="flex flex-wrap gap-2 max-w-3xl">
@@ -298,7 +298,7 @@ export default async function MethodDetailPage({ params }: Props) {
                       <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-white)' }}>
                         <Check className="w-4 h-4" strokeWidth={3} aria-hidden />
                       </span>
-                      <h2 className="text-display font-semibold" style={{ color: 'var(--method-ink-accent)' }}>
+                      <h2 className="text-display font-bold" style={{ color: 'var(--method-ink-accent)' }}>
                         {locale === 'de' ? 'Wann sinnvoll?' : 'When useful?'}
                       </h2>
                     </div>
@@ -317,7 +317,7 @@ export default async function MethodDetailPage({ params }: Props) {
                       <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-white)' }}>
                         <X className="w-4 h-4" strokeWidth={3} aria-hidden />
                       </span>
-                      <h2 className="text-display font-semibold" style={{ color: 'var(--method-ink-accent)' }}>
+                      <h2 className="text-display font-bold" style={{ color: 'var(--method-ink-accent)' }}>
                         {locale === 'de' ? 'Wann nicht sinnvoll?' : 'When not useful?'}
                       </h2>
                     </div>
@@ -361,7 +361,7 @@ export default async function MethodDetailPage({ params }: Props) {
                   <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-white)' }}>
                     <Lightbulb className="w-[18px] h-[18px]" aria-hidden />
                   </span>
-                  <h2 className="text-display font-semibold" style={{ color: 'var(--method-ink-accent)' }}>
+                  <h2 className="text-display font-bold" style={{ color: 'var(--method-ink-accent)' }}>
                     {locale === 'de' ? 'Tipps' : 'Tips'}
                   </h2>
                 </div>
@@ -380,7 +380,7 @@ export default async function MethodDetailPage({ params }: Props) {
                   <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-white)' }}>
                     <Ban className="w-[18px] h-[18px]" aria-hidden />
                   </span>
-                  <h2 className="text-display font-semibold" style={{ color: 'var(--method-ink-accent)' }}>
+                  <h2 className="text-display font-bold" style={{ color: 'var(--method-ink-accent)' }}>
                     {locale === 'de' ? 'Ungeeignet für' : 'Not suitable for'}
                   </h2>
                 </div>
@@ -400,7 +400,7 @@ export default async function MethodDetailPage({ params }: Props) {
                 <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-white)' }}>
                   <Layers className="w-[18px] h-[18px]" aria-hidden />
                 </span>
-                <h2 className="text-display font-semibold" style={{ color: 'var(--method-ink-accent)' }}>
+                <h2 className="text-display font-bold" style={{ color: 'var(--method-ink-accent)' }}>
                   {locale === 'de' ? 'Ähnliche Methoden' : 'Similar Methods'}
                 </h2>
               </div>
@@ -427,7 +427,7 @@ export default async function MethodDetailPage({ params }: Props) {
                           loading="lazy"
                         />
                         <span className="flex flex-col min-w-0 flex-1">
-                          <span className="text-text font-semibold truncate transition-colors" style={{ color: 'var(--method-ink-accent)' }}>
+                          <span className="text-text font-bold truncate transition-colors" style={{ color: 'var(--method-ink-accent)' }}>
                             {m.title}
                           </span>
                           {subtitle && (
