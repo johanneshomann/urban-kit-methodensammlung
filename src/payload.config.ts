@@ -30,6 +30,7 @@ import { en } from '@payloadcms/translations/languages/en'
 import { de } from '@payloadcms/translations/languages/de'
 import path from 'path'
 import { buildConfig } from 'payload'
+import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
 import { CharacteristicsSettings } from './globals/CharacteristicsSettings'
@@ -213,6 +214,8 @@ export default buildConfig({
     url: process.env.MONGODB_URI ?? 'mongodb://localhost:27017/urban-kit',
   }),
   serverURL: process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000',
+  // Required for image processing (resizing / format conversion on upload).
+  sharp,
   upload: {
     limits: {
       fileSize: 5000000,

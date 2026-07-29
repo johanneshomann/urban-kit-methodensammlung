@@ -72,7 +72,7 @@ src/
 | `TargetGroups` | `target-groups` | Filter: intended participant groups (+ explanation) |
 | `GroupSizes` | `group-sizes` | Filter: group-size ranges |
 | `Characteristics` | `characteristics` | Filter: character (playful, structured, …) |
-| `Media` | `media` | Image uploads (`public/media`), publicly readable |
+| `Media` | `media` | Image uploads (`public/media`), publicly readable; `image/*` only, ≤ 5 MB. Sharp re-encodes the stored original as WebP (max 2400px) and generates `thumbnail` 400 / `card` 800 / `hero` 1600 px WebP renditions — no full-size camera files are kept |
 | `Icons` | `icons` | Icon uploads (`public/icons`) |
 | `Users` | `users` | Admin users; `role` ∈ {admin, editor}. Admin-only |
 | `ApiClients` | `api-clients` | Read-only API keys. Admin-only |
