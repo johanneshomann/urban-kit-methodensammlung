@@ -26,7 +26,7 @@ import config from '@payload-config'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Link } from '@/navigation'
-import { ChevronDown, Info, Flag, ListChecks, Lightbulb, Check, X, ArrowRight, Images, Layers } from 'lucide-react'
+import { Ban, ChevronDown, Info, Flag, ListChecks, Lightbulb, Check, X, ArrowRight, Images, Layers } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { EyebrowBadge } from '@/components/EyebrowBadge'
@@ -356,10 +356,7 @@ export default async function MethodDetailPage({ params }: Props) {
               <div className="flex flex-col gap-0 rounded-xl overflow-hidden shadow-sm" style={{ background: 'var(--method-white)' }}>
                 <div className="flex items-center gap-4 px-6 py-4">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-white)' }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                      <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
-                      <path d="M9 18h6"/><path d="M10 22h4"/>
-                    </svg>
+                    <Lightbulb className="w-[18px] h-[18px]" aria-hidden />
                   </span>
                   <h2 className="text-display font-semibold" style={{ color: 'var(--method-ink-accent)' }}>
                     {locale === 'de' ? 'Tipps' : 'Tips'}
@@ -378,9 +375,7 @@ export default async function MethodDetailPage({ params }: Props) {
               <div className="flex flex-col gap-0 rounded-xl overflow-hidden shadow-sm" style={{ background: 'var(--method-white)' }}>
                 <div className="flex items-center gap-4 px-6 py-4">
                   <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-white)' }}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                      <circle cx="12" cy="12" r="10"/><path d="m4.9 4.9 14.2 14.2"/>
-                    </svg>
+                    <Ban className="w-[18px] h-[18px]" aria-hidden />
                   </span>
                   <h2 className="text-display font-semibold" style={{ color: 'var(--method-ink-accent)' }}>
                     {locale === 'de' ? 'Ungeeignet für' : 'Not suitable for'}
