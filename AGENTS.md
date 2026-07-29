@@ -50,6 +50,8 @@ comment what would otherwise need reverse-engineering, and skip the obvious.
 | **Regenerate import map** | `npm run generate:importmap` | **Run after adding/moving a custom admin component** referenced in `payload.config.ts` |
 | Seed data | `npm run seed` | Idempotent; populates filter taxonomies + platform settings |
 | Migrate localization | `npm run migrate:localization` | One-off `*De/*En` → Payload localized format |
+| Backfill similar links | `npm run backfill:similar` | One-off: make existing `aehnlicheMethoden` links reciprocal |
+| Backup / restore | `npm run backup` / `npm run restore` | DB + media backup (cron-able on the server), DB restore |
 | Local DB (Docker) | `docker-compose up mongodb` | MongoDB on `127.0.0.1:27018` |
 | Full stack (Docker) | `docker-compose up` | App `3040→3000` + MongoDB |
 
@@ -64,7 +66,7 @@ There is no lint or test command. To sanity-check a change, run `npm run build`
 
 ```
 seed.ts                     # Idempotent seed: taxonomies + platform-settings global
-scripts/migrate-localization.ts
+scripts/                    # migrate-localization, backfill-similar-methods, backup.sh, restore.sh
 docker-compose.yml          # app + mongo:7
 Dockerfile                  # multi-stage; runs generate:importmap + build
 .env.example                # copy to .env / .env.local
@@ -88,6 +90,7 @@ src/
 
 Full inventory: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 Data model & fields: [`docs/CONTENT-MODEL.md`](docs/CONTENT-MODEL.md).
+Method assistant (chatbot) design: [`docs/CHATBOT.md`](docs/CHATBOT.md).
 
 ---
 
