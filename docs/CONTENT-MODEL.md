@@ -83,9 +83,14 @@ Characteristics (Einfach/Strukturiert/Spielerisch/Aktivierend/Kreativ).
 
 ## Globals
 
-- **`PlatformSettings`** (admin-only): brand + text colors, legal texts (Impressum,
-  Datenschutz, Kontakt), and email operational settings (recipient, from-name, subject
-  prefix, enable toggle). SMTP **credentials** are NOT here — they come from env vars.
+- **`PlatformSettings`** (admin-only): brand + text colors, branding uploads (admin
+  logo, favicon, OG sharing image), the Kontakt page content, and email operational
+  settings (recipient, from-name, subject prefix, enable toggle). SMTP **credentials**
+  are NOT here — they come from env vars.
+- **`Legal`** (admin-only): the legal texts — Impressum, Datenschutz, cookie policy.
+- **`Assistant`** (admin-only, **`read` locked** — it stores the API key): method-assistant
+  config (enable, provider, API key, model, greeting, extra instructions, rate limit),
+  with env-var fallbacks. See [`CHATBOT.md`](CHATBOT.md).
 - **Eight filter-settings globals** (admin+editor): each holds the display `icon` /
   `lucideIcon` fallback and an active flag for one filter group on the public site
   (`ParticipationDepthSettings`, `ProjectPhaseSettings`, `GoalSettings`,

@@ -46,8 +46,9 @@ src/
 - **Collections** are registered in two groups: content/filters/assets get
   `lockWritesToEditors` applied in bulk via `.map(...)`; `Users` and `ApiClients` are
   admin-only and listed last.
-- **Globals:** `PlatformSettings` is admin-only (`lockGlobalWritesToAdmins`); the eight
-  filter-settings globals get `lockGlobalWritesToEditors`.
+- **Globals:** `PlatformSettings`, `Legal` and `Assistant` are admin-only
+  (`lockGlobalWritesToAdmins`; `Assistant` additionally locks `read` — it holds the API
+  key); the eight filter-settings globals get `lockGlobalWritesToEditors`.
 - **Editor:** Lexical with a fixed feature set (headings, lists, links, upload,
   relationship, align, blockquote, code, sub/superscript, etc.).
 - **Email:** Nodemailer adapter; SMTP from env, ethereal mock when `SMTP_HOST` unset.
@@ -83,7 +84,9 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 
 | Global | Writable by | Purpose |
 |---|---|---|
-| `PlatformSettings` | admin | Brand/text colors, Impressum, Datenschutz, Kontakt, email (recipient, subject prefix, enable toggle) |
+| `PlatformSettings` | admin | Colors, branding uploads (admin logo, favicon, OG image), Kontakt, email (recipient, from-name, subject prefix, enable toggle) |
+| `Legal` | admin | Legal texts: Impressum, Datenschutz, cookie policy |
+| `Assistant` | admin | Method-assistant config (provider, API key, model, greeting, rate limit). **`read` is locked** so the key can't leak via REST — see [`CHATBOT.md`](CHATBOT.md) |
 | `ParticipationDepthSettings` | admin+editor | Filter display icon + lucide fallback + active flag |
 | `ProjectPhaseSettings` | admin+editor | ″ |
 | `GoalSettings` | admin+editor | ″ |
@@ -115,14 +118,15 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 ## Components
 
 **Frontend (`src/components/`):** `FilterableMethodList`, `MethodFilters`,
-`CharacteristicFilter`, `MethodCard`, `MethodCardSlider`, `MethodAccordions`,
-`MethodStickyTitle`, `GalleryLightbox`, `SaveButton`, `SavedWidget`, `SavedExport`,
-`SectionDotsNav`, `ExpandableContent`, `FaqAccordion`, `RichTextRenderer`,
-`LanguageSwitcher`, `NavMenu`, plus `accessibility/`.
+`MethodCard`, `MethodCardSlider`, `MethodAccordions`, `MethodStickyTitle`,
+`MethodAssistant`, `AssistantImmersive`, `CurrentMethodProvider`, `GalleryLightbox`,
+`SaveButton`, `SavedWidget`, `SectionDotsNav`, `ExpandableContent`, `FaqAccordion`,
+`RichTextRenderer`, `LanguageSwitcher`, `NavMenu`, `SiteFooter`, `BackButton`,
+`CookieNotice`, `EyebrowBadge`, plus `accessibility/`.
 
 **Admin (`src/components/admin/`):** `TopNav`, `BottomNav`, `CollapseFilterGroups`,
-`ColorPicker`, `ColorResetButton`, `LucideIconPreview`, `SectionRowLabel`,
-`views/Documentation` + `DocumentationContent`.
+`BrandLogo`, `BrandIcon`, `ColorPicker`, `ColorResetButton`, `LucideIconPreview`,
+`SectionRowLabel`, `views/Documentation` + `DocumentationContent`.
 
 ## `src/lib/`
 
@@ -136,9 +140,13 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 | `filterConfig.ts` | Filter configuration constants |
 | `localize.ts` | i18n helper |
 | `saved.ts` | localStorage API for saved methods |
+| `platformIdentity.ts` | Branding uploads (admin logo, favicon, OG image) with built-in defaults |
+| `methodAssistant/` | Method-assistant engine (settings, prompt, tools, rate limit) — see [`CHATBOT.md`](CHATBOT.md) |
 
 ## Data / scripts
 
 - `seed.ts` — idempotent seed of taxonomies + `platform-settings`. `npm run seed`.
 - `scripts/migrate-localization.ts` — one-off `*De/*En` → Payload localized migration.
+- `scripts/backfill-similar-methods.ts` — one-off: make existing `aehnlicheMethoden` links reciprocal. `npm run backfill:similar`.
+- `scripts/backup.sh` / `scripts/restore.sh` — DB + uploaded-media backup (cron-able) and DB restore. `npm run backup` / `npm run restore`.
 - No traditional migrations: Payload derives collections from the TS config.
