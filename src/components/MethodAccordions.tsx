@@ -12,7 +12,7 @@ import RichTextRenderer from './RichTextRenderer'
 import GalleryLightbox from './GalleryLightbox'
 import type { MethodSection } from '@/types'
 
-export type AccordionGalleryImage = { url?: string | null; alt?: string | null; caption?: string | null }
+export type AccordionGalleryImage = { url?: string | null; thumbUrl?: string | null; alt?: string | null; caption?: string | null }
 
 export type AccordionItem = {
   label: string

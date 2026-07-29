@@ -22,7 +22,7 @@ export default function MethodCard({ method, showAuszug, background = 'var(--met
     ? method.characteristics.map((c) => (typeof c === 'object' ? c : null)).filter(Boolean) as FilterItem[]
     : []
 
-  const imageUrl = getMethodImageUrl(method.image, method.id)
+  const imageUrl = getMethodImageUrl(method.image, method.id, 'card')
 
   return (
     <div className="relative group rounded-xl overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all" style={{ background }}>

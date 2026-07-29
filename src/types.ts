@@ -23,12 +23,17 @@ export type MethodSection = {
   content?: unknown
 }
 
+export type MediaSizeName = 'thumbnail' | 'card' | 'hero'
+
 export type MediaFile = {
   id: string
   url?: string | null
   alt?: string | null
   width?: number | null
   height?: number | null
+  // WebP renditions generated on upload (see Media collection imageSizes).
+  // Older uploads (pre image-processing) have no sizes — always fall back to `url`.
+  sizes?: Partial<Record<MediaSizeName, { url?: string | null; width?: number | null; height?: number | null }>> | null
 }
 
 export type GalleryRow = {

@@ -8,7 +8,9 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 
-type GalleryImage = { url?: string | null; alt?: string | null; caption?: string | null }
+// `thumbUrl` (a smaller WebP rendition) is used for the thumbnails; the
+// fullscreen lightbox always shows the original `url`.
+type GalleryImage = { url?: string | null; thumbUrl?: string | null; alt?: string | null; caption?: string | null }
 
 /**
  * Image gallery with a fullscreen lightbox (keyboard nav, scroll lock).
@@ -17,7 +19,7 @@ type GalleryImage = { url?: string | null; alt?: string | null; caption?: string
  * The lightbox caption prefers `caption` (localized, per-use) over `alt`.
  */
 export default function GalleryLightbox({ images, variant = 'grid' }: { images: GalleryImage[]; variant?: 'grid' | 'strip' }) {
-  const items = images.filter((img) => img.url) as { url: string; alt?: string | null; caption?: string | null }[]
+  const items = images.filter((img) => img.url) as { url: string; thumbUrl?: string | null; alt?: string | null; caption?: string | null }[]
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const [mounted, setMounted] = useState(false)
 
@@ -100,7 +102,7 @@ export default function GalleryLightbox({ images, variant = 'grid' }: { images: 
               }`}
             >
               <img
-                src={img.url}
+                src={img.thumbUrl || img.url}
                 alt={img.alt ?? img.caption ?? ''}
                 className={`object-cover transition-transform duration-300 group-hover:scale-105 ${
                   variant === 'strip' ? 'h-44 w-64 sm:h-48 sm:w-72' : 'w-full h-56'

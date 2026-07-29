@@ -139,7 +139,7 @@ export default async function MethodDetailPage({ params }: Props) {
     .map(c => typeof c === 'object' ? c as FilterItem : null)
     .filter(Boolean) as FilterItem[]
 
-  const imageUrl = getMethodImageUrl(method.image, method.id)
+  const imageUrl = getMethodImageUrl(method.image, method.id, 'hero')
   // Fields are already in the requested locale (query passes `locale`), with DE fallback.
   const auszug = method.auszug
   const title = method.title
@@ -160,9 +160,9 @@ export default async function MethodDetailPage({ params }: Props) {
     .map((row) => {
       const img = row?.image
       if (!img || typeof img !== 'object' || !img.url) return null
-      return { url: img.url, alt: img.alt ?? null, caption: row.caption ?? null }
+      return { url: img.url, thumbUrl: img.sizes?.card?.url ?? null, alt: img.alt ?? null, caption: row.caption ?? null }
     })
-    .filter(Boolean) as { url: string; alt: string | null; caption: string | null }[]
+    .filter(Boolean) as { url: string; thumbUrl: string | null; alt: string | null; caption: string | null }[]
 
   const tipps = method.tipps
   const ungeeignet = method.ungeeignetFuer
@@ -172,8 +172,11 @@ export default async function MethodDetailPage({ params }: Props) {
   const aehnliche = (method.aehnlicheMethoden ?? []).map(resolveMethod).filter(Boolean) as Methode[]
   const weitergehen = (method.wieKannEsWeiterGehen ?? []).map(resolveMethod).filter(Boolean) as Methode[]
   const gallery = (method.gallery ?? [])
-    .map((g) => (typeof g === 'object' && g ? g : null))
-    .filter(Boolean) as { url?: string | null; alt?: string | null }[]
+    .map((g) => {
+      if (typeof g !== 'object' || !g?.url) return null
+      return { url: g.url, thumbUrl: g.sizes?.card?.url ?? null, alt: g.alt ?? null }
+    })
+    .filter(Boolean) as { url: string; thumbUrl: string | null; alt: string | null }[]
 
   const savedItem = {
     id: String(method.id),
@@ -433,7 +436,7 @@ export default async function MethodDetailPage({ params }: Props) {
                         className="group flex items-center gap-4 -mx-3 px-3 py-2 rounded-xl transition-colors hover:bg-[var(--method-very-light)]"
                       >
                         <img
-                          src={getMethodImageUrl(m.image, m.id)}
+                          src={getMethodImageUrl(m.image, m.id, 'thumbnail')}
                           alt=""
                           aria-hidden
                           className="w-20 h-14 object-cover rounded-lg shrink-0"
