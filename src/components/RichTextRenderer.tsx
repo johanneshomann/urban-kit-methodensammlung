@@ -28,6 +28,28 @@ type LexicalNode = {
   listType?: string
   url?: string
   newTab?: boolean
+  // Payload's LinkFeature serializes link data under `fields`, not on the node
+  // itself. `doc` is populated (object) at sufficient query depth.
+  fields?: {
+    url?: string
+    newTab?: boolean
+    linkType?: 'custom' | 'internal'
+    doc?: { relationTo?: string; value?: { slug?: string | null } | string | null } | null
+  }
+}
+
+// Resolve a link/autolink node's href: custom URL (Payload keeps it under
+// `fields`; plain Lexical uses `url`) or a populated internal method link.
+function getLinkHref(node: LexicalNode): string | undefined {
+  const f = node.fields
+  if (f?.linkType === 'internal') {
+    const value = f.doc?.value
+    if (f.doc?.relationTo === 'methods' && value && typeof value === 'object' && value.slug) {
+      return `/methods/${value.slug}`
+    }
+    return undefined
+  }
+  return f?.url ?? node.url
 }
 
 type RichTextContent = {
@@ -75,17 +97,26 @@ function renderNode(node: LexicalNode, index: number): React.ReactNode {
         </li>
       )
     case 'link':
+    case 'autolink': {
+      const href = getLinkHref(node)
+      const children = node.children?.map((child, i) => renderNode(child, i))
+      // No resolvable target (e.g. internal link whose doc wasn't populated or
+      // was deleted) → render the text without a dead anchor.
+      if (!href) return <React.Fragment key={index}>{children}</React.Fragment>
+      const newTab = node.fields?.newTab ?? node.newTab
       return (
         <a
           key={index}
-          href={node.url}
-          target={node.newTab ? '_blank' : undefined}
-          rel={node.newTab ? 'noopener noreferrer' : undefined}
-          className="text-blue-600 underline hover:text-blue-800"
+          href={href}
+          target={newTab ? '_blank' : undefined}
+          rel={newTab ? 'noopener noreferrer' : undefined}
+          className="underline transition-colors"
+          style={{ color: 'var(--method-dark)' }}
         >
-          {node.children?.map((child, i) => renderNode(child, i))}
+          {children}
         </a>
       )
+    }
     case 'text': {
       let content: React.ReactNode = node.text ?? ''
       const fmt = node.format ?? 0
