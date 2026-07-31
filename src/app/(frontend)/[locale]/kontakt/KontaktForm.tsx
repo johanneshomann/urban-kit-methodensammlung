@@ -4,7 +4,7 @@
 
 'use client'
 
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Send } from 'lucide-react'
 
@@ -15,6 +15,7 @@ const labelClass =
 
 export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
   const t = useTranslations('kontakt.form')
+  const baseId = useId()
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle')
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -72,12 +73,14 @@ export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
       <fieldset disabled={disabled || isSending} className="contents">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col gap-1.5">
-            <label className={labelClass} style={{ color: 'var(--method-ink)' }}>
+            <label htmlFor={`${baseId}-name`} className={labelClass} style={{ color: 'var(--method-ink)' }}>
               {t('name')}
             </label>
             <input
+              id={`${baseId}-name`}
               type="text"
               name="name"
+              autoComplete="name"
               placeholder={t('namePlaceholder')}
               required
               className={inputClass}
@@ -85,12 +88,14 @@ export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
             />
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className={labelClass} style={{ color: 'var(--method-ink)' }}>
+            <label htmlFor={`${baseId}-email`} className={labelClass} style={{ color: 'var(--method-ink)' }}>
               {t('email')}
             </label>
             <input
+              id={`${baseId}-email`}
               type="email"
               name="email"
+              autoComplete="email"
               placeholder={t('emailPlaceholder')}
               required
               className={inputClass}
@@ -100,10 +105,11 @@ export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className={labelClass} style={{ color: 'var(--method-ink)' }}>
+          <label htmlFor={`${baseId}-betreff`} className={labelClass} style={{ color: 'var(--method-ink)' }}>
             {t('subject')}
           </label>
           <input
+            id={`${baseId}-betreff`}
             type="text"
             name="betreff"
             placeholder={t('subjectPlaceholder')}
@@ -114,10 +120,11 @@ export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label className={labelClass} style={{ color: 'var(--method-ink)' }}>
+          <label htmlFor={`${baseId}-nachricht`} className={labelClass} style={{ color: 'var(--method-ink)' }}>
             {t('message')}
           </label>
           <textarea
+            id={`${baseId}-nachricht`}
             rows={5}
             name="nachricht"
             placeholder={t('messagePlaceholder')}
