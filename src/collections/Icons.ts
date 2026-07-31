@@ -27,9 +27,17 @@ export const Icons: CollectionConfig = {
       label: { en: 'Name', de: 'Name' },
     },
     {
+      // Deliberately optional: icons render as decorative on the website
+      // (aria-hidden, always next to their visible text label).
       name: 'alt',
       type: 'text',
       label: { en: 'Alt Text', de: 'Alternativtext' },
+      admin: {
+        description: {
+          de: 'Optional – Icons erscheinen auf der Website dekorativ neben ihrem Namen und werden von Screenreadern übersprungen. Nur ausfüllen, falls das Icon irgendwo allein stehend Bedeutung tragen soll.',
+          en: 'Optional – icons appear decoratively next to their visible name on the website and are skipped by screen readers. Fill in only if the icon needs to carry meaning on its own somewhere.',
+        },
+      },
     },
   ],
 }

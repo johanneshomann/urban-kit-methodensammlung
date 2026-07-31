@@ -50,6 +50,7 @@ comment what would otherwise need reverse-engineering, and skip the obvious.
 | **Regenerate import map** | `npm run generate:importmap` | **Run after adding/moving a custom admin component** referenced in `payload.config.ts` |
 | Seed data | `npm run seed` | Idempotent; populates filter taxonomies + platform settings |
 | Migrate localization | `npm run migrate:localization` | One-off `*De/*En` → Payload localized format |
+| Migrate media alt | `npm run migrate:media-alt` | One-off: plain-string media `alt` → localized `{ de: … }` |
 | Backfill similar links | `npm run backfill:similar` | One-off: make existing `aehnlicheMethoden` links reciprocal |
 | Backup / restore | `npm run backup` / `npm run restore` | DB + media backup (cron-able on the server), DB restore |
 | Local DB (Docker) | `docker-compose up mongodb` | MongoDB on `127.0.0.1:27018` |

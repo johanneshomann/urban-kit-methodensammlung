@@ -12,6 +12,7 @@
     "seed": "npx tsx seed.ts",
     "migrate:localization": "npx tsx scripts/migrate-localization.ts",
     "backfill:similar": "npx tsx scripts/backfill-similar-methods.ts",
+    "migrate:media-alt": "npx tsx scripts/migrate-media-alt-localized.ts",
     "backup": "bash scripts/backup.sh",
     "restore": "bash scripts/restore.sh"
   },

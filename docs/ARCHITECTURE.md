@@ -148,5 +148,6 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 - `seed.ts` — idempotent seed of taxonomies + `platform-settings`. `npm run seed`.
 - `scripts/migrate-localization.ts` — one-off `*De/*En` → Payload localized migration.
 - `scripts/backfill-similar-methods.ts` — one-off: make existing `aehnlicheMethoden` links reciprocal. `npm run backfill:similar`.
+- `scripts/migrate-media-alt-localized.ts` — one-off: plain-string media `alt` → localized `{ de: … }` (the field is now localized + required in German). `npm run migrate:media-alt`.
 - `scripts/backup.sh` / `scripts/restore.sh` — DB + uploaded-media backup (cron-able) and DB restore. `npm run backup` / `npm run restore`.
 - No traditional migrations: Payload derives collections from the TS config.

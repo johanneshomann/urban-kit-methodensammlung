@@ -4,6 +4,7 @@
 
 import type { CollectionConfig } from 'payload'
 import path from 'path'
+import { requiredTextInDefaultLocale } from '../lib/requiredInDefaultLocale'
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -33,9 +34,19 @@ export const Media: CollectionConfig = {
   },
   fields: [
     {
+      // Required in German (WCAG 1.1.1) — gallery images are content, and the
+      // lightbox reads this aloud / shows it as caption fallback.
       name: 'alt',
       type: 'text',
       label: { en: 'Alt Text', de: 'Alternativtext' },
+      localized: true,
+      validate: requiredTextInDefaultLocale,
+      admin: {
+        description: {
+          de: 'Beschreibt den Bildinhalt für Screenreader (Pflicht auf Deutsch, Barrierefreiheit). Kurz sagen, was zu sehen ist und warum es relevant ist – ein Satz, ca. 125 Zeichen. Nicht mit „Bild von …“ oder „Foto von …“ beginnen, das kündigen Screenreader ohnehin an. Beispiel: „Teilnehmende kleben Ideenkarten an eine Stellwand.“',
+          en: 'Describes the image for screen readers (required in German, accessibility). Briefly say what is shown and why it matters – one sentence, ~125 characters. Don’t start with “image of” / “photo of”, screen readers announce that anyway. Example: “Participants pinning idea cards to a display board.”',
+        },
+      },
     },
   ],
 }
