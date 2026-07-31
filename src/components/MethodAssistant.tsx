@@ -41,7 +41,9 @@ export default function MethodAssistant({
   const [messages, setMessages] = useState<Msg[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  // Holds the message KEY ('error' | 'errorRate'), not the text — rendered via
+  // t.rich so the message can embed a link to the manual filter search.
+  const [error, setError] = useState<'error' | 'errorRate' | null>(null)
 
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -81,7 +83,7 @@ export default function MethodAssistant({
       })
 
       if (!res.ok) {
-        setError(res.status === 429 ? t('errorRate') : t('error'))
+        setError(res.status === 429 ? 'errorRate' : 'error')
         return
       }
 
@@ -91,7 +93,7 @@ export default function MethodAssistant({
         { role: 'assistant', content: data.reply, methods: data.methods },
       ])
     } catch {
-      setError(t('error'))
+      setError('error')
     } finally {
       setLoading(false)
     }
@@ -194,7 +196,7 @@ export default function MethodAssistant({
               <div className="flex justify-start">
                 <div
                   className="max-w-[80%] md:max-w-[calc(80%-60px)] px-4 py-2.5 rounded-2xl text-text"
-                  style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+                  style={{ background: 'var(--method-light)', color: 'var(--method-ink)' }}
                 >
                   <ChatMarkdown>{m.content}</ChatMarkdown>
                 </div>
@@ -234,7 +236,7 @@ export default function MethodAssistant({
           <div className="flex justify-start">
             <div
               className="inline-flex gap-1 px-4 py-2.5 rounded-2xl text-text"
-              style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+              style={{ background: 'var(--method-light)', color: 'var(--method-ink)' }}
             >
               <span className="animate-bounce" style={{ animationDelay: '0ms' }}>·</span>
               <span className="animate-bounce" style={{ animationDelay: '120ms' }}>·</span>
@@ -257,8 +259,14 @@ export default function MethodAssistant({
         ))}
 
       {error && (
-        <p className="text-small" style={{ color: 'var(--method-accent)' }}>
-          {error}
+        <p className="text-small" style={{ color: 'var(--method-dark)' }}>
+          {t.rich(error, {
+            link: (chunks) => (
+              <Link href="/#methods" className="underline hover:opacity-70 transition-opacity">
+                {chunks}
+              </Link>
+            ),
+          })}
         </p>
       )}
     </div>

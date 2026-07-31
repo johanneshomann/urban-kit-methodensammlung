@@ -122,8 +122,8 @@
     "greeting": "Hi! I'll help you find methods that fit your project. Describe it in your own words — or we can go through it step by step. What are you planning?",
     "placeholder": "Describe your project or reply …",
     "send": "Send",
-    "error": "Something went wrong. Please try again or use the filters below.",
-    "errorRate": "A few too many requests right now. Please wait a moment and use the filters below in the meantime.",
+    "error": "Something went wrong. Please try again or use the <link>filter search</link>.",
+    "errorRate": "A few too many requests right now. Please wait a moment and use the <link>filter search</link> in the meantime.",
     "privacyNotice": "By using the assistant you agree to the <link>privacy policy</link>.",
     "imprint": "Imprint"
   },
