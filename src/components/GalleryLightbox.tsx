@@ -7,6 +7,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useFocusTrap } from '@/hooks/useFocusTrap'
 
 // `thumbUrl` (a smaller WebP rendition) is used for the thumbnails; the
 // fullscreen lightbox always shows the original `url`.
@@ -25,6 +26,7 @@ export default function GalleryLightbox({ images, variant = 'grid' }: { images: 
 
   // Strip variant: scroll-arrow state (mirrors MethodCardSlider)
   const trackRef = useRef<HTMLDivElement>(null)
+  const dialogRef = useRef<HTMLDivElement>(null)
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(false)
 
@@ -62,6 +64,8 @@ export default function GalleryLightbox({ images, variant = 'grid' }: { images: 
     () => setOpenIndex((i) => (i === null ? i : (i + 1) % items.length)),
     [items.length],
   )
+
+  useFocusTrap(openIndex !== null, dialogRef)
 
   useEffect(() => {
     if (openIndex === null) return
@@ -142,8 +146,10 @@ export default function GalleryLightbox({ images, variant = 'grid' }: { images: 
       {mounted && openIndex !== null &&
         createPortal(
           <div
+            ref={dialogRef}
             role="dialog"
             aria-modal="true"
+            aria-label={items[openIndex].caption || items[openIndex].alt || 'Bildansicht'}
             onClick={close}
             className="lightbox-fade fixed inset-0 z-[9999] flex items-center justify-center p-6"
             style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)' }}
@@ -153,6 +159,7 @@ export default function GalleryLightbox({ images, variant = 'grid' }: { images: 
               type="button"
               onClick={close}
               aria-label="Schließen"
+              data-autofocus
               className="absolute top-4 right-4 w-11 h-11 rounded-full flex items-center justify-center transition-transform hover:scale-110"
               style={{ background: 'var(--method-white-transparent)', color: 'var(--method-ink-accent)', backdropFilter: 'blur(6px)' }}
             >

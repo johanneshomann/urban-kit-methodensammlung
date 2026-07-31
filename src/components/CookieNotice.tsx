@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/navigation'
 import { Cookie, X } from 'lucide-react'
+import { useFocusTrap } from '@/hooks/useFocusTrap'
 
 /**
  * Informational cookie/storage notice — not a consent gate (the site uses only
@@ -26,6 +27,9 @@ export default function CookieNotice() {
   const [visible, setVisible] = useState(false)
   const visibleRef = useRef(false)
   const ackedRef = useRef(false)
+  const dialogRef = useRef<HTMLDivElement>(null)
+
+  useFocusTrap(visible, dialogRef)
 
   useEffect(() => {
     try {
@@ -86,6 +90,16 @@ export default function CookieNotice() {
     }
   }
 
+  // Escape closes the notice — required while the focus trap is active (WCAG 2.1.2).
+  useEffect(() => {
+    if (!visible) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') dismiss()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [visible])
+
   if (!visible) return null
 
   return (
@@ -95,6 +109,7 @@ export default function CookieNotice() {
       onClick={dismiss}
     >
       <div
+        ref={dialogRef}
         role="dialog"
         aria-modal="true"
         aria-label={t('title')}
@@ -123,6 +138,7 @@ export default function CookieNotice() {
             <div className="mt-4 flex items-center gap-4">
               <button
                 onClick={dismiss}
+                data-autofocus
                 className="text-small font-bold px-4 py-2 rounded-xl transition-colors cursor-pointer"
                 style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-dark)'; e.currentTarget.style.color = 'var(--method-white)' }}
