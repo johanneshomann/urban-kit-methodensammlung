@@ -38,8 +38,8 @@ export default function BackButton({
       onClick={handleBack}
       aria-label={label}
       title={label}
-      className="inline-flex items-center justify-center px-2 py-1 rounded-md text-small leading-none shrink-0 transition-opacity hover:opacity-100 cursor-pointer"
-      style={{ color: 'var(--method-white)', background: 'var(--method-ink)', opacity: 0.6 }}
+      className="inline-flex items-center justify-center px-2 py-1 rounded-md text-small leading-none shrink-0 transition-colors cursor-pointer hover:bg-[var(--method-ink-accent)]"
+      style={{ color: 'var(--method-white)', background: 'var(--method-ink)' }}
     >
       <ArrowLeft className="w-[1em] h-[1em]" aria-hidden />
     </button>

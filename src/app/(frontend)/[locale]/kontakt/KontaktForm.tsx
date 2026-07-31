@@ -145,9 +145,9 @@ export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
             type="submit"
             disabled={disabled || isSending}
             className="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-cta font-bold transition-all disabled:opacity-60 disabled:cursor-not-allowed"
-            style={{ background: 'var(--method)', color: 'var(--method-white)' }}
-            onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
-            onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
+            style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-dark)'; e.currentTarget.style.color = 'var(--method-white)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-ink-accent)' }}
           >
             <Send className="w-[1em] h-[1em] shrink-0" />
             {isSending ? t('sending') : t('submit')}

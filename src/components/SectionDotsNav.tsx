@@ -102,10 +102,10 @@ export default function SectionDotsNav({ items, label = 'Abschnitte' }: { items:
               aria-hidden
               className="block rounded-full"
               style={{
-                background: isActive ? 'var(--method-dark)' : 'var(--method)',
+                background: isActive ? 'var(--method-dark)' : 'var(--method-accent)',
                 width: isActive ? 14 : 10,
                 height: isActive ? 14 : 10,
-                opacity: isActive ? 1 : 0.5,
+                opacity: 1,
                 transform: !isActive && hoveredId === item.id ? 'scale(1.3)' : 'scale(1)',
                 transition: 'width 0.25s, height 0.25s, opacity 0.25s, transform 0.2s, background 0.25s',
               }}

@@ -129,7 +129,7 @@ function FilterPill({ icon, label, value, onClick }: {
       <X
         className="shrink-0 w-[1em] h-[1em]"
         style={{
-          color: 'var(--method)',
+          color: 'var(--method-dark)',
           transform: hovered ? 'scale(1.2) rotate(90deg)' : 'scale(1) rotate(0deg)',
           transition: 'transform 0.4s cubic-bezier(0.22,1,0.36,1)',
         }}
@@ -325,11 +325,11 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
           <Link
             href="/assistant"
             className="shrink-0 self-stretch flex items-center gap-2 px-4 rounded-xl cursor-pointer transition-all shadow-sm hover:shadow-md text-display"
-            style={{ background: 'var(--method)', color: 'var(--method-white)' }}
+            style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
             aria-label={tAssistant('title')}
             title={tAssistant('title')}
-            onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
-            onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
+            onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-dark)'; e.currentTarget.style.color = 'var(--method-white)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-ink-accent)' }}
           >
             <Sparkles className="w-[1em] h-[1em] shrink-0" />
             <span className="hidden lg:inline whitespace-nowrap">{tAssistant('title')}</span>
@@ -370,7 +370,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
                       className="flex-1 flex items-center justify-center p-2 rounded-lg transition-all cursor-pointer text-text"
                       style={{
                         background: gridCols === n ? 'var(--method)' : 'var(--method-light)',
-                        color: gridCols === n ? 'var(--method-white)' : 'var(--method-ink)',
+                        color: gridCols === n ? 'var(--method-ink-accent)' : 'var(--method-ink)',
                       }}
                       aria-label={`${n} Spalte${n !== 1 ? 'n' : ''}`}
                     >
@@ -390,7 +390,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
                     className="flex-1 px-2 py-1.5 rounded-lg text-small transition-all cursor-pointer"
                     style={{
                       background: showAuszug ? 'var(--method)' : 'var(--method-light)',
-                      color: showAuszug ? 'var(--method-white)' : 'var(--method-ink)',
+                      color: showAuszug ? 'var(--method-ink-accent)' : 'var(--method-ink)',
                     }}
                   >
                     Anzeigen

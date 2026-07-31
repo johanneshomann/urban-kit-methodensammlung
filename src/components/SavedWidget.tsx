@@ -63,7 +63,7 @@ export default function SavedWidget() {
                     onClick={() => setOpen(false)}
                     className="text-small line-clamp-1 flex-1 transition-colors"
                     style={{ color: 'var(--method-ink)' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--method)')}
+                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--method-dark)')}
                     onMouseLeave={e => (e.currentTarget.style.color = 'var(--method-ink)')}
                   >
                     {item.title}
@@ -90,9 +90,9 @@ export default function SavedWidget() {
               <button
                 onClick={() => add(current)}
                 className="flex items-center justify-center gap-1.5 w-full text-center text-small font-bold py-2.5 rounded-xl transition-colors"
-                style={{ background: 'var(--method)', color: 'var(--method-white)' }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
+                style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-dark)'; e.currentTarget.style.color = 'var(--method-white)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-ink-accent)' }}
               >
                 <Bookmark className="w-4 h-4" />{t('saveThis')}
               </button>
@@ -106,11 +106,11 @@ export default function SavedWidget() {
                 className="block w-full text-center text-small font-bold py-2.5 rounded-xl transition-colors"
                 style={
                   onMethodPage
-                    ? { background: 'transparent', color: 'var(--method)' }
-                    : { background: 'var(--method)', color: 'var(--method-white)' }
+                    ? { background: 'transparent', color: 'var(--method-dark)' }
+                    : { background: 'var(--method)', color: 'var(--method-ink-accent)' }
                 }
-                onMouseEnter={e => (e.currentTarget.style.background = onMethodPage ? 'var(--method-very-light)' : 'var(--method-dark)')}
-                onMouseLeave={e => (e.currentTarget.style.background = onMethodPage ? 'transparent' : 'var(--method)')}
+                onMouseEnter={e => { e.currentTarget.style.background = onMethodPage ? 'var(--method-very-light)' : 'var(--method-dark)'; if (!onMethodPage) e.currentTarget.style.color = 'var(--method-white)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = onMethodPage ? 'transparent' : 'var(--method)'; if (!onMethodPage) e.currentTarget.style.color = 'var(--method-ink-accent)' }}
               >
                 {t('viewAll')}
               </Link>
@@ -122,17 +122,17 @@ export default function SavedWidget() {
       {/* FAB button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-12 h-12 rounded-2xl text-method-white shadow-lg hover:shadow-xl transition-all duration-150 flex items-center justify-center relative pointer-events-auto cursor-pointer"
-        style={{ background: 'var(--method)' }}
-        onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
-        onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
+        className="w-12 h-12 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-150 flex items-center justify-center relative pointer-events-auto cursor-pointer"
+        style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+        onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-dark)'; e.currentTarget.style.color = 'var(--method-white)' }}
+        onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-ink-accent)' }}
         aria-label={t('title')}
       >
         <Bookmark className="w-5 h-5" fill={open ? 'currentColor' : 'none'} />
         {count > 0 && (
           <span
             className="absolute -top-1 -right-1 w-5 h-5 rounded-full text-xs font-bold flex items-center justify-center shadow border"
-            style={{ background: 'var(--method-white)', color: 'var(--method)' }}
+            style={{ background: 'var(--method-white)', color: 'var(--method-dark)' }}
           >
             {count > 9 ? '9+' : count}
           </span>

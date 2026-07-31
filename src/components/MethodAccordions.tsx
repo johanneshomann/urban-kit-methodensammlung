@@ -87,7 +87,7 @@ function SectionList({ sections, locale, gallery }: { sections: MethodSection[];
             >
               <span
                 className="w-8 text-center text-small font-bold tabular-nums shrink-0 transition-colors duration-200"
-                style={{ color: isOpen || hoveredIndex === i ? 'var(--method)' : 'var(--method-light)' }}
+                style={{ color: isOpen || hoveredIndex === i ? 'var(--method-dark)' : 'var(--method-ink)' }}
               >
                 {String(i + 1).padStart(2, '0')}
               </span>
@@ -99,7 +99,7 @@ function SectionList({ sections, locale, gallery }: { sections: MethodSection[];
               </span>
               <ChevronDown
                 className={`w-[1em] h-[1em] text-text shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-                style={{ color: isOpen || hoveredIndex === i ? 'var(--method)' : 'var(--method-light)' }}
+                style={{ color: isOpen || hoveredIndex === i ? 'var(--method-dark)' : 'var(--method-accent)' }}
                 aria-hidden
               />
             </button>
@@ -189,7 +189,7 @@ export default function MethodAccordions({ items, locale = 'de' }: { items: Acco
                 className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-small font-bold transition-transform duration-200"
                 style={{
                   background: 'var(--method)',
-                  color: 'var(--method-white)',
+                  color: 'var(--method-ink-accent)',
                   transform: isHovered && !isOpen ? 'scale(1.1)' : 'scale(1)',
                 }}
               >
@@ -207,7 +207,7 @@ export default function MethodAccordions({ items, locale = 'de' }: { items: Acco
               </span>
               <ChevronDown
                 className={`w-[1em] h-[1em] shrink-0 text-display transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
-                style={{ color: 'var(--method)', opacity: isHovered || isOpen ? 0.7 : 0.3 }}
+                style={{ color: isHovered || isOpen ? 'var(--method-dark)' : 'var(--method-accent)' }}
               />
             </button>
             <div

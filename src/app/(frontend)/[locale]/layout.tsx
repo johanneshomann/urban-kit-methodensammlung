@@ -99,7 +99,7 @@ export default async function LocaleLayout({ children, params }: Props) {
               <span className="inline-flex items-center gap-1.5">
                 <span className="hidden sm:inline">
                   <span className="font-normal" style={{ color: 'var(--method-ink-accent)' }}>Urban</span>
-                  <span style={{ color: 'var(--method)' }}>KIT</span>
+                  <span style={{ color: 'var(--method-dark)' }}>KIT</span>
                 </span>
                 <span className="font-normal" style={{ color: 'var(--method-ink)' }}>
                   <span className="hidden sm:inline"> – </span>{tNav('subtitle')}
@@ -143,16 +143,16 @@ async function FooterText() {
     <div className="max-w-6xl mx-auto px-4 py-6 text-small text-ink flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
       <span>{t('text')}</span>
       <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2">
-        <Link href="/impressum" className="hover:text-method transition-colors">
+        <Link href="/impressum" className="hover:text-method-dark transition-colors">
           {t('impressum')}
         </Link>
-        <Link href="/datenschutz" className="hover:text-method transition-colors">
+        <Link href="/datenschutz" className="hover:text-method-dark transition-colors">
           {t('datenschutz')}
         </Link>
-        <Link href="/cookies" className="hover:text-method transition-colors">
+        <Link href="/cookies" className="hover:text-method-dark transition-colors">
           {t('cookies')}
         </Link>
-        <a href="/admin" className="hover:text-method transition-colors">
+        <a href="/admin" className="hover:text-method-dark transition-colors">
           {t('login')}
         </a>
       </nav>

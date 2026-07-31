@@ -73,7 +73,6 @@ export default function SavedPage() {
             <BackButton locale={locale} />
             <EyebrowBadge
               label={saved.length === 1 ? t('countOne') : t('countMany', { count: saved.length })}
-              opacity={0.6}
               className="!mb-0"
             />
           </div>
@@ -103,7 +102,7 @@ export default function SavedPage() {
           {/* Cards grid */}
           <section id="saved-content" className="px-6 md:px-16 lg:px-24 py-12 md:py-16" style={{ background: 'var(--method-very-light)' }}>
             <div className="flex items-center justify-between gap-6 mb-10">
-              <EyebrowBadge label={t('cardsEyebrow')} opacity={0.6} />
+              <EyebrowBadge label={t('cardsEyebrow')} />
               <div className="flex items-center gap-3">
                 <Link
                   href="/saved/print"
@@ -136,7 +135,7 @@ export default function SavedPage() {
           {/* Comparison table */}
           {fullMethods.length > 1 && (
             <section className="px-6 md:px-16 lg:px-24 py-12 md:py-16" style={{ background: 'var(--method-very-light)' }}>
-              <EyebrowBadge label={t('comparison')} opacity={0.6} />
+              <EyebrowBadge label={t('comparison')} />
               <h2 className="text-title font-bold tracking-tight mb-10" style={{ color: 'var(--method-ink-accent)' }}>
                 {t('comparison')}<span style={{ color: 'var(--method)' }}>.</span>
               </h2>

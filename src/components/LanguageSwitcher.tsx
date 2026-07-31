@@ -19,7 +19,7 @@ export default function LanguageSwitcher() {
   return (
     <button
       onClick={toggle}
-      className="flex items-center gap-1.5 text-text cursor-pointer transition-colors text-ink hover:text-method"
+      className="flex items-center gap-1.5 text-text cursor-pointer transition-colors text-ink hover:text-method-dark"
       aria-label="Switch language"
     >
       {locale === 'en' ? 'DE' : 'EN'}

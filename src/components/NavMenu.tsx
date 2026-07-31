@@ -72,7 +72,7 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
       {/* Desktop: hover opens, click toggles */}
       <button
         onClick={openMenu}
-        onMouseEnter={e => { openMenu(); e.currentTarget.style.color = 'var(--method)'; }}
+        onMouseEnter={e => { openMenu(); e.currentTarget.style.color = 'var(--method-dark)'; }}
         onMouseLeave={e => { closeDelayed(); e.currentTarget.style.color = ''; }}
         aria-expanded={isOpen}
         className={`hidden md:flex items-center gap-1 text-text cursor-pointer transition-colors ${isOpen ? 'text-[var(--method)]' : 'text-[var(--method-ink)]'}`}
@@ -87,7 +87,7 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
         aria-expanded={isOpen}
         className="md:hidden flex items-center cursor-pointer transition-colors"
         style={{ color: 'var(--method-ink)' }}
-        onMouseEnter={e => (e.currentTarget.style.color = 'var(--method)')}
+        onMouseEnter={e => (e.currentTarget.style.color = 'var(--method-dark)')}
         onMouseLeave={e => (e.currentTarget.style.color = 'var(--method-ink)')}
       >
         <span className="relative w-5 h-5 shrink-0">
@@ -117,7 +117,7 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
                     onClick={closeImmediate}
                     className={`flex items-center gap-2 py-1.5 text-text transition-colors ${active ? 'font-bold' : 'font-normal'}`}
                     style={{ color: active ? 'var(--method-ink-accent)' : 'var(--method-ink)' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--method)')}
+                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--method-dark)')}
                     onMouseLeave={e => (e.currentTarget.style.color = active ? 'var(--method-ink-accent)' : 'var(--method-ink)')}
                   >
                     <Icon className="text-text w-[1em] h-[1em] shrink-0" aria-hidden="true" />
@@ -144,7 +144,7 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
                     onClick={closeImmediate}
                     className={`flex items-center gap-2 py-2.5 text-text transition-colors ${active ? 'font-bold' : 'font-normal'}`}
                     style={{ color: active ? 'var(--method-ink-accent)' : 'var(--method-ink)' }}
-                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--method)')}
+                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--method-dark)')}
                     onMouseLeave={e => (e.currentTarget.style.color = active ? 'var(--method-ink-accent)' : 'var(--method-ink)')}
                   >
                     <Icon className="text-text w-[1em] h-[1em] shrink-0" aria-hidden="true" />

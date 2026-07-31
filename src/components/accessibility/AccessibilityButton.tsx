@@ -156,9 +156,9 @@ export function AccessibilityButton() {
         aria-expanded={open}
         aria-controls={open ? panelId : undefined}
         className="inline-flex h-12 w-12 items-center justify-center rounded-2xl shadow-lg transition-all duration-150 hover:scale-105 cursor-pointer"
-        style={{ background: 'var(--method)', color: 'var(--method-white)' }}
-        onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
-        onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
+        style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+        onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-dark)'; e.currentTarget.style.color = 'var(--method-white)' }}
+        onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-ink-accent)' }}
       >
         <Accessibility className="h-6 w-6" />
       </button>
@@ -188,7 +188,7 @@ function Toggle({
         aria-hidden="true"
         data-a11y-switch-track
         className="relative inline-flex h-5 w-9 shrink-0 items-center rounded-full transition-colors"
-        style={{ background: checked ? 'var(--method)' : 'var(--method-light)' }}
+        style={{ background: checked ? 'var(--method-dark)' : 'var(--method-light)' }}
       >
         <span
           data-a11y-switch-knob

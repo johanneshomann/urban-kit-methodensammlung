@@ -233,7 +233,7 @@ export default async function MethodDetailPage({ params }: Props) {
         <div className="relative z-10 flex-1 flex flex-col px-6 md:px-16 lg:px-24 pt-20 md:pt-28">
           <div className="flex items-center gap-2 mb-4">
             <BackButton locale={locale} fallback="/#methods" />
-            <EyebrowBadge label={locale === 'de' ? 'Methode' : 'Method'} opacity={0.6} className="!mb-0" />
+            <EyebrowBadge label={locale === 'de' ? 'Methode' : 'Method'} className="!mb-0" />
           </div>
 
           <h1 className="text-hero font-bold mb-6 max-w-3xl" style={{ color: 'var(--method-ink-accent)' }}>{title}</h1>
@@ -269,7 +269,7 @@ export default async function MethodDetailPage({ params }: Props) {
           {/* Scroll hint */}
           <a
             href="#beschreibung"
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center opacity-40 hover:opacity-100 transition-opacity cursor-pointer"
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center opacity-70 hover:opacity-100 transition-opacity cursor-pointer"
           >
             <ChevronDown
               className="w-14 h-14 animate-bounce"
@@ -310,7 +310,7 @@ export default async function MethodDetailPage({ params }: Props) {
                 {hasContent(wann) && (
                   <div className="flex flex-col gap-0 rounded-xl overflow-hidden shadow-sm" style={{ background: 'var(--method-very-light)' }}>
                     <div className="flex items-center gap-4 px-6 py-4">
-                      <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-white)' }}>
+                      <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}>
                         <Check className="w-4 h-4" strokeWidth={3} aria-hidden />
                       </span>
                       <h2 className="text-display font-bold" style={{ color: 'var(--method-ink-accent)' }}>
@@ -329,7 +329,7 @@ export default async function MethodDetailPage({ params }: Props) {
                 {hasContent(wannNicht) && (
                   <div className="flex flex-col gap-0 rounded-xl overflow-hidden shadow-sm" style={{ background: 'var(--method-very-light)' }}>
                     <div className="flex items-center gap-4 px-6 py-4">
-                      <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-white)' }}>
+                      <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}>
                         <X className="w-4 h-4" strokeWidth={3} aria-hidden />
                       </span>
                       <h2 className="text-display font-bold" style={{ color: 'var(--method-ink-accent)' }}>
@@ -374,7 +374,7 @@ export default async function MethodDetailPage({ params }: Props) {
             {hasContent(tipps) && (
               <div className="flex flex-col gap-0 rounded-xl overflow-hidden shadow-sm" style={{ background: 'var(--method-white)' }}>
                 <div className="flex items-center gap-4 px-6 py-4">
-                  <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-white)' }}>
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}>
                     <Lightbulb className="w-[18px] h-[18px]" aria-hidden />
                   </span>
                   <h2 className="text-display font-bold" style={{ color: 'var(--method-ink-accent)' }}>
@@ -393,7 +393,7 @@ export default async function MethodDetailPage({ params }: Props) {
             {hasContent(ungeeignet) && (
               <div className="flex flex-col gap-0 rounded-xl overflow-hidden shadow-sm" style={{ background: 'var(--method-white)' }}>
                 <div className="flex items-center gap-4 px-6 py-4">
-                  <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-white)' }}>
+                  <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}>
                     <Ban className="w-[18px] h-[18px]" aria-hidden />
                   </span>
                   <h2 className="text-display font-bold" style={{ color: 'var(--method-ink-accent)' }}>
@@ -413,7 +413,7 @@ export default async function MethodDetailPage({ params }: Props) {
           {aehnliche.length > 0 && (
             <div className="mt-6 flex flex-col gap-0 rounded-xl overflow-hidden shadow-sm" style={{ background: 'var(--method-white)' }}>
               <div className="flex items-center gap-4 px-6 py-4">
-                <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-white)' }}>
+                <span className="flex items-center justify-center w-8 h-8 rounded-full shrink-0" style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}>
                   <Layers className="w-[18px] h-[18px]" aria-hidden />
                 </span>
                 <h2 className="text-display font-bold" style={{ color: 'var(--method-ink-accent)' }}>

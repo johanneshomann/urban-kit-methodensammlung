@@ -55,7 +55,7 @@ export default async function KontaktPage({ params }: Props) {
         <div className="relative z-10">
           <div className="flex items-center gap-2 mb-4">
             <BackButton locale={locale} />
-            <EyebrowBadge label={t('eyebrow')} opacity={0.6} className="!mb-0" />
+            <EyebrowBadge label={t('eyebrow')} className="!mb-0" />
           </div>
           <h1 className="text-hero font-bold leading-none tracking-tight mb-5 hyphens-auto [overflow-wrap:anywhere]" style={{ color: 'var(--method-ink-accent)' }}>
             {t('titleLine1')}<span style={{ color: 'var(--method)' }}>.</span>
@@ -72,7 +72,7 @@ export default async function KontaktPage({ params }: Props) {
         className="min-h-svh flex flex-col justify-center px-6 md:px-16 lg:px-24 py-12 md:py-24"
         style={{ background: 'var(--method-very-light)' }}
       >
-        <EyebrowBadge label={t('sectionEyebrow')} opacity={0.6} />
+        <EyebrowBadge label={t('sectionEyebrow')} />
         <h2 className="text-title font-bold tracking-tight mb-10" style={{ color: 'var(--method-ink-accent)' }}>
           {t('sectionTitleLine1')}<br />
           {t('sectionTitleLine2')}<span style={{ color: 'var(--method)' }}>.</span>

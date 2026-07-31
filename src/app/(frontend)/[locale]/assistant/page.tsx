@@ -55,7 +55,7 @@ export default async function AssistantPage({ params }: Props) {
         <div className="relative z-10">
           <div className="flex items-center gap-2 mb-4">
             <BackButton locale={locale} />
-            <EyebrowBadge label={t('eyebrow')} opacity={0.6} className="!mb-0" />
+            <EyebrowBadge label={t('eyebrow')} className="!mb-0" />
           </div>
           <h1
             className="text-hero font-bold leading-none tracking-tight mb-4 hyphens-auto [overflow-wrap:anywhere]"

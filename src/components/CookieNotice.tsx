@@ -124,9 +124,9 @@ export default function CookieNotice() {
               <button
                 onClick={dismiss}
                 className="text-small font-bold px-4 py-2 rounded-xl transition-colors cursor-pointer"
-                style={{ background: 'var(--method)', color: 'var(--method-white)' }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
+                style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-dark)'; e.currentTarget.style.color = 'var(--method-white)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-ink-accent)' }}
               >
                 {t('dismiss')}
               </button>
@@ -134,7 +134,7 @@ export default function CookieNotice() {
                 href="/cookies"
                 onClick={dismiss}
                 className="text-small underline transition-colors hover:opacity-70"
-                style={{ color: 'var(--method)' }}
+                style={{ color: 'var(--method-dark)' }}
               >
                 {t('more')}
               </Link>
