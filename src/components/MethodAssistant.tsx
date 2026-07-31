@@ -195,8 +195,8 @@ export default function MethodAssistant({
             ) : (
               <div className="flex justify-start">
                 <div
-                  className="max-w-[80%] md:max-w-[calc(80%-60px)] px-4 py-2.5 rounded-2xl text-text"
-                  style={{ background: 'var(--method-light)', color: 'var(--method-ink)' }}
+                  className="max-w-[80%] md:max-w-[calc(80%-60px)] px-4 py-2.5 rounded-2xl text-text shadow-sm"
+                  style={{ background: 'var(--method-light)', color: 'var(--method-ink-accent)' }}
                 >
                   <ChatMarkdown>{m.content}</ChatMarkdown>
                 </div>
@@ -235,8 +235,8 @@ export default function MethodAssistant({
         (isPage ? (
           <div className="flex justify-start">
             <div
-              className="inline-flex gap-1 px-4 py-2.5 rounded-2xl text-text"
-              style={{ background: 'var(--method-light)', color: 'var(--method-ink)' }}
+              className="inline-flex gap-1 px-4 py-2.5 rounded-2xl text-text shadow-sm"
+              style={{ background: 'var(--method-light)', color: 'var(--method-ink-accent)' }}
             >
               <span className="animate-bounce" style={{ animationDelay: '0ms' }}>·</span>
               <span className="animate-bounce" style={{ animationDelay: '120ms' }}>·</span>
