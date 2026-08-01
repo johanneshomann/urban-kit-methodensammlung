@@ -59,6 +59,8 @@ function ClearDot({ onClear, tooltip }: { onClear: (e: React.MouseEvent) => void
         onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') onClear(e as unknown as React.MouseEvent) }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onFocus={handleMouseEnter}
+        onBlur={handleMouseLeave}
         className="shrink-0 relative flex items-center justify-center cursor-pointer"
         style={{ width: '1em', height: '1em', color: 'var(--method-accent)' }}
         aria-label={tooltip}
