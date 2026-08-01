@@ -13,7 +13,9 @@ import { adminOnlyCollection } from '../lib/access'
  * authenticate ONLY via their API key (no admin login). Writes everywhere are
  * locked to admin users, so a key can read content but never change it.
  *
- * Usage: send `Authorization: api-clients API-Key <key>` with each request.
+ * Usage: send `Authorization: api-clients API-Key <key>` with each request to the
+ * GraphQL endpoint (`/api/graphql`) — keys are rejected on the REST endpoints,
+ * which exist only for the admin UI (see `readViaGraphQLOnlyForApiClients`).
  */
 export const ApiClients: CollectionConfig = {
   slug: 'api-clients',
@@ -31,8 +33,8 @@ export const ApiClients: CollectionConfig = {
     defaultColumns: ['name', 'enableAPIKey', 'updatedAt'],
     group: { en: 'Administration', de: 'Administration' },
     description: {
-      en: 'Read-only API keys for external integrations. Enable a key per client, then send it in the Authorization header.',
-      de: 'Schreibgeschützte API-Schlüssel für externe Integrationen. Pro Client einen Schlüssel aktivieren und im Authorization-Header senden.',
+      en: 'Read-only API keys for external integrations via the GraphQL API (/api/graphql). Enable a key per client, then send it in the Authorization header. How to authenticate and build queries: see “Documentation” (bottom of the sidebar) → “API”.',
+      de: 'Schreibgeschützte API-Schlüssel für externe Integrationen über die GraphQL-API (/api/graphql). Pro Client einen Schlüssel aktivieren und im Authorization-Header senden. Wie Anfragen authentifiziert und Abfragen aufgebaut werden: siehe „Dokumentation“ (unten in der Seitenleiste) → Bereich „API“.',
     },
   },
   fields: [

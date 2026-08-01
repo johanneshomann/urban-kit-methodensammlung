@@ -13,7 +13,7 @@ type Answer = Record<Lang, string[]> // 1 entry → paragraph, several → numbe
 
 type FieldDef = { name: L; desc: L }
 type FieldGroup = { heading: L; fields: FieldDef[] }
-type Item = { q: L; note?: L; a?: Answer; groups?: FieldGroup[] }
+type Item = { q: L; note?: L; a?: Answer; groups?: FieldGroup[]; code?: L }
 type Category = { key: string; label: L; intro: L; items: Item[] }
 
 const HEAD: Record<Lang, { title: string; lead: string }> = {
@@ -465,15 +465,15 @@ const CATEGORIES: Category[] = [
     key: 'api',
     label: { de: 'API', en: 'API' },
     intro: {
-      de: 'Programmatischer Zugriff auf die Inhalte über die REST-API – z. B. um Methoden auf einer anderen Website einzubinden.',
-      en: 'Programmatic access to the content via the REST API – e.g. to embed methods on another website.',
+      de: 'Programmatischer Lesezugriff auf die Inhalte über die GraphQL-API – z. B. um Methoden auf einer anderen Website einzubinden.',
+      en: 'Programmatic read access to the content via the GraphQL API – e.g. to embed methods on another website.',
     },
     items: [
       {
         q: { de: 'Was bietet die API?', en: 'What does the API offer?' },
         a: {
-          de: ['Payload stellt automatisch eine REST-API bereit. Methoden lassen sich z. B. über „GET /api/methods“ (Liste) und „GET /api/methods/<id>“ (Einzeleintrag) abrufen – inklusive Filter-Verknüpfungen, Bildern und beiden Sprachen. Die API ist nicht öffentlich: Anfragen benötigen einen API-Schlüssel.'],
-          en: ['Payload automatically provides a REST API. Methods can be fetched via “GET /api/methods” (list) and “GET /api/methods/<id>” (single entry) – including filter relationships, images and both languages. The API is not public: requests require an API key.'],
+          de: ['Die Inhalte lassen sich über eine GraphQL-API abrufen (Endpunkt: „POST /api/graphql“). Eine Anfrage beschreibt genau, welche Felder benötigt werden – die Antwort enthält exakt diese Felder, inklusive Filter-Verknüpfungen, Bildern und beiden Sprachen. Die API ist nicht öffentlich (Anfragen benötigen einen API-Schlüssel), schreibgeschützt und liefert ausschließlich veröffentlichte Methoden – Entwürfe bleiben unsichtbar.'],
+          en: ['The content can be fetched via a GraphQL API (endpoint: “POST /api/graphql”). A request describes exactly which fields are needed – the response contains exactly those fields, including filter relationships, images and both languages. The API is not public (requests require an API key), read-only, and only returns published methods – drafts stay invisible.'],
         },
       },
       {
@@ -497,43 +497,142 @@ const CATEGORIES: Category[] = [
         q: { de: 'Wie authentifiziere ich Anfragen?', en: 'How do I authenticate requests?' },
         a: {
           de: [
-            'Sende den Schlüssel bei jeder Anfrage im Header:',
-            'Authorization: api-clients API-Key <DEIN_SCHLÜSSEL>',
-            'Beispiel mit curl: curl -H "Authorization: api-clients API-Key <KEY>" "https://<domain>/api/methods?locale=de&depth=2"',
+            'Sende den Schlüssel bei jeder Anfrage im Header „Authorization: api-clients API-Key <DEIN_SCHLÜSSEL>“. Vollständiges Beispiel mit curl:',
           ],
           en: [
-            'Send the key in the header of every request:',
-            'Authorization: api-clients API-Key <YOUR_KEY>',
-            'Example with curl: curl -H "Authorization: api-clients API-Key <KEY>" "https://<domain>/api/methods?locale=en&depth=2"',
+            'Send the key in the header of every request: “Authorization: api-clients API-Key <YOUR_KEY>”. Complete example with curl:',
           ],
+        },
+        code: {
+          de: `curl -X POST "https://<domain>/api/graphql" \\
+  -H "Authorization: api-clients API-Key <SCHLÜSSEL>" \\
+  -H "Content-Type: application/json" \\
+  -d '{"query": "{ Methods(locale: de) { docs { title slug } } }"}'`,
+          en: `curl -X POST "https://<domain>/api/graphql" \\
+  -H "Authorization: api-clients API-Key <KEY>" \\
+  -H "Content-Type: application/json" \\
+  -d '{"query": "{ Methods(locale: en) { docs { title slug } } }"}'`,
         },
       },
       {
-        q: { de: 'Nützliche Abfrage-Parameter', en: 'Useful query parameters' },
+        q: { de: 'Wie baue ich eine Abfrage auf?', en: 'How do I build a query?' },
+        a: {
+          de: [
+            'Eine Abfrage besteht aus drei Teilen: dem Namen der Abfrage (z. B. „Methods“), optionalen Argumenten in runden Klammern (Sprache, Filter, Seitengröße) und in geschweiften Klammern den gewünschten Feldern. Nur diese Felder werden zurückgegeben. Verknüpfungen – etwa die Ziele einer Methode – fragst du einfach verschachtelt mit ab:',
+          ],
+          en: [
+            'A query has three parts: the query name (e.g. “Methods”), optional arguments in parentheses (language, filters, page size) and the requested fields in curly braces. Only those fields are returned. Relationships – e.g. a method’s goals – are simply requested nested inside:',
+          ],
+        },
+        code: {
+          de: `{
+  Methods(locale: de, limit: 10, sort: "title") {
+    totalDocs
+    docs {
+      title
+      auszug
+      slug
+      goals { name }
+      targetGroups { name }
+      image { url alt }
+    }
+  }
+}`,
+          en: `{
+  Methods(locale: en, limit: 10, sort: "title") {
+    totalDocs
+    docs {
+      title
+      auszug
+      slug
+      goals { name }
+      targetGroups { name }
+      image { url alt }
+    }
+  }
+}`,
+        },
+      },
+      {
+        q: { de: 'Beispiel: eine einzelne Methode abrufen', en: 'Example: fetching a single method' },
+        a: {
+          de: ['Über das Argument „where“ lassen sich Ergebnisse filtern – z. B. eine Methode über ihren Slug (den URL-Namen) laden, inklusive Ablauf und ähnlichen Methoden:'],
+          en: ['The “where” argument filters results – e.g. load one method by its slug (the URL name), including its procedure and related methods:'],
+        },
+        code: {
+          de: `{
+  Methods(locale: de, where: { slug: { equals: "design-thinking" } }) {
+    docs {
+      title
+      zielDerMethode
+      durchfuehrung { sectionTitle content }
+      aehnlicheMethoden { title slug }
+    }
+  }
+}`,
+          en: `{
+  Methods(locale: en, where: { slug: { equals: "design-thinking" } }) {
+    docs {
+      title
+      zielDerMethode
+      durchfuehrung { sectionTitle content }
+      aehnlicheMethoden { title slug }
+    }
+  }
+}`,
+        },
+      },
+      {
+        q: { de: 'Welche Abfragen und Argumente gibt es?', en: 'Which queries and arguments are available?' },
         groups: [
           {
-            heading: { de: 'An die URL anhängen (?param=…&param=…)', en: 'Append to the URL (?param=…&param=…)' },
+            heading: { de: 'Abfragen', en: 'Queries' },
+            fields: [
+              { name: { de: 'Methods', en: 'Methods' }, desc: { de: 'Liste der Methoden mit Seiteninformationen (totalDocs, page …).', en: 'List of methods with pagination info (totalDocs, page …).' } },
+              { name: { de: 'Method', en: 'Method' }, desc: { de: 'Ein einzelner Eintrag über seine ID.', en: 'A single entry by its ID.' } },
+              { name: { de: 'countMethods', en: 'countMethods' }, desc: { de: 'Nur die Anzahl – ohne Inhalte.', en: 'Just the count – no content.' } },
+              { name: { de: 'Goals, Formats, Durations, TargetGroups, GroupSizes, Characteristics, ParticipationDepths, ProjectPhases', en: 'Goals, Formats, Durations, TargetGroups, GroupSizes, Characteristics, ParticipationDepths, ProjectPhases' }, desc: { de: 'Die Filterwerte – gleicher Aufbau wie „Methods“ (z. B. { Goals { docs { name } } }).', en: 'The filter values – same shape as “Methods” (e.g. { Goals { docs { name } } }).' } },
+            ],
+          },
+          {
+            heading: { de: 'Wichtige Argumente', en: 'Key arguments' },
             fields: [
               { name: { de: 'locale', en: 'locale' }, desc: { de: '„de“ oder „en“ – gibt die Inhalte in der Sprache zurück (Fallback: Deutsch).', en: '“de” or “en” – returns content in that language (fallback: German).' } },
-              { name: { de: 'depth', en: 'depth' }, desc: { de: 'Wie tief Verknüpfungen aufgelöst werden, z. B. „2“ für Filterwerte und Bild-URLs.', en: 'How deep relationships are resolved, e.g. “2” for filter values and image URLs.' } },
-              { name: { de: 'where', en: 'where' }, desc: { de: 'Filtern der Ergebnisse, z. B. where[status][equals]=published oder where[slug][equals]=<slug>.', en: 'Filter the results, e.g. where[status][equals]=published or where[slug][equals]=<slug>.' } },
+              { name: { de: 'where', en: 'where' }, desc: { de: 'Filtern der Ergebnisse, z. B. { slug: { equals: "…" } } oder { title: { contains: "…" } }.', en: 'Filter the results, e.g. { slug: { equals: "…" } } or { title: { contains: "…" } }.' } },
               { name: { de: 'limit & page', en: 'limit & page' }, desc: { de: 'Seitengröße und Blättern (Standard: 10 pro Seite).', en: 'Page size and pagination (default: 10 per page).' } },
-              { name: { de: 'sort', en: 'sort' }, desc: { de: 'Sortierung, z. B. „-createdAt“ (neueste zuerst).', en: 'Sorting, e.g. “-createdAt” (newest first).' } },
+              { name: { de: 'sort', en: 'sort' }, desc: { de: 'Sortierung, z. B. „title“ oder „-createdAt“ (neueste zuerst).', en: 'Sorting, e.g. “title” or “-createdAt” (newest first).' } },
             ],
           },
         ],
+      },
+      {
+        q: { de: 'Wie erkunde und teste ich die API?', en: 'How do I explore and test the API?' },
+        a: {
+          de: [
+            'In der Entwicklungsumgebung gibt es unter „/api/graphql-playground“ eine interaktive Oberfläche: Abfragen tippen, Autovervollständigung nutzen und die Dokumentation aller Felder durchstöbern (auf der Live-Website ist sie abgeschaltet).',
+            'Zusätzlich liegt das vollständige Schema als Datei „schema.graphql“ im Projekt – Entwickler:innen können daraus typisierte Clients generieren.',
+          ],
+          en: [
+            'In the development environment, “/api/graphql-playground” offers an interactive interface: type queries, use autocompletion and browse the documentation of every field (it is disabled on the live website).',
+            'In addition, the full schema is committed as “schema.graphql” in the project – developers can generate typed clients from it.',
+          ],
+        },
       },
       {
         q: { de: 'Worauf muss ich achten?', en: 'What should I keep in mind?' },
         a: {
           de: [
             'Schlüssel nur an vertrauenswürdige Stellen weitergeben. Bei Verdacht den API-Client löschen oder den Schlüssel neu generieren.',
-            'Nur veröffentlichte Methoden anzeigen? Dann „where[status][equals]=published“ verwenden – sonst kommen auch Entwürfe mit.',
+            'API-Schlüssel funktionieren nur mit GraphQL – die klassischen REST-Adressen (z. B. „/api/methods“) lehnen sie ab.',
+            'Entwürfe werden nie ausgeliefert – ein zusätzlicher Status-Filter ist nicht nötig.',
+            'Sehr große, tief verschachtelte Abfragen lehnt der Server mit „maximum complexity“ ab – die Abfrage dann in kleinere Teile aufteilen.',
             'Für den Zugriff direkt aus dem Browser einer anderen Domain muss zusätzlich CORS eingerichtet werden. Server-zu-Server-Aufrufe (z. B. curl) sind davon nicht betroffen.',
           ],
           en: [
             'Only share keys with trusted parties. If a key is exposed, delete the API client or generate a new key.',
-            'Only want published methods? Use “where[status][equals]=published” – otherwise drafts are included too.',
+            'API keys only work with GraphQL – the classic REST URLs (e.g. “/api/methods”) reject them.',
+            'Drafts are never delivered – no extra status filter is needed.',
+            'Very large, deeply nested queries are rejected by the server with “maximum complexity” – split the query into smaller parts.',
             'Accessing the API directly from a browser on another domain additionally requires CORS to be configured. Server-to-server calls (e.g. curl) are not affected.',
           ],
         },
@@ -668,8 +767,26 @@ export function DocumentationContent({ lang }: { lang: Lang }) {
                     </div>
                   ))}
                 </div>
-              ) : (
-                <AnswerBody lines={item.a![lang]} />
+              ) : item.a ? (
+                <AnswerBody lines={item.a[lang]} />
+              ) : null}
+              {item.code && (
+                <pre
+                  style={{
+                    background: 'var(--theme-elevation-0)',
+                    border: '1px solid var(--theme-elevation-100)',
+                    borderRadius: 'var(--style-radius-s, 4px)',
+                    padding: '0.7rem 0.85rem',
+                    marginTop: 'calc(var(--base) / 2)',
+                    marginBottom: 0,
+                    overflowX: 'auto',
+                    fontSize: '0.85rem',
+                    lineHeight: 1.55,
+                    color: 'var(--theme-elevation-800)',
+                  }}
+                >
+                  <code>{item.code[lang]}</code>
+                </pre>
               )}
             </section>
           ))}
