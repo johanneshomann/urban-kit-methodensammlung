@@ -25,7 +25,7 @@ Slug `methods`, `useAsTitle: 'title'`, admin columns
 
 | Tab (de / en) | Field | Type | Localized | Required (DE) | Notes |
 |---|---|---|---|---|---|
-| **Allgemein** / General | `status` | select | – | yes | `draft` \| `published`; only `published` shows on site |
+| **Allgemein** / General | `status` | select | – | yes | `draft` \| `published`; only `published` shows on site, and API-key clients only receive `published` docs, GraphQL-only (`publishedOnlyForApiClients` read access) |
 | | `title` | text | ✓ | ✓ | drives slug + URL |
 | | `auszug` | textarea | ✓ | ✓ | short card summary |
 | | `zielDerMethode` | richText | ✓ | ✓ | goal of the method |

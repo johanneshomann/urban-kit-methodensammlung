@@ -44,11 +44,15 @@ src/
 
 - **Locales:** `de` (default) + `en`, `fallback: true`. Admin UI languages `de`/`en`, fallback `de`.
 - **Collections** are registered in two groups: content/filters/assets get
-  `lockWritesToEditors` applied in bulk via `.map(...)`; `Users` and `ApiClients` are
-  admin-only and listed last.
+  `lockWritesToEditors` + `readViaGraphQLOnlyForApiClients` applied in bulk via
+  `.map(...)` (a collection's own access wins, e.g. Media's public read); `Users` and
+  `ApiClients` are admin-only and listed last.
 - **Globals:** `PlatformSettings`, `Legal` and `Assistant` are admin-only
   (`lockGlobalWritesToAdmins`; `Assistant` additionally locks `read` — it holds the API
-  key); the eight filter-settings globals get `lockGlobalWritesToEditors`.
+  key); the eight filter-settings globals get `lockGlobalWritesToEditors`. All except
+  `Assistant` also get the GraphQL-only read gate for API clients.
+- **GraphQL:** `graphQL.maxComplexity` (query cost guard) + `schemaOutputFile` →
+  committed `schema.graphql` (`npm run generate:schema`).
 - **Editor:** Lexical with a fixed feature set (headings, lists, links, upload,
   relationship, align, blockquote, code, sub/superscript, etc.).
 - **Email:** Nodemailer adapter (Payload auth mails only — no contact form); SMTP from env, ethereal mock when `SMTP_HOST` unset.
@@ -107,7 +111,9 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 
 **Payload** — `(payload)/`:
 - `admin/[[...segments]]` — admin UI
-- `api/[...slug]` — Payload REST/GraphQL handler
+- `api/[...slug]` — Payload REST handler (serves the admin UI; API-key clients are rejected here)
+- `api/graphql` — GraphQL endpoint — the **external API surface** (API keys via `Authorization: api-clients API-Key <key>`; `maxComplexity` guard; SDL committed as `schema.graphql`, regenerate with `npm run generate:schema`)
+- `api/graphql-playground` — interactive GraphQL IDE (disabled in production by Payload's default)
 
 **Custom API** — `src/app/api/`:
 - `methods-by-ids/route.ts` — GET methods by id list (locale-aware), for saved view

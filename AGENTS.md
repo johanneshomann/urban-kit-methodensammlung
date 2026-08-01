@@ -48,6 +48,7 @@ comment what would otherwise need reverse-engineering, and skip the obvious.
 | Start (prod) | `npm run start` | |
 | **Regenerate types** | `npm run generate:types` | **Run after ANY change to a collection/global** → updates `src/payload-types.ts` |
 | **Regenerate import map** | `npm run generate:importmap` | **Run after adding/moving a custom admin component** referenced in `payload.config.ts` |
+| **Regenerate GraphQL schema** | `npm run generate:schema` | **Run after ANY change to a collection/global** → updates the committed `schema.graphql` (SDL for external consumers) |
 | Seed data | `npm run seed` | Idempotent; populates filter taxonomies + platform settings |
 | Migrate localization | `npm run migrate:localization` | One-off `*De/*En` → Payload localized format |
 | Migrate media alt | `npm run migrate:media-alt` | One-off: plain-string media `alt` → localized `{ de: … }` |
@@ -56,7 +57,10 @@ comment what would otherwise need reverse-engineering, and skip the obvious.
 | Local DB (Docker) | `docker-compose up mongodb` | MongoDB on `127.0.0.1:27018` |
 | Full stack (Docker) | `docker-compose up` | App `3040→3000` + MongoDB |
 
-**Admin panel:** `http://localhost:3040/admin` · **REST/GraphQL API:** under `/api`.
+**Admin panel:** `http://localhost:3040/admin` · **External API:** GraphQL at
+`/api/graphql` (playground at `/api/graphql-playground`, dev only). The REST
+endpoints under `/api` exist for the admin UI; API-key clients are **rejected on
+REST** and must use GraphQL.
 
 There is no lint or test command. To sanity-check a change, run `npm run build`
 (slow) or `npm run generate:types` (fast — also surfaces collection/global type errors).
@@ -106,12 +110,15 @@ Method assistant (chatbot) design: [`docs/CHATBOT.md`](docs/CHATBOT.md).
    helpers instead.
 
 2. **Regenerate types after model changes.** Editing anything in `src/collections/`
-   or `src/globals/` → run `npm run generate:types`. `src/payload-types.ts` is
-   generated and gitignored; never edit it by hand.
+   or `src/globals/` → run `npm run generate:types` **and** `npm run generate:schema`.
+   `src/payload-types.ts` is generated and gitignored; never edit it by hand.
+   `schema.graphql` is generated but **committed** (external consumers use it for codegen).
 
 3. **Access control lives in [`src/lib/access.ts`](src/lib/access.ts).** Three roles:
    `admin` (everything), `editor` (content + filters + media/icons, **no** users /
-   API clients / legal texts), and read-only **API-key clients**. Apply access with
+   API clients / legal texts), and read-only **API-key clients** (GraphQL only —
+   REST is denied via `readViaGraphQLOnlyForApiClients`, and they only receive
+   `published` methods — `publishedOnlyForApiClients`). Apply access with
    the exported helpers (`lockWritesToEditors`, `lockGlobalWritesToEditors`,
    `lockWritesToAdmins`, `adminOnlyCollection`, …) — don't inline ad-hoc access fns.
    Note `payload.config.ts` applies these in bulk via `.map(...)`, so a new collection
@@ -127,8 +134,11 @@ Method assistant (chatbot) design: [`docs/CHATBOT.md`](docs/CHATBOT.md).
    it only regenerates while editing the default locale. See
    [`src/collections/Methods.ts`](src/collections/Methods.ts).
 
-6. **Two API surfaces.** Payload's own REST/GraphQL lives under `(payload)/api`.
-   Custom app routes (`src/app/api/methods-by-ids`, `src/app/api/method-assistant`,
+6. **Two API surfaces.** Payload's own API lives under `(payload)/api`: REST
+   (used by the admin UI; external API keys are rejected there) and **GraphQL at
+   `/api/graphql`** (the surface for external integrations, header
+   `Authorization: api-clients API-Key <key>`). Custom app routes
+   (`src/app/api/methods-by-ids`, `src/app/api/method-assistant`,
    `src/app/api/method-pdf`) are plain Next route handlers. The public site
    reads content via Payload's **local API**,
    which **bypasses access control** — keep that in mind for "why can the public see X".

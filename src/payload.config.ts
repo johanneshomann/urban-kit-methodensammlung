@@ -64,6 +64,7 @@ import {
   lockWritesToEditors,
   lockGlobalWritesToAdmins,
   lockGlobalWritesToEditors,
+  readViaGraphQLOnlyForApiClients,
 } from './lib/access'
 
 const filename = fileURLToPath(import.meta.url)
@@ -143,16 +144,21 @@ export default buildConfig({
       Characteristics,
       // Assets
       Icons, Media,
-    ].map((c) => ({ ...c, access: { ...lockWritesToEditors, ...c.access } })),
+    ].map((c) => ({
+      ...c,
+      // API-key clients read via GraphQL only; a collection's own access (e.g.
+      // Media's public read, Methods' published-only rule) still wins via spread.
+      access: { ...lockWritesToEditors, read: readViaGraphQLOnlyForApiClients, ...c.access },
+    })),
     // Administration (last) — fully admin-only
     Users,
     ApiClients,
   ],
   globals: [
     // Platform texts (contact, colors) — admin-only.
-    { ...PlatformSettings, access: { ...lockGlobalWritesToAdmins, ...PlatformSettings.access } },
+    { ...PlatformSettings, access: { ...lockGlobalWritesToAdmins, read: readViaGraphQLOnlyForApiClients, ...PlatformSettings.access } },
     // Legal texts (imprint, privacy, cookie policy) — admin-only.
-    { ...Legal, access: { ...lockGlobalWritesToAdmins, ...Legal.access } },
+    { ...Legal, access: { ...lockGlobalWritesToAdmins, read: readViaGraphQLOnlyForApiClients, ...Legal.access } },
     // Method assistant settings — admin-only (read locked: holds the API key).
     { ...Assistant, access: { ...lockGlobalWritesToAdmins, ...Assistant.access } },
     // Filter settings (icons etc.) — editable by admins + editors.
@@ -165,7 +171,7 @@ export default buildConfig({
       TargetGroupSettings,
       GroupSizeSettings,
       CharacteristicsSettings,
-    ].map((g) => ({ ...g, access: { ...lockGlobalWritesToEditors, ...g.access } })),
+    ].map((g) => ({ ...g, access: { ...lockGlobalWritesToEditors, read: readViaGraphQLOnlyForApiClients, ...g.access } })),
   ],
   editor: lexicalEditor({
     features: [

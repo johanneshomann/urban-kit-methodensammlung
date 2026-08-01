@@ -58,6 +58,36 @@ export const adminFieldAccess: FieldAccess = ({ req }) => {
   return isAdminUser(user) && user?.role === 'admin'
 }
 
+/**
+ * External API-key clients may only read via GraphQL — REST is reserved for the
+ * admin panel (which is what logged-in `users` talk to `/api/...` with). The
+ * public site is unaffected either way: it reads via the local API, which
+ * bypasses access control.
+ */
+const isGraphQL = (req: { payloadAPI?: string } | undefined) => req?.payloadAPI === 'GraphQL'
+
+/**
+ * Content read: admin users always (the admin UI needs REST); API-key clients
+ * only via GraphQL. Unauthenticated requests stay rejected.
+ */
+export const readViaGraphQLOnlyForApiClients: Access = ({ req }) => {
+  const user = req?.user as UserLike
+  if (!user) return false
+  return isAdminUser(user) || isGraphQL(req)
+}
+
+/**
+ * Methods read: admin users see everything (including drafts); API-key clients
+ * only receive published documents, and only via GraphQL.
+ */
+export const publishedOnlyForApiClients: Access = ({ req }) => {
+  const user = req?.user as UserLike
+  if (!user) return false
+  if (isAdminUser(user)) return true
+  if (!isGraphQL(req)) return false
+  return { status: { equals: 'published' } }
+}
+
 /** Content & filter writes: admins and editors; `read` left at Payload's default. */
 export const lockWritesToEditors = {
   create: adminOrEditor,

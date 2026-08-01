@@ -13,6 +13,7 @@
  * `afterChange` hook keeps `aehnlicheMethoden` (similar methods) reciprocal.
  */
 import type { CollectionConfig } from 'payload'
+import { publishedOnlyForApiClients } from '../lib/access'
 import {
   requiredArrayInDefaultLocale,
   requiredTextInDefaultLocale,
@@ -52,6 +53,9 @@ export const Methods: CollectionConfig = {
     singular: { en: 'Method', de: 'Methode' },
     plural: { en: 'Methods', de: 'Methoden' },
   },
+  // Write locks come from the bulk `.map(...)` in payload.config.ts; `read` is
+  // narrowed here so API-key clients never receive drafts.
+  access: { read: publishedOnlyForApiClients },
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'characteristics', 'status', 'updatedAt'],
