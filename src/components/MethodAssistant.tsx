@@ -279,8 +279,8 @@ export default function MethodAssistant({
         {transcript}
         <div className="shrink-0 pt-4">
           <div
-            className="flex items-center gap-2 px-4 py-2.5 rounded-2xl shadow-sm"
-            style={{ background: 'var(--method-white)' }}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-2xl shadow-sm focus-within:ring-2"
+            style={{ background: 'var(--method-white)', '--tw-ring-color': 'var(--method-dark)' } as React.CSSProperties}
           >
             {composerControls}
           </div>
@@ -313,8 +313,8 @@ export default function MethodAssistant({
           <div style={{ borderTop: '1px solid color-mix(in oklab, var(--method-ink) 12%, transparent)' }}>
             {transcript}
             <div
-              className="flex items-center gap-2 px-4 py-3"
-              style={{ borderTop: '1px solid color-mix(in oklab, var(--method-ink) 12%, transparent)' }}
+              className="flex items-center gap-2 px-4 py-3 focus-within:ring-2 focus-within:ring-inset"
+              style={{ borderTop: '1px solid color-mix(in oklab, var(--method-ink) 12%, transparent)', '--tw-ring-color': 'var(--method-dark)' } as React.CSSProperties}
             >
               {composerControls}
             </div>

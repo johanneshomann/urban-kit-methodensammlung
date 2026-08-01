@@ -266,7 +266,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
       <div className="flex flex-col gap-2" ref={filterAreaRef}>
       <div className="flex flex-col sm:flex-row gap-2">
         {/* Search */}
-        <div className="flex-1 flex items-center gap-2 px-4 py-2.5 rounded-xl text-text shadow-sm hover:shadow-md transition-shadow" style={{ background: 'var(--method-white)' }}>
+        <div className="flex-1 flex items-center gap-2 px-4 py-2.5 rounded-xl text-text shadow-sm hover:shadow-md transition-shadow focus-within:ring-2" style={{ background: 'var(--method-white)', '--tw-ring-color': 'var(--method-dark)' } as React.CSSProperties}>
           <Search className="w-[1em] h-[1em] shrink-0 opacity-40" style={{ color: 'var(--method-ink)' }} />
           <input
             type="search"
