@@ -266,9 +266,10 @@ export default function MethodFilters({ filters, onChange, onClearKey, available
             style={isOpen ? { background: 'var(--method-light)' } : undefined}
             className="transition-colors"
           >
-            {/* Sub-accordion header */}
-            <button
-              type="button"
+            {/* Sub-accordion header. The row div is a mouse convenience; the
+                semantic toggle is the inner button, so ClearDot is a sibling
+                control instead of an (invalid) button nested in a button. */}
+            <div
               onClick={() => toggleAccordion(key)}
               onMouseEnter={() => setHoveredKey(key)}
               onMouseLeave={() => setHoveredKey(null)}
@@ -282,17 +283,25 @@ export default function MethodFilters({ filters, onChange, onClearKey, available
               }
             >
               <span className="flex items-center gap-2 text-text" style={{ color: 'var(--method-ink)' }}>
-                <FilterIcon uploadUrl={filterIcons?.[key]} lucideName={filterLucideIcons?.[key]} className="w-[1em] h-[1em] object-contain" />
-                <span className="font-normal">{label}</span>
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  onClick={(e) => { e.stopPropagation(); toggleAccordion(key) }}
+                  className="flex items-center gap-2 text-left cursor-pointer"
+                >
+                  <FilterIcon uploadUrl={filterIcons?.[key]} lucideName={filterLucideIcons?.[key]} className="w-[1em] h-[1em] object-contain" />
+                  <span className="font-normal">{label}</span>
+                </button>
                 {hasActive && (
                   <ClearDot tooltip={tFilter('resetOne', { label })} onClear={(e) => { e.stopPropagation(); onClearKey?.(key) }} />
                 )}
               </span>
               <ChevronDown
+                aria-hidden
                 className={`w-[1em] h-[1em] shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
                 style={{ color: 'var(--method-ink)', opacity: 0.5 }}
               />
-            </button>
+            </div>
 
             {/* Sub-accordion body */}
             <div

@@ -287,9 +287,10 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
             On mobile this wrapper keeps them together on a second row below the
             search; `sm:contents` dissolves it so the desktop row is unchanged. */}
         <div className="flex gap-2 sm:contents">
-        {/* Filter toggle button */}
-        <button
-          type="button"
+        {/* Filter toggle. The row div is a mouse convenience; the semantic
+            toggle is the inner button, so ClearDot is a sibling control
+            instead of an (invalid) button nested in a button. */}
+        <div
           onClick={() => setFilterOpen(v => !v)}
           className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-display cursor-pointer flex-1 sm:flex-none ${filterOpen ? 'sm:min-w-[16rem]' : 'sm:min-w-[12rem]'}`}
           style={{
@@ -298,11 +299,18 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
             boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
             transition: 'background 0.2s, box-shadow 0.2s, min-width 0.4s cubic-bezier(0.22,1,0.36,1)',
           }}
-          onMouseEnter={e => { if (!filterOpen) { (e.currentTarget as HTMLButtonElement).style.background = 'var(--method-light)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' } }}
-          onMouseLeave={e => { if (!filterOpen) { (e.currentTarget as HTMLButtonElement).style.background = 'var(--method-white)'; (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)' } }}
+          onMouseEnter={e => { if (!filterOpen) { (e.currentTarget as HTMLDivElement).style.background = 'var(--method-light)'; (e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' } }}
+          onMouseLeave={e => { if (!filterOpen) { (e.currentTarget as HTMLDivElement).style.background = 'var(--method-white)'; (e.currentTarget as HTMLDivElement).style.boxShadow = '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)' } }}
         >
-          <SlidersHorizontal className="w-[1em] h-[1em] shrink-0" style={{ color: 'var(--method-ink)' }} />
-          <span>{tFilter('label').replace(':', '')}</span>
+          <button
+            type="button"
+            aria-expanded={filterOpen}
+            onClick={(e) => { e.stopPropagation(); setFilterOpen(v => !v) }}
+            className="flex items-center gap-2 cursor-pointer"
+          >
+            <SlidersHorizontal className="w-[1em] h-[1em] shrink-0" style={{ color: 'var(--method-ink)' }} aria-hidden />
+            <span>{tFilter('label').replace(':', '')}</span>
+          </button>
           <span
             style={{
               display: 'inline-flex',
@@ -315,10 +323,11 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
             <ClearDot tooltip={tFilter('resetAll')} onClear={(e) => { e.stopPropagation(); setFilters({ ...EMPTY_FILTERS }) }} />
           </span>
           <ChevronDown
+            aria-hidden
             className={`w-[1em] h-[1em] shrink-0 ml-auto transition-transform duration-300 ${filterOpen ? 'rotate-180' : ''}`}
             style={{ color: 'var(--method-ink)' }}
           />
-        </button>
+        </div>
 
         {/* Assistant CTA → dedicated page */}
         {assistantEnabled && (
