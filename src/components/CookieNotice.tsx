@@ -104,7 +104,7 @@ export default function CookieNotice() {
 
   return (
     <div
-      className="cookie-notice fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
       style={{ background: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(2px)' }}
       onClick={dismiss}
     >
