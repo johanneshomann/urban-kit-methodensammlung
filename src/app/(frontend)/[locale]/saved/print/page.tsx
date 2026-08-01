@@ -53,9 +53,9 @@ export default function SavedPrintPage() {
             <button
               onClick={() => window.print()}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-small font-bold transition-all cursor-pointer"
-              style={{ background: 'var(--method)', color: 'white' }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'var(--method-dark)')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'var(--method)')}
+              style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-dark)'; e.currentTarget.style.color = 'var(--method-white)' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-on-brand)' }}
             >
               <Printer className="w-[1em] h-[1em]" />
               {locale === 'de' ? 'Drucken' : 'Print'}

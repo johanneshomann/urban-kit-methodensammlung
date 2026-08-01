@@ -105,9 +105,9 @@ export default function SavedWidget() {
               <button
                 onClick={() => add(current)}
                 className="flex items-center justify-center gap-1.5 w-full text-center text-small font-bold py-2.5 rounded-xl transition-colors"
-                style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+                style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-dark)'; e.currentTarget.style.color = 'var(--method-white)' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-ink-accent)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-on-brand)' }}
               >
                 <Bookmark className="w-4 h-4" />{t('saveThis')}
               </button>
@@ -122,10 +122,10 @@ export default function SavedWidget() {
                 style={
                   onMethodPage
                     ? { background: 'transparent', color: 'var(--method-dark)' }
-                    : { background: 'var(--method)', color: 'var(--method-ink-accent)' }
+                    : { background: 'var(--method)', color: 'var(--method-on-brand)' }
                 }
                 onMouseEnter={e => { e.currentTarget.style.background = onMethodPage ? 'var(--method-very-light)' : 'var(--method-dark)'; if (!onMethodPage) e.currentTarget.style.color = 'var(--method-white)' }}
-                onMouseLeave={e => { e.currentTarget.style.background = onMethodPage ? 'transparent' : 'var(--method)'; if (!onMethodPage) e.currentTarget.style.color = 'var(--method-ink-accent)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = onMethodPage ? 'transparent' : 'var(--method)'; if (!onMethodPage) e.currentTarget.style.color = 'var(--method-on-brand)' }}
               >
                 {t('viewAll')}
               </Link>
@@ -140,9 +140,9 @@ export default function SavedWidget() {
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className="w-12 h-12 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-150 flex items-center justify-center relative pointer-events-auto cursor-pointer"
-        style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+        style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
         onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-dark)'; e.currentTarget.style.color = 'var(--method-white)' }}
-        onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-ink-accent)' }}
+        onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-on-brand)' }}
         aria-label={t('title')}
       >
         <Bookmark className="w-5 h-5" fill={open ? 'currentColor' : 'none'} />

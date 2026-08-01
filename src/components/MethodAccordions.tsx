@@ -189,7 +189,7 @@ export default function MethodAccordions({ items, locale = 'de' }: { items: Acco
                 className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-small font-bold transition-transform duration-200"
                 style={{
                   background: 'var(--method)',
-                  color: 'var(--method-ink-accent)',
+                  color: 'var(--method-on-brand)',
                   transform: isHovered && !isOpen ? 'scale(1.1)' : 'scale(1)',
                 }}
               >

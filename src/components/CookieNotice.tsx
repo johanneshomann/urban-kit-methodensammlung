@@ -140,9 +140,9 @@ export default function CookieNotice() {
                 onClick={dismiss}
                 data-autofocus
                 className="text-small font-bold px-4 py-2 rounded-xl transition-colors cursor-pointer"
-                style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+                style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-dark)'; e.currentTarget.style.color = 'var(--method-white)' }}
-                onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-ink-accent)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-on-brand)' }}
               >
                 {t('dismiss')}
               </button>

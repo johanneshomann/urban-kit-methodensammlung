@@ -171,9 +171,9 @@ export function AccessibilityButton() {
         aria-expanded={open}
         aria-controls={open ? panelId : undefined}
         className="inline-flex h-12 w-12 items-center justify-center rounded-2xl shadow-lg transition-all duration-150 hover:scale-105 cursor-pointer"
-        style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+        style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
         onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-dark)'; e.currentTarget.style.color = 'var(--method-white)' }}
-        onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-ink-accent)' }}
+        onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-on-brand)' }}
       >
         <Accessibility className="h-6 w-6" />
       </button>

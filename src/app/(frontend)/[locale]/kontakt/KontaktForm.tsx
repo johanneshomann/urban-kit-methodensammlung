@@ -84,7 +84,7 @@ export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
               placeholder={t('namePlaceholder')}
               required
               className={inputClass}
-              style={{ color: 'var(--method-ink-accent)', '--tw-ring-color': 'var(--method)' } as React.CSSProperties}
+              style={{ color: 'var(--method-ink-accent)', '--tw-ring-color': 'var(--method-dark)' } as React.CSSProperties}
             />
           </div>
           <div className="flex flex-col gap-1.5">
@@ -99,7 +99,7 @@ export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
               placeholder={t('emailPlaceholder')}
               required
               className={inputClass}
-              style={{ color: 'var(--method-ink-accent)', '--tw-ring-color': 'var(--method)' } as React.CSSProperties}
+              style={{ color: 'var(--method-ink-accent)', '--tw-ring-color': 'var(--method-dark)' } as React.CSSProperties}
             />
           </div>
         </div>
@@ -115,7 +115,7 @@ export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
             placeholder={t('subjectPlaceholder')}
             required
             className={inputClass}
-            style={{ color: 'var(--method-ink-accent)', '--tw-ring-color': 'var(--method)' } as React.CSSProperties}
+            style={{ color: 'var(--method-ink-accent)', '--tw-ring-color': 'var(--method-dark)' } as React.CSSProperties}
           />
         </div>
 
@@ -130,7 +130,7 @@ export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
             placeholder={t('messagePlaceholder')}
             required
             className={`${inputClass} resize-none`}
-            style={{ color: 'var(--method-ink-accent)', '--tw-ring-color': 'var(--method)' } as React.CSSProperties}
+            style={{ color: 'var(--method-ink-accent)', '--tw-ring-color': 'var(--method-dark)' } as React.CSSProperties}
           />
         </div>
 
@@ -145,9 +145,9 @@ export function KontaktForm({ disabled = false }: { disabled?: boolean }) {
             type="submit"
             disabled={disabled || isSending}
             className="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-cta font-bold transition-all disabled:opacity-60 disabled:cursor-not-allowed"
-            style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+            style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
             onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-dark)'; e.currentTarget.style.color = 'var(--method-white)' }}
-            onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-ink-accent)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-on-brand)' }}
           >
             <Send className="w-[1em] h-[1em] shrink-0" />
             {isSending ? t('sending') : t('submit')}

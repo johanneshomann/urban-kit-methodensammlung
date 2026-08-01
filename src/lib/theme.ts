@@ -77,5 +77,6 @@ export function colorsToCssVars(c: MethodensammlungColors): string {
     --method-white-transparent: ${c.whiteTransparent};
     --method-black: ${c.black};
     --method-border: ${c.methodLight};
+    --method-on-brand: ${c.inkAccent};
   `.trim()
 }

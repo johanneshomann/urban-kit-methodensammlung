@@ -276,6 +276,10 @@ html.a11y-high-contrast {
   /* Borders/outlines must stay black so shapes are distinguishable on the
      all-white surfaces (cards, panels, inputs, the export button, etc.). */
   --method-border: #000 !important;
+  /* Text/icons sitting ON --method surfaces. Default theme: dark ink on the
+     light brand color. High contrast: --method becomes black, so this must
+     flip to white — otherwise buttons render black-on-black. */
+  --method-on-brand: #fff !important;
 }
 
 /*

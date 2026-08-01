@@ -185,7 +185,7 @@ function Chip({ label, icon, isActive, isAvailable, onClick }: {
           isActive
             ? {
                 background: hovered ? 'var(--method-dark)' : 'var(--method)',
-                color: hovered ? 'var(--method-white)' : 'var(--method-ink-accent)',
+                color: hovered ? 'var(--method-white)' : 'var(--method-on-brand)',
                 borderColor: 'var(--method-black)',
                 cursor: 'pointer',
               }
@@ -193,7 +193,7 @@ function Chip({ label, icon, isActive, isAvailable, onClick }: {
               ? { background: 'var(--method-white)', color: 'var(--method-ink)', opacity: 0.3, cursor: 'default' }
               : {
                   background: hovered ? 'var(--method)' : 'var(--method-white)',
-                  color: hovered ? 'var(--method-ink-accent)' : 'var(--method-ink)',
+                  color: hovered ? 'var(--method-on-brand)' : 'var(--method-ink)',
 
                   boxShadow: hovered ? '0 4px 12px rgba(0,0,0,0.08)' : 'none',
                   cursor: 'pointer',

@@ -95,7 +95,7 @@ export default async function HelpPage({ params }: Props) {
                   <div className="flex items-center gap-4 px-6 py-4">
                     <span
                       className="flex items-center justify-center w-8 h-8 rounded-full shrink-0"
-                      style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+                      style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
                       aria-hidden="true"
                     >
                       <Icon className="w-4 h-4" />
@@ -152,7 +152,7 @@ export default async function HelpPage({ params }: Props) {
             <Link
               href="/kontakt"
               className="shrink-0 inline-flex items-center gap-2 px-5 py-3 rounded-xl text-cta font-bold transition-all shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95"
-              style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+              style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
             >
               <Mail className="w-[1.1em] h-[1.1em] shrink-0" aria-hidden="true" />
               {t('footerCta')}

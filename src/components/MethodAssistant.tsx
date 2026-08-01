@@ -143,7 +143,7 @@ export default function MethodAssistant({
         onClick={send}
         disabled={loading || !input.trim()}
         className="flex items-center justify-center w-9 h-9 rounded-full shrink-0 transition-opacity disabled:opacity-30 cursor-pointer disabled:cursor-default"
-        style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
+        style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
         aria-label={t('send')}
       >
         <Send className="w-[1em] h-[1em]" />
@@ -208,7 +208,7 @@ export default function MethodAssistant({
                 className={`text-text max-w-[85%] px-4 py-2.5 rounded-2xl ${m.role === 'user' ? 'whitespace-pre-wrap' : ''}`}
                 style={{
                   background: m.role === 'user' ? 'var(--method)' : 'var(--method-light)',
-                  color: m.role === 'user' ? 'var(--method-ink-accent)' : 'var(--method-ink)',
+                  color: m.role === 'user' ? 'var(--method-on-brand)' : 'var(--method-ink)',
                 }}
               >
                 {m.role === 'user' ? m.content : <ChatMarkdown>{m.content}</ChatMarkdown>}
