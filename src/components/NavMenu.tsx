@@ -4,7 +4,7 @@
 
 'use client'
 
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import { Link, usePathname } from '@/navigation'
 import { useTranslations } from 'next-intl'
 import { ChevronRight, Home, Bookmark, Mail, Signpost, Menu, X, Sparkles } from 'lucide-react'
@@ -17,6 +17,9 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
   const [open, setOpen] = useState(false)
   const [closing, setClosing] = useState(false)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const rootRef = useRef<HTMLDivElement>(null)
+  const desktopBtnRef = useRef<HTMLButtonElement>(null)
+  const mobileBtnRef = useRef<HTMLButtonElement>(null)
   const pathname = usePathname()
 
   const openMenu = useCallback(() => {
@@ -57,6 +60,20 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
 
   const isOpen = open && !closing
 
+  // Keyboard exit (APG disclosure pattern): Escape closes and refocuses the
+  // visible trigger — without this, keyboard users could open but never close.
+  useEffect(() => {
+    if (!open) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      closeImmediate()
+      const trigger = desktopBtnRef.current?.offsetParent ? desktopBtnRef.current : mobileBtnRef.current
+      trigger?.focus()
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [open, closeImmediate])
+
   const links = [
     { href: '/',            label: t('home'),              icon: Home },
     ...(assistantEnabled
@@ -68,10 +85,20 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
   ]
 
   return (
-    <>
-      {/* Desktop: hover opens, click toggles */}
+    <div
+      ref={rootRef}
+      className="contents"
+      onBlur={(e) => {
+        // Close when keyboard focus moves outside the menu + triggers entirely.
+        if (open && e.relatedTarget && !rootRef.current?.contains(e.relatedTarget as Node)) {
+          closeImmediate()
+        }
+      }}
+    >
+      {/* Desktop: hover opens, click/Enter toggles */}
       <button
-        onClick={openMenu}
+        ref={desktopBtnRef}
+        onClick={toggle}
         onMouseEnter={e => { openMenu(); e.currentTarget.style.color = 'var(--method-dark)'; }}
         onMouseLeave={e => { closeDelayed(); e.currentTarget.style.color = ''; }}
         aria-expanded={isOpen}
@@ -83,6 +110,7 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
 
       {/* Mobile: click only */}
       <button
+        ref={mobileBtnRef}
         onClick={toggle}
         aria-expanded={isOpen}
         className="md:hidden flex items-center cursor-pointer transition-colors"
@@ -156,6 +184,6 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
