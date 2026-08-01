@@ -58,6 +58,21 @@ html {
   scroll-behavior: smooth;
 }
 
+/*
+  Keyboard focus indicator (WCAG 2.4.7). :focus-visible fires for keyboard
+  navigation only, so pointer users never see rings. outline (not box-shadow)
+  survives overflow-hidden rounded containers and forced-colors modes.
+*/
+:focus-visible {
+  outline: 2px solid var(--method-dark);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+html.a11y-high-contrast :focus-visible {
+  outline-color: #000 !important;
+}
+
 body {
   font-family: var(--font-sans);
   color: var(--method-ink);
