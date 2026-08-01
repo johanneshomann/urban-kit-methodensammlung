@@ -144,6 +144,7 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 | `saved.ts` | localStorage API for saved methods |
 | `platformIdentity.ts` | Branding uploads (admin logo, favicon, OG image) with built-in defaults |
 | `methodAssistant/` | Method-assistant engine (settings, prompt, tools, rate limit) — see [`CHATBOT.md`](CHATBOT.md) |
+| `pdf/` | PDF export (`@react-pdf/renderer`): `MethodsPdf` document + Lexical→PDF rich-text converter, used by `/api/method-pdf` |
 
 ## Data / scripts
 

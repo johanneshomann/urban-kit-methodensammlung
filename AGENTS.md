@@ -82,7 +82,7 @@ src/
   app/
     (frontend)/[locale]/    # Public localized site (de, en)
     (payload)/              # Admin UI + Payload REST/GraphQL
-    api/                    # Custom Next routes: kontakt, methods-by-ids, method-assistant
+    api/                    # Custom Next routes: kontakt, methods-by-ids, method-assistant, method-pdf
   components/               # Frontend React components
   components/admin/         # Custom Payload admin components (nav, color picker, …)
   lib/                      # access.ts, requiredInDefaultLocale.ts, theme, helpers
@@ -129,7 +129,8 @@ Method assistant (chatbot) design: [`docs/CHATBOT.md`](docs/CHATBOT.md).
 
 6. **Two API surfaces.** Payload's own REST/GraphQL lives under `(payload)/api`.
    Custom app routes (`src/app/api/kontakt`, `src/app/api/methods-by-ids`,
-   `src/app/api/method-assistant`) are plain Next route handlers. The public site
+   `src/app/api/method-assistant`, `src/app/api/method-pdf`) are plain Next
+   route handlers. The public site
    reads content via Payload's **local API**,
    which **bypasses access control** — keep that in mind for "why can the public see X".
 

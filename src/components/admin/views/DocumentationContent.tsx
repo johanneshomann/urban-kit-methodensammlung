@@ -77,8 +77,8 @@ const CATEGORIES: Category[] = [
       {
         q: { de: 'Welche Inhalte sind zweisprachig – und welche nicht?', en: 'Which content is bilingual – and which isn’t?' },
         a: {
-          de: ['Zweisprachig sind die Methoden (Titel, Auszug, Ziel, Ablauf, Tipps …), die Filterwerte (je ein deutsches und ein englisches Namensfeld), die Rechtstexte (Impressum, Datenschutz, Cookie-Richtlinie) sowie die Kontaktangaben. Gemeinsam für beide Sprachen gelten dagegen Verknüpfungen, Bilder, der Slug und der Status.'],
-          en: ['Bilingual: methods (title, excerpt, goal, procedure, tips …), the filter values (a German and an English name field each), the legal texts (imprint, privacy, cookie policy) and the contact details. Shared across both languages: relationships, images, the slug and the status.'],
+          de: ['Zweisprachig sind die Methoden (Titel, Auszug, Ziel, Ablauf, Tipps …), die Filterwerte (je ein deutsches und ein englisches Namensfeld), die Rechtstexte (Impressum, Datenschutz, Cookie-Richtlinie, Erklärung zur Barrierefreiheit), die Alternativtexte von Bildern sowie die Kontaktangaben. Gemeinsam für beide Sprachen gelten dagegen Verknüpfungen, Bilder, der Slug und der Status.'],
+          en: ['Bilingual: methods (title, excerpt, goal, procedure, tips …), the filter values (a German and an English name field each), the legal texts (imprint, privacy, cookie policy, accessibility statement), the alt texts of images and the contact details. Shared across both languages: relationships, images, the slug and the status.'],
         },
       },
       {
@@ -168,6 +168,25 @@ const CATEGORIES: Category[] = [
             ],
           },
           {
+            heading: { de: 'Reiter „Praxisbeispiele“', en: '“Best Practices” tab' },
+            fields: [
+              {
+                name: { de: 'Praxisbeispiele', en: 'Best Practices' },
+                desc: {
+                  de: 'Optionale Beispiele aus der Praxis – gleiche Abschnitts-Struktur wie der Ablauf (Titel + Inhalt). Der Bereich erscheint auf der Website nur, wenn Abschnitte oder Bilder vorhanden sind.',
+                  en: 'Optional real-world examples – same section structure as the procedure (title + content). The area only appears on the website when sections or images exist.',
+                },
+              },
+              {
+                name: { de: 'Galerie', en: 'Gallery' },
+                desc: {
+                  de: 'Bilder zu den Praxisbeispielen mit übersetzbarer Bildunterschrift. Sie erscheinen als horizontal scrollbare Galerie mit Vollbildansicht unterhalb der Abschnitte.',
+                  en: 'Images for the best-practice examples with a translatable caption. They appear as a horizontally scrollable gallery with a fullscreen view below the sections.',
+                },
+              },
+            ],
+          },
+          {
             heading: { de: 'Reiter „Hinweise“', en: '“Notes” tab' },
             fields: [
               {
@@ -227,6 +246,13 @@ const CATEGORIES: Category[] = [
                 desc: {
                   de: 'Mehrere weitere Bilder aus der Medien-Bibliothek für die Galerie auf der Detailseite.',
                   en: 'Several additional images from the media library for the gallery on the detail page.',
+                },
+              },
+              {
+                name: { de: 'Hinweis: Bild-Uploads', en: 'Note: image uploads' },
+                desc: {
+                  de: 'Beim Hochladen ist ein deutscher Alternativtext Pflicht (für Screenreader; in der Galerie auch als Untertitel). Kurz beschreiben, was zu sehen ist – nicht mit „Bild von …“ beginnen. Nur Bilddateien bis 5 MB; sie werden automatisch verkleinert und als WebP gespeichert.',
+                  en: 'A German alt text is required on upload (for screen readers; also the caption in the gallery). Briefly describe what is shown – don’t start with “image of …”. Image files up to 5 MB only; they are automatically resized and stored as WebP.',
                 },
               },
             ],
@@ -361,15 +387,15 @@ const CATEGORIES: Category[] = [
     key: 'legal',
     label: { de: 'Rechtliches', en: 'Legal' },
     intro: {
-      de: 'Die Rechtstexte der Website: Impressum, Datenschutz und Cookie-Richtlinie.',
-      en: 'The website’s legal texts: imprint, privacy policy and cookie policy.',
+      de: 'Die Rechtstexte der Website: Impressum, Datenschutz, Cookie-Richtlinie und Erklärung zur Barrierefreiheit.',
+      en: 'The website’s legal texts: imprint, privacy policy, cookie policy and accessibility statement.',
     },
     items: [
       {
         q: { de: 'Was steht unter „Rechtliches“?', en: 'What is under “Legal”?' },
         a: {
-          de: ['Hier liegen die drei Rechtstexte der Website – jeweils in einem eigenen Reiter: „Impressum“, „Datenschutz“ und „Cookie-Richtlinie“. Jeder Text hat eine eigene öffentliche Seite, die im Footer verlinkt ist.'],
-          en: ['This holds the website’s three legal texts – each in its own tab: “Imprint”, “Privacy Policy” and “Cookie Policy”. Each text has its own public page, linked in the footer.'],
+          de: ['Hier liegen die vier Rechtstexte der Website – jeweils in einem eigenen Reiter: „Impressum“, „Datenschutz“, „Cookie-Richtlinie“ und „Barrierefreiheit“. Jeder Text hat eine eigene öffentliche Seite, die im Footer verlinkt ist. In der Erklärung zur Barrierefreiheit bitte die Platzhalter in eckigen Klammern (Feedback-Adresse, zuständige Stelle) ergänzen.'],
+          en: ['This holds the website’s four legal texts – each in its own tab: “Imprint”, “Privacy Policy”, “Cookie Policy” and “Accessibility”. Each text has its own public page, linked in the footer. In the accessibility statement, please fill in the bracketed placeholders (feedback address, responsible body).'],
         },
       },
       {
