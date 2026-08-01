@@ -93,16 +93,61 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
     return () => document.removeEventListener('focusin', onFocusIn)
   }, [open, closeImmediate])
 
-  // Keyboard exit (APG disclosure pattern): Escape closes and refocuses the
-  // visible trigger — without this, keyboard users could open but never close.
+  // Keyboard handling while open. Tab is managed manually because macOS
+  // Safari/Firefox skip links in native Tab order (and Safari doesn't focus
+  // buttons on click), which would otherwise tab straight OUT of the menu and
+  // close it. Escape closes and refocuses the trigger; arrows are a bonus.
   useEffect(() => {
     if (!open) return
+
+    const visibleTrigger = () =>
+      desktopBtnRef.current?.offsetParent ? desktopBtnRef.current : mobileBtnRef.current
+    const visibleLinks = () =>
+      Array.from(rootRef.current?.querySelectorAll<HTMLElement>('a[href]') ?? []).filter(
+        (a) => a.offsetParent,
+      )
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key !== 'Escape') return
-      closeImmediate()
-      const trigger = desktopBtnRef.current?.offsetParent ? desktopBtnRef.current : mobileBtnRef.current
-      trigger?.focus()
+      if (e.key === 'Escape') {
+        closeImmediate()
+        visibleTrigger()?.focus()
+        return
+      }
+      if (e.key !== 'Tab' && e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return
+
+      // Only steer the keyboard when focus is in the menu region (or nowhere,
+      // e.g. Safari after a click) — never hijack typing elsewhere on the page.
+      const active = document.activeElement as HTMLElement | null
+      const inRegion = !!active && !!rootRef.current?.contains(active)
+      const unanchored = !active || active === document.body
+      if (!inRegion && !unanchored) return
+
+      const links = visibleLinks()
+      if (links.length === 0) return
+      const idx = active ? links.indexOf(active) : -1
+
+      if (e.key === 'Tab' && !e.shiftKey) {
+        if (idx === links.length - 1) {
+          closeImmediate() // leaving past the last link — let focus move on
+          return
+        }
+        e.preventDefault()
+        links[idx + 1].focus() // idx -1 (trigger/nothing) → first link
+      } else if (e.key === 'Tab' && e.shiftKey) {
+        if (idx === -1) return // on the trigger: default back-tab; focusin closes
+        e.preventDefault()
+        if (idx === 0) visibleTrigger()?.focus()
+        else links[idx - 1].focus()
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault()
+        links[Math.min(idx + 1, links.length - 1)].focus()
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault()
+        if (idx <= 0) visibleTrigger()?.focus()
+        else links[idx - 1].focus()
+      }
     }
+
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [open, closeImmediate])
