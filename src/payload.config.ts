@@ -120,6 +120,13 @@ export default buildConfig({
     defaultLocale: 'de',
     fallback: true,
   },
+  graphQL: {
+    // Committed SDL schema for external consumers (codegen etc.) — regenerate
+    // with `npm run generate:schema` after model changes.
+    schemaOutputFile: path.resolve(dirname, '..', 'schema.graphql'),
+    // Rejects abusively deep/broad queries; raise if a legitimate integration hits it.
+    maxComplexity: 1000,
+  },
   collections: [
     // Content, filters & assets — read for authenticated entities, writes for admins + editors.
     ...[
