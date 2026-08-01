@@ -17,6 +17,7 @@ export default function SavedWidget() {
   const t = useTranslations('savedWidget')
   const [open, setOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const fabRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -24,8 +25,20 @@ export default function SavedWidget() {
         setOpen(false)
       }
     }
-    if (open) document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setOpen(false)
+        fabRef.current?.focus()
+      }
+    }
+    if (open) {
+      document.addEventListener('mousedown', handleClickOutside)
+      document.addEventListener('keydown', handleKeyDown)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('keydown', handleKeyDown)
+    }
   }, [open])
 
   const count = mounted ? saved.length : 0
@@ -34,8 +47,10 @@ export default function SavedWidget() {
 
   return (
     <div ref={containerRef} className="saved-widget fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3 pointer-events-none">
-      {/* Popup panel */}
+      {/* Popup panel — inert while closed so its (invisible) links/buttons
+          leave the tab order and the accessibility tree. */}
       <div
+        inert={!open}
         className={`w-80 max-w-[calc(100vw-3rem)] bg-method-white rounded-2xl shadow-2xl flex flex-col overflow-hidden transition-all duration-200 origin-bottom-right ${
           open
             ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto'
@@ -121,6 +136,8 @@ export default function SavedWidget() {
 
       {/* FAB button */}
       <button
+        ref={fabRef}
+        aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
         className="w-12 h-12 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-150 flex items-center justify-center relative pointer-events-auto cursor-pointer"
         style={{ background: 'var(--method)', color: 'var(--method-ink-accent)' }}
