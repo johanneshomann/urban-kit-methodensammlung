@@ -106,7 +106,7 @@ export default function SavedPage() {
               <a
                 href={`/api/method-pdf?ids=${saved.map(s => s.id).join(',')}&locale=${locale}`}
                 download
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-small font-bold transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-small transition-colors"
                 style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
                 onMouseEnter={e => { e.currentTarget.style.background = 'var(--method-dark)'; e.currentTarget.style.color = 'var(--method-white)' }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-on-brand)' }}

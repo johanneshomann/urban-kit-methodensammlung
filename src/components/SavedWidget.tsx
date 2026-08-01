@@ -118,7 +118,7 @@ export default function SavedWidget() {
               <Link
                 href="/saved"
                 onClick={() => setOpen(false)}
-                className="block w-full text-center text-small font-bold py-2.5 rounded-xl transition-colors"
+                className="block w-full text-center text-small py-2.5 rounded-xl transition-colors"
                 style={
                   onMethodPage
                     ? { background: 'transparent', color: 'var(--method-dark)' }
