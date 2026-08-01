@@ -82,7 +82,7 @@ src/
   app/
     (frontend)/[locale]/    # Public localized site (de, en)
     (payload)/              # Admin UI + Payload REST/GraphQL
-    api/                    # Custom Next routes: kontakt, methods-by-ids, method-assistant, method-pdf
+    api/                    # Custom Next routes: methods-by-ids, method-assistant, method-pdf
   components/               # Frontend React components
   components/admin/         # Custom Payload admin components (nav, color picker, …)
   lib/                      # access.ts, requiredInDefaultLocale.ts, theme, helpers
@@ -128,17 +128,17 @@ Method assistant (chatbot) design: [`docs/CHATBOT.md`](docs/CHATBOT.md).
    [`src/collections/Methods.ts`](src/collections/Methods.ts).
 
 6. **Two API surfaces.** Payload's own REST/GraphQL lives under `(payload)/api`.
-   Custom app routes (`src/app/api/kontakt`, `src/app/api/methods-by-ids`,
-   `src/app/api/method-assistant`, `src/app/api/method-pdf`) are plain Next
-   route handlers. The public site
+   Custom app routes (`src/app/api/methods-by-ids`, `src/app/api/method-assistant`,
+   `src/app/api/method-pdf`) are plain Next route handlers. The public site
    reads content via Payload's **local API**,
    which **bypasses access control** — keep that in mind for "why can the public see X".
 
-7. **Email config is split.** SMTP credentials come from env vars
-   (`SMTP_HOST`/`PORT`/`SECURE`/`USER`/`PASS`/`FROM_*`); non-secret operational values
-   (recipient, subject prefix, enable toggle) live in the `PlatformSettings` global and
-   are read per-request. No `SMTP_HOST` ⇒ Payload uses an `ethereal.email` mock in dev
-   and logs a preview URL.
+7. **Email is auth-only.** The Nodemailer adapter (SMTP env vars
+   `SMTP_HOST`/`PORT`/`SECURE`/`USER`/`PASS`/`FROM_*`) serves only Payload's own auth
+   mails (admin password resets). There is deliberately **no contact form** — the
+   Kontakt page shows a mailto address (`kontaktEmail` in `PlatformSettings`), so no
+   visitor data is processed server-side (DSGVO minimization). No `SMTP_HOST` ⇒
+   ethereal.email mock in dev.
 
 8. **Custom admin components** are referenced by string path in `payload.config.ts`
    (e.g. `@/components/admin/TopNav#TopNav`). After adding/moving one, run
@@ -172,4 +172,4 @@ let the user decide when to commit.
 - **Public page / routing** → `src/app/(frontend)/[locale]/…` + `src/i18n` + `navigation.ts`.
 - **Admin UI tweak** → `src/components/admin/…` (+ `generate:importmap` if newly wired).
 - **Access / permissions** → `src/lib/access.ts`.
-- **Email / contact form** → `src/app/api/kontakt/route.ts` + `PlatformSettings` global + SMTP env.
+- **Contact page** → `(frontend)/[locale]/kontakt` + the `PlatformSettings` Kontakt tab (email + text). Mailto-only by design — no form.

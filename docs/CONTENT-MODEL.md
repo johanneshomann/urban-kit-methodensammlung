@@ -88,9 +88,9 @@ Characteristics (Einfach/Strukturiert/Spielerisch/Aktivierend/Kreativ).
 ## Globals
 
 - **`PlatformSettings`** (admin-only): brand + text colors, branding uploads (admin
-  logo, favicon, OG sharing image), the Kontakt page content, and email operational
-  settings (recipient, from-name, subject prefix, enable toggle). SMTP **credentials**
-  are NOT here — they come from env vars.
+  logo, favicon, OG sharing image), and the Kontakt page content (email address +
+  rich text). There is no contact form — the Kontakt page is mailto-only; SMTP env
+  vars only serve Payload's auth mails.
 - **`Legal`** (admin-only): the legal texts — Impressum, Datenschutz, cookie policy, and the Erklärung zur Barrierefreiheit (seeded default per the EU model declaration; bracketed placeholders for the feedback address + enforcement body are filled by admins).
 - **`Assistant`** (admin-only, **`read` locked** — it stores the API key): method-assistant
   config (enable, provider, API key, model, greeting, extra instructions, rate limit),

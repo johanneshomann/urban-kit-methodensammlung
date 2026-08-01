@@ -9,7 +9,6 @@ import { EyebrowBadge } from '@/components/EyebrowBadge'
 import BackButton from '@/components/BackButton'
 import RichTextRenderer from '@/components/RichTextRenderer'
 import { Mail, ChevronDown } from 'lucide-react'
-import { KontaktForm } from './KontaktForm'
 
 type Props = { params: Promise<{ locale: string }> }
 
@@ -78,39 +77,47 @@ export default async function KontaktPage({ params }: Props) {
           {t('sectionTitleLine2')}<span style={{ color: 'var(--method)' }}>.</span>
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-          {/* Left — contact info */}
-          <div className="flex flex-col gap-6">
-            <div className="bg-method-white rounded-xl border p-7 flex flex-col gap-5 hover:shadow-md transition-all">
-              {content && (
-                <div className="text-text" style={{ color: 'var(--method-ink)' }}>
-                  <RichTextRenderer content={content as any} />
-                </div>
-              )}
-              {email && (
+        {/* Contact goes via email only — deliberately no form: nothing is
+            processed or stored server-side (see the DSGVO discussion). */}
+        <div className="max-w-2xl">
+          <div className="bg-method-white rounded-xl border p-7 flex flex-col gap-5 hover:shadow-md transition-all">
+            {content && (
+              <div className="text-text" style={{ color: 'var(--method-ink)' }}>
+                <RichTextRenderer content={content as any} />
+              </div>
+            )}
+            {email && (
+              <div className="flex flex-col gap-3">
                 <div>
                   <p className="text-small uppercase tracking-widest font-bold mb-1" style={{ color: 'var(--method-ink)' }}>
                     E-Mail
                   </p>
                   <a
                     href={`mailto:${email}`}
-                    className="text-text transition-opacity hover:opacity-70"
-                    style={{ color: 'var(--method)' }}
+                    className="text-text underline transition-opacity hover:opacity-70"
+                    style={{ color: 'var(--method-dark)' }}
                   >
                     {email}
                   </a>
                 </div>
-              )}
-              {!content && !email && (
-                <p className="text-text italic" style={{ color: 'var(--method-ink)' }}>
-                  {t('placeholder')}
-                </p>
-              )}
-            </div>
+                <div>
+                  <a
+                    href={`mailto:${email}`}
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-cta transition-colors"
+                    style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
+                  >
+                    <Mail className="w-[1em] h-[1em] shrink-0" aria-hidden />
+                    {t('writeEmail')}
+                  </a>
+                </div>
+              </div>
+            )}
+            {!content && !email && (
+              <p className="text-text italic" style={{ color: 'var(--method-ink)' }}>
+                {t('placeholder')}
+              </p>
+            )}
           </div>
-
-          {/* Right — form */}
-          <KontaktForm disabled={!settings.mailEnabled} />
         </div>
       </section>
     </div>

@@ -260,22 +260,7 @@
     "sectionTitleLine2": "Sie uns",
     "contactText": "Eine E-Mail genügt – wir antworten so schnell wie möglich.",
     "placeholder": "Kontaktinformationen werden hier ergänzt.",
-    "form": {
-      "name": "Name",
-      "namePlaceholder": "Ihr Name",
-      "email": "E-Mail",
-      "emailPlaceholder": "ihre@email.de",
-      "subject": "Betreff",
-      "subjectPlaceholder": "Worum geht es?",
-      "message": "Nachricht",
-      "messagePlaceholder": "Ihre Nachricht …",
-      "submit": "Absenden",
-      "sending": "Wird gesendet …",
-      "successTitle": "Danke für Ihre Nachricht",
-      "successText": "Wir melden uns so schnell wie möglich bei Ihnen.",
-      "errorGeneric": "Etwas ist schiefgelaufen. Bitte später erneut versuchen.",
-      "errorDisabled": "Das Kontaktformular ist derzeit nicht verfügbar. Bitte schreiben Sie uns direkt eine E-Mail."
-    }
+    "writeEmail": "E-Mail schreiben"
   },
   "datenschutz": {
     "metaTitle": "Datenschutzerklärung – Urban Kit Methodensammlung",

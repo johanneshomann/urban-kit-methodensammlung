@@ -142,61 +142,6 @@ export const PlatformSettings: GlobalConfig = {
             },
           ],
         },
-        {
-          label: { en: 'Mail', de: 'E-Mail' },
-          description: {
-            en: 'Settings for the contact form. SMTP credentials are configured via environment variables on the server.',
-            de: 'Einstellungen für das Kontaktformular. Die SMTP-Zugangsdaten werden serverseitig über Umgebungsvariablen konfiguriert.',
-          },
-          fields: [
-            {
-              name: 'mailEnabled',
-              type: 'checkbox',
-              defaultValue: false,
-              label: { en: 'Enable contact form sending', de: 'Versand über Kontaktformular aktivieren' },
-              admin: {
-                description: {
-                  en: 'When off, the contact form is disabled and no emails are sent.',
-                  de: 'Wenn deaktiviert, ist das Kontaktformular gesperrt und es werden keine E-Mails versendet.',
-                },
-              },
-            },
-            {
-              name: 'mailRecipient',
-              type: 'email',
-              label: { en: 'Recipient address', de: 'Empfänger-Adresse' },
-              admin: {
-                description: {
-                  en: 'Where contact form submissions are delivered. Falls back to the contact email address if empty.',
-                  de: 'Wohin Kontaktanfragen zugestellt werden. Fällt auf die Kontakt-E-Mail-Adresse zurück, wenn leer.',
-                },
-              },
-            },
-            {
-              name: 'mailFromName',
-              type: 'text',
-              label: { en: 'Sender display name', de: 'Anzeigename des Absenders' },
-              admin: {
-                description: {
-                  en: 'Optional. Overrides the default sender name (SMTP_FROM_NAME) for contact emails.',
-                  de: 'Optional. Überschreibt den Standard-Absendernamen (SMTP_FROM_NAME) für Kontakt-E-Mails.',
-                },
-              },
-            },
-            {
-              name: 'mailSubjectPrefix',
-              type: 'text',
-              label: { en: 'Subject prefix', de: 'Betreff-Präfix' },
-              admin: {
-                placeholder: '[Urban Kit Kontakt]',
-                description: {
-                  en: 'Optional. Prepended to the email subject, e.g. "[Urban Kit Kontakt]".',
-                  de: 'Optional. Wird dem Betreff vorangestellt, z. B. „[Urban Kit Kontakt]“.',
-                },
-              },
-            },
-          ],
-        },
       ],
     },
   ],

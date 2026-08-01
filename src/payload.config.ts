@@ -142,7 +142,7 @@ export default buildConfig({
     ApiClients,
   ],
   globals: [
-    // Platform texts (contact, colors, mail) — admin-only.
+    // Platform texts (contact, colors) — admin-only.
     { ...PlatformSettings, access: { ...lockGlobalWritesToAdmins, ...PlatformSettings.access } },
     // Legal texts (imprint, privacy, cookie policy) — admin-only.
     { ...Legal, access: { ...lockGlobalWritesToAdmins, ...Legal.access } },
@@ -183,10 +183,10 @@ export default buildConfig({
       UploadFeature(),
     ],
   }),
-  // Email is configured via the Nodemailer adapter. SMTP credentials are read
-  // from env vars at startup; non-secret operational values (recipient, etc.)
-  // live in the Platform Settings global and are read per-request in the route.
-  // With no SMTP_HOST set, Payload falls back to an ethereal.email mock in dev.
+  // Email is configured via the Nodemailer adapter and is used only for
+  // Payload's own auth mails (e.g. admin password resets) — the public site
+  // has no contact form by design (nothing is processed server-side). With no
+  // SMTP_HOST set, Payload falls back to an ethereal.email mock in dev.
   email: nodemailerAdapter({
     defaultFromAddress: process.env.SMTP_FROM_ADDRESS ?? 'noreply@urban-kit.local',
     defaultFromName: process.env.SMTP_FROM_NAME ?? 'Urban Kit',

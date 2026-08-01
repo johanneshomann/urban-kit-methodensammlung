@@ -51,7 +51,7 @@ src/
   key); the eight filter-settings globals get `lockGlobalWritesToEditors`.
 - **Editor:** Lexical with a fixed feature set (headings, lists, links, upload,
   relationship, align, blockquote, code, sub/superscript, etc.).
-- **Email:** Nodemailer adapter; SMTP from env, ethereal mock when `SMTP_HOST` unset.
+- **Email:** Nodemailer adapter (Payload auth mails only — no contact form); SMTP from env, ethereal mock when `SMTP_HOST` unset.
 - **Admin components:** custom `TopNav`, `CollapseFilterGroups`, `BottomNav`, and a
   custom `documentation` view at `/admin/dokumentation`.
 - **Uploads:** 5 MB file-size limit.
@@ -84,7 +84,7 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 
 | Global | Writable by | Purpose |
 |---|---|---|
-| `PlatformSettings` | admin | Colors, branding uploads (admin logo, favicon, OG image), Kontakt, email (recipient, from-name, subject prefix, enable toggle) |
+| `PlatformSettings` | admin | Colors, branding uploads (admin logo, favicon, OG image), Kontakt (email address + text) |
 | `Legal` | admin | Legal texts: Impressum, Datenschutz, cookie policy, Erklärung zur Barrierefreiheit |
 | `Assistant` | admin | Method-assistant config (provider, API key, model, greeting, rate limit). **`read` is locked** so the key can't leak via REST — see [`CHATBOT.md`](CHATBOT.md) |
 | `ParticipationDepthSettings` | admin+editor | Filter display icon + lucide fallback + active flag |
@@ -110,7 +110,6 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 - `api/[...slug]` — Payload REST/GraphQL handler
 
 **Custom API** — `src/app/api/`:
-- `kontakt/route.ts` — POST contact form (uses `PlatformSettings` + SMTP)
 - `methods-by-ids/route.ts` — GET methods by id list (locale-aware), for saved view
 - `method-assistant/route.ts` — POST chat turn for the method assistant (validated,
   rate-limited; provider/key from the `Assistant` global). See [`CHATBOT.md`](CHATBOT.md).

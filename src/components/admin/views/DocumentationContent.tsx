@@ -433,8 +433,8 @@ const CATEGORIES: Category[] = [
       {
         q: { de: 'Was sind die Plattform-Einstellungen?', en: 'What are the platform settings?' },
         a: {
-          de: ['Hier liegen die übergreifenden Einstellungen der Website: die Farben (Design), die Kontaktangaben und die E-Mail-Einstellungen für das Kontaktformular. Die Rechtstexte (Impressum, Datenschutz, Cookie-Richtlinie) stehen separat unter „Rechtliches“.'],
-          en: ['This is where the website’s cross-cutting settings live: the colors (design), the contact details and the email settings for the contact form. The legal texts (imprint, privacy, cookie policy) sit separately under “Legal”.'],
+          de: ['Hier liegen die übergreifenden Einstellungen der Website: die Farben (Design), die Kontaktangaben (E-Mail-Adresse und Text der Kontaktseite). Die Rechtstexte (Impressum, Datenschutz, Cookie-Richtlinie) stehen separat unter „Rechtliches“.'],
+          en: ['This is where the website’s cross-cutting settings live: the colors (design), the contact details (email address and the contact page text). The legal texts (imprint, privacy, cookie policy) sit separately under “Legal”.'],
         },
       },
       {

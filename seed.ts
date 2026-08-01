@@ -78,7 +78,7 @@ const barrierefreiheitDe = doc([
   h('h3', 'Erstellung dieser Erklärung'),
   p(txt('Diese Erklärung wurde am 31. Juli 2026 erstellt und zuletzt am 31. Juli 2026 überprüft.')),
   h('h3', 'Barrieren melden: Feedback und Kontakt'),
-  p(txt('Sie möchten uns bestehende Barrieren mitteilen oder Informationen zur Umsetzung der Barrierefreiheit erfragen? Nutzen Sie gerne unser '), a('Kontaktformular', '/kontakt'), txt(' oder schreiben Sie an [E-Mail-Adresse ergänzen]. Wir bemühen uns, Anfragen innerhalb von zwei Wochen zu beantworten.')),
+  p(txt('Sie möchten uns bestehende Barrieren mitteilen oder Informationen zur Umsetzung der Barrierefreiheit erfragen? Nutzen Sie gerne unsere '), a('Kontaktseite', '/kontakt'), txt(' oder schreiben Sie an [E-Mail-Adresse ergänzen]. Wir bemühen uns, Anfragen innerhalb von zwei Wochen zu beantworten.')),
   h('h3', 'Durchsetzungsverfahren'),
   p(txt('Wenn Sie der Ansicht sind, dass unsere Antwort auf Ihre Rückmeldung nicht zufriedenstellend ist, können Sie sich an die zuständige Durchsetzungs- bzw. Ombudsstelle wenden: [Zuständige Stelle mit Kontaktdaten ergänzen — für öffentliche Stellen des Landes NRW ist dies die Ombudsstelle für barrierefreie Informationstechnik des Landes Nordrhein-Westfalen].')),
 ])
@@ -93,7 +93,7 @@ const barrierefreiheitEn = doc([
   h('h3', 'Preparation of this statement'),
   p(txt('This statement was prepared on 31 July 2026 and last reviewed on 31 July 2026.')),
   h('h3', 'Reporting barriers: feedback and contact'),
-  p(txt('Would you like to report existing barriers or request information on the implementation of accessibility? Please use our '), a('contact form', '/kontakt'), txt(' or write to [add email address]. We aim to respond to enquiries within two weeks.')),
+  p(txt('Would you like to report existing barriers or request information on the implementation of accessibility? Please use our '), a('contact page', '/kontakt'), txt(' or write to [add email address]. We aim to respond to enquiries within two weeks.')),
   h('h3', 'Enforcement procedure'),
   p(txt('If you believe that our response to your feedback is not satisfactory, you can contact the responsible enforcement/ombudsman body: [add responsible body with contact details — for public bodies of the state of North Rhine-Westphalia this is the Ombudsstelle für barrierefreie Informationstechnik des Landes Nordrhein-Westfalen].')),
 ])
