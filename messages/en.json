@@ -19,7 +19,8 @@
     "contact": "Contact",
     "help": "Guide",
     "assistant": "Assistant",
-    "subtitle": "Method Archive"
+    "subtitle": "Method Archive",
+    "switchLanguage": "Switch language"
   },
   "help": {
     "metaTitle": "Guide – Urban Kit Method Archive",
@@ -99,7 +100,8 @@
   "home": {
     "eyebrow": "Methods for participatory projects",
     "title": "Method Archive",
-    "subtitle": "Find tried-and-tested methods for participatory urban projects. Filter by target group, timeframe, goal and more – and discover what fits your project."
+    "subtitle": "Find tried-and-tested methods for participatory urban projects. Filter by target group, timeframe, goal and more – and discover what fits your project.",
+    "scrollToMethods": "To the methods"
   },
   "beforeYouBegin": {
     "title": "Before you begin",
@@ -114,7 +116,10 @@
     "label": "Filter:",
     "characteristic": "Characteristic",
     "all": "All",
-    "reset": "Reset"
+    "reset": "Reset",
+    "resetOne": "Reset {label}",
+    "resetAll": "Reset all filters",
+    "adjustView": "Adjust view"
   },
   "assistant": {
     "title": "Method assistant",
@@ -147,7 +152,8 @@
     "durchfuehrung": "Execution",
     "auswertung": "Evaluation",
     "tipps": "Tips",
-    "ungeeignetFuer": "Not suitable for"
+    "ungeeignetFuer": "Not suitable for",
+    "scrollToDescription": "To the description"
   },
   "saved": {
     "title": "Bookmarked Methods",
@@ -243,5 +249,14 @@
     "more": "More in the cookie policy",
     "dismiss": "Got it",
     "close": "Close"
+  },
+  "gallery": {
+    "close": "Close",
+    "prevImage": "Previous image",
+    "nextImage": "Next image",
+    "stripPrev": "Back",
+    "stripNext": "Next",
+    "imageN": "Image {n}",
+    "view": "Image view"
   }
 }

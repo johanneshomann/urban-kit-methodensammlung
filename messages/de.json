@@ -19,7 +19,8 @@
     "contact": "Kontakt",
     "help": "Anleitung",
     "assistant": "Assistent",
-    "subtitle": "Methodensammlung"
+    "subtitle": "Methodensammlung",
+    "switchLanguage": "Sprache wechseln"
   },
   "help": {
     "metaTitle": "Anleitung – Urban Kit Methodensammlung",
@@ -99,7 +100,8 @@
   "home": {
     "eyebrow": "Methoden für partizipative Projekte",
     "title": "Methodensammlung",
-    "subtitle": "Hier finden sich erprobte Methoden für partizipative Stadtprojekte. Über die Filter nach Zielgruppe, Zeitrahmen, Ziel und weiteren Kriterien zeigt sich, was zum jeweiligen Vorhaben passt."
+    "subtitle": "Hier finden sich erprobte Methoden für partizipative Stadtprojekte. Über die Filter nach Zielgruppe, Zeitrahmen, Ziel und weiteren Kriterien zeigt sich, was zum jeweiligen Vorhaben passt.",
+    "scrollToMethods": "Zu den Methoden"
   },
   "beforeYouBegin": {
     "title": "Vor dem Start",
@@ -114,7 +116,10 @@
     "label": "Filter:",
     "characteristic": "Merkmal",
     "all": "Alle",
-    "reset": "Zurücksetzen"
+    "reset": "Zurücksetzen",
+    "resetOne": "{label} zurücksetzen",
+    "resetAll": "Alle Filter zurücksetzen",
+    "adjustView": "Ansicht anpassen"
   },
   "assistant": {
     "title": "Methoden-Assistent",
@@ -147,7 +152,8 @@
     "durchfuehrung": "Durchführung",
     "auswertung": "Auswertung",
     "tipps": "Tipps",
-    "ungeeignetFuer": "Ungeeignet für"
+    "ungeeignetFuer": "Ungeeignet für",
+    "scrollToDescription": "Zur Beschreibung"
   },
   "saved": {
     "title": "Gemerkte Methoden",
@@ -243,5 +249,14 @@
     "more": "Mehr in der Cookie-Richtlinie",
     "dismiss": "Verstanden",
     "close": "Schließen"
+  },
+  "gallery": {
+    "close": "Schließen",
+    "prevImage": "Vorheriges Bild",
+    "nextImage": "Nächstes Bild",
+    "stripPrev": "Zurück",
+    "stripNext": "Weiter",
+    "imageN": "Bild {n}",
+    "view": "Bildansicht"
   }
 }

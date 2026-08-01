@@ -28,7 +28,7 @@ import type { LucideIcon } from 'lucide-react'
 // NOTE: `ClearDot` is duplicated near-verbatim in MethodFilters.tsx. Kept inline
 // for now; a shared component is a known cleanup (see the OSS review notes).
 // The portal-rendered tooltip escapes the filter panel's `overflow`/stacking context.
-function ClearDot({ onClear, tooltip = 'Zurücksetzen' }: { onClear: (e: React.MouseEvent) => void; tooltip?: string }) {
+function ClearDot({ onClear, tooltip }: { onClear: (e: React.MouseEvent) => void; tooltip: string }) {
   const [hovered, setHovered] = useState(false)
   const btnRef = useRef<HTMLButtonElement>(null)
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null)
@@ -61,7 +61,7 @@ function ClearDot({ onClear, tooltip = 'Zurücksetzen' }: { onClear: (e: React.M
         onMouseLeave={handleMouseLeave}
         className="shrink-0 relative flex items-center justify-center cursor-pointer"
         style={{ width: '1em', height: '1em', color: 'var(--method-accent)' }}
-        aria-label="Filter zurücksetzen"
+        aria-label={tooltip}
       >
         <span
           className="rounded-full block absolute"
@@ -312,7 +312,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
               transition: 'max-width 0.4s cubic-bezier(0.22,1,0.36,1)',
             }}
           >
-            <ClearDot tooltip="Alle zurücksetzen" onClear={(e) => { e.stopPropagation(); setFilters({ ...EMPTY_FILTERS }) }} />
+            <ClearDot tooltip={tFilter('resetAll')} onClear={(e) => { e.stopPropagation(); setFilters({ ...EMPTY_FILTERS }) }} />
           </span>
           <ChevronDown
             className={`w-[1em] h-[1em] shrink-0 ml-auto transition-transform duration-300 ${filterOpen ? 'rotate-180' : ''}`}
@@ -348,7 +348,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
             }}
             onMouseEnter={e => { if (!settingsOpen) (e.currentTarget as HTMLButtonElement).style.background = 'var(--method-light)' }}
             onMouseLeave={e => { if (!settingsOpen) (e.currentTarget as HTMLButtonElement).style.background = 'var(--method-white)' }}
-            aria-label="Ansicht anpassen"
+            aria-label={tFilter('adjustView')}
           >
             <Settings className="w-[1em] h-[1em]" />
           </button>

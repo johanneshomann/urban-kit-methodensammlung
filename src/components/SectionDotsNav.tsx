@@ -10,7 +10,7 @@ import type { LucideIcon } from 'lucide-react'
 
 export type DotItem = { id: string; label: string; icon?: string }
 
-export default function SectionDotsNav({ items, label = 'Abschnitte' }: { items: DotItem[]; label?: string }) {
+export default function SectionDotsNav({ items, label }: { items: DotItem[]; label: string }) {
   const [activeId, setActiveId] = useState<string | null>(items[0]?.id ?? null)
   const [hoveredId, setHoveredId] = useState<string | null>(null)
   const [revealId, setRevealId] = useState<string | null>(null)

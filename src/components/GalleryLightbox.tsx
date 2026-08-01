@@ -5,6 +5,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { createPortal } from 'react-dom'
 import { X, ChevronLeft, ChevronRight } from 'lucide-react'
 import { useFocusTrap } from '@/hooks/useFocusTrap'
@@ -20,6 +21,7 @@ type GalleryImage = { url?: string | null; thumbUrl?: string | null; alt?: strin
  * The lightbox caption prefers `caption` (localized, per-use) over `alt`.
  */
 export default function GalleryLightbox({ images, variant = 'grid' }: { images: GalleryImage[]; variant?: 'grid' | 'strip' }) {
+  const t = useTranslations('gallery')
   const items = images.filter((img) => img.url) as { url: string; thumbUrl?: string | null; alt?: string | null; caption?: string | null }[]
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const [mounted, setMounted] = useState(false)
@@ -100,7 +102,7 @@ export default function GalleryLightbox({ images, variant = 'grid' }: { images: 
               key={i}
               type="button"
               onClick={() => setOpenIndex(i)}
-              aria-label={img.caption || img.alt || `Bild ${i + 1}`}
+              aria-label={img.caption || img.alt || t('imageN', { n: i + 1 })}
               className={`group relative overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-zoom-in ${
                 variant === 'strip' ? 'snap-start shrink-0' : ''
               }`}
@@ -123,7 +125,7 @@ export default function GalleryLightbox({ images, variant = 'grid' }: { images: 
               type="button"
               onClick={() => scrollTrack(-1)}
               disabled={!canPrev}
-              aria-label="Zurück"
+              aria-label={t('stripPrev')}
               className="absolute left-2 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-9 h-9 rounded-full shadow-md transition-all hover:scale-110 disabled:opacity-0 disabled:pointer-events-none cursor-pointer"
               style={{ background: 'var(--method-white)', color: 'var(--method-ink-accent)' }}
             >
@@ -133,7 +135,7 @@ export default function GalleryLightbox({ images, variant = 'grid' }: { images: 
               type="button"
               onClick={() => scrollTrack(1)}
               disabled={!canNext}
-              aria-label="Weiter"
+              aria-label={t('stripNext')}
               className="absolute right-2 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-9 h-9 rounded-full shadow-md transition-all hover:scale-110 disabled:opacity-0 disabled:pointer-events-none cursor-pointer"
               style={{ background: 'var(--method-white)', color: 'var(--method-ink-accent)' }}
             >
@@ -149,7 +151,7 @@ export default function GalleryLightbox({ images, variant = 'grid' }: { images: 
             ref={dialogRef}
             role="dialog"
             aria-modal="true"
-            aria-label={items[openIndex].caption || items[openIndex].alt || 'Bildansicht'}
+            aria-label={items[openIndex].caption || items[openIndex].alt || t('view')}
             onClick={close}
             className="lightbox-fade fixed inset-0 z-[9999] flex items-center justify-center p-6"
             style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)' }}
@@ -158,7 +160,7 @@ export default function GalleryLightbox({ images, variant = 'grid' }: { images: 
             <button
               type="button"
               onClick={close}
-              aria-label="Schließen"
+              aria-label={t('close')}
               data-autofocus
               className="absolute top-4 right-4 w-11 h-11 rounded-full flex items-center justify-center transition-transform hover:scale-110"
               style={{ background: 'var(--method-white-transparent)', color: 'var(--method-ink-accent)', backdropFilter: 'blur(6px)' }}
@@ -171,7 +173,7 @@ export default function GalleryLightbox({ images, variant = 'grid' }: { images: 
                 <button
                   type="button"
                   onClick={(e) => { e.stopPropagation(); prev() }}
-                  aria-label="Vorheriges Bild"
+                  aria-label={t('prevImage')}
                   className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center transition-transform hover:scale-110"
                   style={{ background: 'var(--method-white-transparent)', color: 'var(--method-ink-accent)', backdropFilter: 'blur(6px)' }}
                 >
@@ -180,7 +182,7 @@ export default function GalleryLightbox({ images, variant = 'grid' }: { images: 
                 <button
                   type="button"
                   onClick={(e) => { e.stopPropagation(); next() }}
-                  aria-label="Nächstes Bild"
+                  aria-label={t('nextImage')}
                   className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full flex items-center justify-center transition-transform hover:scale-110"
                   style={{ background: 'var(--method-white-transparent)', color: 'var(--method-ink-accent)', backdropFilter: 'blur(6px)' }}
                 >

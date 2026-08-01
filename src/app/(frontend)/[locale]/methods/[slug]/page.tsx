@@ -274,7 +274,7 @@ export default async function MethodDetailPage({ params }: Props) {
             <ChevronDown
               className="w-14 h-14 animate-bounce"
               style={{ color: 'var(--method-ink)' }}
-              aria-label="Zur Beschreibung"
+              aria-label={t('scrollToDescription')}
             />
           </a>
         </div>

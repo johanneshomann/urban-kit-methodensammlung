@@ -133,7 +133,7 @@ export default async function HomePage({ params }: Props) {
           <ChevronDown
             className="w-14 h-14 animate-bounce"
             style={{ color: 'var(--method)' }}
-            aria-label="Zu den Methoden"
+            aria-label={t('scrollToMethods')}
           />
         </a>
 

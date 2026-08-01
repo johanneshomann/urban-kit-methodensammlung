@@ -10,7 +10,7 @@
  * reports changes back up; it owns no filtering logic, only the panel UI/state.
  */
 
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import * as LucideIcons from 'lucide-react'
@@ -19,7 +19,7 @@ import { ChevronDown, X } from 'lucide-react'
 
 // NOTE: duplicated near-verbatim from FilterableMethodList.tsx — extracting a shared
 // ClearDot is a known cleanup (see OSS review notes). Keep the two in sync until then.
-function ClearDot({ onClear, tooltip = 'Zurücksetzen' }: { onClear: (e: React.MouseEvent) => void; tooltip?: string }) {
+function ClearDot({ onClear, tooltip }: { onClear: (e: React.MouseEvent) => void; tooltip: string }) {
   const [hovered, setHovered] = useState(false)
   const btnRef = useRef<HTMLButtonElement>(null)
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null)
@@ -52,7 +52,7 @@ function ClearDot({ onClear, tooltip = 'Zurücksetzen' }: { onClear: (e: React.M
         onMouseLeave={handleMouseLeave}
         className="shrink-0 relative flex items-center justify-center cursor-pointer"
         style={{ width: '1em', height: '1em', color: 'var(--method-accent)' }}
-        aria-label="Filter zurücksetzen"
+        aria-label={tooltip}
       >
         <span
           aria-hidden
@@ -222,6 +222,7 @@ function Chip({ label, icon, isActive, isAvailable, onClick }: {
 
 export default function MethodFilters({ filters, onChange, onClearKey, availableOptions, allOptions, filterIcons, filterLucideIcons, allFilterItems, allCategoryItems, activeFilterKeys, parentOpen }: Props) {
   const locale = useLocale()
+  const tFilter = useTranslations('filter')
   const [openKeys, setOpenKeys] = useState<Set<FilterKey>>(new Set())
   const [hoveredKey, setHoveredKey] = useState<FilterKey | null>(null)
 
@@ -284,7 +285,7 @@ export default function MethodFilters({ filters, onChange, onClearKey, available
                 <FilterIcon uploadUrl={filterIcons?.[key]} lucideName={filterLucideIcons?.[key]} className="w-[1em] h-[1em] object-contain" />
                 <span className="font-normal">{label}</span>
                 {hasActive && (
-                  <ClearDot tooltip={`${label} zurücksetzen`} onClear={(e) => { e.stopPropagation(); onClearKey?.(key) }} />
+                  <ClearDot tooltip={tFilter('resetOne', { label })} onClear={(e) => { e.stopPropagation(); onClearKey?.(key) }} />
                 )}
               </span>
               <ChevronDown
