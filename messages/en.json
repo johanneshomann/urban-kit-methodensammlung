@@ -9,7 +9,8 @@
     "reduceMotion": "Reduce motion",
     "highContrast": "High contrast",
     "underlineLinks": "Underline links",
-    "reset": "Reset"
+    "reset": "Reset",
+    "statement": "Accessibility statement"
   },
   "nav": {
     "menu": "Menu",
@@ -92,7 +93,8 @@
     "impressum": "Imprint",
     "datenschutz": "Privacy Policy",
     "cookies": "Cookie Policy",
-    "login": "Login"
+    "login": "Login",
+    "barrierefreiheit": "Accessibility"
   },
   "meta": {
     "title": "Urban Kit – Method Archive",
@@ -261,5 +263,13 @@
     "stripNext": "Next",
     "imageN": "Image {n}",
     "view": "Image view"
+  },
+  "barrierefreiheit": {
+    "metaTitle": "Accessibility Statement – Urban Kit Methodensammlung",
+    "eyebrow": "Legal",
+    "title": "Accessibility",
+    "subtitle": "Accessibility statement per BITV 2.0 — the accessibility status of this website, how to give feedback, and the enforcement procedure.",
+    "scrollHint": "To the statement",
+    "placeholder": "The accessibility statement will be added here."
   }
 }

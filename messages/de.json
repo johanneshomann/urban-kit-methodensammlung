@@ -9,7 +9,8 @@
     "reduceMotion": "Animationen reduzieren",
     "highContrast": "Hoher Kontrast",
     "underlineLinks": "Links unterstreichen",
-    "reset": "Zurücksetzen"
+    "reset": "Zurücksetzen",
+    "statement": "Erklärung zur Barrierefreiheit"
   },
   "nav": {
     "menu": "Menü",
@@ -92,7 +93,8 @@
     "impressum": "Impressum",
     "datenschutz": "Datenschutzerklärung",
     "cookies": "Cookie-Richtlinie",
-    "login": "Login"
+    "login": "Login",
+    "barrierefreiheit": "Barrierefreiheit"
   },
   "meta": {
     "title": "Urban Kit – Methodensammlung",
@@ -261,5 +263,13 @@
     "stripNext": "Weiter",
     "imageN": "Bild {n}",
     "view": "Bildansicht"
+  },
+  "barrierefreiheit": {
+    "metaTitle": "Erklärung zur Barrierefreiheit – Urban Kit Methodensammlung",
+    "eyebrow": "Rechtliches",
+    "title": "Barrierefreiheit",
+    "subtitle": "Erklärung zur Barrierefreiheit gemäß BITV 2.0 — Informationen zum Stand der Barrierefreiheit dieser Website, Feedback-Möglichkeit und Durchsetzungsverfahren.",
+    "scrollHint": "Zur Erklärung",
+    "placeholder": "Die Erklärung zur Barrierefreiheit wird hier ergänzt."
   }
 }

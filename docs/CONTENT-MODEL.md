@@ -91,7 +91,7 @@ Characteristics (Einfach/Strukturiert/Spielerisch/Aktivierend/Kreativ).
   logo, favicon, OG sharing image), the Kontakt page content, and email operational
   settings (recipient, from-name, subject prefix, enable toggle). SMTP **credentials**
   are NOT here — they come from env vars.
-- **`Legal`** (admin-only): the legal texts — Impressum, Datenschutz, cookie policy.
+- **`Legal`** (admin-only): the legal texts — Impressum, Datenschutz, cookie policy, and the Erklärung zur Barrierefreiheit (seeded default per the EU model declaration; bracketed placeholders for the feedback address + enforcement body are filled by admins).
 - **`Assistant`** (admin-only, **`read` locked** — it stores the API key): method-assistant
   config (enable, provider, API key, model, greeting, extra instructions, rate limit),
   with env-var fallbacks. See [`CHATBOT.md`](CHATBOT.md).

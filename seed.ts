@@ -59,6 +59,45 @@ const cookiePolicyEn = doc([
   p(txt('You can delete cookies and local storage at any time via your browser settings. Clearing local storage removes your saved methods and your accessibility settings.')),
 ])
 
+// Inline link node matching what Payload's Lexical LinkFeature produces.
+const a = (text: string, url: string) => ({
+  type: 'link', version: 3, format: '', indent: 0, direction: 'ltr',
+  fields: { url, newTab: false, linkType: 'custom' },
+  children: [txt(text)],
+})
+
+// Default accessibility statement (BITV 2.0 / EU model declaration).
+// Bracketed placeholders are meant to be completed by an admin.
+const barrierefreiheitDe = doc([
+  h('h2', 'Erklärung zur Barrierefreiheit'),
+  p(txt('Diese Erklärung zur Barrierefreiheit gilt für die Website „Urban Kit Methodensammlung“. Wir sind bemüht, diese Website im Einklang mit der Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) barrierefrei zugänglich zu machen.')),
+  h('h3', 'Stand der Vereinbarkeit mit den Anforderungen'),
+  p(txt('Diese Website ist mit der BITV 2.0 (WCAG 2.1, Konformitätsstufe AA) vereinbar. Grundlage dieser Einschätzung ist eine am 31. Juli 2026 durchgeführte Selbstbewertung.')),
+  h('h3', 'Nicht barrierefreie Inhalte'),
+  p(txt('Derzeit sind uns keine nicht barrierefreien Inhalte bekannt. Sollten Sie dennoch auf eine Barriere stoßen, freuen wir uns über Ihre Rückmeldung.')),
+  h('h3', 'Erstellung dieser Erklärung'),
+  p(txt('Diese Erklärung wurde am 31. Juli 2026 erstellt und zuletzt am 31. Juli 2026 überprüft.')),
+  h('h3', 'Barrieren melden: Feedback und Kontakt'),
+  p(txt('Sie möchten uns bestehende Barrieren mitteilen oder Informationen zur Umsetzung der Barrierefreiheit erfragen? Nutzen Sie gerne unser '), a('Kontaktformular', '/kontakt'), txt(' oder schreiben Sie an [E-Mail-Adresse ergänzen]. Wir bemühen uns, Anfragen innerhalb von zwei Wochen zu beantworten.')),
+  h('h3', 'Durchsetzungsverfahren'),
+  p(txt('Wenn Sie der Ansicht sind, dass unsere Antwort auf Ihre Rückmeldung nicht zufriedenstellend ist, können Sie sich an die zuständige Durchsetzungs- bzw. Ombudsstelle wenden: [Zuständige Stelle mit Kontaktdaten ergänzen — für öffentliche Stellen des Landes NRW ist dies die Ombudsstelle für barrierefreie Informationstechnik des Landes Nordrhein-Westfalen].')),
+])
+
+const barrierefreiheitEn = doc([
+  h('h2', 'Accessibility Statement'),
+  p(txt('This accessibility statement applies to the “Urban Kit Methodensammlung” website. We strive to make this website accessible in accordance with the German Barrier-Free Information Technology Ordinance (BITV 2.0).')),
+  h('h3', 'Compliance status'),
+  p(txt('This website is compliant with BITV 2.0 (WCAG 2.1, conformance level AA). This assessment is based on a self-evaluation carried out on 31 July 2026.')),
+  h('h3', 'Non-accessible content'),
+  p(txt('We are currently not aware of any non-accessible content. Should you nevertheless encounter a barrier, we appreciate your feedback.')),
+  h('h3', 'Preparation of this statement'),
+  p(txt('This statement was prepared on 31 July 2026 and last reviewed on 31 July 2026.')),
+  h('h3', 'Reporting barriers: feedback and contact'),
+  p(txt('Would you like to report existing barriers or request information on the implementation of accessibility? Please use our '), a('contact form', '/kontakt'), txt(' or write to [add email address]. We aim to respond to enquiries within two weeks.')),
+  h('h3', 'Enforcement procedure'),
+  p(txt('If you believe that our response to your feedback is not satisfactory, you can contact the responsible enforcement/ombudsman body: [add responsible body with contact details — for public bodies of the state of North Rhine-Westphalia this is the Ombudsstelle für barrierefreie Informationstechnik des Landes Nordrhein-Westfalen].')),
+])
+
 async function seed() {
   // Imported dynamically AFTER dotenv has run. A static `import` is hoisted and
   // evaluated before the dotenv.config() calls above, so payload.config would
@@ -206,6 +245,15 @@ async function seed() {
       await payload.updateGlobal({ slug: 'legal' as any, locale: 'de', data: { cookies: cookiePolicyDe } as any, overrideAccess: true })
       await payload.updateGlobal({ slug: 'legal' as any, locale: 'en', data: { cookies: cookiePolicyEn } as any, overrideAccess: true })
       console.log('  create legal / cookies (default cookie policy)')
+    }
+
+    // Seed the default accessibility statement if none exists yet.
+    if ((legal as any)?.barrierefreiheit) {
+      console.log('  skip  legal / barrierefreiheit (already set)')
+    } else {
+      await payload.updateGlobal({ slug: 'legal' as any, locale: 'de', data: { barrierefreiheit: barrierefreiheitDe } as any, overrideAccess: true })
+      await payload.updateGlobal({ slug: 'legal' as any, locale: 'en', data: { barrierefreiheit: barrierefreiheitEn } as any, overrideAccess: true })
+      console.log('  create legal / barrierefreiheit (default accessibility statement)')
     }
   }
 

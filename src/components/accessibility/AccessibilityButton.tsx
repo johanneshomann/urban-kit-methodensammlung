@@ -12,7 +12,8 @@
 
 import { useEffect, useId, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import { Accessibility, Minus, Plus, RotateCcw, X } from 'lucide-react'
+import { Link } from '@/navigation'
+import { Accessibility, ExternalLink, Minus, Plus, RotateCcw, X } from 'lucide-react'
 import { useAccessibility } from './AccessibilityProvider'
 
 export function AccessibilityButton() {
@@ -145,6 +146,20 @@ export function AccessibilityButton() {
             <RotateCcw className="h-3.5 w-3.5" />
             {t('reset')}
           </button>
+
+          {/* The statement page — the audience opening this panel is exactly
+              who the Erklärung zur Barrierefreiheit is for. */}
+          <div className="mt-3 pt-3" style={{ borderTop: '1px solid var(--method-light)' }}>
+            <Link
+              href="/barrierefreiheit"
+              onClick={() => setOpen(false)}
+              className="text-small inline-flex items-center gap-1.5 underline transition-opacity hover:opacity-70"
+              style={{ color: 'var(--method-dark)' }}
+            >
+              <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+              {t('statement')}
+            </Link>
+          </div>
         </div>
       )}
 
