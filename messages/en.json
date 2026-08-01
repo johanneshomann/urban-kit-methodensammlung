@@ -119,7 +119,9 @@
     "reset": "Reset",
     "resetOne": "Reset {label}",
     "resetAll": "Reset all filters",
-    "adjustView": "Adjust view"
+    "adjustView": "Adjust view",
+    "searchPlaceholder": "Search methods …",
+    "searchLabel": "Search methods"
   },
   "assistant": {
     "title": "Method assistant",

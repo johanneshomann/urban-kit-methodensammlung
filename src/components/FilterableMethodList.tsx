@@ -274,7 +274,8 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
             type="search"
             value={search}
             onChange={e => setSearch(e.target.value)}
-            placeholder="Methode suchen …"
+            aria-label={tFilter('searchLabel')}
+            placeholder={tFilter('searchPlaceholder')}
             className="flex-1 outline-none bg-transparent placeholder:opacity-40"
             style={{ color: 'var(--method-ink)' }}
           />

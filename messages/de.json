@@ -119,7 +119,9 @@
     "reset": "Zurücksetzen",
     "resetOne": "{label} zurücksetzen",
     "resetAll": "Alle Filter zurücksetzen",
-    "adjustView": "Ansicht anpassen"
+    "adjustView": "Ansicht anpassen",
+    "searchPlaceholder": "Methode suchen …",
+    "searchLabel": "Methoden durchsuchen"
   },
   "assistant": {
     "title": "Methoden-Assistent",
