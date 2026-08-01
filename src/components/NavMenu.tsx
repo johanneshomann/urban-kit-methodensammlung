@@ -53,12 +53,45 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
     setClosing(false)
   }, [])
 
-  const toggle = useCallback(() => {
-    if (open && !closing) closeImmediate()
-    else openMenu()
+  // Keyboard activation (click with detail 0 = Enter/Space) moves focus into
+  // the first menu link on open, so Tab continues through the links instead of
+  // leaving the menu region and closing it.
+  const pendingFocus = useRef(false)
+  const handleTriggerClick = useCallback((e: React.MouseEvent) => {
+    if (open && !closing) {
+      closeImmediate()
+      return
+    }
+    pendingFocus.current = e.detail === 0
+    openMenu()
   }, [open, closing, closeImmediate, openMenu])
 
   const isOpen = open && !closing
+
+  useEffect(() => {
+    if (!open || !pendingFocus.current) return
+    pendingFocus.current = false
+    const links = rootRef.current?.querySelectorAll<HTMLElement>('a[href]')
+    if (!links) return
+    // Focus the first link of the panel that's actually displayed (desktop or mobile).
+    for (const a of links) {
+      if (a.offsetParent) {
+        a.focus()
+        break
+      }
+    }
+  }, [open])
+
+  // Close when focus lands outside the menu region. `focusin` on the document
+  // is more reliable than blur/relatedTarget (which can be null mid-transition).
+  useEffect(() => {
+    if (!open) return
+    const onFocusIn = (e: FocusEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) closeImmediate()
+    }
+    document.addEventListener('focusin', onFocusIn)
+    return () => document.removeEventListener('focusin', onFocusIn)
+  }, [open, closeImmediate])
 
   // Keyboard exit (APG disclosure pattern): Escape closes and refocuses the
   // visible trigger — without this, keyboard users could open but never close.
@@ -85,20 +118,11 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
   ]
 
   return (
-    <div
-      ref={rootRef}
-      className="contents"
-      onBlur={(e) => {
-        // Close when keyboard focus moves outside the menu + triggers entirely.
-        if (open && e.relatedTarget && !rootRef.current?.contains(e.relatedTarget as Node)) {
-          closeImmediate()
-        }
-      }}
-    >
+    <div ref={rootRef} className="contents">
       {/* Desktop: hover opens, click/Enter toggles */}
       <button
         ref={desktopBtnRef}
-        onClick={toggle}
+        onClick={handleTriggerClick}
         onMouseEnter={e => { openMenu(); e.currentTarget.style.color = 'var(--method-dark)'; }}
         onMouseLeave={e => { closeDelayed(); e.currentTarget.style.color = ''; }}
         aria-expanded={isOpen}
@@ -111,7 +135,7 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
       {/* Mobile: click only */}
       <button
         ref={mobileBtnRef}
-        onClick={toggle}
+        onClick={handleTriggerClick}
         aria-expanded={isOpen}
         className="md:hidden flex items-center cursor-pointer transition-colors"
         style={{ color: 'var(--method-ink)' }}
