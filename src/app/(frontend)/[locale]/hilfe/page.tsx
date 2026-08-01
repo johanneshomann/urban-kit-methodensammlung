@@ -7,14 +7,15 @@ import { Link } from '@/navigation'
 import { EyebrowBadge } from '@/components/EyebrowBadge'
 import BackButton from '@/components/BackButton'
 import FaqAccordion, { type FaqItem } from '@/components/FaqAccordion'
-import { Signpost, ChevronDown, Home, BookOpen, Bookmark, Accessibility, Mail, LayoutGrid, HelpCircle } from 'lucide-react'
+import { Signpost, ChevronDown, Home, BookOpen, Bookmark, Accessibility, Mail, MessageCircle, LayoutGrid, HelpCircle, Route } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
 type Props = { params: Promise<{ locale: string }> }
 
 type PageEntry = { icon: string; title: string; text: string }
+type StepEntry = { title: string; text: string }
 
-const ICONS: Record<string, LucideIcon> = { Home, BookOpen, Bookmark, Accessibility, Mail }
+const ICONS: Record<string, LucideIcon> = { Home, BookOpen, Bookmark, Accessibility, Mail, MessageCircle }
 
 export async function generateMetadata({ params }: Props) {
   const { locale } = await params
@@ -26,6 +27,7 @@ export default async function HelpPage({ params }: Props) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'help' })
 
+  const steps = t.raw('steps') as StepEntry[]
   const pages = t.raw('pages') as PageEntry[]
   const faq = t.raw('faq') as FaqItem[]
 
@@ -66,9 +68,57 @@ export default async function HelpPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Pages overview */}
+      {/* How to use — step-by-step workflow */}
       <section
         id="help-content"
+        className="relative w-full min-h-[100svh] py-16 scroll-mt-20 flex flex-col justify-center overflow-hidden"
+        style={{ background: 'var(--method-very-light)' }}
+      >
+        <Route
+          className="absolute right-2 sm:right-8 md:right-16 top-1/2 -translate-y-1/2 h-[22%] sm:h-[40%] w-auto pointer-events-none"
+          strokeWidth={1}
+          aria-hidden="true"
+          style={{ color: 'var(--method)', opacity: 0.07 }}
+        />
+        <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-16 w-full">
+          <h2 className="text-title font-bold mb-6" style={{ color: 'var(--method-ink-accent)' }}>
+            {t('stepsTitle')}
+          </h2>
+
+          <ol className="flex flex-col gap-4 md:gap-5">
+            {steps.map(({ title, text }, i) => (
+              <li
+                key={i}
+                className="rounded-xl overflow-hidden shadow-sm"
+                style={{ background: 'var(--method-white)' }}
+              >
+                <div className="flex items-center gap-4 px-6 py-4">
+                  <span
+                    className="flex items-center justify-center w-8 h-8 rounded-full shrink-0 text-small font-bold"
+                    style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
+                    aria-hidden="true"
+                  >
+                    {i + 1}
+                  </span>
+                  <h3 className="text-display font-bold" style={{ color: 'var(--method-ink-accent)' }}>
+                    {title}
+                  </h3>
+                </div>
+                <p
+                  className="px-6 pb-6 text-text leading-relaxed"
+                  style={{ color: 'var(--method-ink)', borderTop: '1px solid var(--method-ink)', paddingTop: '1.25rem' }}
+                >
+                  {text}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* Pages overview */}
+      <section
+        id="help-pages"
         className="relative w-full min-h-[100svh] py-16 scroll-mt-20 flex flex-col justify-center overflow-hidden"
         style={{ background: 'var(--method-very-light)' }}
       >

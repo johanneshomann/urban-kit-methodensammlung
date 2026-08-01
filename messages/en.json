@@ -28,24 +28,57 @@
     "metaTitle": "Guide – Urban Kit Method Archive",
     "eyebrow": "Help & Guide",
     "title": "Guide",
-    "subtitle": "Here you'll learn how the Method Archive is structured and how to use it for your participatory urban project.",
+    "subtitle": "Here you'll learn how the Method Archive is structured and how to use it for your participatory urban project – from finding the right method to running it.",
     "scrollHint": "Scroll to the guide",
+    "stepsTitle": "How to use the archive",
+    "steps": [
+      {
+        "title": "Find suitable methods",
+        "text": "On the home page, narrow down all methods with the filters – by participation depth, project phase, goal, format, duration, target group, group size and character. The search takes you straight to methods by name. Alternatively, the Method Assistant helps you choose in a dialogue."
+      },
+      {
+        "title": "Get to know a method",
+        "text": "The detail page explains each method in full: its goal, the procedure across preparation, execution and evaluation, best-practice examples with images, and notes on when the method is useful – and when it isn't."
+      },
+      {
+        "title": "Bookmark and compare",
+        "text": "Use the bookmark icon to collect interesting methods. Under “Bookmarked Methods”, a comparison table places their characteristics side by side – making the final choice easier."
+      },
+      {
+        "title": "Export and share",
+        "text": "Print or save your selection as a PDF, or export it as a file – handy for coordinating within your team or as a handout for the session."
+      },
+      {
+        "title": "Prepare and run",
+        "text": "The “Before you begin” checklist on the home page helps with preparation. Important: the time estimates refer to running the method with participants – preparation and follow-up take extra time."
+      }
+    ],
     "pagesTitle": "The pages at a glance",
     "pages": [
       {
         "icon": "Home",
         "title": "Method Archive",
-        "text": "The home page shows all methods. Use the filters to narrow them down by target group, timeframe, goal, format and more until the right ones remain."
+        "text": "The home page shows all methods. Use the filters and search to narrow them down by participation depth, target group, duration, goal, format and more until the right ones remain."
+      },
+      {
+        "icon": "MessageCircle",
+        "title": "Method Assistant",
+        "text": "The assistant helps you choose in a dialogue: describe your project in your own words – it suggests suitable methods from the archive and explains why they fit."
       },
       {
         "icon": "BookOpen",
         "title": "Method detail page",
-        "text": "Every method has its own page with the procedure, required materials, tips, notes and related methods. Use the bookmark icon to add it to your bookmarks."
+        "text": "Every method has its own page with its goal, procedure (preparation, execution, evaluation), best-practice examples, tips and notes, plus related and follow-up methods. Use the bookmark icon to add it to your bookmarks."
       },
       {
         "icon": "Bookmark",
         "title": "Bookmarked Methods",
-        "text": "Your bookmarked methods gather here in one place. You can export the selection as a list and share it with your team."
+        "text": "Your bookmarked methods gather here in one place. A comparison table contrasts their characteristics; you can print the selection as a PDF or export it as a file and share it with your team."
+      },
+      {
+        "icon": "Accessibility",
+        "title": "Accessibility",
+        "text": "Via the accessibility icon you can adjust font size, high contrast, underlined links and reduced animations. The accessibility statement is linked in the footer."
       },
       {
         "icon": "Mail",
@@ -57,7 +90,11 @@
     "faq": [
       {
         "q": "How do I find the right method?",
-        "a": "Use the filters on the home page. You can combine several criteria – the list updates instantly."
+        "a": "Use the filters and search on the home page. You can combine several criteria – the list updates instantly. If you'd rather choose in a dialogue, use the Method Assistant."
+      },
+      {
+        "q": "What does the Method Assistant do – and what happens to my input?",
+        "a": "Based on your project description, the assistant suggests suitable methods from the archive and explains why they fit. To answer, your input is sent to an AI service – see the privacy policy for details."
       },
       {
         "q": "How do I bookmark a method?",
@@ -69,7 +106,11 @@
       },
       {
         "q": "Can I export or share my selection?",
-        "a": "Yes. Under “Bookmarked Methods” you can export your selection as a list – handy for coordinating within your team."
+        "a": "Yes. Under “Bookmarked Methods” you can print or save your selection as a PDF, or export it as a file – handy for coordinating within your team."
+      },
+      {
+        "q": "What do the methods' time estimates refer to?",
+        "a": "To actually running the method with participants. Preparation and follow-up take extra time and should be planned in separately."
       },
       {
         "q": "Is the archive available in English?",
@@ -77,7 +118,11 @@
       },
       {
         "q": "How do I adjust font size and contrast?",
-        "a": "Open the accessibility settings via the icon and set font size, contrast or reduced animations."
+        "a": "Open the settings via the accessibility icon and adjust font size, high contrast, underlined links and reduced animations."
+      },
+      {
+        "q": "What data is stored?",
+        "a": "Bookmarked methods and settings are stored only locally in your browser – no account needed. See the privacy policy and cookie policy for details."
       },
       {
         "q": "Who do I contact with questions?",
@@ -166,7 +211,7 @@
     "countMany": "{count} methods bookmarked",
     "empty": "Your bookmark list is empty.",
     "discover": "Discover methods →",
-    "remove": "Remove",
+    "remove": "Remove {title}",
     "viewDetails": "View details →",
     "comparison": "Comparison",
     "method": "Method",
@@ -174,10 +219,11 @@
     "export": "↓ Export as JSON",
     "scrollHint": "To your bookmarked methods",
     "cardsEyebrow": "Your selection",
-    "printPreview": "Save as PDF",
     "print": "Print / Save as PDF",
     "backToSaved": "← Bookmarked Methods",
-    "printedOn": "Exported on"
+    "printedOn": "Exported on",
+    "downloadAll": "Download all as PDF",
+    "downloadOne": "As PDF"
   },
   "savedButton": {
     "saved": "✓ Bookmarked",

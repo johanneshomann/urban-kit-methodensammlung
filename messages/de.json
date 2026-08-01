@@ -28,24 +28,57 @@
     "metaTitle": "Anleitung – Urban Kit Methodensammlung",
     "eyebrow": "Hilfe & Anleitung",
     "title": "Anleitung",
-    "subtitle": "Diese Anleitung erklärt, wie die Methodensammlung aufgebaut ist und wie sie sich für partizipative Stadtprojekte nutzen lässt.",
+    "subtitle": "Diese Anleitung erklärt, wie die Methodensammlung aufgebaut ist und wie sie sich für partizipative Stadtprojekte nutzen lässt – vom Finden der passenden Methode bis zur Durchführung.",
     "scrollHint": "Zur Anleitung scrollen",
+    "stepsTitle": "So lässt sich die Sammlung nutzen",
+    "steps": [
+      {
+        "title": "Passende Methoden finden",
+        "text": "Auf der Startseite lassen sich alle Methoden über die Filter eingrenzen – nach Beteiligungstiefe, Projektphase, Ziel, Format, Dauer, Zielgruppe, Gruppengröße und Merkmal. Die Suche führt direkt zu Methoden per Namen. Alternativ hilft der Methoden-Assistent im Dialog weiter."
+      },
+      {
+        "title": "Methode kennenlernen",
+        "text": "Die Detailseite erklärt jede Methode vollständig: das Ziel, den Ablauf in Vorbereitung, Durchführung und Auswertung, Praxisbeispiele mit Bildern sowie Hinweise, wann die Methode sinnvoll ist – und wann nicht."
+      },
+      {
+        "title": "Merken und vergleichen",
+        "text": "Über das Lesezeichen-Symbol wandern interessante Methoden in die Merkliste. Unter „Gemerkte Methoden“ stellt eine Vergleichstabelle ihre Merkmale nebeneinander – so fällt die Auswahl leichter."
+      },
+      {
+        "title": "Exportieren und teilen",
+        "text": "Die Auswahl lässt sich als PDF drucken bzw. speichern oder als Datei exportieren – praktisch für die Abstimmung im Team oder als Unterlage für den Termin."
+      },
+      {
+        "title": "Vorbereiten und durchführen",
+        "text": "Die Checkliste „Vor dem Start“ auf der Startseite hilft bei der Vorbereitung. Wichtig: Die Zeitangaben der Methoden beziehen sich auf die Durchführung mit den Beteiligten – Vor- und Nachbereitung brauchen zusätzliche Zeit."
+      }
+    ],
     "pagesTitle": "Die Seiten im Überblick",
     "pages": [
       {
         "icon": "Home",
         "title": "Methodensammlung",
-        "text": "Die Startseite zeigt alle Methoden. Über die Filter lassen sie sich nach Zielgruppe, Zeitrahmen, Ziel, Format und weiteren Kriterien eingrenzen, bis die passenden übrig bleiben."
+        "text": "Die Startseite zeigt alle Methoden. Über Filter und Suche lassen sie sich nach Beteiligungstiefe, Zielgruppe, Dauer, Ziel, Format und weiteren Kriterien eingrenzen, bis die passenden übrig bleiben."
+      },
+      {
+        "icon": "MessageCircle",
+        "title": "Methoden-Assistent",
+        "text": "Der Assistent hilft im Dialog bei der Auswahl: das Projekt in eigenen Worten beschreiben – er schlägt passende Methoden aus der Sammlung vor und erklärt, warum sie passen."
       },
       {
         "icon": "BookOpen",
         "title": "Methoden-Detailseite",
-        "text": "Jede Methode hat eine eigene Seite mit Ablauf, benötigtem Material, Tipps, Hinweisen und ähnlichen Methoden. Über das Lesezeichen lässt sie sich merken."
+        "text": "Jede Methode hat eine eigene Seite mit Ziel, Ablauf (Vorbereitung, Durchführung, Auswertung), Praxisbeispielen, Tipps und Hinweisen sowie ähnlichen und weiterführenden Methoden. Über das Lesezeichen lässt sie sich merken."
       },
       {
         "icon": "Bookmark",
         "title": "Gemerkte Methoden",
-        "text": "Die gemerkten Methoden sammeln sich hier an einem Ort. Die Auswahl lässt sich als Liste exportieren und im Team teilen."
+        "text": "Die gemerkten Methoden sammeln sich hier an einem Ort. Eine Vergleichstabelle stellt ihre Merkmale gegenüber; die Auswahl lässt sich als PDF drucken oder als Datei exportieren und im Team teilen."
+      },
+      {
+        "icon": "Accessibility",
+        "title": "Barrierefreiheit",
+        "text": "Über das Barrierefreiheit-Symbol lassen sich Schriftgröße, hoher Kontrast, unterstrichene Links und reduzierte Animationen einstellen. Die Erklärung zur Barrierefreiheit ist im Footer verlinkt."
       },
       {
         "icon": "Mail",
@@ -57,7 +90,11 @@
     "faq": [
       {
         "q": "Wie finde ich die passende Methode?",
-        "a": "Am besten über die Filter auf der Startseite. Mehrere Kriterien lassen sich kombinieren – die Liste aktualisiert sich sofort."
+        "a": "Am besten über Filter und Suche auf der Startseite. Mehrere Kriterien lassen sich kombinieren – die Liste aktualisiert sich sofort. Wer lieber im Dialog auswählt, nutzt den Methoden-Assistenten."
+      },
+      {
+        "q": "Was macht der Methoden-Assistent – und was passiert mit meinen Eingaben?",
+        "a": "Der Assistent schlägt auf Basis einer Projektbeschreibung passende Methoden aus der Sammlung vor und erklärt, warum sie passen. Zur Beantwortung werden die Eingaben an einen KI-Dienst übermittelt – Details dazu stehen in der Datenschutzerklärung."
       },
       {
         "q": "Wie merke ich mir eine Methode?",
@@ -69,7 +106,11 @@
       },
       {
         "q": "Kann ich meine Auswahl exportieren oder teilen?",
-        "a": "Ja. Unter „Gemerkte Methoden“ lässt sich die Auswahl als Liste exportieren – praktisch für die Abstimmung im Team."
+        "a": "Ja. Unter „Gemerkte Methoden“ lässt sich die Auswahl als PDF drucken bzw. speichern oder als Datei exportieren – praktisch für die Abstimmung im Team."
+      },
+      {
+        "q": "Worauf beziehen sich die Zeitangaben der Methoden?",
+        "a": "Auf die tatsächliche Durchführung mit den Beteiligten. Vorbereitung und Nachbereitung beanspruchen zusätzliche Zeit und sollten extra eingeplant werden."
       },
       {
         "q": "Gibt es die Sammlung auch auf Englisch?",
@@ -77,7 +118,11 @@
       },
       {
         "q": "Wie passe ich Schrift und Kontrast an?",
-        "a": "Über das Symbol öffnen sich die Barrierefreiheit-Einstellungen; dort lassen sich Schriftgröße, Kontrast oder reduzierte Animationen einstellen."
+        "a": "Über das Barrierefreiheit-Symbol öffnen sich die Einstellungen; dort lassen sich Schriftgröße, hoher Kontrast, unterstrichene Links und reduzierte Animationen einstellen."
+      },
+      {
+        "q": "Welche Daten werden gespeichert?",
+        "a": "Gemerkte Methoden und Einstellungen liegen ausschließlich lokal im Browser – ein Konto ist nicht nötig. Mehr dazu steht in der Datenschutzerklärung und der Cookie-Richtlinie."
       },
       {
         "q": "An wen wende ich mich bei Fragen?",
@@ -166,7 +211,7 @@
     "countMany": "{count} Methoden gemerkt",
     "empty": "Ihre Merkliste ist leer.",
     "discover": "Methoden entdecken →",
-    "remove": "Entfernen",
+    "remove": "{title} entfernen",
     "viewDetails": "Details anzeigen →",
     "comparison": "Vergleich",
     "method": "Methode",
@@ -174,10 +219,11 @@
     "export": "↓ Als JSON exportieren",
     "scrollHint": "Zu den gemerkten Methoden",
     "cardsEyebrow": "Ihre Auswahl",
-    "printPreview": "Als PDF",
     "print": "Drucken / Als PDF speichern",
     "backToSaved": "← Gemerkte Methoden",
-    "printedOn": "Exportiert am"
+    "printedOn": "Exportiert am",
+    "downloadAll": "Alle als PDF herunterladen",
+    "downloadOne": "Als PDF"
   },
   "savedButton": {
     "saved": "✓ Gemerkt",

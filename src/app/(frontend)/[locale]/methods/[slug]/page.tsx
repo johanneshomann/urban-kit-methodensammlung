@@ -26,7 +26,7 @@ import config from '@payload-config'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Link } from '@/navigation'
-import { Ban, ChevronDown, Info, Flag, ListChecks, Lightbulb, Check, X, ArrowRight, Images, Layers } from 'lucide-react'
+import { Ban, ChevronDown, FileDown, Info, Flag, ListChecks, Lightbulb, Check, X, ArrowRight, Images, Layers } from 'lucide-react'
 import * as LucideIcons from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { EyebrowBadge } from '@/components/EyebrowBadge'
@@ -234,6 +234,15 @@ export default async function MethodDetailPage({ params }: Props) {
           <div className="flex items-center gap-2 mb-4">
             <BackButton locale={locale} fallback="/#methods" />
             <EyebrowBadge label={locale === 'de' ? 'Methode' : 'Method'} className="!mb-0" />
+            <a
+              href={`/api/method-pdf?ids=${method.id}&locale=${locale}`}
+              download
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-small leading-none shadow-sm transition-shadow hover:shadow-md"
+              style={{ background: 'var(--method-white)', color: 'var(--method-ink)' }}
+            >
+              <FileDown className="w-[1em] h-[1em]" aria-hidden />
+              {locale === 'de' ? 'Als PDF' : 'As PDF'}
+            </a>
           </div>
 
           <h1 className="text-hero font-bold mb-6 max-w-3xl" style={{ color: 'var(--method-ink-accent)' }}>{title}</h1>

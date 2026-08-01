@@ -101,7 +101,7 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 **Frontend** — `(frontend)/[locale]/…` (localized, `de`/`en`):
 - `page.tsx` — homepage (filterable method list)
 - `methods/[slug]/page.tsx` — method detail
-- `saved/page.tsx` + `saved/print/page.tsx` — localStorage-saved methods & print view
+- `saved/page.tsx` — localStorage-saved methods: list with per-method PDF export, "all as PDF", comparison table
 - `assistant/` — full-page method assistant (chat)
 - `kontakt/`, `datenschutz/`, `impressum/`, `cookies/`, `barrierefreiheit/`, `hilfe/`
 
@@ -114,6 +114,8 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 - `methods-by-ids/route.ts` — GET methods by id list (locale-aware), for saved view
 - `method-assistant/route.ts` — POST chat turn for the method assistant (validated,
   rate-limited; provider/key from the `Assistant` global). See [`CHATBOT.md`](CHATBOT.md).
+- `method-pdf/route.tsx` — GET PDF export of one or more published methods
+  (@react-pdf/renderer, server-side, rate-limited; `src/lib/pdf/`).
 
 ## Components
 
