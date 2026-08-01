@@ -20,7 +20,8 @@
     "help": "Guide",
     "assistant": "Assistant",
     "subtitle": "Method Archive",
-    "switchLanguage": "Switch language"
+    "switchLanguage": "Switch language",
+    "skipLink": "Skip to content"
   },
   "help": {
     "metaTitle": "Guide – Urban Kit Method Archive",

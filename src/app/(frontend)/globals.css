@@ -73,6 +73,34 @@ html.a11y-high-contrast :focus-visible {
   outline-color: #000 !important;
 }
 
+/*
+  Skip link (WCAG 2.4.1): first tab stop on every page, visually hidden until
+  keyboard-focused (off-screen, NOT display:none — that would be unfocusable),
+  then a prominent pill above the sticky header.
+*/
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  background: var(--method-dark);
+  color: var(--method-white);
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* The jump target is content, not a control — no ring around the whole page. */
+#main-content:focus-visible {
+  outline: none;
+}
+
 body {
   font-family: var(--font-sans);
   color: var(--method-ink);
