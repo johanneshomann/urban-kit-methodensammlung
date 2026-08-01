@@ -4,13 +4,13 @@
 
 'use client'
 
+import MethodCard from '@/components/MethodCard'
 import { EyebrowBadge } from '@/components/EyebrowBadge'
 import BackButton from '@/components/BackButton'
 import { useSaved } from '@/hooks/useSaved'
-import { getMethodImageUrl } from '@/lib/methodImage'
 import { Link } from '@/navigation'
 import { useTranslations, useLocale } from 'next-intl'
-import { Bookmark, ChevronDown, FileDown, X } from 'lucide-react'
+import { Bookmark, ChevronDown, FileDown } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import type { FilterItem, Methode } from '@/types'
 
@@ -117,57 +117,15 @@ export default function SavedPage() {
             </div>
 
             {fullMethods.length > 0 ? (
-              <div className="rounded-xl overflow-hidden shadow-sm" style={{ background: 'var(--method-white)' }}>
-                <ul className="divide-y" style={{ borderColor: 'var(--method-light)' }}>
-                  {fullMethods.map(m => {
-                    const chars = resolveItems(m.characteristics).map(f => getLocalizedFilterName(f, locale)).filter(Boolean)
-                    return (
-                      <li key={m.id} className="flex items-center gap-4 px-4 sm:px-6 py-3 transition-colors hover:bg-[var(--method-very-light)]">
-                        <img
-                          src={getMethodImageUrl(m.image, m.id, 'thumbnail')}
-                          alt=""
-                          aria-hidden
-                          className="w-20 h-14 object-cover rounded-lg shrink-0 hidden sm:block"
-                          loading="lazy"
-                        />
-                        <Link href={`/methods/${m.slug}`} className="flex flex-col min-w-0 flex-1 group">
-                          <span className="text-text font-bold truncate transition-colors group-hover:underline" style={{ color: 'var(--method-ink-accent)' }}>
-                            {m.title}
-                          </span>
-                          {chars.length > 0 && (
-                            <span className="text-small truncate" style={{ color: 'var(--method-ink)' }}>
-                              {chars.slice(0, 3).join(' · ')}
-                            </span>
-                          )}
-                        </Link>
-                        <a
-                          href={`/api/method-pdf?ids=${m.id}&locale=${locale}`}
-                          download
-                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-small shrink-0 transition-colors"
-                          style={{ border: '1px solid var(--method-accent)', color: 'var(--method-ink)' }}
-                          onMouseEnter={e => { e.currentTarget.style.background = 'var(--method)'; e.currentTarget.style.color = 'var(--method-on-brand)' }}
-                          onMouseLeave={e => { e.currentTarget.style.background = ''; e.currentTarget.style.color = 'var(--method-ink)' }}
-                        >
-                          <FileDown className="w-[1em] h-[1em]" aria-hidden />
-                          {t('downloadOne')}
-                        </a>
-                        <button
-                          onClick={() => remove(String(m.id))}
-                          aria-label={t('remove', { title: m.title })}
-                          className="shrink-0 p-1.5 rounded-md transition-opacity opacity-40 hover:opacity-100"
-                          style={{ color: 'var(--method-ink)' }}
-                        >
-                          <X className="w-4 h-4" aria-hidden />
-                        </button>
-                      </li>
-                    )
-                  })}
-                </ul>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {fullMethods.map(method => (
+                  <MethodCard key={method.id} method={method} showAuszug showPdfButton />
+                ))}
               </div>
             ) : (
-              <div className="flex flex-col gap-px rounded-xl overflow-hidden">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {saved.map(item => (
-                  <div key={item.id} className="animate-pulse h-16" style={{ background: 'var(--method-light)' }} />
+                  <div key={item.id} className="rounded-xl animate-pulse h-64" style={{ background: 'var(--method-light)' }} />
                 ))}
               </div>
             )}

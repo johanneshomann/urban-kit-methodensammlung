@@ -5,18 +5,22 @@
 import type { FilterItem, Methode } from '@/types'
 import { getLocalizedName } from '@/lib/localize'
 import { getMethodImageUrl } from '@/lib/methodImage'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { Link } from '@/navigation'
+import { FileDown } from 'lucide-react'
 import SaveButton from './SaveButton'
 
 type Props = {
   method: Methode
   showAuszug?: boolean
   background?: string
+  /** Show a PDF-download button next to the bookmark (used on the saved page). */
+  showPdfButton?: boolean
 }
 
-export default function MethodCard({ method, showAuszug, background = 'var(--method-white)' }: Props) {
+export default function MethodCard({ method, showAuszug, background = 'var(--method-white)', showPdfButton }: Props) {
   const locale = useLocale()
+  const tSaved = useTranslations('saved')
   const auszug = method.auszug
   const characteristics = Array.isArray(method.characteristics)
     ? method.characteristics.map((c) => (typeof c === 'object' ? c : null)).filter(Boolean) as FilterItem[]
@@ -42,6 +46,18 @@ export default function MethodCard({ method, showAuszug, background = 'var(--met
             characteristics: characteristics.map((c) => getLocalizedName(c, locale)),
           }}
         />
+        {showPdfButton && (
+          <a
+            href={`/api/method-pdf?ids=${method.id}&locale=${locale}`}
+            download
+            aria-label={`${tSaved('downloadOne')}: ${method.title}`}
+            title={tSaved('downloadOne')}
+            className="absolute top-3 right-16 z-20 text-display flex items-center justify-center p-2 rounded-xl shadow-md transition-all duration-150 hover:shadow-lg hover:scale-105 active:scale-95"
+            style={{ color: 'var(--method-ink)', background: 'var(--method-white)' }}
+          >
+            <FileDown className="w-[1em] h-[1em]" aria-hidden />
+          </a>
+        )}
       </div>
 
       {/* Content */}

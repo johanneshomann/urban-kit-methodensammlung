@@ -46,7 +46,7 @@
       },
       {
         "title": "Exportieren und teilen",
-        "text": "Die Auswahl lässt sich als PDF drucken bzw. speichern oder als Datei exportieren – praktisch für die Abstimmung im Team oder als Unterlage für den Termin."
+        "text": "Die Auswahl lässt sich als PDF herunterladen – alle gemerkten Methoden gesammelt oder einzeln – praktisch für die Abstimmung im Team oder als Unterlage für den Termin."
       },
       {
         "title": "Vorbereiten und durchführen",
@@ -73,7 +73,7 @@
       {
         "icon": "Bookmark",
         "title": "Gemerkte Methoden",
-        "text": "Die gemerkten Methoden sammeln sich hier an einem Ort. Eine Vergleichstabelle stellt ihre Merkmale gegenüber; die Auswahl lässt sich als PDF drucken oder als Datei exportieren und im Team teilen."
+        "text": "Die gemerkten Methoden sammeln sich hier an einem Ort. Eine Vergleichstabelle stellt ihre Merkmale gegenüber; die Auswahl lässt sich gesammelt oder einzeln als PDF herunterladen und im Team teilen."
       },
       {
         "icon": "Accessibility",
@@ -106,7 +106,7 @@
       },
       {
         "q": "Kann ich meine Auswahl exportieren oder teilen?",
-        "a": "Ja. Unter „Gemerkte Methoden“ lässt sich die Auswahl als PDF drucken bzw. speichern oder als Datei exportieren – praktisch für die Abstimmung im Team."
+        "a": "Ja. Unter „Gemerkte Methoden“ lässt sich die Auswahl als PDF herunterladen – alle gemerkten Methoden gesammelt oder jede einzeln – praktisch für die Abstimmung im Team."
       },
       {
         "q": "Worauf beziehen sich die Zeitangaben der Methoden?",
@@ -211,7 +211,6 @@
     "countMany": "{count} Methoden gemerkt",
     "empty": "Ihre Merkliste ist leer.",
     "discover": "Methoden entdecken →",
-    "remove": "{title} entfernen",
     "viewDetails": "Details anzeigen →",
     "comparison": "Vergleich",
     "method": "Methode",

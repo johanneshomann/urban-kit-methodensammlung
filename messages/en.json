@@ -46,7 +46,7 @@
       },
       {
         "title": "Export and share",
-        "text": "Print or save your selection as a PDF, or export it as a file – handy for coordinating within your team or as a handout for the session."
+        "text": "Download your selection as a PDF – all bookmarked methods bundled or each one individually – handy for coordinating within your team or as a handout for the session."
       },
       {
         "title": "Prepare and run",
@@ -73,7 +73,7 @@
       {
         "icon": "Bookmark",
         "title": "Bookmarked Methods",
-        "text": "Your bookmarked methods gather here in one place. A comparison table contrasts their characteristics; you can print the selection as a PDF or export it as a file and share it with your team."
+        "text": "Your bookmarked methods gather here in one place. A comparison table contrasts their characteristics; you can download the selection as a PDF – bundled or per method – and share it with your team."
       },
       {
         "icon": "Accessibility",
@@ -106,7 +106,7 @@
       },
       {
         "q": "Can I export or share my selection?",
-        "a": "Yes. Under “Bookmarked Methods” you can print or save your selection as a PDF, or export it as a file – handy for coordinating within your team."
+        "a": "Yes. Under “Bookmarked Methods” you can download your selection as a PDF – all bookmarked methods bundled or each one individually – handy for coordinating within your team."
       },
       {
         "q": "What do the methods' time estimates refer to?",
@@ -211,7 +211,6 @@
     "countMany": "{count} methods bookmarked",
     "empty": "Your bookmark list is empty.",
     "discover": "Discover methods →",
-    "remove": "Remove {title}",
     "viewDetails": "View details →",
     "comparison": "Comparison",
     "method": "Method",
