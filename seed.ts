@@ -23,40 +23,44 @@ const doc = (children: any[]) => ({ root: { type: 'root', format: '', indent: 0,
 
 // Default cookie / local-storage policy. Serves as an editable orientation for
 // what the platform actually stores; reflects the inventory in src/lib/saved.ts,
-// src/lib/accessibility.ts, next-intl (NEXT_LOCALE) and Payload auth.
+// src/lib/accessibility.ts, src/components/CookieNotice.tsx, next-intl
+// (NEXT_LOCALE, session cookie) and Payload auth. Kept in sync with
+// docs/COOKIE-POLICY-TEMPLATES.md — update both together.
 const cookiePolicyDe = doc([
   h('h2', 'Cookies & lokale Speicherung'),
-  p(txt('Diese Website verwendet ausschließlich technisch notwendige bzw. funktionale Cookies sowie lokale Browser-Speicher. Es findet kein Tracking, keine Analyse und keine Weitergabe an Dritte statt. Eine Einwilligung ist daher in der Regel nicht erforderlich.')),
+  p(txt('Diese Website verwendet ausschließlich technisch notwendige bzw. funktionale Cookies und lokale Browser-Speicherung. Es findet kein Tracking statt, es werden keine Analyse- oder Marketing-Cookies gesetzt und keine Daten an Dritte weitergegeben. Eine Einwilligung (Cookie-Banner) ist daher nicht erforderlich. Rechtsgrundlage ist § 25 Abs. 2 TDDDG i. V. m. Art. 6 Abs. 1 lit. f DSGVO.')),
   h('h3', 'Cookies'),
   ul([
-    [b('NEXT_LOCALE'), txt(' – Speichert die von Ihnen gewählte Sprache (Deutsch/Englisch). Funktional, Erstanbieter, Laufzeit ca. 1 Jahr.')],
-    [b('payload-token'), txt(' – Anmelde-Sitzung für den Verwaltungsbereich (/admin). Wird nur für angemeldete Redakteur:innen gesetzt, ist httpOnly und technisch notwendig. Laufzeit ca. 2 Stunden.')],
+    [b('NEXT_LOCALE'), txt(' – Speichert die gewählte Sprache (Deutsch/Englisch). Wird nur gesetzt, wenn Sie die Sprache aktiv wechseln. Funktional, First-Party, Sitzungs-Cookie (wird beim Schließen des Browsers gelöscht).')],
+    [b('payload-token'), txt(' – Anmelde-Sitzung für den Verwaltungsbereich (/admin). Wird ausschließlich für angemeldete Redakteur:innen gesetzt, nicht für Besucher:innen der Website. Technisch notwendig, httpOnly, Laufzeit ca. 2 Stunden.')],
   ]),
-  h('h3', 'Lokale Speicherung (Local Storage)'),
-  p(txt('Die folgenden Daten werden ausschließlich lokal in Ihrem Browser gespeichert und nicht an den Server übertragen:')),
+  h('h3', 'Lokale Speicherung (Local Storage / Session Storage)'),
+  p(txt('Die folgenden Daten liegen ausschließlich lokal in Ihrem Browser und werden nicht auf dem Server gespeichert:')),
   ul([
-    [b('uk-saved'), txt(' – Ihre gemerkten Methoden. Funktional, bleibt bis zum Löschen erhalten.')],
-    [b('uk-a11y'), txt(' – Ihre Barrierefreiheits-Einstellungen (Schriftgröße, reduzierte Bewegung, hoher Kontrast, unterstrichene Links). Funktional, bleibt bis zum Löschen erhalten.')],
+    [b('uk-saved'), txt(' – Ihre gemerkten Methoden. Funktional, bleibt bis zum Löschen erhalten. Hinweis: Die gespeicherten Methoden-Kennungen werden nur dann an den Server übertragen, wenn Sie die Seite „Gemerkte Methoden“ aufrufen oder ein PDF erzeugen – sie dienen dort ausschließlich zum Laden der Inhalte und werden serverseitig nicht gespeichert.')],
+    [b('uk-a11y'), txt(' – Ihre Barrierefreiheit-Einstellungen (Schriftgröße, reduzierte Animationen, hoher Kontrast, unterstrichene Links). Funktional, bleibt bis zum Löschen erhalten.')],
+    [b('uk-cookie-notice-ack'), txt(' – Merkt sich, dass Sie den Speicherhinweis geschlossen haben. Session Storage, wird beim Schließen des Tabs gelöscht.')],
   ]),
   h('h3', 'Ihre Kontrolle'),
-  p(txt('Sie können Cookies und lokale Speicherung jederzeit über die Einstellungen Ihres Browsers löschen. Das Entfernen der lokalen Speicherung löscht Ihre gemerkten Methoden und Ihre Barrierefreiheits-Einstellungen.')),
+  p(txt('Sie können Cookies und lokale Speicherung jederzeit über die Einstellungen Ihres Browsers löschen oder blockieren. Das Löschen der lokalen Speicherung entfernt Ihre gemerkten Methoden und Ihre Barrierefreiheit-Einstellungen; die Funktionsfähigkeit der Website kann dadurch eingeschränkt sein.')),
 ])
 const cookiePolicyEn = doc([
   h('h2', 'Cookies & local storage'),
-  p(txt('This website uses only technically necessary or functional cookies and local browser storage. There is no tracking, no analytics and no sharing with third parties. Consent is therefore generally not required.')),
+  p(txt('This website uses only technically necessary or functional cookies and local browser storage. There is no tracking, no analytics or marketing cookies, and no sharing of data with third parties. Consent (a cookie banner) is therefore not required. The legal basis is Section 25 (2) TDDDG in conjunction with Art. 6 (1) (f) GDPR.')),
   h('h3', 'Cookies'),
   ul([
-    [b('NEXT_LOCALE'), txt(' – Stores your chosen language (German/English). Functional, first-party, lifetime approx. 1 year.')],
-    [b('payload-token'), txt(' – Login session for the administration area (/admin). Set only for signed-in editors, httpOnly and technically necessary. Lifetime approx. 2 hours.')],
+    [b('NEXT_LOCALE'), txt(' – Stores your chosen language (German/English). Only set when you actively switch the language. Functional, first-party, session cookie (deleted when the browser is closed).')],
+    [b('payload-token'), txt(' – Login session for the administration area (/admin). Set exclusively for signed-in editors, never for website visitors. Technically necessary, httpOnly, lifetime approx. 2 hours.')],
   ]),
-  h('h3', 'Local storage'),
-  p(txt('The following data is stored only locally in your browser and is never transmitted to the server:')),
+  h('h3', 'Local storage (local storage / session storage)'),
+  p(txt('The following data lives only locally in your browser and is not stored on the server:')),
   ul([
-    [b('uk-saved'), txt(' – Your saved methods. Functional, kept until cleared.')],
+    [b('uk-saved'), txt(' – Your bookmarked methods. Functional, kept until cleared. Note: the stored method IDs are transmitted to the server only when you open the “Bookmarked Methods” page or generate a PDF – they are used solely to load the content and are not stored server-side.')],
     [b('uk-a11y'), txt(' – Your accessibility settings (font size, reduced motion, high contrast, underlined links). Functional, kept until cleared.')],
+    [b('uk-cookie-notice-ack'), txt(' – Remembers that you dismissed the storage notice. Session storage, deleted when the tab is closed.')],
   ]),
   h('h3', 'Your control'),
-  p(txt('You can delete cookies and local storage at any time via your browser settings. Clearing local storage removes your saved methods and your accessibility settings.')),
+  p(txt('You can delete or block cookies and local storage at any time via your browser settings. Clearing local storage removes your bookmarked methods and your accessibility settings; parts of the website may work with reduced functionality as a result.')),
 ])
 
 // Inline link node matching what Payload's Lexical LinkFeature produces.
