@@ -71,16 +71,20 @@ const a = (text: string, url: string) => ({
 })
 
 // Default accessibility statement (BITV 2.0 / EU model declaration).
-// Bracketed placeholders are meant to be completed by an admin.
+// Bracketed placeholders (dates, feedback email, enforcement body) are meant to
+// be completed by an admin — the statement is only valid once they are filled.
+// Kept in sync with docs/ACCESSIBILITY-STATEMENT-TEMPLATES.md — update both together.
 const barrierefreiheitDe = doc([
   h('h2', 'Erklärung zur Barrierefreiheit'),
   p(txt('Diese Erklärung zur Barrierefreiheit gilt für die Website „Urban Kit Methodensammlung“. Wir sind bemüht, diese Website im Einklang mit der Barrierefreie-Informationstechnik-Verordnung (BITV 2.0) barrierefrei zugänglich zu machen.')),
   h('h3', 'Stand der Vereinbarkeit mit den Anforderungen'),
-  p(txt('Diese Website ist mit der BITV 2.0 (WCAG 2.1, Konformitätsstufe AA) vereinbar. Grundlage dieser Einschätzung ist eine am 31. Juli 2026 durchgeführte Selbstbewertung.')),
+  p(txt('Diese Website ist mit der BITV 2.0 (WCAG 2.1, Konformitätsstufe AA) vereinbar. Grundlage dieser Einschätzung ist eine am [Datum der Selbstbewertung ergänzen] durchgeführte Selbstbewertung.')),
   h('h3', 'Nicht barrierefreie Inhalte'),
   p(txt('Derzeit sind uns keine nicht barrierefreien Inhalte bekannt. Sollten Sie dennoch auf eine Barriere stoßen, freuen wir uns über Ihre Rückmeldung.')),
+  h('h3', 'Barrierefreiheitsfunktionen dieser Website'),
+  p(txt('Über das Barrierefreiheit-Symbol lassen sich Schriftgröße, hoher Kontrast, unterstrichene Links und reduzierte Animationen einstellen; die Einstellungen bleiben lokal im Browser gespeichert. Die Website ist vollständig per Tastatur bedienbar und bietet einen „Zum Inhalt springen“-Link.')),
   h('h3', 'Erstellung dieser Erklärung'),
-  p(txt('Diese Erklärung wurde am 31. Juli 2026 erstellt und zuletzt am 31. Juli 2026 überprüft.')),
+  p(txt('Diese Erklärung wurde am [Datum ergänzen] erstellt und zuletzt am [Datum ergänzen] überprüft.')),
   h('h3', 'Barrieren melden: Feedback und Kontakt'),
   p(txt('Sie möchten uns bestehende Barrieren mitteilen oder Informationen zur Umsetzung der Barrierefreiheit erfragen? Nutzen Sie gerne unsere '), a('Kontaktseite', '/kontakt'), txt(' oder schreiben Sie an [E-Mail-Adresse ergänzen]. Wir bemühen uns, Anfragen innerhalb von zwei Wochen zu beantworten.')),
   h('h3', 'Durchsetzungsverfahren'),
@@ -91,11 +95,13 @@ const barrierefreiheitEn = doc([
   h('h2', 'Accessibility Statement'),
   p(txt('This accessibility statement applies to the “Urban Kit Methodensammlung” website. We strive to make this website accessible in accordance with the German Barrier-Free Information Technology Ordinance (BITV 2.0).')),
   h('h3', 'Compliance status'),
-  p(txt('This website is compliant with BITV 2.0 (WCAG 2.1, conformance level AA). This assessment is based on a self-evaluation carried out on 31 July 2026.')),
+  p(txt('This website is compliant with BITV 2.0 (WCAG 2.1, conformance level AA). This assessment is based on a self-evaluation carried out on [add date of self-evaluation].')),
   h('h3', 'Non-accessible content'),
   p(txt('We are currently not aware of any non-accessible content. Should you nevertheless encounter a barrier, we appreciate your feedback.')),
+  h('h3', 'Accessibility features of this website'),
+  p(txt('Via the accessibility icon you can adjust font size, high contrast, underlined links and reduced animations; the settings are kept locally in your browser. The website is fully keyboard-operable and offers a “skip to content” link.')),
   h('h3', 'Preparation of this statement'),
-  p(txt('This statement was prepared on 31 July 2026 and last reviewed on 31 July 2026.')),
+  p(txt('This statement was prepared on [add date] and last reviewed on [add date].')),
   h('h3', 'Reporting barriers: feedback and contact'),
   p(txt('Would you like to report existing barriers or request information on the implementation of accessibility? Please use our '), a('contact page', '/kontakt'), txt(' or write to [add email address]. We aim to respond to enquiries within two weeks.')),
   h('h3', 'Enforcement procedure'),
