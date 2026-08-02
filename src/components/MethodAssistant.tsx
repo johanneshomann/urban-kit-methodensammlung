@@ -14,6 +14,14 @@ import MethodCard from './MethodCard'
 
 type Msg = { role: 'user' | 'assistant'; content: string; methods?: Methode[] }
 
+/**
+ * What actually goes into sessionStorage: method CARDS are stored as ids only.
+ * The full documents (depth 2, all rich text + galleries) are far too large —
+ * a few of them exceed the ~5 MB quota, setItem throws, and the whole
+ * transcript silently stops persisting. Ids are rehydrated on restore.
+ */
+type StoredMsg = { role: 'user' | 'assistant'; content: string; methodIds?: string[] }
+
 const CHAT_STORAGE_KEY = 'uk-assistant-chat'
 
 /** Renders the assistant's Markdown (bold, lists, headings). Styling in globals.css (.chat-md). */
@@ -58,28 +66,63 @@ export default function MethodAssistant({
   // cookie policy as uk-assistant-chat). Falls back to seeding the greeting.
   useEffect(() => {
     if (messages.length > 0) return
-    let stored: Msg[] = []
+    let cancelled = false
+
+    let stored: StoredMsg[] = []
     try {
       const raw = sessionStorage.getItem(CHAT_STORAGE_KEY)
       if (raw) {
         const parsed = JSON.parse(raw)
         if (Array.isArray(parsed)) {
           stored = parsed.filter(
-            (m): m is Msg =>
+            (m): m is StoredMsg =>
               !!m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string',
           )
         }
       }
     } catch { /* storage blocked or corrupt — start fresh */ }
-    if (stored.length > 0) setMessages(stored)
-    else setMessages([{ role: 'assistant', content: greeting?.trim() || t('greeting') }])
-  }, [messages.length, t, greeting])
 
-  // Persist the transcript for the session (shared between the homepage widget
-  // and the assistant page, so a conversation continues across both).
+    if (stored.length === 0) {
+      setMessages([{ role: 'assistant', content: greeting?.trim() || t('greeting') }])
+      return
+    }
+
+    // Show the text immediately, then fetch the referenced methods so the
+    // cards reappear too (one request for the whole transcript).
+    setMessages(stored.map(({ role, content }) => ({ role, content })))
+
+    const ids = [...new Set(stored.flatMap((m) => m.methodIds ?? []))]
+    if (ids.length === 0) return
+
+    fetch(`/api/methods-by-ids?ids=${ids.join(',')}&locale=${locale}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (cancelled) return
+        const byId = new Map<string, Methode>(
+          ((data?.docs ?? []) as Methode[]).map((d) => [String(d.id), d]),
+        )
+        setMessages(
+          stored.map(({ role, content, methodIds }) => ({
+            role,
+            content,
+            methods: methodIds?.map((id) => byId.get(id)).filter(Boolean) as Methode[] | undefined,
+          })),
+        )
+      })
+      .catch(() => { /* cards stay missing; the conversation text is intact */ })
+
+    return () => { cancelled = true }
+  }, [messages.length, t, greeting, locale])
+
+  // Persist the transcript for the session (ids only — see StoredMsg).
   useEffect(() => {
     if (messages.length === 0) return
-    try { sessionStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(messages)) } catch { /* ignore */ }
+    const toStore: StoredMsg[] = messages.map(({ role, content, methods }) => ({
+      role,
+      content,
+      ...(methods?.length ? { methodIds: methods.map((m) => String(m.id)) } : {}),
+    }))
+    try { sessionStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(toStore)) } catch { /* ignore */ }
   }, [messages])
 
   // Always follow the conversation — jump to the newest message (and the typing
