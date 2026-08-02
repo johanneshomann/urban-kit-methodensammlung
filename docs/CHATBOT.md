@@ -19,7 +19,7 @@ rationale.
 > - `src/lib/methodAssistant/provider.ts` — the tool-use loop (AI SDK `generateText` + tools)
 > - `src/lib/methodAssistant/rateLimit.ts` — in-memory IP rate limiter (limit configurable in the global)
 > - `src/app/api/method-assistant/route.ts` — server route (keys stay server-side)
-> - `src/components/MethodAssistant.tsx` — chat widget (mounted in `(frontend)/[locale]/page.tsx`)
+> - `src/components/MethodAssistant.tsx` — the chat UI (mounted on the dedicated `/assistant` page, `variant="page"`; the homepage links there via the toolbar CTA — the `inline` widget variant is currently unmounted)
 > - `src/globals/Assistant.ts` — admin global (enable, provider, API key, model, greeting, instructions, rate limit)
 > - Strings under `assistant` in `messages/{de,en}.json`; env fallbacks in `.env.example`
 
