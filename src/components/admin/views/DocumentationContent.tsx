@@ -462,6 +462,56 @@ const CATEGORIES: Category[] = [
     ],
   },
   {
+    key: 'assistant',
+    label: { de: 'Assistent', en: 'Assistant' },
+    intro: {
+      de: 'Der Methoden-Assistent ist der optionale KI-Chat auf der Website, der Besucher:innen passende Methoden aus der Sammlung vorschlägt.',
+      en: 'The Method Assistant is the optional AI chat on the website that suggests suitable methods from the collection to visitors.',
+    },
+    items: [
+      {
+        q: { de: 'Was ist der Methoden-Assistent — und was passiert, wenn er aus ist?', en: 'What is the Method Assistant — and what happens when it is off?' },
+        a: {
+          de: ['Der Assistent beantwortet Fragen im Chat und empfiehlt ausschließlich veröffentlichte Methoden aus der Sammlung — er erfindet keine Inhalte. Er erscheint nur, wenn er unter „Assistent“ aktiviert und ein API-Schlüssel hinterlegt ist. Ist er deaktiviert, nicht eingerichtet oder das Tageslimit erreicht, wird der Chat einfach ausgeblendet und die Website funktioniert normal über die Filter-Suche weiter — es geht nichts kaputt.'],
+          en: ['The assistant answers questions in a chat and recommends only published methods from the collection — it does not invent content. It only appears when it is enabled under “Assistant” and an API key is configured. If it is disabled, unconfigured, or the daily limit is reached, the chat is simply hidden and the website keeps working normally via the filter search — nothing breaks.'],
+        },
+      },
+      {
+        q: { de: 'Wie richte ich den Assistenten ein? (API-Schlüssel)', en: 'How do I set up the assistant? (API key)' },
+        a: {
+          de: [
+            'Konto beim Anbieter anlegen: Standard ist Mistral (EU) — auf console.mistral.ai registrieren und Zahlungsdaten hinterlegen. Dort empfiehlt sich auch gleich ein monatliches Kostenlimit.',
+            'In der Mistral-Konsole unter „API Keys“ einen neuen Schlüssel erstellen und sofort kopieren — er wird nur einmal angezeigt.',
+            'Im Admin „Assistent“ öffnen: Anbieter „Mistral“ wählen und den Schlüssel in das Feld „API-Schlüssel“ einfügen. Alternativ (sicherer) das Feld leer lassen und den Schlüssel serverseitig als Umgebungsvariable MISTRAL_API_KEY hinterlegen lassen — das übernimmt die technische Betreuung.',
+            'Das Modell-Feld leer lassen — es gilt automatisch ein günstiger Standard (mistral-small-latest).',
+            'Speichern und auf der Website eine Testfrage im Chat stellen — kommt eine Antwort mit Methoden-Karten, ist alles korrekt eingerichtet.',
+          ],
+          en: [
+            'Create an account with the provider: the default is Mistral (EU) — register at console.mistral.ai and add billing details. Setting a monthly spend limit there is recommended.',
+            'In the Mistral console, create a new key under “API Keys” and copy it immediately — it is shown only once.',
+            'Open “Assistant” in the admin: choose the provider “Mistral” and paste the key into the “API key” field. Alternatively (more secure), leave the field empty and have the key set server-side as the MISTRAL_API_KEY environment variable — that is a job for technical maintenance.',
+            'Leave the model field empty — a sensible cheap default applies automatically (mistral-small-latest).',
+            'Save, then ask a test question in the chat on the website — if an answer with method cards comes back, everything is set up correctly.',
+          ],
+        },
+      },
+      {
+        q: { de: 'Was kostet der Assistent und wie ist er gegen Missbrauch geschützt?', en: 'What does the assistant cost and how is it protected against abuse?' },
+        a: {
+          de: ['Eine typische Unterhaltung kostet Bruchteile eines Cents. Drei Schutzmechanismen begrenzen die Kosten: das „Anfrage-Limit“ pro Besucher-IP (einstellbar im Assistent-Bereich, Standard 20 pro 5 Minuten), ein globales Tageslimit über alle Besucher:innen hinweg (Server-Einstellung, Standard 600 pro Tag — danach verschwindet der Chat bis zum nächsten Tag) und eine Begrenzung der Antwortlänge. Zusätzlich empfiehlt sich ein Kostenlimit direkt in der Anbieter-Konsole — das fängt alles Übrige ab.'],
+          en: ['A typical conversation costs fractions of a cent. Three guards bound the cost: the per-visitor-IP “rate limit” (adjustable in the Assistant area, default 20 per 5 minutes), a global daily limit across all visitors (server setting, default 600 per day — after that the chat disappears until the next day), and a cap on answer length. Additionally, a spend limit directly in the provider console is recommended — it catches everything else.'],
+        },
+      },
+      {
+        q: { de: 'Was ist beim Datenschutz zu beachten?', en: 'What about privacy?' },
+        a: {
+          de: ['Chat-Eingaben werden zur Beantwortung an den gewählten KI-Anbieter übermittelt; der Assistent speichert keine Gespräche. Der Standard-Anbieter Mistral verarbeitet in der EU. Wichtig: Die Datenschutzerklärung muss den eingesetzten Anbieter nennen (Abschnitt „Methoden-Assistent“). Bei einem Wechsel zu einem US-Anbieter (Anthropic, OpenAI) muss dort zusätzlich die Drittlandübermittlung ergänzt werden.'],
+          en: ['Chat input is transmitted to the selected AI provider to generate answers; the assistant does not store conversations. The default provider Mistral processes within the EU. Important: the privacy policy must name the provider in use (“Method Assistant” section). When switching to a US provider (Anthropic, OpenAI), the third-country transfer must additionally be added there.'],
+        },
+      },
+    ],
+  },
+  {
     key: 'api',
     label: { de: 'API', en: 'API' },
     intro: {

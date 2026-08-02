@@ -45,8 +45,8 @@ export const Assistant: GlobalConfig = {
       ],
       admin: {
         description: {
-          en: 'Which LLM provider answers the chat.',
-          de: 'Welcher LLM-Anbieter den Chat beantwortet.',
+          en: 'Which LLM provider answers the chat. Mistral (default) processes within the EU — switching to a US provider requires updating the privacy policy (third-country transfer).',
+          de: 'Welcher LLM-Anbieter den Chat beantwortet. Mistral (Standard) verarbeitet in der EU — beim Wechsel zu einem US-Anbieter muss die Datenschutzerklärung angepasst werden (Drittlandübermittlung).',
         },
       },
     },
@@ -57,8 +57,8 @@ export const Assistant: GlobalConfig = {
       admin: {
         autoComplete: 'off',
         description: {
-          en: 'API key for the selected provider. Stored in the database. Leave empty to use the server environment variable (ANTHROPIC_API_KEY / OPENAI_API_KEY / MISTRAL_API_KEY) — the more secure option.',
-          de: 'API-Schlüssel des gewählten Anbieters. Wird in der Datenbank gespeichert. Leer lassen, um die Server-Umgebungsvariable zu nutzen (ANTHROPIC_API_KEY / OPENAI_API_KEY / MISTRAL_API_KEY) — die sicherere Variante.',
+          en: 'API key for the selected provider — created in the provider console (Mistral: console.mistral.ai → API Keys; Anthropic: console.anthropic.com; OpenAI: platform.openai.com). Stored in the database. Leave empty to use the server environment variable (MISTRAL_API_KEY / ANTHROPIC_API_KEY / OPENAI_API_KEY) — the more secure option. Tip: set a monthly spend limit in the provider console.',
+          de: 'API-Schlüssel des gewählten Anbieters — wird in dessen Konsole erstellt (Mistral: console.mistral.ai → API Keys; Anthropic: console.anthropic.com; OpenAI: platform.openai.com). Wird in der Datenbank gespeichert. Leer lassen, um die Server-Umgebungsvariable zu nutzen (MISTRAL_API_KEY / ANTHROPIC_API_KEY / OPENAI_API_KEY) — die sicherere Variante. Tipp: In der Anbieter-Konsole ein monatliches Kostenlimit setzen.',
         },
       },
     },

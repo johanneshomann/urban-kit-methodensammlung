@@ -33,16 +33,21 @@ the UI. Precedence: **global value → env var → default**.
 | Global field | Env fallback | Default |
 |---|---|---|
 | Enable assistant | — | on |
-| Provider | `METHOD_ASSISTANT_PROVIDER` | `anthropic` |
+| Provider | `METHOD_ASSISTANT_PROVIDER` | `mistral` (EU processing — see provider note) |
 | API key | `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` / `MISTRAL_API_KEY` (per provider) | — |
-| Model | `METHOD_ASSISTANT_MODEL` | `claude-haiku-4-5` / `gpt-4o-mini` / `mistral-small-latest` |
+| Model | `METHOD_ASSISTANT_MODEL` | `mistral-small-latest` / `claude-haiku-4-5` / `gpt-4o-mini` (per provider) |
 | Opening message (localized) | — | i18n `assistant.greeting` |
 | Extra instructions (localized) | — | none (appended to the system prompt) |
 | Rate limit (req / 5 min / IP) | — | 20 |
 
-Provider note: Anthropic prompt-caching (the cost optimisation in §5) is applied only on the
-Anthropic provider via `providerOptions`; OpenAI caches automatically, Mistral doesn't cache —
-so the per-conversation cost math in §5 is Anthropic-specific.
+Provider note: the default is **Mistral** (`mistral-small-latest`, i.e. Mistral Small 4 —
+built for agentic tool calling, German is a tier-1 language). Being EU-based (Mistral AI SAS,
+Paris; EU processing), it also removes the third-country-transfer section from the privacy
+policy. Trade-off: Mistral has **no prompt caching**, so the ~4–8k-token system prompt is
+billed in full each request — at $0.10/M input that is still well under a tenth of a cent per
+turn, so the §5 cost posture holds. Anthropic prompt-caching is applied via `providerOptions`
+when that provider is selected (OpenAI caches automatically); the §5 caching lever is
+Anthropic-specific.
 
 ## 0. Content-aware suggestion — "describe your project → get methods"
 

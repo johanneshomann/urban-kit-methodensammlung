@@ -85,16 +85,18 @@ Notes:
 >
 > Für den optionalen Methoden-Assistenten werden Ihre Chat-Eingaben zur
 > Beantwortung an einen externen KI-Anbieter übermittelt:
-> [KI-Anbieter ergänzen, z. B. „Anthropic PBC, USA“ / „OpenAI, L.L.C., USA“ /
-> „Mistral AI, Frankreich“]. Übermittelt werden ausschließlich die Inhalte des
+> [KI-Anbieter ergänzen — Standard dieser Plattform: „Mistral AI SAS, Frankreich
+> (Verarbeitung in der EU)“; Alternativen: „Anthropic PBC, USA“ / „OpenAI, L.L.C., USA“]. Übermittelt werden ausschließlich die Inhalte des
 > Chatverlaufs; geben Sie daher bitte keine personenbezogenen Daten in den Chat
 > ein. Die Nutzung des Assistenten ist freiwillig; Rechtsgrundlage ist Ihre
 > Einwilligung durch die aktive Nutzung (Art. 6 Abs. 1 lit. a DSGVO). Zur
 > Missbrauchsvermeidung wird Ihre IP-Adresse kurzzeitig und ausschließlich im
 > Arbeitsspeicher für eine Ratenbegrenzung verarbeitet; sie wird nicht
-> dauerhaft gespeichert. [Bei Nicht-EU-Anbietern ergänzen: Die Übermittlung in
-> ein Drittland erfolgt auf Grundlage von Standardvertragsklauseln
-> (Art. 46 DSGVO).]
+> dauerhaft gespeichert. [Nur bei Nicht-EU-Anbietern (Anthropic, OpenAI) ergänzen: Die
+> Übermittlung in ein Drittland erfolgt auf Grundlage von
+> Standardvertragsklauseln (Art. 46 DSGVO). — Beim EU-Standardanbieter
+> Mistral entfällt dieser Satz ersatzlos: die Verarbeitung findet in der EU
+> statt, es gibt keine Drittlandübermittlung.]
 >
 > **5. Merkliste und PDF-Export**
 >
@@ -176,15 +178,18 @@ Notes:
 > **4. Method Assistant (AI chat)**
 >
 > For the optional Method Assistant, your chat input is transmitted to an
-> external AI provider to generate answers: [add AI provider, e.g. “Anthropic
-> PBC, USA” / “OpenAI, L.L.C., USA” / “Mistral AI, France”]. Only the content
+> external AI provider to generate answers: [add AI provider — this platform's default:
+> “Mistral AI SAS, France (processing within the EU)”; alternatives:
+> “Anthropic PBC, USA” / “OpenAI, L.L.C., USA”]. Only the content
 > of the chat conversation is transmitted; please do not enter any personal
 > data into the chat. Use of the assistant is voluntary; the legal basis is
 > your consent through active use (Art. 6 (1) (a) GDPR). To prevent abuse,
 > your IP address is processed briefly and exclusively in memory for rate
-> limiting; it is not stored permanently. [For non-EU providers add: the
+> limiting; it is not stored permanently. [Only for non-EU providers (Anthropic, OpenAI) add: the
 > third-country transfer is based on standard contractual clauses
-> (Art. 46 GDPR).]
+> (Art. 46 GDPR). — With the EU default provider Mistral, delete this
+> sentence entirely: processing happens within the EU, there is no
+> third-country transfer.]
 >
 > **5. Bookmarks and PDF export**
 >
