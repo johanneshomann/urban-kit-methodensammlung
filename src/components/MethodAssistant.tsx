@@ -78,7 +78,10 @@ export default function MethodAssistant({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           locale,
-          messages: next.map(({ role, content }) => ({ role, content })),
+          // Only the window the server forwards to the model anyway (it slices
+          // to the last 8 and REJECTS >16) — sending the full history would
+          // permanently break the chat after ~8 exchanges.
+          messages: next.slice(-8).map(({ role, content }) => ({ role, content })),
         }),
       })
 
