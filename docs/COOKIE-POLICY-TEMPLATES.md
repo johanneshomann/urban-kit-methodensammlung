@@ -18,6 +18,7 @@ They describe exactly what the **stock codebase** stores — nothing more:
 | localStorage | `uk-saved` | Bookmarked methods (`src/lib/saved.ts`) |
 | localStorage | `uk-a11y` | Accessibility settings (`src/lib/accessibility.ts`) |
 | sessionStorage | `uk-cookie-notice-ack` | Storage-notice dismissal (`src/components/CookieNotice.tsx`) |
+| sessionStorage | `uk-assistant-chat` | Current assistant chat transcript (`src/components/MethodAssistant.tsx`) |
 
 **Keep the policy in sync with the code:** if you add analytics, embeds, or any
 other storage, these texts are no longer accurate and must be extended.
@@ -63,6 +64,9 @@ it to "never transmitted".
 >   zum Löschen erhalten.
 > - **uk-cookie-notice-ack** – Merkt sich, dass Sie den Speicherhinweis
 >   geschlossen haben. Session Storage, wird beim Schließen des Tabs gelöscht.
+> - **uk-assistant-chat** – Ihr aktueller Chat-Verlauf mit dem
+>   Methoden-Assistenten, damit er beim Navigieren auf der Website erhalten
+>   bleibt. Session Storage, wird beim Schließen des Tabs gelöscht.
 >
 > **Ihre Kontrolle**
 >
@@ -105,6 +109,9 @@ it to "never transmitted".
 >   contrast, underlined links). Functional, kept until cleared.
 > - **uk-cookie-notice-ack** – Remembers that you dismissed the storage notice.
 >   Session storage, deleted when the tab is closed.
+> - **uk-assistant-chat** – Your current chat transcript with the Method
+>   Assistant, so it survives navigating around the website. Session storage,
+>   deleted when the tab is closed.
 >
 > **Your control**
 >

@@ -39,6 +39,7 @@ const cookiePolicyDe = doc([
   ul([
     [b('uk-saved'), txt(' – Ihre gemerkten Methoden. Funktional, bleibt bis zum Löschen erhalten. Hinweis: Die gespeicherten Methoden-Kennungen werden nur dann an den Server übertragen, wenn Sie die Seite „Gemerkte Methoden“ aufrufen oder ein PDF erzeugen – sie dienen dort ausschließlich zum Laden der Inhalte und werden serverseitig nicht gespeichert.')],
     [b('uk-a11y'), txt(' – Ihre Barrierefreiheit-Einstellungen (Schriftgröße, reduzierte Animationen, hoher Kontrast, unterstrichene Links). Funktional, bleibt bis zum Löschen erhalten.')],
+    [b('uk-assistant-chat'), txt(' – Ihr aktueller Chat-Verlauf mit dem Methoden-Assistenten, damit er beim Navigieren auf der Website erhalten bleibt. Session Storage, wird beim Schließen des Tabs gelöscht.')],
     [b('uk-cookie-notice-ack'), txt(' – Merkt sich, dass Sie den Speicherhinweis geschlossen haben. Session Storage, wird beim Schließen des Tabs gelöscht.')],
   ]),
   h('h3', 'Ihre Kontrolle'),
@@ -57,6 +58,7 @@ const cookiePolicyEn = doc([
   ul([
     [b('uk-saved'), txt(' – Your bookmarked methods. Functional, kept until cleared. Note: the stored method IDs are transmitted to the server only when you open the “Bookmarked Methods” page or generate a PDF – they are used solely to load the content and are not stored server-side.')],
     [b('uk-a11y'), txt(' – Your accessibility settings (font size, reduced motion, high contrast, underlined links). Functional, kept until cleared.')],
+    [b('uk-assistant-chat'), txt(' – Your current chat transcript with the Method Assistant, so it survives navigating around the website. Session storage, deleted when the tab is closed.')],
     [b('uk-cookie-notice-ack'), txt(' – Remembers that you dismissed the storage notice. Session storage, deleted when the tab is closed.')],
   ]),
   h('h3', 'Your control'),

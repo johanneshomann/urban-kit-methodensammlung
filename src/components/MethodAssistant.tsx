@@ -14,6 +14,8 @@ import MethodCard from './MethodCard'
 
 type Msg = { role: 'user' | 'assistant'; content: string; methods?: Methode[] }
 
+const CHAT_STORAGE_KEY = 'uk-assistant-chat'
+
 /** Renders the assistant's Markdown (bold, lists, headings). Styling in globals.css (.chat-md). */
 function ChatMarkdown({ children }: { children: string }) {
   return (
@@ -57,12 +59,34 @@ export default function MethodAssistant({
     el.style.height = `${el.scrollHeight}px`
   }
 
-  // Seed the greeting once, when first opened.
+  // On first open, restore the transcript from this browser session (survives
+  // navigating away and back; cleared when the tab closes — documented in the
+  // cookie policy as uk-assistant-chat). Falls back to seeding the greeting.
   useEffect(() => {
-    if (open && messages.length === 0) {
-      setMessages([{ role: 'assistant', content: greeting?.trim() || t('greeting') }])
-    }
+    if (!open || messages.length > 0) return
+    let stored: Msg[] = []
+    try {
+      const raw = sessionStorage.getItem(CHAT_STORAGE_KEY)
+      if (raw) {
+        const parsed = JSON.parse(raw)
+        if (Array.isArray(parsed)) {
+          stored = parsed.filter(
+            (m): m is Msg =>
+              !!m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string',
+          )
+        }
+      }
+    } catch { /* storage blocked or corrupt — start fresh */ }
+    if (stored.length > 0) setMessages(stored)
+    else setMessages([{ role: 'assistant', content: greeting?.trim() || t('greeting') }])
   }, [open, messages.length, t, greeting])
+
+  // Persist the transcript for the session (shared between the homepage widget
+  // and the assistant page, so a conversation continues across both).
+  useEffect(() => {
+    if (messages.length === 0) return
+    try { sessionStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(messages)) } catch { /* ignore */ }
+  }, [messages])
 
   // Always follow the conversation — jump to the newest message (and the typing
   // indicator) so the user never misses a reply.

@@ -505,8 +505,8 @@ const CATEGORIES: Category[] = [
       {
         q: { de: 'Was ist beim Datenschutz zu beachten?', en: 'What about privacy?' },
         a: {
-          de: ['Chat-Eingaben werden zur Beantwortung an den gewählten KI-Anbieter übermittelt; der Assistent speichert keine Gespräche. Der Standard-Anbieter Mistral verarbeitet in der EU. Wichtig: Die Datenschutzerklärung muss den eingesetzten Anbieter nennen (Abschnitt „Methoden-Assistent“). Bei einem Wechsel zu einem US-Anbieter (Anthropic, OpenAI) muss dort zusätzlich die Drittlandübermittlung ergänzt werden.'],
-          en: ['Chat input is transmitted to the selected AI provider to generate answers; the assistant does not store conversations. The default provider Mistral processes within the EU. Important: the privacy policy must name the provider in use (“Method Assistant” section). When switching to a US provider (Anthropic, OpenAI), the third-country transfer must additionally be added there.'],
+          de: ['Chat-Eingaben werden zur Beantwortung an den gewählten KI-Anbieter übermittelt; der Assistent speichert keine Gespräche auf dem Server; der Verlauf liegt nur für die Dauer der Browser-Sitzung lokal im Browser der Besucher:innen. Der Standard-Anbieter Mistral verarbeitet in der EU. Wichtig: Die Datenschutzerklärung muss den eingesetzten Anbieter nennen (Abschnitt „Methoden-Assistent“). Bei einem Wechsel zu einem US-Anbieter (Anthropic, OpenAI) muss dort zusätzlich die Drittlandübermittlung ergänzt werden.'],
+          en: ['Chat input is transmitted to the selected AI provider to generate answers; the assistant does not store conversations on the server; the transcript lives only in the visitor’s browser for the duration of the browser session. The default provider Mistral processes within the EU. Important: the privacy policy must name the provider in use (“Method Assistant” section). When switching to a US provider (Anthropic, OpenAI), the third-country transfer must additionally be added there.'],
         },
       },
     ],
