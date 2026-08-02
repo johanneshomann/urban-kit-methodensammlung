@@ -11,6 +11,7 @@
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "generate:schema": "cross-env NODE_OPTIONS=--no-deprecation payload-graphql generate:schema",
     "seed": "npx tsx seed.ts",
+    "seed:legal": "npx tsx scripts/seed-legal.ts",
     "migrate:localization": "npx tsx scripts/migrate-localization.ts",
     "backfill:similar": "npx tsx scripts/backfill-similar-methods.ts",
     "migrate:media-alt": "npx tsx scripts/migrate-media-alt-localized.ts",
