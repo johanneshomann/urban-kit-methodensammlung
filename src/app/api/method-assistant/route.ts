@@ -5,7 +5,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { runAssistantTurn, type ChatMessage } from '@/lib/methodAssistant/provider'
 import { loadAssistantSettings } from '@/lib/methodAssistant/settings'
-import { rateLimit } from '@/lib/methodAssistant/rateLimit'
+import { countDailyRequest, dailyLimitReached, rateLimit } from '@/lib/methodAssistant/rateLimit'
 
 export const dynamic = 'force-dynamic'
 
@@ -50,6 +50,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'assistant_unavailable' }, { status: 503 })
   }
 
+  // Global daily budget first — an attacker rotating IPs slips past the per-IP
+  // window. Exhausted ⇒ same 503 as "not configured", so the widget hides and
+  // the site falls back to manual filtering.
+  if (dailyLimitReached()) {
+    console.warn('[method-assistant] daily request ceiling reached')
+    return NextResponse.json({ error: 'assistant_unavailable' }, { status: 503 })
+  }
+
   const limit = rateLimit(clientIp(req), settings.rateLimit)
   if (!limit.ok) {
     return NextResponse.json(
@@ -59,6 +67,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
+    countDailyRequest()
     const result = await runAssistantTurn(parsed, loc, settings)
     return NextResponse.json(result)
   } catch (err) {
