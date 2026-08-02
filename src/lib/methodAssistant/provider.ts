@@ -23,6 +23,10 @@ import type { AssistantSettings } from './settings'
 const MAX_STEPS = 8 // hard stop on the agentic loop
 const MAX_GET_METHOD_CALLS = 4 // deep-read budget (the most expensive path)
 const MAX_SHOWN = 6 // cards surfaced to the user per turn
+// Per-step output ceiling (cost guard): fits a full German multi-method
+// comparison reply (~300–450 tokens) with headroom; tool-call steps emit far
+// less. Bounds a malicious "write everything out" prompt at MAX_STEPS × this.
+const MAX_OUTPUT_TOKENS = 800
 
 export type ChatMessage = { role: 'user' | 'assistant'; content: string }
 export type AssistantResult = { reply: string; methods: Methode[] }
@@ -132,6 +136,7 @@ export async function runAssistantTurn(
     ],
     messages,
     tools,
+    maxOutputTokens: MAX_OUTPUT_TOKENS,
     stopWhen: stepCountIs(MAX_STEPS),
   })
 
