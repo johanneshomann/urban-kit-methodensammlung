@@ -42,7 +42,7 @@ function pickProvider(value: unknown): AssistantProvider {
     return value as AssistantProvider
   }
   const env = (process.env.METHOD_ASSISTANT_PROVIDER || '').toLowerCase()
-  return PROVIDERS.includes(env as AssistantProvider) ? (env as AssistantProvider) : 'anthropic'
+  return PROVIDERS.includes(env as AssistantProvider) ? (env as AssistantProvider) : 'mistral'
 }
 
 function str(v: unknown): string | undefined {

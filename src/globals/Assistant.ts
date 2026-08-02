@@ -36,7 +36,7 @@ export const Assistant: GlobalConfig = {
     {
       name: 'provider',
       type: 'select',
-      defaultValue: 'anthropic',
+      defaultValue: 'mistral',
       label: { en: 'Provider', de: 'Anbieter' },
       options: [
         { label: 'Anthropic (Claude)', value: 'anthropic' },
@@ -67,7 +67,7 @@ export const Assistant: GlobalConfig = {
       type: 'text',
       label: { en: 'Model (optional)', de: 'Modell (optional)' },
       admin: {
-        placeholder: 'claude-haiku-4-5',
+        placeholder: 'mistral-small-latest',
         description: {
           en: 'Model id for the provider. Leave empty for a sensible cheap default (Anthropic: claude-haiku-4-5, OpenAI: gpt-4o-mini, Mistral: mistral-small-latest).',
           de: 'Modell-ID des Anbieters. Leer lassen für einen günstigen Standard (Anthropic: claude-haiku-4-5, OpenAI: gpt-4o-mini, Mistral: mistral-small-latest).',
