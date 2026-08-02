@@ -5,18 +5,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { runAssistantTurn, type ChatMessage } from '@/lib/methodAssistant/provider'
 import { loadAssistantSettings } from '@/lib/methodAssistant/settings'
-import { countDailyRequest, dailyLimitReached, rateLimit } from '@/lib/methodAssistant/rateLimit'
+import { clientIp, countDailyRequest, dailyLimitReached, rateLimit } from '@/lib/methodAssistant/rateLimit'
 
 export const dynamic = 'force-dynamic'
 
 const MAX_MESSAGES = 16 // cap conversation length
 const MAX_CHARS = 2000 // cap a single message
-
-function clientIp(req: NextRequest): string {
-  const fwd = req.headers.get('x-forwarded-for')
-  if (fwd) return fwd.split(',')[0].trim()
-  return req.headers.get('x-real-ip') || 'unknown'
-}
 
 function parseMessages(raw: unknown): ChatMessage[] | null {
   if (!Array.isArray(raw) || raw.length === 0 || raw.length > MAX_MESSAGES) return null
@@ -58,7 +52,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'assistant_unavailable' }, { status: 503 })
   }
 
-  const limit = rateLimit(clientIp(req), settings.rateLimit)
+  const limit = rateLimit(clientIp(req.headers), settings.rateLimit)
   if (!limit.ok) {
     return NextResponse.json(
       { error: 'rate_limited' },

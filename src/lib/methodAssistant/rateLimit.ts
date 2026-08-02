@@ -14,6 +14,35 @@
  * manual filtering, which is a designed-for state.
  */
 
+/**
+ * The client IP to key rate limits on, in descending order of trust:
+ *
+ * 1. `CF-Connecting-IP` — set (and always overwritten) by Cloudflare, which
+ *    fronts this app via a Zero Trust tunnel. Not spoofable by the client.
+ * 2. `X-Real-IP` — single value, typically set by a reverse proxy.
+ * 3. The **last** `X-Forwarded-For` entry — proxies (Cloudflare included)
+ *    *append* the address they saw, so the last hop is the one added by our
+ *    own trusted proxy. Reading the FIRST entry would let a client pick their
+ *    own rate-limit bucket by sending a fake header.
+ *
+ * Provider-agnostic: without Cloudflare, step 1 is simply absent and any
+ * ordinary reverse proxy (nginx/Caddy/Traefik) is covered by 2 or 3. With no
+ * proxy headers at all, everyone shares one bucket — over-restrictive rather
+ * than bypassable, which is the safe direction to fail in.
+ */
+export function clientIp(headers: Headers): string {
+  const cf = headers.get('cf-connecting-ip')?.trim()
+  if (cf) return cf
+  const real = headers.get('x-real-ip')?.trim()
+  if (real) return real
+  const fwd = headers.get('x-forwarded-for')
+  if (fwd) {
+    const parts = fwd.split(',').map((s) => s.trim()).filter(Boolean)
+    if (parts.length) return parts[parts.length - 1]
+  }
+  return 'unknown'
+}
+
 const WINDOW_MS = 5 * 60 * 1000
 const DEFAULT_MAX = 20
 /** Requests per calendar day across ALL clients. Override via env. */

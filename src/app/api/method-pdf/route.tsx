@@ -16,20 +16,14 @@ import { NextRequest, NextResponse } from 'next/server'
 import { renderToBuffer } from '@react-pdf/renderer'
 import { MethodsPdf } from '@/lib/pdf/MethodsPdf'
 import { resolveColors } from '@/lib/theme'
-import { rateLimit } from '@/lib/methodAssistant/rateLimit'
+import { clientIp, rateLimit } from '@/lib/methodAssistant/rateLimit'
 import type { Methode } from '@/types'
 
 const MAX_IDS = 50
 const RATE_LIMIT_PER_5_MIN = 30
 
-function clientIp(req: NextRequest): string {
-  const fwd = req.headers.get('x-forwarded-for')
-  if (fwd) return fwd.split(',')[0].trim()
-  return req.headers.get('x-real-ip') || 'unknown'
-}
-
 export async function GET(req: NextRequest) {
-  const limit = rateLimit(clientIp(req), RATE_LIMIT_PER_5_MIN)
+  const limit = rateLimit(clientIp(req.headers), RATE_LIMIT_PER_5_MIN)
   if (!limit.ok) {
     return NextResponse.json({ error: 'rate_limited' }, { status: 429, headers: { 'Retry-After': String(limit.retryAfter ?? 60) } })
   }
