@@ -76,7 +76,7 @@ export default async function AssistantPage({ params }: Props) {
         style={{ height: 'calc(100dvh - 3.5rem)', background: 'var(--method-very-light)' }}
       >
         <div className="flex-1 min-h-0">
-          <MethodAssistant enabled variant="page" greeting={settings.greeting} />
+          <MethodAssistant enabled greeting={settings.greeting} />
         </div>
       </section>
     </div>

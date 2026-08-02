@@ -7,7 +7,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLocale, useTranslations } from 'next-intl'
 import { Link } from '@/navigation'
-import { Sparkles, Send, ChevronDown } from 'lucide-react'
+import { Send } from 'lucide-react'
 import Markdown from 'react-markdown'
 import type { Methode } from '@/types'
 import MethodCard from './MethodCard'
@@ -28,18 +28,12 @@ function ChatMarkdown({ children }: { children: string }) {
 export default function MethodAssistant({
   enabled,
   greeting,
-  variant = 'inline',
 }: {
   enabled: boolean
   greeting?: string
-  /** 'inline' = collapsible accordion (home page). 'page' = always-open, full-height (dedicated page). */
-  variant?: 'inline' | 'page'
 }) {
   const t = useTranslations('assistant')
   const locale = useLocale()
-  const isPage = variant === 'page'
-
-  const [open, setOpen] = useState(isPage)
   const [messages, setMessages] = useState<Msg[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -63,7 +57,7 @@ export default function MethodAssistant({
   // navigating away and back; cleared when the tab closes — documented in the
   // cookie policy as uk-assistant-chat). Falls back to seeding the greeting.
   useEffect(() => {
-    if (!open || messages.length > 0) return
+    if (messages.length > 0) return
     let stored: Msg[] = []
     try {
       const raw = sessionStorage.getItem(CHAT_STORAGE_KEY)
@@ -79,7 +73,7 @@ export default function MethodAssistant({
     } catch { /* storage blocked or corrupt — start fresh */ }
     if (stored.length > 0) setMessages(stored)
     else setMessages([{ role: 'assistant', content: greeting?.trim() || t('greeting') }])
-  }, [open, messages.length, t, greeting])
+  }, [messages.length, t, greeting])
 
   // Persist the transcript for the session (shared between the homepage widget
   // and the assistant page, so a conversation continues across both).
@@ -138,31 +132,6 @@ export default function MethodAssistant({
 
   if (!enabled) return null
 
-  const headerInner = (
-    <>
-      <span
-        className="flex items-center justify-center w-9 h-9 rounded-full shrink-0"
-        style={{ background: 'var(--method-light)', color: 'var(--method-dark)' }}
-      >
-        <Sparkles className="w-[1.1em] h-[1.1em]" />
-      </span>
-      <span className="flex flex-col flex-1 min-w-0">
-        <span className="text-display font-bold leading-tight" style={{ color: 'var(--method-ink-accent)' }}>
-          {t('title')}
-        </span>
-        <span className="text-small opacity-60" style={{ color: 'var(--method-ink)' }}>
-          {t('subtitle')}
-        </span>
-      </span>
-      {!isPage && (
-        <ChevronDown
-          className={`w-[1.2em] h-[1.2em] shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
-          style={{ color: 'var(--method-ink)' }}
-        />
-      )}
-    </>
-  )
-
   const composerControls = (
     <>
       <textarea
@@ -211,96 +180,61 @@ export default function MethodAssistant({
     </p>
   )
 
-  // Page variant: fade the transcript's top & bottom edges so bubbles ease in/out
-  // of view as they scroll (mirrors the section fade). ~one bubble tall.
+  // Fade the transcript's top & bottom edges so bubbles ease in/out of view as
+  // they scroll (mirrors the section fade). ~one bubble tall.
   const FADE = '1rem'
   const fadeMask = `linear-gradient(to bottom, transparent 0, #000 ${FADE}, #000 calc(100% - ${FADE}), transparent 100%)`
-  const maskStyle = isPage ? { maskImage: fadeMask, WebkitMaskImage: fadeMask } : undefined
 
-  // Shared transcript + composer, rendered for both variants.
   const transcript = (
     <div
       ref={scrollRef}
-      style={maskStyle}
-      className={`overflow-y-auto flex flex-col ${isPage ? 'flex-1 min-h-0 py-6 gap-6' : 'max-h-[26rem] px-5 py-4 gap-4'}`}
+      style={{ maskImage: fadeMask, WebkitMaskImage: fadeMask }}
+      className="overflow-y-auto flex flex-col flex-1 min-h-0 py-6 gap-6"
     >
       {messages.map((m, i) => (
         <div key={i} className="flex flex-col gap-3">
-          {isPage ? (
-            m.role === 'user' ? (
-              <div className="flex justify-end">
-                <div
-                  className="max-w-[80%] md:max-w-[calc(80%-60px)] px-4 py-2.5 rounded-2xl whitespace-pre-wrap text-text shadow-sm"
-                  style={{ background: 'var(--method-white)', color: 'var(--method-ink)' }}
-                >
-                  {m.content}
-                </div>
-              </div>
-            ) : (
-              <div className="flex justify-start">
-                <div
-                  className="max-w-[80%] md:max-w-[calc(80%-60px)] px-4 py-2.5 rounded-2xl text-text shadow-sm"
-                  style={{ background: 'var(--method-light)', color: 'var(--method-ink-accent)' }}
-                >
-                  <ChatMarkdown>{m.content}</ChatMarkdown>
-                </div>
-              </div>
-            )
-          ) : (
-            <div className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+          {m.role === 'user' ? (
+            <div className="flex justify-end">
               <div
-                className={`text-text max-w-[85%] px-4 py-2.5 rounded-2xl ${m.role === 'user' ? 'whitespace-pre-wrap' : ''}`}
-                style={{
-                  background: m.role === 'user' ? 'var(--method)' : 'var(--method-light)',
-                  color: m.role === 'user' ? 'var(--method-on-brand)' : 'var(--method-ink)',
-                }}
+                className="max-w-[80%] md:max-w-[calc(80%-60px)] px-4 py-2.5 rounded-2xl whitespace-pre-wrap text-text shadow-sm"
+                style={{ background: 'var(--method-white)', color: 'var(--method-ink)' }}
               >
-                {m.role === 'user' ? m.content : <ChatMarkdown>{m.content}</ChatMarkdown>}
+                {m.content}
+              </div>
+            </div>
+          ) : (
+            <div className="flex justify-start">
+              <div
+                className="max-w-[80%] md:max-w-[calc(80%-60px)] px-4 py-2.5 rounded-2xl text-text shadow-sm"
+                style={{ background: 'var(--method-light)', color: 'var(--method-ink-accent)' }}
+              >
+                <ChatMarkdown>{m.content}</ChatMarkdown>
               </div>
             </div>
           )}
 
           {m.methods && m.methods.length > 0 && (
-            <div className={`grid grid-cols-1 gap-4 ${isPage ? 'sm:grid-cols-2 lg:grid-cols-3' : 'sm:grid-cols-2'}`}>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {m.methods.map((method) => (
-                <MethodCard
-                  key={method.id}
-                  method={method}
-                  showAuszug
-                  background={isPage ? 'var(--method-white)' : 'var(--method-very-light)'}
-                />
+                <MethodCard key={method.id} method={method} showAuszug background="var(--method-white)" />
               ))}
             </div>
           )}
         </div>
       ))}
 
-      {loading &&
-        (isPage ? (
-          <div className="flex justify-start">
-            <div
-              className="inline-flex gap-1 px-4 py-2.5 rounded-2xl text-text shadow-sm"
-              style={{ background: 'var(--method-light)', color: 'var(--method-ink-accent)' }}
-            >
-              <span className="animate-bounce" style={{ animationDelay: '0ms' }}>·</span>
-              <span className="animate-bounce" style={{ animationDelay: '120ms' }}>·</span>
-              <span className="animate-bounce" style={{ animationDelay: '240ms' }}>·</span>
-            </div>
+      {loading && (
+        <div className="flex justify-start">
+          <div
+            className="inline-flex gap-1 px-4 py-2.5 rounded-2xl text-text shadow-sm"
+            style={{ background: 'var(--method-light)', color: 'var(--method-ink-accent)' }}
+          >
+            <span className="animate-bounce" style={{ animationDelay: '0ms' }}>·</span>
+            <span className="animate-bounce" style={{ animationDelay: '120ms' }}>·</span>
+            <span className="animate-bounce" style={{ animationDelay: '240ms' }}>·</span>
           </div>
-        ) : (
-          <div className="flex justify-start">
-            <div
-              className="text-text px-4 py-2.5 rounded-2xl"
-              style={{ background: 'var(--method-light)', color: 'var(--method-ink)' }}
-            >
-              <span className="inline-flex gap-1">
-                <span className="animate-bounce" style={{ animationDelay: '0ms' }}>·</span>
-                <span className="animate-bounce" style={{ animationDelay: '120ms' }}>·</span>
-                <span className="animate-bounce" style={{ animationDelay: '240ms' }}>·</span>
-              </span>
-            </div>
-          </div>
-        ))}
+        </div>
+      )}
 
       {error && (
         <p className="text-small" style={{ color: 'var(--method-dark)' }}>
@@ -316,55 +250,18 @@ export default function MethodAssistant({
     </div>
   )
 
-  // Page variant: seamless — no card, messages on the page, input pinned at the bottom.
-  if (isPage) {
-    return (
-      <div className="flex flex-col h-full min-h-0">
-        {transcript}
-        <div className="shrink-0 pt-4">
-          <div
-            className="flex items-center gap-2 px-4 py-2.5 rounded-2xl shadow-sm focus-within:ring-2"
-            style={{ background: 'var(--method-white)', '--tw-ring-color': 'var(--method-dark)' } as React.CSSProperties}
-          >
-            {composerControls}
-          </div>
-          <div className="mt-2 text-center">{privacyNotice}</div>
-        </div>
-      </div>
-    )
-  }
-
-  // Inline variant: collapsible card.
+  // Seamless layout: messages on the page, composer pinned at the bottom.
   return (
-    <div className="rounded-2xl overflow-hidden shadow-sm" style={{ background: 'var(--method-white)' }}>
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center gap-3 px-5 py-4 cursor-pointer text-left"
-        aria-expanded={open}
-      >
-        {headerInner}
-      </button>
-
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateRows: open ? '1fr' : '0fr',
-          transition: 'grid-template-rows 0.3s cubic-bezier(0.22,1,0.36,1)',
-        }}
-      >
-        <div style={{ overflow: 'hidden' }}>
-          <div style={{ borderTop: '1px solid color-mix(in oklab, var(--method-ink) 12%, transparent)' }}>
-            {transcript}
-            <div
-              className="flex items-center gap-2 px-4 py-3 focus-within:ring-2 focus-within:ring-inset"
-              style={{ borderTop: '1px solid color-mix(in oklab, var(--method-ink) 12%, transparent)', '--tw-ring-color': 'var(--method-dark)' } as React.CSSProperties}
-            >
-              {composerControls}
-            </div>
-            <div className="px-4 pb-3">{privacyNotice}</div>
-          </div>
+    <div className="flex flex-col h-full min-h-0">
+      {transcript}
+      <div className="shrink-0 pt-4">
+        <div
+          className="flex items-center gap-2 px-4 py-2.5 rounded-2xl shadow-sm focus-within:ring-2"
+          style={{ background: 'var(--method-white)', '--tw-ring-color': 'var(--method-dark)' } as React.CSSProperties}
+        >
+          {composerControls}
         </div>
+        <div className="mt-2 text-center">{privacyNotice}</div>
       </div>
     </div>
   )
