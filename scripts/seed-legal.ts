@@ -3,17 +3,17 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 /**
- * Seeds ONLY the default legal texts (cookie policy + accessibility statement)
- * into the `Legal` global — the subset of `npm run seed` you want when the
+ * Seeds ONLY the default legal texts (privacy policy, cookie policy,
+ * accessibility statement) into the `Legal` global — the subset of `npm run seed` you want when the
  * templates changed but the taxonomies should be left alone.
  *
  *   npm run seed:legal            # only fills texts that are still empty
  *   npm run seed:legal -- --force # OVERWRITES the stored texts with the defaults
  *
- * `--force` discards admin edits in those two fields (both locales), so the
- * placeholders in the accessibility statement have to be filled in again.
- * The privacy policy is deliberately never seeded — it must be written for the
- * actual operator; see docs/PRIVACY-POLICY-TEMPLATES.md.
+ * `--force` discards admin edits in those fields (both locales), so the
+ * bracketed placeholders (privacy policy, accessibility statement) have to be
+ * filled in again. The Impressum is never seeded — there is no meaningful
+ * default for it.
  */
 import dotenv from 'dotenv'
 dotenv.config({ path: '.env.local' })
@@ -25,9 +25,12 @@ import {
   barrierefreiheitEn,
   cookiePolicyDe,
   cookiePolicyEn,
+  datenschutzDe,
+  datenschutzEn,
 } from '../src/lib/legalDefaults'
 
 const FIELDS = [
+  { name: 'datenschutz', label: 'privacy policy', de: datenschutzDe, en: datenschutzEn },
   { name: 'cookies', label: 'cookie policy', de: cookiePolicyDe, en: cookiePolicyEn },
   { name: 'barrierefreiheit', label: 'accessibility statement', de: barrierefreiheitDe, en: barrierefreiheitEn },
 ] as const

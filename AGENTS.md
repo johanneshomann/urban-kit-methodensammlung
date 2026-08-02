@@ -50,7 +50,7 @@ comment what would otherwise need reverse-engineering, and skip the obvious.
 | **Regenerate import map** | `npm run generate:importmap` | **Run after adding/moving a custom admin component** referenced in `payload.config.ts` |
 | **Regenerate GraphQL schema** | `npm run generate:schema` | **Run after ANY change to a collection/global** → updates the committed `schema.graphql` (SDL for external consumers) |
 | Seed data | `npm run seed` | Idempotent; populates filter taxonomies + legal defaults. Never touches methods |
-| Seed legal texts only | `npm run seed:legal` | Cookie policy + accessibility statement only; `-- --force` overwrites the stored texts |
+| Seed legal texts only | `npm run seed:legal` | Privacy + cookie policy + accessibility statement; `-- --force` overwrites the stored texts |
 | Migrate localization | `npm run migrate:localization` | One-off `*De/*En` → Payload localized format |
 | Migrate media alt | `npm run migrate:media-alt` | One-off: plain-string media `alt` → localized `{ de: … }` |
 | Backfill similar links | `npm run backfill:similar` | One-off: make existing `aehnlicheMethoden` links reciprocal |

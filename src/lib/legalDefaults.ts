@@ -78,7 +78,7 @@ const a = (text: string, url: string) => ({
 // starting point, not a valid policy. Reflects the stock processing inventory
 // (no analytics, assistant → external AI provider, transient IP rate limiting).
 // Kept in sync with docs/PRIVACY-POLICY-TEMPLATES.md — update both together.
-const datenschutzDe = doc([
+export const datenschutzDe = doc([
   h('h2', 'Datenschutzerklärung'),
   p(txt('Der Schutz Ihrer persönlichen Daten ist uns wichtig. Diese Website erhebt so wenige personenbezogene Daten wie möglich: Es gibt keine Nutzerkonten für Besucher:innen, keine Analyse- oder Tracking-Dienste und keine Weitergabe von Daten zu Werbezwecken.')),
   h('h3', '1. Verantwortliche Stelle'),
@@ -101,7 +101,7 @@ const datenschutzDe = doc([
   p(txt('Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch gegen Verarbeitungen auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (Art. 21). Eine erteilte Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen. Zudem haben Sie ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde, z. B. bei der für uns zuständigen Behörde: [Aufsichtsbehörde mit Kontaktdaten ergänzen].')),
   p(txt('Stand: [Datum ergänzen]')),
 ])
-const datenschutzEn = doc([
+export const datenschutzEn = doc([
   h('h2', 'Privacy Policy'),
   p(txt('Protecting your personal data matters to us. This website collects as little personal data as possible: there are no visitor accounts, no analytics or tracking services, and no sharing of data for advertising purposes.')),
   h('h3', '1. Controller'),
@@ -162,4 +162,3 @@ export const barrierefreiheitEn = doc([
   h('h3', 'Enforcement procedure'),
   p(txt('If you believe that our response to your feedback is not satisfactory, you can contact the responsible enforcement/ombudsman body: [add responsible body with contact details — for public bodies of the state of North Rhine-Westphalia this is the Ombudsstelle für barrierefreie Informationstechnik des Landes Nordrhein-Westfalen].')),
 ])
-

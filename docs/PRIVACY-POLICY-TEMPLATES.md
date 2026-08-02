@@ -4,11 +4,14 @@ Ready-to-paste texts for the **Datenschutzerklärung** in the Legal global
 (Admin → *Rechtliches* / *Legal* → field *Datenschutzerklärung* / *Privacy
 policy*, one paste per locale via the admin language switcher).
 
-**Fresh installs don't need to paste anything:** `npm run seed` seeds this exact
-text (see `datenschutzDe` / `datenschutzEn` in [`../seed.ts`](../seed.ts)) when
-the field is still empty and no old platform-settings text was migrated. These
-templates are for updating existing installs — and the reference if the two
-ever drift.
+**Fresh installs don't need to paste anything:** `npm run seed` (or
+`npm run seed:legal`) seeds this exact text — see `datenschutzDe` /
+`datenschutzEn` in [`../src/lib/legalDefaults.ts`](../src/lib/legalDefaults.ts) —
+when the field is still empty and no old platform-settings text was migrated.
+To push an updated template into an existing install, run
+`npm run seed:legal -- --force` (overwrites the stored text, placeholders must
+be filled again). These templates are the copy-paste path and the reference if
+the two ever drift.
 
 ⚠️ **The seeded/pasted text is a fill-in-the-blanks starting point, not a valid
 policy.** A privacy policy is operator-specific from the first sentence

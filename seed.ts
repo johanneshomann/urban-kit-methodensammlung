@@ -13,6 +13,8 @@ import {
   barrierefreiheitEn,
   cookiePolicyDe,
   cookiePolicyEn,
+  datenschutzDe,
+  datenschutzEn,
 } from './src/lib/legalDefaults'
 
 async function seed() {
@@ -165,6 +167,18 @@ async function seed() {
       await payload.updateGlobal({ slug: 'legal' as any, locale: 'de', data: { datenschutz: datenschutzDe } as any, overrideAccess: true })
       await payload.updateGlobal({ slug: 'legal' as any, locale: 'en', data: { datenschutz: datenschutzEn } as any, overrideAccess: true })
       console.log('  create legal / datenschutz (default privacy policy — placeholders MUST be filled)')
+    }
+
+    // Seed the default privacy policy if the field is still empty (i.e. nothing
+    // was migrated above). It is a fill-in-the-blanks starting point — the
+    // placeholders MUST be completed before go-live.
+    const legalAfterMigration = await payload.findGlobal({ slug: 'legal' as any, locale: 'all' as any })
+    if ((legalAfterMigration as any)?.datenschutz) {
+      console.log('  skip  legal / datenschutz (text present — default not needed)')
+    } else {
+      await payload.updateGlobal({ slug: 'legal' as any, locale: 'de', data: { datenschutz: datenschutzDe } as any, overrideAccess: true })
+      await payload.updateGlobal({ slug: 'legal' as any, locale: 'en', data: { datenschutz: datenschutzEn } as any, overrideAccess: true })
+      console.log('  create legal / datenschutz (default privacy policy — FILL THE PLACEHOLDERS)')
     }
 
     // Seed the default cookie policy if none exists yet.
