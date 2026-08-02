@@ -70,6 +70,58 @@ const a = (text: string, url: string) => ({
   children: [txt(text)],
 })
 
+// Default privacy policy (DSGVO/GDPR). Every bracketed placeholder MUST be
+// filled by an admin before go-live — the seeded text is a fill-in-the-blanks
+// starting point, not a valid policy. Reflects the stock processing inventory
+// (no analytics, assistant → external AI provider, transient IP rate limiting).
+// Kept in sync with docs/PRIVACY-POLICY-TEMPLATES.md — update both together.
+const datenschutzDe = doc([
+  h('h2', 'Datenschutzerklärung'),
+  p(txt('Der Schutz Ihrer persönlichen Daten ist uns wichtig. Diese Website erhebt so wenige personenbezogene Daten wie möglich: Es gibt keine Nutzerkonten für Besucher:innen, keine Analyse- oder Tracking-Dienste und keine Weitergabe von Daten zu Werbezwecken.')),
+  h('h3', '1. Verantwortliche Stelle'),
+  p(txt('[Betreiber:in ergänzen: Name/Institution, Anschrift, E-Mail-Adresse]')),
+  p(txt('[Falls vorhanden: Datenschutzbeauftragte:r mit Kontaktdaten ergänzen — andernfalls diesen Absatz löschen]')),
+  h('h3', '2. Hosting und Server-Logfiles'),
+  p(txt('Diese Website wird gehostet bei [Hosting-Anbieter, Ort/Land ergänzen]. Beim Aufruf der Website verarbeitet der Server automatisch technisch notwendige Daten: IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browsertyp (User-Agent) und Referrer. Diese Logfiles dienen der Sicherstellung des Betriebs und der Abwehr von Angriffen (Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO) und werden nach [Log-Speicherdauer ergänzen] gelöscht. Mit dem Hosting-Anbieter besteht ein Auftragsverarbeitungsvertrag (Art. 28 DSGVO).')),
+  p(txt('[Nur falls ein CDN/Proxy eingesetzt wird, sonst löschen:] Die Auslieferung der Website erfolgt über [CDN/Proxy-Anbieter ergänzen, z. B. Cloudflare Inc., USA]. Dabei werden Verbindungsdaten (u. a. IP-Adresse) durch den Anbieter verarbeitet. Soweit der Anbieter außerhalb der EU sitzt, erfolgt die Übermittlung auf Grundlage von Standardvertragsklauseln (Art. 46 DSGVO).')),
+  h('h3', '3. Cookies und lokale Speicherung'),
+  p(txt('Diese Website verwendet ausschließlich technisch notwendige bzw. funktionale Cookies und lokale Browser-Speicherung (z. B. für gemerkte Methoden und Barrierefreiheit-Einstellungen). Details enthält die '), a('Cookie-Richtlinie', '/cookies'), txt('.')),
+  h('h3', '4. Methoden-Assistent (KI-Chat)'),
+  p(txt('Für den optionalen Methoden-Assistenten werden Ihre Chat-Eingaben zur Beantwortung an einen externen KI-Anbieter übermittelt: [KI-Anbieter ergänzen, z. B. „Anthropic PBC, USA“ / „OpenAI, L.L.C., USA“ / „Mistral AI, Frankreich“]. Übermittelt werden ausschließlich die Inhalte des Chatverlaufs; geben Sie daher bitte keine personenbezogenen Daten in den Chat ein. Die Nutzung des Assistenten ist freiwillig; Rechtsgrundlage ist Ihre Einwilligung durch die aktive Nutzung (Art. 6 Abs. 1 lit. a DSGVO). Zur Missbrauchsvermeidung wird Ihre IP-Adresse kurzzeitig und ausschließlich im Arbeitsspeicher für eine Ratenbegrenzung verarbeitet; sie wird nicht dauerhaft gespeichert. [Bei Nicht-EU-Anbietern ergänzen: Die Übermittlung in ein Drittland erfolgt auf Grundlage von Standardvertragsklauseln (Art. 46 DSGVO).]')),
+  h('h3', '5. Merkliste und PDF-Export'),
+  p(txt('Ihre gemerkten Methoden werden ausschließlich lokal in Ihrem Browser gespeichert. Beim Aufruf der Merklisten-Seite oder beim PDF-Export werden nur die Kennungen der gemerkten Methoden an den Server übertragen, um die Inhalte zu laden bzw. das PDF zu erzeugen; sie werden serverseitig nicht gespeichert. Beim PDF-Export wird Ihre IP-Adresse kurzzeitig im Arbeitsspeicher für eine Ratenbegrenzung verarbeitet.')),
+  h('h3', '6. Kontakt per E-Mail'),
+  p(txt('Wenn Sie uns per E-Mail kontaktieren, verarbeiten wir die von Ihnen mitgeteilten Daten (E-Mail-Adresse, Inhalt der Nachricht) zur Bearbeitung Ihres Anliegens (Art. 6 Abs. 1 lit. b bzw. f DSGVO). Die Daten werden gelöscht, sobald sie für die Bearbeitung nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.')),
+  h('h3', '7. Verwaltungsbereich (nur Redakteur:innen)'),
+  p(txt('Für die Pflege der Inhalte existieren persönliche Konten für Redakteur:innen (Name, E-Mail-Adresse, Passwort-Hash). Ein technisch notwendiges Sitzungs-Cookie wird nur bei der Anmeldung im Verwaltungsbereich gesetzt. E-Mails (z. B. zum Zurücksetzen des Passworts) werden über [SMTP-Anbieter ergänzen] versendet.')),
+  h('h3', '8. Ihre Rechte'),
+  p(txt('Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch gegen Verarbeitungen auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (Art. 21). Eine erteilte Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen. Zudem haben Sie ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde, z. B. bei der für uns zuständigen Behörde: [Aufsichtsbehörde mit Kontaktdaten ergänzen].')),
+  p(txt('Stand: [Datum ergänzen]')),
+])
+const datenschutzEn = doc([
+  h('h2', 'Privacy Policy'),
+  p(txt('Protecting your personal data matters to us. This website collects as little personal data as possible: there are no visitor accounts, no analytics or tracking services, and no sharing of data for advertising purposes.')),
+  h('h3', '1. Controller'),
+  p(txt('[Add operator: name/institution, postal address, email address]')),
+  p(txt('[If applicable: add data protection officer with contact details — otherwise delete this paragraph]')),
+  h('h3', '2. Hosting and server log files'),
+  p(txt('This website is hosted by [add hosting provider, city/country]. When you visit the website, the server automatically processes technically necessary data: IP address, date and time, requested page, browser type (user agent) and referrer. These log files serve to keep the site operational and to defend against attacks (legal basis: Art. 6 (1) (f) GDPR) and are deleted after [add log retention period]. A data processing agreement (Art. 28 GDPR) is in place with the hosting provider.')),
+  p(txt('[Only if a CDN/proxy is used, otherwise delete:] The website is delivered via [add CDN/proxy provider, e.g. Cloudflare Inc., USA]. Connection data (including the IP address) is processed by this provider. Where the provider is located outside the EU, the transfer is based on standard contractual clauses (Art. 46 GDPR).')),
+  h('h3', '3. Cookies and local storage'),
+  p(txt('This website uses only technically necessary or functional cookies and local browser storage (e.g. for bookmarked methods and accessibility settings). Details are provided in the '), a('cookie policy', '/cookies'), txt('.')),
+  h('h3', '4. Method Assistant (AI chat)'),
+  p(txt('For the optional Method Assistant, your chat input is transmitted to an external AI provider to generate answers: [add AI provider, e.g. “Anthropic PBC, USA” / “OpenAI, L.L.C., USA” / “Mistral AI, France”]. Only the content of the chat conversation is transmitted; please do not enter any personal data into the chat. Use of the assistant is voluntary; the legal basis is your consent through active use (Art. 6 (1) (a) GDPR). To prevent abuse, your IP address is processed briefly and exclusively in memory for rate limiting; it is not stored permanently. [For non-EU providers add: the third-country transfer is based on standard contractual clauses (Art. 46 GDPR).]')),
+  h('h3', '5. Bookmarks and PDF export'),
+  p(txt('Your bookmarked methods are stored only locally in your browser. When you open the bookmarks page or export a PDF, only the IDs of the bookmarked methods are transmitted to the server to load the content or generate the PDF; they are not stored server-side. During PDF export, your IP address is processed briefly in memory for rate limiting.')),
+  h('h3', '6. Contact by email'),
+  p(txt('If you contact us by email, we process the data you provide (email address, content of the message) to handle your enquiry (Art. 6 (1) (b) or (f) GDPR). The data is deleted once it is no longer required for processing and no statutory retention obligations apply.')),
+  h('h3', '7. Administration area (editors only)'),
+  p(txt('Personal accounts exist for editors who maintain the content (name, email address, password hash). A technically necessary session cookie is set only when signing in to the administration area. Emails (e.g. password resets) are sent via [add SMTP provider].')),
+  h('h3', '8. Your rights'),
+  p(txt('You have the right of access (Art. 15 GDPR), rectification (Art. 16), erasure (Art. 17), restriction of processing (Art. 18), data portability (Art. 20) and objection to processing based on Art. 6 (1) (f) GDPR (Art. 21). You may withdraw any consent at any time with effect for the future. You also have the right to lodge a complaint with a data protection supervisory authority, e.g. the authority responsible for us: [add supervisory authority with contact details].')),
+  p(txt('Last updated: [add date]')),
+])
+
 // Default accessibility statement (BITV 2.0 / EU model declaration).
 // Bracketed placeholders (dates, feedback email, enforcement body) are meant to
 // be completed by an admin — the statement is only valid once they are filled.
@@ -237,6 +289,7 @@ async function seed() {
 
     // One-time migration: move imprint + privacy from their old platform-settings
     // location into the new "Legal" global, preserving both locales.
+    const migrated = new Set<string>()
     for (const field of ['impressum', 'datenschutz'] as const) {
       if ((legal as any)?.[field]) { console.log(`  skip  legal / ${field} (already set)`); continue }
       const value = (ps as any)?.[field]
@@ -245,7 +298,18 @@ async function seed() {
         const v = value?.[loc]
         if (v) await payload.updateGlobal({ slug: 'legal' as any, locale: loc, data: { [field]: v } as any, overrideAccess: true })
       }
+      migrated.add(field)
       console.log(`  migrate legal / ${field} (from platform-settings)`)
+    }
+
+    // Seed the default privacy policy (fill-in-the-blanks placeholders) if the
+    // field is still empty after the migration above.
+    if ((legal as any)?.datenschutz || migrated.has('datenschutz')) {
+      // skip — the migration loop above already logged this field's status
+    } else {
+      await payload.updateGlobal({ slug: 'legal' as any, locale: 'de', data: { datenschutz: datenschutzDe } as any, overrideAccess: true })
+      await payload.updateGlobal({ slug: 'legal' as any, locale: 'en', data: { datenschutz: datenschutzEn } as any, overrideAccess: true })
+      console.log('  create legal / datenschutz (default privacy policy — placeholders MUST be filled)')
     }
 
     // Seed the default cookie policy if none exists yet.
