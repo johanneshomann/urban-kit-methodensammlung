@@ -51,6 +51,9 @@ export default function MethodAssistant({
 
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
+  // Blocks the persist effect until the stored transcript has been restored,
+  // so the initial empty/partial state can never overwrite it.
+  const hydratedRef = useRef(false)
 
   // Auto-grow the composer with its content (capped via CSS max-height) so
   // longer messages wrap into view instead of scrolling on one line.
@@ -61,12 +64,22 @@ export default function MethodAssistant({
     el.style.height = `${el.scrollHeight}px`
   }
 
-  // On first open, restore the transcript from this browser session (survives
+  // Restore the transcript from this browser session on mount (survives
   // navigating away and back; cleared when the tab closes — documented in the
   // cookie policy as uk-assistant-chat). Falls back to seeding the greeting.
+  //
+  // Runs ONCE: the state it sets would otherwise re-trigger this effect, whose
+  // cleanup would cancel the in-flight fetch. It also sets messages a single
+  // time (with the cards already attached), because an intermediate text-only
+  // state would make the persist effect below write the transcript back
+  // WITHOUT the method ids — losing them permanently.
   useEffect(() => {
-    if (messages.length > 0) return
     let cancelled = false
+    const finish = (msgs: Msg[]) => {
+      if (cancelled) return
+      setMessages(msgs)
+      hydratedRef.current = true
+    }
 
     let stored: StoredMsg[] = []
     try {
@@ -83,40 +96,39 @@ export default function MethodAssistant({
     } catch { /* storage blocked or corrupt — start fresh */ }
 
     if (stored.length === 0) {
-      setMessages([{ role: 'assistant', content: greeting?.trim() || t('greeting') }])
+      finish([{ role: 'assistant', content: greeting?.trim() || t('greeting') }])
       return
     }
 
-    // Show the text immediately, then fetch the referenced methods so the
-    // cards reappear too (one request for the whole transcript).
-    setMessages(stored.map(({ role, content }) => ({ role, content })))
-
+    const textOnly: Msg[] = stored.map(({ role, content }) => ({ role, content }))
     const ids = [...new Set(stored.flatMap((m) => m.methodIds ?? []))]
-    if (ids.length === 0) return
+    if (ids.length === 0) {
+      finish(textOnly)
+      return
+    }
 
+    // Rehydrate the cards (one request for the whole transcript), then render.
     fetch(`/api/methods-by-ids?ids=${ids.join(',')}&locale=${locale}`)
       .then((r) => r.json())
       .then((data) => {
-        if (cancelled) return
         const byId = new Map<string, Methode>(
           ((data?.docs ?? []) as Methode[]).map((d) => [String(d.id), d]),
         )
-        setMessages(
-          stored.map(({ role, content, methodIds }) => ({
-            role,
-            content,
-            methods: methodIds?.map((id) => byId.get(id)).filter(Boolean) as Methode[] | undefined,
-          })),
+        finish(
+          stored.map(({ role, content, methodIds }) => {
+            const methods = methodIds?.map((id) => byId.get(id)).filter(Boolean) as Methode[] | undefined
+            return { role, content, ...(methods?.length ? { methods } : {}) }
+          }),
         )
       })
-      .catch(() => { /* cards stay missing; the conversation text is intact */ })
+      .catch(() => finish(textOnly)) // cards missing, conversation text intact
 
     return () => { cancelled = true }
-  }, [messages.length, t, greeting, locale])
+  }, [])
 
   // Persist the transcript for the session (ids only — see StoredMsg).
   useEffect(() => {
-    if (messages.length === 0) return
+    if (!hydratedRef.current || messages.length === 0) return
     const toStore: StoredMsg[] = messages.map(({ role, content, methods }) => ({
       role,
       content,
