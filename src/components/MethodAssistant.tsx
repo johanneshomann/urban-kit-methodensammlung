@@ -46,7 +46,16 @@ export default function MethodAssistant({
   const [error, setError] = useState<'error' | 'errorRate' | null>(null)
 
   const scrollRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLTextAreaElement>(null)
+
+  // Auto-grow the composer with its content (capped via CSS max-height) so
+  // longer messages wrap into view instead of scrolling on one line.
+  function resizeInput() {
+    const el = inputRef.current
+    if (!el) return
+    el.style.height = 'auto'
+    el.style.height = `${el.scrollHeight}px`
+  }
 
   // Seed the greeting once, when first opened.
   useEffect(() => {
@@ -70,6 +79,7 @@ export default function MethodAssistant({
     const next: Msg[] = [...messages, { role: 'user', content: text }]
     setMessages(next)
     setInput('')
+    requestAnimationFrame(resizeInput) // shrink the composer back after clearing
     setLoading(true)
 
     try {
@@ -131,14 +141,21 @@ export default function MethodAssistant({
 
   const composerControls = (
     <>
-      <input
+      <textarea
         ref={inputRef}
         value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); send() } }}
+        rows={1}
+        onChange={(e) => { setInput(e.target.value); resizeInput() }}
+        onKeyDown={(e) => {
+          // Enter sends; Shift+Enter inserts a line break.
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault()
+            send()
+          }
+        }}
         placeholder={t('placeholder')}
         maxLength={2000}
-        className="flex-1 outline-none bg-transparent text-text placeholder:opacity-40"
+        className="flex-1 outline-none bg-transparent text-text placeholder:opacity-40 resize-none overflow-y-auto max-h-32 leading-relaxed"
         style={{ color: 'var(--method-ink)' }}
       />
       <button
