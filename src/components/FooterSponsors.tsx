@@ -16,26 +16,9 @@ import { createPortal } from 'react-dom'
 import { usePathname } from '@/navigation'
 import type { Sponsor } from '@/lib/sponsors'
 
-// NOTE: the delayed portal tooltip mirrors SaveButton/ClearDot (a shared
-// tooltip is a known cleanup — see the OSS review notes).
+// Footer band logo: no tooltip here (deliberately — the Über page cards have
+// one); the sponsor name is still the accessible name of the link/image.
 function SponsorLogo({ sponsor }: { sponsor: Sponsor }) {
-  const ref = useRef<HTMLElement>(null)
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null)
-
-  function show() {
-    if (!ref.current) return
-    const rect = ref.current.getBoundingClientRect()
-    timerRef.current = setTimeout(() => {
-      setTooltipPos({ x: rect.left + rect.width / 2, y: rect.top })
-    }, 550)
-  }
-
-  function hide() {
-    if (timerRef.current) clearTimeout(timerRef.current)
-    setTooltipPos(null)
-  }
-
   const img = (
     <img
       src={sponsor.logoUrl}
@@ -45,59 +28,23 @@ function SponsorLogo({ sponsor }: { sponsor: Sponsor }) {
     />
   )
 
-  const interactionProps = {
-    onMouseEnter: show,
-    onMouseLeave: hide,
-    onFocus: show,
-    onBlur: hide,
+  if (sponsor.url) {
+    return (
+      <a
+        href={sponsor.url}
+        target="_blank"
+        rel="sponsored noopener noreferrer"
+        aria-label={sponsor.name}
+        className="shrink-0 transition-opacity hover:opacity-70"
+      >
+        {img}
+      </a>
+    )
   }
-
   return (
-    <>
-      {sponsor.url ? (
-        <a
-          ref={ref as React.RefObject<HTMLAnchorElement>}
-          href={sponsor.url}
-          target="_blank"
-          rel="sponsored noopener noreferrer"
-          aria-label={sponsor.name}
-          className="shrink-0 transition-opacity hover:opacity-70"
-          {...interactionProps}
-        >
-          {img}
-        </a>
-      ) : (
-        <span
-          ref={ref as React.RefObject<HTMLSpanElement>}
-          role="img"
-          aria-label={sponsor.name}
-          tabIndex={0}
-          className="shrink-0"
-          {...interactionProps}
-        >
-          {img}
-        </span>
-      )}
-      {tooltipPos && createPortal(
-        <span
-          aria-hidden
-          className="tooltip-in pointer-events-none text-small whitespace-nowrap px-2.5 py-1 rounded-lg border"
-          style={{
-            position: 'fixed',
-            left: tooltipPos.x,
-            top: tooltipPos.y - 8,
-            transform: 'translate(-50%, -100%)',
-            background: 'var(--method-white-transparent)',
-            color: 'var(--method-ink)',
-            zIndex: 9999,
-            backdropFilter: 'blur(6px)',
-          }}
-        >
-          {sponsor.name}
-        </span>,
-        document.body,
-      )}
-    </>
+    <span role="img" aria-label={sponsor.name} className="shrink-0">
+      {img}
+    </span>
   )
 }
 
