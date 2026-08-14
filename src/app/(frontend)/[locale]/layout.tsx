@@ -12,7 +12,7 @@ import LanguageSwitcher from '@/components/LanguageSwitcher'
 import NavMenu from '@/components/NavMenu'
 import SiteFooter from '@/components/SiteFooter'
 import FooterSponsors from '@/components/FooterSponsors'
-import { mapSponsors, type Sponsor } from '@/lib/sponsors'
+import { footerSponsors, mapSponsors, type Sponsor } from '@/lib/sponsors'
 import { loadAssistantSettings } from '@/lib/methodAssistant/settings'
 import SavedWidget from '@/components/SavedWidget'
 import CookieNotice from '@/components/CookieNotice'
@@ -84,7 +84,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const assistant = await loadAssistantSettings(locale as 'de' | 'en')
 
   // Sponsor logos for the footer band — rides the settings fetch above.
-  const sponsors = mapSponsors(settings)
+  const sponsors = footerSponsors(mapSponsors(settings))
 
   return (
     <html lang={locale} className={atkinson.variable}>

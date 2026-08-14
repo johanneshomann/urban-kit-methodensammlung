@@ -203,6 +203,23 @@ export const PlatformSettings: GlobalConfig = {
                   },
                 },
                 {
+                  name: 'display',
+                  type: 'select',
+                  defaultValue: 'both',
+                  label: { en: 'Show on', de: 'Anzeigen in' },
+                  options: [
+                    { label: { en: 'Footer & About page', de: 'Footer & Über-Seite' }, value: 'both' },
+                    { label: { en: 'Footer only', de: 'Nur Footer' }, value: 'footer' },
+                    { label: { en: 'About page only', de: 'Nur Über-Seite' }, value: 'ueber' },
+                  ],
+                  admin: {
+                    description: {
+                      en: 'E.g. a combined funding block (ministry + KfW in one image) as “Footer only”, plus the two individual logos as “About page only” — so the About page shows separate cards.',
+                      de: 'Z. B. den kombinierten Förderlogo-Block (Ministerium + KfW in einem Bild) als „Nur Footer“, dazu die beiden Einzellogos als „Nur Über-Seite“ – so erhält die Über-Seite getrennte Karten.',
+                    },
+                  },
+                },
+                {
                   name: 'size',
                   type: 'select',
                   defaultValue: 'standard',

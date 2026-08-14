@@ -15,6 +15,17 @@ export type Sponsor = {
   logoUrl: string
   alt: string
   size: 'standard' | 'gross'
+  display: 'both' | 'footer' | 'ueber'
+}
+
+/** Rows for the footer band. */
+export function footerSponsors(all: Sponsor[]): Sponsor[] {
+  return all.filter((s) => s.display !== 'ueber')
+}
+
+/** Rows for the Über page grid. */
+export function aboutSponsors(all: Sponsor[]): Sponsor[] {
+  return all.filter((s) => s.display !== 'footer')
 }
 
 export function mapSponsors(settings: unknown): Sponsor[] {
@@ -22,7 +33,7 @@ export function mapSponsors(settings: unknown): Sponsor[] {
   if (!Array.isArray(rows)) return []
   return rows
     .map((row) => {
-      const r = row as { logo?: unknown; name?: unknown; url?: unknown; size?: unknown }
+      const r = row as { logo?: unknown; name?: unknown; url?: unknown; size?: unknown; display?: unknown }
       const logo = r?.logo as { url?: string | null; alt?: string | null; sizes?: { card?: { url?: string | null } } } | null
       if (!logo || typeof logo !== 'object' || !logo.url || typeof r?.name !== 'string' || r.name.trim() === '') return null
       return {
@@ -31,6 +42,7 @@ export function mapSponsors(settings: unknown): Sponsor[] {
         logoUrl: logo.sizes?.card?.url ?? logo.url,
         alt: logo.alt || r.name,
         size: r.size === 'gross' ? 'gross' as const : 'standard' as const,
+        display: r.display === 'footer' ? 'footer' as const : r.display === 'ueber' ? 'ueber' as const : 'both' as const,
       }
     })
     .filter(Boolean) as Sponsor[]
