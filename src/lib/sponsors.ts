@@ -15,7 +15,8 @@ export type Sponsor = {
   logoUrl: string
   alt: string
   size: 'klein' | 'standard' | 'gross'
-  gapBefore: 'none' | 'klein' | 'standard' | 'gross'
+  /** Pixel gap to the previous footer logo (first logo: ignored). */
+  gapBefore: number
   display: 'both' | 'footer' | 'ueber'
 }
 
@@ -44,7 +45,7 @@ export function mapSponsors(settings: unknown): Sponsor[] {
         alt: logo.alt || r.name,
         size: r.size === 'gross' ? 'gross' as const : r.size === 'klein' ? 'klein' as const : 'standard' as const,
         display: r.display === 'footer' ? 'footer' as const : r.display === 'ueber' ? 'ueber' as const : 'both' as const,
-        gapBefore: r.gapBefore === 'none' || r.gapBefore === 'klein' || r.gapBefore === 'gross' ? r.gapBefore as 'none' | 'klein' | 'gross' : 'standard' as const,
+        gapBefore: typeof r.gapBefore === 'number' && r.gapBefore >= 0 ? r.gapBefore : 40,
       }
     })
     .filter(Boolean) as Sponsor[]
