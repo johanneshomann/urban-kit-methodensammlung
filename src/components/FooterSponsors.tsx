@@ -56,9 +56,11 @@ export default function FooterSponsors({ sponsors }: { sponsors: Sponsor[] }) {
   return (
     <div className="border-t">
       <div className="max-w-6xl mx-auto px-4 py-6 flex justify-center sm:justify-start">
-        <ul className="flex flex-wrap items-center justify-center gap-0 list-none">
+        {/* First two logos sit flush (funding lockup pair whose clear space is
+            inside the artwork); every further logo gets a gap. */}
+        <ul className="flex flex-wrap items-center justify-center gap-y-5 list-none">
           {sponsors.map((s, i) => (
-            <li key={`${s.name}-${i}`} className="flex items-center">
+            <li key={`${s.name}-${i}`} className={`flex items-center ${i >= 2 ? 'ml-10' : ''}`}>
               <SponsorLogo sponsor={s} />
             </li>
           ))}
