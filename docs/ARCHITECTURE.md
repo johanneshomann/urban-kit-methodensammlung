@@ -157,6 +157,7 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 - `scripts/seed-legal.ts` — legal texts only (privacy + cookie policy + accessibility statement), `--force` overwrites. Texts live in `src/lib/legalDefaults.ts`, shared with `seed.ts`. `npm run seed:legal`.
 - `scripts/migrate-localization.ts` — one-off `*De/*En` → Payload localized migration.
 - `scripts/backfill-similar-methods.ts` — one-off: make existing `aehnlicheMethoden` links reciprocal. `npm run backfill:similar`.
+- `scripts/backfill-phase-slugs.ts` — one-off: set the stable `slug` on existing project phases (external consumers match by slug; new phases get it via seed). `npm run backfill:phase-slugs`.
 - `scripts/migrate-media-alt-localized.ts` — one-off: plain-string media `alt` → localized `{ de: … }` (the field is now localized + required in German). `npm run migrate:media-alt`.
 - `scripts/backup.sh` / `scripts/restore.sh` — DB + uploaded-media backup (cron-able) and DB restore. `npm run backup` / `npm run restore`.
 - No traditional migrations: Payload derives collections from the TS config.

@@ -54,6 +54,7 @@ comment what would otherwise need reverse-engineering, and skip the obvious.
 | Migrate localization | `npm run migrate:localization` | One-off `*De/*En` → Payload localized format |
 | Migrate media alt | `npm run migrate:media-alt` | One-off: plain-string media `alt` → localized `{ de: … }` |
 | Backfill similar links | `npm run backfill:similar` | One-off: make existing `aehnlicheMethoden` links reciprocal |
+| Backfill phase slugs | `npm run backfill:phase-slugs` | One-off: set stable `slug` on existing project phases (external integrations match by slug) |
 | Backup / restore | `npm run backup` / `npm run restore` | DB + media backup (cron-able on the server), DB restore |
 | Local DB (Docker) | `docker-compose up mongodb` | MongoDB on `127.0.0.1:27018` |
 | Full stack (Docker) | `docker-compose up` | App `3040→3000` + MongoDB |

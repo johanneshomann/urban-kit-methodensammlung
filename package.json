@@ -15,6 +15,7 @@
     "migrate:localization": "npx tsx scripts/migrate-localization.ts",
     "backfill:similar": "npx tsx scripts/backfill-similar-methods.ts",
     "migrate:media-alt": "npx tsx scripts/migrate-media-alt-localized.ts",
+    "backfill:phase-slugs": "npx tsx scripts/backfill-phase-slugs.ts",
     "backup": "bash scripts/backup.sh",
     "restore": "bash scripts/restore.sh"
   },

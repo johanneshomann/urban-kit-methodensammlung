@@ -75,7 +75,10 @@ optional uploaded `icon`, `lucideIcon` string fallback. Two have a parent-catego
 split:
 
 - **Project phases:** `ProjectPhases` reference `ProjectPhaseCategories`
-  (Vorbereitung / Durchführung / Nachbereitung).
+  (Vorbereitung / Durchführung / Nachbereitung) and carry a stable `slug`
+  (indexed, sidebar) — external consumers (the UrbanKIT platform) match phases
+  by slug, so display names can change safely. Seeded; existing DBs:
+  `npm run backfill:phase-slugs`.
 - **Durations:** `Durations` reference `DurationCategories` (Kurz / Mittel / Lang) and
   carry their own `lucideIcon`.
 - **Target groups** add an `explanation` field.

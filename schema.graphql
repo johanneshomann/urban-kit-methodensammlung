@@ -267,6 +267,7 @@ type Icon {
 type ProjectPhase {
   id: String!
   name: String
+  slug: String
   category(locale: LocaleInputType, fallbackLocale: FallbackLocaleInputType): ProjectPhaseCategory
   icon(locale: LocaleInputType, fallbackLocale: FallbackLocaleInputType): Icon
   lucideIcon: String
@@ -2242,6 +2243,7 @@ type ProjectPhases {
 
 input ProjectPhase_where {
   name: ProjectPhase_name_operator
+  slug: ProjectPhase_slug_operator
   category: ProjectPhase_category_operator
   icon: ProjectPhase_icon_operator
   lucideIcon: ProjectPhase_lucideIcon_operator
@@ -2253,6 +2255,17 @@ input ProjectPhase_where {
 }
 
 input ProjectPhase_name_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input ProjectPhase_slug_operator {
   equals: String
   not_equals: String
   like: String
@@ -2326,6 +2339,7 @@ input ProjectPhase_id_operator {
 
 input ProjectPhase_where_and {
   name: ProjectPhase_name_operator
+  slug: ProjectPhase_slug_operator
   category: ProjectPhase_category_operator
   icon: ProjectPhase_icon_operator
   lucideIcon: ProjectPhase_lucideIcon_operator
@@ -2338,6 +2352,7 @@ input ProjectPhase_where_and {
 
 input ProjectPhase_where_or {
   name: ProjectPhase_name_operator
+  slug: ProjectPhase_slug_operator
   category: ProjectPhase_category_operator
   icon: ProjectPhase_icon_operator
   lucideIcon: ProjectPhase_lucideIcon_operator
@@ -2362,6 +2377,7 @@ type project_phasesDocAccess {
 
 type ProjectPhasesDocAccessFields {
   name: ProjectPhasesDocAccessFields_name
+  slug: ProjectPhasesDocAccessFields_slug
   category: ProjectPhasesDocAccessFields_category
   icon: ProjectPhasesDocAccessFields_icon
   lucideIcon: ProjectPhasesDocAccessFields_lucideIcon
@@ -2389,6 +2405,29 @@ type ProjectPhasesDocAccessFields_name_Update {
 }
 
 type ProjectPhasesDocAccessFields_name_Delete {
+  permission: Boolean!
+}
+
+type ProjectPhasesDocAccessFields_slug {
+  create: ProjectPhasesDocAccessFields_slug_Create
+  read: ProjectPhasesDocAccessFields_slug_Read
+  update: ProjectPhasesDocAccessFields_slug_Update
+  delete: ProjectPhasesDocAccessFields_slug_Delete
+}
+
+type ProjectPhasesDocAccessFields_slug_Create {
+  permission: Boolean!
+}
+
+type ProjectPhasesDocAccessFields_slug_Read {
+  permission: Boolean!
+}
+
+type ProjectPhasesDocAccessFields_slug_Update {
+  permission: Boolean!
+}
+
+type ProjectPhasesDocAccessFields_slug_Delete {
   permission: Boolean!
 }
 
@@ -8127,8 +8166,22 @@ type PlatformSetting {
   ogImage(locale: LocaleInputType, fallbackLocale: FallbackLocaleInputType): Media
   kontaktEmail: EmailAddress
   kontakt(depth: Int): JSON
+  ueber(depth: Int): JSON
+  sponsors: [PlatformSetting_Sponsors!]
   updatedAt: DateTime
   createdAt: DateTime
+}
+
+type PlatformSetting_Sponsors {
+  logo(locale: LocaleInputType, fallbackLocale: FallbackLocaleInputType): Media
+  name: String
+  height: Float
+  padTop: Float
+  padRight: Float
+  padBottom: Float
+  padLeft: Float
+  url: String
+  id: String
 }
 
 type platform_settingsDocAccess {
@@ -8150,6 +8203,8 @@ type PlatformSettingsDocAccessFields {
   ogImage: PlatformSettingsDocAccessFields_ogImage
   kontaktEmail: PlatformSettingsDocAccessFields_kontaktEmail
   kontakt: PlatformSettingsDocAccessFields_kontakt
+  ueber: PlatformSettingsDocAccessFields_ueber
+  sponsors: PlatformSettingsDocAccessFields_sponsors
   updatedAt: PlatformSettingsDocAccessFields_updatedAt
   createdAt: PlatformSettingsDocAccessFields_createdAt
 }
@@ -8427,6 +8482,272 @@ type PlatformSettingsDocAccessFields_kontakt_Update {
 }
 
 type PlatformSettingsDocAccessFields_kontakt_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_ueber {
+  create: PlatformSettingsDocAccessFields_ueber_Create
+  read: PlatformSettingsDocAccessFields_ueber_Read
+  update: PlatformSettingsDocAccessFields_ueber_Update
+  delete: PlatformSettingsDocAccessFields_ueber_Delete
+}
+
+type PlatformSettingsDocAccessFields_ueber_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_ueber_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_ueber_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_ueber_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors {
+  create: PlatformSettingsDocAccessFields_sponsors_Create
+  read: PlatformSettingsDocAccessFields_sponsors_Read
+  update: PlatformSettingsDocAccessFields_sponsors_Update
+  delete: PlatformSettingsDocAccessFields_sponsors_Delete
+  fields: PlatformSettingsDocAccessFields_sponsors_Fields
+}
+
+type PlatformSettingsDocAccessFields_sponsors_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_Fields {
+  logo: PlatformSettingsDocAccessFields_sponsors_logo
+  name: PlatformSettingsDocAccessFields_sponsors_name
+  height: PlatformSettingsDocAccessFields_sponsors_height
+  padTop: PlatformSettingsDocAccessFields_sponsors_padTop
+  padRight: PlatformSettingsDocAccessFields_sponsors_padRight
+  padBottom: PlatformSettingsDocAccessFields_sponsors_padBottom
+  padLeft: PlatformSettingsDocAccessFields_sponsors_padLeft
+  url: PlatformSettingsDocAccessFields_sponsors_url
+  id: PlatformSettingsDocAccessFields_sponsors_id
+}
+
+type PlatformSettingsDocAccessFields_sponsors_logo {
+  create: PlatformSettingsDocAccessFields_sponsors_logo_Create
+  read: PlatformSettingsDocAccessFields_sponsors_logo_Read
+  update: PlatformSettingsDocAccessFields_sponsors_logo_Update
+  delete: PlatformSettingsDocAccessFields_sponsors_logo_Delete
+}
+
+type PlatformSettingsDocAccessFields_sponsors_logo_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_logo_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_logo_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_logo_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_name {
+  create: PlatformSettingsDocAccessFields_sponsors_name_Create
+  read: PlatformSettingsDocAccessFields_sponsors_name_Read
+  update: PlatformSettingsDocAccessFields_sponsors_name_Update
+  delete: PlatformSettingsDocAccessFields_sponsors_name_Delete
+}
+
+type PlatformSettingsDocAccessFields_sponsors_name_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_name_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_name_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_name_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_height {
+  create: PlatformSettingsDocAccessFields_sponsors_height_Create
+  read: PlatformSettingsDocAccessFields_sponsors_height_Read
+  update: PlatformSettingsDocAccessFields_sponsors_height_Update
+  delete: PlatformSettingsDocAccessFields_sponsors_height_Delete
+}
+
+type PlatformSettingsDocAccessFields_sponsors_height_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_height_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_height_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_height_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padTop {
+  create: PlatformSettingsDocAccessFields_sponsors_padTop_Create
+  read: PlatformSettingsDocAccessFields_sponsors_padTop_Read
+  update: PlatformSettingsDocAccessFields_sponsors_padTop_Update
+  delete: PlatformSettingsDocAccessFields_sponsors_padTop_Delete
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padTop_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padTop_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padTop_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padTop_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padRight {
+  create: PlatformSettingsDocAccessFields_sponsors_padRight_Create
+  read: PlatformSettingsDocAccessFields_sponsors_padRight_Read
+  update: PlatformSettingsDocAccessFields_sponsors_padRight_Update
+  delete: PlatformSettingsDocAccessFields_sponsors_padRight_Delete
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padRight_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padRight_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padRight_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padRight_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padBottom {
+  create: PlatformSettingsDocAccessFields_sponsors_padBottom_Create
+  read: PlatformSettingsDocAccessFields_sponsors_padBottom_Read
+  update: PlatformSettingsDocAccessFields_sponsors_padBottom_Update
+  delete: PlatformSettingsDocAccessFields_sponsors_padBottom_Delete
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padBottom_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padBottom_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padBottom_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padBottom_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padLeft {
+  create: PlatformSettingsDocAccessFields_sponsors_padLeft_Create
+  read: PlatformSettingsDocAccessFields_sponsors_padLeft_Read
+  update: PlatformSettingsDocAccessFields_sponsors_padLeft_Update
+  delete: PlatformSettingsDocAccessFields_sponsors_padLeft_Delete
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padLeft_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padLeft_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padLeft_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_padLeft_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_url {
+  create: PlatformSettingsDocAccessFields_sponsors_url_Create
+  read: PlatformSettingsDocAccessFields_sponsors_url_Read
+  update: PlatformSettingsDocAccessFields_sponsors_url_Update
+  delete: PlatformSettingsDocAccessFields_sponsors_url_Delete
+}
+
+type PlatformSettingsDocAccessFields_sponsors_url_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_url_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_url_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_url_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_id {
+  create: PlatformSettingsDocAccessFields_sponsors_id_Create
+  read: PlatformSettingsDocAccessFields_sponsors_id_Read
+  update: PlatformSettingsDocAccessFields_sponsors_id_Update
+  delete: PlatformSettingsDocAccessFields_sponsors_id_Delete
+}
+
+type PlatformSettingsDocAccessFields_sponsors_id_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_id_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_id_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsDocAccessFields_sponsors_id_Delete {
   permission: Boolean!
 }
 
@@ -11364,6 +11685,7 @@ type project_phasesAccess {
 
 type ProjectPhasesFields {
   name: ProjectPhasesFields_name
+  slug: ProjectPhasesFields_slug
   category: ProjectPhasesFields_category
   icon: ProjectPhasesFields_icon
   lucideIcon: ProjectPhasesFields_lucideIcon
@@ -11391,6 +11713,29 @@ type ProjectPhasesFields_name_Update {
 }
 
 type ProjectPhasesFields_name_Delete {
+  permission: Boolean!
+}
+
+type ProjectPhasesFields_slug {
+  create: ProjectPhasesFields_slug_Create
+  read: ProjectPhasesFields_slug_Read
+  update: ProjectPhasesFields_slug_Update
+  delete: ProjectPhasesFields_slug_Delete
+}
+
+type ProjectPhasesFields_slug_Create {
+  permission: Boolean!
+}
+
+type ProjectPhasesFields_slug_Read {
+  permission: Boolean!
+}
+
+type ProjectPhasesFields_slug_Update {
+  permission: Boolean!
+}
+
+type ProjectPhasesFields_slug_Delete {
   permission: Boolean!
 }
 
@@ -14805,6 +15150,8 @@ type PlatformSettingsFields {
   ogImage: PlatformSettingsFields_ogImage
   kontaktEmail: PlatformSettingsFields_kontaktEmail
   kontakt: PlatformSettingsFields_kontakt
+  ueber: PlatformSettingsFields_ueber
+  sponsors: PlatformSettingsFields_sponsors
   updatedAt: PlatformSettingsFields_updatedAt
   createdAt: PlatformSettingsFields_createdAt
 }
@@ -15082,6 +15429,272 @@ type PlatformSettingsFields_kontakt_Update {
 }
 
 type PlatformSettingsFields_kontakt_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_ueber {
+  create: PlatformSettingsFields_ueber_Create
+  read: PlatformSettingsFields_ueber_Read
+  update: PlatformSettingsFields_ueber_Update
+  delete: PlatformSettingsFields_ueber_Delete
+}
+
+type PlatformSettingsFields_ueber_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_ueber_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_ueber_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_ueber_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors {
+  create: PlatformSettingsFields_sponsors_Create
+  read: PlatformSettingsFields_sponsors_Read
+  update: PlatformSettingsFields_sponsors_Update
+  delete: PlatformSettingsFields_sponsors_Delete
+  fields: PlatformSettingsFields_sponsors_Fields
+}
+
+type PlatformSettingsFields_sponsors_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_Fields {
+  logo: PlatformSettingsFields_sponsors_logo
+  name: PlatformSettingsFields_sponsors_name
+  height: PlatformSettingsFields_sponsors_height
+  padTop: PlatformSettingsFields_sponsors_padTop
+  padRight: PlatformSettingsFields_sponsors_padRight
+  padBottom: PlatformSettingsFields_sponsors_padBottom
+  padLeft: PlatformSettingsFields_sponsors_padLeft
+  url: PlatformSettingsFields_sponsors_url
+  id: PlatformSettingsFields_sponsors_id
+}
+
+type PlatformSettingsFields_sponsors_logo {
+  create: PlatformSettingsFields_sponsors_logo_Create
+  read: PlatformSettingsFields_sponsors_logo_Read
+  update: PlatformSettingsFields_sponsors_logo_Update
+  delete: PlatformSettingsFields_sponsors_logo_Delete
+}
+
+type PlatformSettingsFields_sponsors_logo_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_logo_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_logo_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_logo_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_name {
+  create: PlatformSettingsFields_sponsors_name_Create
+  read: PlatformSettingsFields_sponsors_name_Read
+  update: PlatformSettingsFields_sponsors_name_Update
+  delete: PlatformSettingsFields_sponsors_name_Delete
+}
+
+type PlatformSettingsFields_sponsors_name_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_name_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_name_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_name_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_height {
+  create: PlatformSettingsFields_sponsors_height_Create
+  read: PlatformSettingsFields_sponsors_height_Read
+  update: PlatformSettingsFields_sponsors_height_Update
+  delete: PlatformSettingsFields_sponsors_height_Delete
+}
+
+type PlatformSettingsFields_sponsors_height_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_height_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_height_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_height_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padTop {
+  create: PlatformSettingsFields_sponsors_padTop_Create
+  read: PlatformSettingsFields_sponsors_padTop_Read
+  update: PlatformSettingsFields_sponsors_padTop_Update
+  delete: PlatformSettingsFields_sponsors_padTop_Delete
+}
+
+type PlatformSettingsFields_sponsors_padTop_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padTop_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padTop_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padTop_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padRight {
+  create: PlatformSettingsFields_sponsors_padRight_Create
+  read: PlatformSettingsFields_sponsors_padRight_Read
+  update: PlatformSettingsFields_sponsors_padRight_Update
+  delete: PlatformSettingsFields_sponsors_padRight_Delete
+}
+
+type PlatformSettingsFields_sponsors_padRight_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padRight_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padRight_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padRight_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padBottom {
+  create: PlatformSettingsFields_sponsors_padBottom_Create
+  read: PlatformSettingsFields_sponsors_padBottom_Read
+  update: PlatformSettingsFields_sponsors_padBottom_Update
+  delete: PlatformSettingsFields_sponsors_padBottom_Delete
+}
+
+type PlatformSettingsFields_sponsors_padBottom_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padBottom_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padBottom_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padBottom_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padLeft {
+  create: PlatformSettingsFields_sponsors_padLeft_Create
+  read: PlatformSettingsFields_sponsors_padLeft_Read
+  update: PlatformSettingsFields_sponsors_padLeft_Update
+  delete: PlatformSettingsFields_sponsors_padLeft_Delete
+}
+
+type PlatformSettingsFields_sponsors_padLeft_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padLeft_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padLeft_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_padLeft_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_url {
+  create: PlatformSettingsFields_sponsors_url_Create
+  read: PlatformSettingsFields_sponsors_url_Read
+  update: PlatformSettingsFields_sponsors_url_Update
+  delete: PlatformSettingsFields_sponsors_url_Delete
+}
+
+type PlatformSettingsFields_sponsors_url_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_url_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_url_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_url_Delete {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_id {
+  create: PlatformSettingsFields_sponsors_id_Create
+  read: PlatformSettingsFields_sponsors_id_Read
+  update: PlatformSettingsFields_sponsors_id_Update
+  delete: PlatformSettingsFields_sponsors_id_Delete
+}
+
+type PlatformSettingsFields_sponsors_id_Create {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_id_Read {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_id_Update {
+  permission: Boolean!
+}
+
+type PlatformSettingsFields_sponsors_id_Delete {
   permission: Boolean!
 }
 
@@ -16894,6 +17507,7 @@ input mutationParticipationDepthUpdateInput {
 
 input mutationProjectPhaseInput {
   name: String
+  slug: String
   category: String
   icon: String
   lucideIcon: String
@@ -16903,6 +17517,7 @@ input mutationProjectPhaseInput {
 
 input mutationProjectPhaseUpdateInput {
   name: String
+  slug: String
   category: String
   icon: String
   lucideIcon: String
@@ -17419,8 +18034,22 @@ input mutationPlatformSettingInput {
   ogImage: String
   kontaktEmail: String
   kontakt: JSON
+  ueber: JSON
+  sponsors: [mutationPlatformSetting_SponsorsInput]
   updatedAt: String
   createdAt: String
+}
+
+input mutationPlatformSetting_SponsorsInput {
+  logo: String
+  name: String!
+  height: Float
+  padTop: Float
+  padRight: Float
+  padBottom: Float
+  padLeft: Float
+  url: String
+  id: String
 }
 
 input mutationLegalInput {

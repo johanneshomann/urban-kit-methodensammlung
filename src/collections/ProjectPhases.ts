@@ -21,6 +21,22 @@ export const ProjectPhases: CollectionConfig = {
       validate: requiredTextInDefaultLocale,
     },
     {
+      // Stable machine identifier — external consumers (e.g. the UrbanKIT
+      // platform's phase-based method suggestions) match phases by this slug,
+      // so renaming the display name never breaks the integration.
+      name: 'slug',
+      label: { en: 'Slug (stable ID)', de: 'Slug (stabile ID)' },
+      type: 'text',
+      index: true,
+      admin: {
+        position: 'sidebar',
+        description: {
+          en: 'Stable identifier for external integrations (the UrbanKIT platform matches phases by this slug). Do not change once set.',
+          de: 'Stabile Kennung für externe Integrationen (die UrbanKIT-Plattform ordnet Phasen über diesen Slug zu). Nach dem Setzen nicht mehr ändern.',
+        },
+      },
+    },
+    {
       name: 'category',
       label: { en: 'Category', de: 'Kategorie' },
       type: 'relationship',
