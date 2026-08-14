@@ -14,7 +14,7 @@ export type Sponsor = {
   url: string | null
   logoUrl: string
   alt: string
-  size: 'standard' | 'gross'
+  size: 'klein' | 'standard' | 'gross'
   display: 'both' | 'footer' | 'ueber'
 }
 
@@ -41,7 +41,7 @@ export function mapSponsors(settings: unknown): Sponsor[] {
         url: typeof r.url === 'string' && r.url.trim() !== '' ? r.url.trim() : null,
         logoUrl: logo.sizes?.card?.url ?? logo.url,
         alt: logo.alt || r.name,
-        size: r.size === 'gross' ? 'gross' as const : 'standard' as const,
+        size: r.size === 'gross' ? 'gross' as const : r.size === 'klein' ? 'klein' as const : 'standard' as const,
         display: r.display === 'footer' ? 'footer' as const : r.display === 'ueber' ? 'ueber' as const : 'both' as const,
       }
     })

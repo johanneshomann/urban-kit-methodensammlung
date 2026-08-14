@@ -225,6 +225,7 @@ export const PlatformSettings: GlobalConfig = {
                   defaultValue: 'standard',
                   label: { en: 'Size', de: 'Größe' },
                   options: [
+                    { label: { en: 'Small', de: 'Klein' }, value: 'klein' },
                     { label: { en: 'Standard', de: 'Standard' }, value: 'standard' },
                     { label: { en: 'Large', de: 'Groß' }, value: 'gross' },
                   ],
