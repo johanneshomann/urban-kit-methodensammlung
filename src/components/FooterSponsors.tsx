@@ -13,17 +13,11 @@
 
 import { useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-
-export type FooterSponsor = {
-  name: string
-  url: string | null
-  logoUrl: string
-  alt: string
-}
+import type { Sponsor } from '@/lib/sponsors'
 
 // NOTE: the delayed portal tooltip mirrors SaveButton/ClearDot (a shared
 // tooltip is a known cleanup — see the OSS review notes).
-function SponsorLogo({ sponsor }: { sponsor: FooterSponsor }) {
+function SponsorLogo({ sponsor }: { sponsor: Sponsor }) {
   const ref = useRef<HTMLElement>(null)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [tooltipPos, setTooltipPos] = useState<{ x: number; y: number } | null>(null)
@@ -106,7 +100,7 @@ function SponsorLogo({ sponsor }: { sponsor: FooterSponsor }) {
   )
 }
 
-export default function FooterSponsors({ heading, sponsors }: { heading: string; sponsors: FooterSponsor[] }) {
+export default function FooterSponsors({ heading, sponsors }: { heading: string; sponsors: Sponsor[] }) {
   if (sponsors.length === 0) return null
   return (
     <div className="border-t">

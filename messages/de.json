@@ -22,7 +22,8 @@
     "assistant": "Assistent",
     "subtitle": "Methodensammlung",
     "switchLanguage": "Sprache wechseln",
-    "skipLink": "Zum Inhalt springen"
+    "skipLink": "Zum Inhalt springen",
+    "ueber": "Über das Projekt"
   },
   "help": {
     "metaTitle": "Anleitung – Urban Kit Methodensammlung",
@@ -140,7 +141,8 @@
     "cookies": "Cookie-Richtlinie",
     "login": "Login",
     "barrierefreiheit": "Barrierefreiheit",
-    "sponsors": "Gefördert durch"
+    "sponsors": "Gefördert durch",
+    "ueber": "Über das Projekt"
   },
   "meta": {
     "title": "Urban Kit – Methodensammlung",
@@ -302,5 +304,15 @@
     "subtitle": "Erklärung zur Barrierefreiheit gemäß BITV 2.0 — Informationen zum Stand der Barrierefreiheit dieser Website, Feedback-Möglichkeit und Durchsetzungsverfahren.",
     "scrollHint": "Zur Erklärung",
     "placeholder": "Die Erklärung zur Barrierefreiheit wird hier ergänzt."
+  },
+  "ueber": {
+    "metaTitle": "Über das Projekt – Urban Kit Methodensammlung",
+    "eyebrow": "Projekt",
+    "title": "Über das Projekt",
+    "subtitle": "Hintergrund, Ziele und Förderung der Urban Kit Methodensammlung.",
+    "scrollHint": "Zum Inhalt",
+    "placeholder": "Der Text über das Projekt wird hier ergänzt.",
+    "sponsorsEyebrow": "Förderung",
+    "sponsorsHeading": "Gefördert durch"
   }
 }

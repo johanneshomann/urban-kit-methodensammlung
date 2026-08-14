@@ -7,7 +7,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
 import { Link, usePathname } from '@/navigation'
 import { useTranslations } from 'next-intl'
-import { ChevronRight, Home, Bookmark, Mail, Signpost, Menu, X, Sparkles } from 'lucide-react'
+import { ChevronRight, Home, Bookmark, HeartHandshake, Mail, Signpost, Menu, X, Sparkles } from 'lucide-react'
 
 const CLOSE_DURATION = 280
 const CLOSE_DELAY = 220
@@ -159,6 +159,7 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
       : []),
     { href: '/saved',       label: t('saved'),             icon: Bookmark },
     { href: '/hilfe',       label: t('help'),              icon: Signpost },
+    { href: '/ueber',       label: t('ueber'),             icon: HeartHandshake },
     { href: '/kontakt',     label: t('contact'),           icon: Mail },
   ]
 

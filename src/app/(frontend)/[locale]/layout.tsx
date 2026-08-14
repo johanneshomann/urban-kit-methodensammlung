@@ -11,7 +11,8 @@ import { Link } from '@/navigation'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import NavMenu from '@/components/NavMenu'
 import SiteFooter from '@/components/SiteFooter'
-import FooterSponsors, { type FooterSponsor } from '@/components/FooterSponsors'
+import FooterSponsors from '@/components/FooterSponsors'
+import { mapSponsors, type Sponsor } from '@/lib/sponsors'
 import { loadAssistantSettings } from '@/lib/methodAssistant/settings'
 import SavedWidget from '@/components/SavedWidget'
 import CookieNotice from '@/components/CookieNotice'
@@ -83,19 +84,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const assistant = await loadAssistantSettings(locale as 'de' | 'en')
 
   // Sponsor logos for the footer band — rides the settings fetch above.
-  // Rows with an unpopulated/missing logo are dropped defensively.
-  const sponsors: FooterSponsor[] = ((settings as any).sponsors ?? [])
-    .map((row: any) => {
-      const logo = row?.logo
-      if (!logo || typeof logo !== 'object' || !logo.url || !row?.name) return null
-      return {
-        name: row.name as string,
-        url: typeof row.url === 'string' && row.url.trim() !== '' ? row.url.trim() : null,
-        logoUrl: (logo.sizes?.card?.url as string | undefined) ?? (logo.url as string),
-        alt: (logo.alt as string | undefined) || (row.name as string),
-      }
-    })
-    .filter(Boolean)
+  const sponsors = mapSponsors(settings)
 
   return (
     <html lang={locale} className={atkinson.variable}>
@@ -154,13 +143,16 @@ export default async function LocaleLayout({ children, params }: Props) {
   )
 }
 
-async function FooterText({ sponsors }: { sponsors: FooterSponsor[] }) {
+async function FooterText({ sponsors }: { sponsors: Sponsor[] }) {
   const t = await getTranslations('footer')
   return (
     <>
       <div className="max-w-6xl mx-auto px-4 py-6 text-small text-ink flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
       <span>{t('text')}</span>
       <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2">
+        <Link href="/ueber" className="hover:text-method-dark transition-colors">
+          {t('ueber')}
+        </Link>
         <Link href="/impressum" className="hover:text-method-dark transition-colors">
           {t('impressum')}
         </Link>

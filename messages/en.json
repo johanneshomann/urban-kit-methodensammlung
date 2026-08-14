@@ -22,7 +22,8 @@
     "assistant": "Assistant",
     "subtitle": "Method Archive",
     "switchLanguage": "Switch language",
-    "skipLink": "Skip to content"
+    "skipLink": "Skip to content",
+    "ueber": "About the project"
   },
   "help": {
     "metaTitle": "Guide – Urban Kit Method Archive",
@@ -140,7 +141,8 @@
     "cookies": "Cookie Policy",
     "login": "Login",
     "barrierefreiheit": "Accessibility",
-    "sponsors": "Supported by"
+    "sponsors": "Supported by",
+    "ueber": "About the project"
   },
   "meta": {
     "title": "Urban Kit – Method Archive",
@@ -302,5 +304,15 @@
     "subtitle": "Accessibility statement per BITV 2.0 — the accessibility status of this website, how to give feedback, and the enforcement procedure.",
     "scrollHint": "To the statement",
     "placeholder": "The accessibility statement will be added here."
+  },
+  "ueber": {
+    "metaTitle": "About the Project – Urban Kit Methodensammlung",
+    "eyebrow": "Project",
+    "title": "About the Project",
+    "subtitle": "Background, goals and funding of the Urban Kit method collection.",
+    "scrollHint": "To the content",
+    "placeholder": "The text about the project will be added here.",
+    "sponsorsEyebrow": "Funding",
+    "sponsorsHeading": "Supported by"
   }
 }

@@ -433,8 +433,8 @@ const CATEGORIES: Category[] = [
       {
         q: { de: 'Was sind die Plattform-Einstellungen?', en: 'What are the platform settings?' },
         a: {
-          de: ['Hier liegen die übergreifenden Einstellungen der Website: die Farben (Design), die Kontaktangaben (E-Mail-Adresse und Text der Kontaktseite) und die Sponsoren-Logos im Footer. Die Rechtstexte (Impressum, Datenschutz, Cookie-Richtlinie) stehen separat unter „Rechtliches“.'],
-          en: ['This is where the website’s cross-cutting settings live: the colors (design), the contact details (email address and the contact page text) and the sponsor logos in the footer. The legal texts (imprint, privacy, cookie policy) sit separately under “Legal”.'],
+          de: ['Hier liegen die übergreifenden Einstellungen der Website: die Farben (Design), die Kontaktangaben (E-Mail-Adresse und Text der Kontaktseite), der Text der Seite „Über das Projekt“ und die Sponsoren-Logos. Die Rechtstexte (Impressum, Datenschutz, Cookie-Richtlinie) stehen separat unter „Rechtliches“.'],
+          en: ['This is where the website’s cross-cutting settings live: the colors (design), the contact details (email address and the contact page text), the “About the project” page text and the sponsor logos. The legal texts (imprint, privacy, cookie policy) sit separately under “Legal”.'],
         },
       },
       {
@@ -458,12 +458,12 @@ const CATEGORIES: Category[] = [
           de: [
             '„Plattform-Einstellungen“ öffnen und den Reiter „Sponsoren“ wählen.',
             'Pro Sponsor ein Logo aus der Medien-Bibliothek wählen (Querformat mit transparentem Hintergrund wirkt am besten), den Namen eintragen (erscheint als Tooltip und für Screenreader – nicht sichtbar neben dem Logo) und optional die Website-Adresse inkl. https://.',
-            'Die Reihenfolge per Drag-and-drop sortieren und speichern. Der Bereich „Gefördert durch“ erscheint im Footer nur, wenn mindestens ein Sponsor eingetragen ist.',
+            'Die Reihenfolge per Drag-and-drop sortieren und speichern. Die Logos erscheinen unten im Footer (nur Tooltip-Name) und auf der Seite „Über das Projekt“ mit sichtbarem Namen — jeweils nur, wenn mindestens ein Sponsor eingetragen ist. Der Text dieser Seite wird im Reiter „Über“ gepflegt.',
           ],
           en: [
             'Open “Platform Settings” and choose the “Sponsors” tab.',
             'Per sponsor, pick a logo from the media library (landscape with transparent background works best), enter the name (appears as a tooltip and for screen readers – not visibly next to the logo) and optionally the website address incl. https://.',
-            'Reorder by drag-and-drop and save. The “Supported by” band only appears in the footer when at least one sponsor is set.',
+            'Reorder by drag-and-drop and save. The logos appear at the bottom of the footer (tooltip name only) and on the “About the project” page with visible names — each only when at least one sponsor is set. That page’s text is maintained in the “About” tab.',
           ],
         },
       },

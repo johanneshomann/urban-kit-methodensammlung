@@ -88,7 +88,7 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 
 | Global | Writable by | Purpose |
 |---|---|---|
-| `PlatformSettings` | admin | Colors, branding uploads (admin logo, favicon, OG image), Kontakt (email address + text), footer sponsor logos (array: logo + name + optional URL) |
+| `PlatformSettings` | admin | Colors, branding uploads (admin logo, favicon, OG image), Kontakt (email address + text), Über page content, footer sponsor logos (array: logo + name + optional URL) |
 | `Legal` | admin | Legal texts: Impressum, Datenschutz, cookie policy, Erklärung zur Barrierefreiheit |
 | `Assistant` | admin | Method-assistant config (provider, API key, model, greeting, rate limit). **`read` is locked** so the key can't leak via REST — see [`CHATBOT.md`](CHATBOT.md) |
 | `ParticipationDepthSettings` | admin+editor | Filter display icon + lucide fallback + active flag |
@@ -107,7 +107,7 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 - `methods/[slug]/page.tsx` — method detail
 - `saved/page.tsx` — localStorage-saved methods: list with per-method PDF export, "all as PDF", comparison table
 - `assistant/` — full-page method assistant (chat)
-- `kontakt/`, `datenschutz/`, `impressum/`, `cookies/`, `barrierefreiheit/`, `hilfe/`
+- `kontakt/`, `ueber/` (About: admin text + sponsor grid), `datenschutz/`, `impressum/`, `cookies/`, `barrierefreiheit/`, `hilfe/`
 
 **Payload** — `(payload)/`:
 - `admin/[[...segments]]` — admin UI

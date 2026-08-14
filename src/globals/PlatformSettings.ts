@@ -143,6 +143,21 @@ export const PlatformSettings: GlobalConfig = {
           ],
         },
         {
+          label: { en: 'About', de: 'Über' },
+          description: {
+            en: 'Content of the “About the project” page (/ueber). The sponsor logos from the Sponsors tab are shown below the text with their names.',
+            de: 'Inhalt der Seite „Über das Projekt“ (/ueber). Darunter erscheinen die Sponsoren-Logos aus dem Reiter „Sponsoren“ mit ihren Namen.',
+          },
+          fields: [
+            {
+              name: 'ueber',
+              type: 'richText',
+              localized: true,
+              label: { en: 'Content', de: 'Inhalt' },
+            },
+          ],
+        },
+        {
           label: { en: 'Sponsors', de: 'Sponsoren' },
           description: {
             en: 'Logos shown in the footer under “Supported by”. The band only appears when at least one sponsor is set.',
