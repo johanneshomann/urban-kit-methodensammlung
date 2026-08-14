@@ -7,6 +7,7 @@ import config from '@payload-config'
 import { getTranslations } from 'next-intl/server'
 import { EyebrowBadge } from '@/components/EyebrowBadge'
 import RichTextRenderer from '@/components/RichTextRenderer'
+import { hasRichTextContent } from '@/lib/richText'
 import { ShieldCheck, ChevronDown } from 'lucide-react'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -24,7 +25,11 @@ export default async function DatenschutzPage({ params }: Props) {
   const payload = await getPayload({ config })
   const settings = await payload.findGlobal({ slug: 'legal' as any, locale: locale as 'de' | 'en', fallbackLocale: 'de' })
 
-  const content = settings.datenschutz
+  // A saved-but-empty EN document defeats Payload's locale fallback — fall back manually.
+  let content = settings.datenschutz
+  if (locale !== 'de' && !hasRichTextContent(content)) {
+    content = (await payload.findGlobal({ slug: 'legal' as any, locale: 'de' })).datenschutz
+  }
 
   return (
     <div>
