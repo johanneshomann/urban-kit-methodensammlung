@@ -13,7 +13,7 @@ import { getTranslations } from 'next-intl/server'
 import { EyebrowBadge } from '@/components/EyebrowBadge'
 import BackButton from '@/components/BackButton'
 import RichTextRenderer from '@/components/RichTextRenderer'
-import { aboutSponsors, mapSponsors } from '@/lib/sponsors'
+import { mapSponsors } from '@/lib/sponsors'
 import { SponsorCards } from '@/components/FooterSponsors'
 import { HeartHandshake, ChevronDown } from 'lucide-react'
 
@@ -33,7 +33,7 @@ export default async function UeberPage({ params }: Props) {
   const settings = await payload.findGlobal({ slug: 'platform-settings' as any, locale: locale as 'de' | 'en', fallbackLocale: 'de' })
 
   const content = (settings as any).ueber
-  const sponsors = aboutSponsors(mapSponsors(settings))
+  const sponsors = mapSponsors(settings)
 
   return (
     <div>

@@ -17,17 +17,6 @@ export type Sponsor = {
   size: 'klein' | 'standard' | 'gross'
   /** Per-side padding (px) around the logo in the footer band. */
   padding: { top: number; right: number; bottom: number; left: number }
-  display: 'both' | 'footer' | 'ueber'
-}
-
-/** Rows for the footer band. */
-export function footerSponsors(all: Sponsor[]): Sponsor[] {
-  return all.filter((s) => s.display !== 'ueber')
-}
-
-/** Rows for the Über page grid. */
-export function aboutSponsors(all: Sponsor[]): Sponsor[] {
-  return all.filter((s) => s.display !== 'footer')
 }
 
 const px = (v: unknown, fallback: number): number =>
@@ -38,7 +27,7 @@ export function mapSponsors(settings: unknown): Sponsor[] {
   if (!Array.isArray(rows)) return []
   return rows
     .map((row) => {
-      const r = row as { logo?: unknown; name?: unknown; url?: unknown; size?: unknown; display?: unknown; padTop?: unknown; padRight?: unknown; padBottom?: unknown; padLeft?: unknown }
+      const r = row as { logo?: unknown; name?: unknown; url?: unknown; size?: unknown; padTop?: unknown; padRight?: unknown; padBottom?: unknown; padLeft?: unknown }
       const logo = r?.logo as { url?: string | null; alt?: string | null; sizes?: { card?: { url?: string | null } } } | null
       if (!logo || typeof logo !== 'object' || !logo.url || typeof r?.name !== 'string' || r.name.trim() === '') return null
       return {
@@ -47,7 +36,6 @@ export function mapSponsors(settings: unknown): Sponsor[] {
         logoUrl: logo.sizes?.card?.url ?? logo.url,
         alt: logo.alt || r.name,
         size: r.size === 'gross' ? 'gross' as const : r.size === 'klein' ? 'klein' as const : 'standard' as const,
-        display: r.display === 'footer' ? 'footer' as const : r.display === 'ueber' ? 'ueber' as const : 'both' as const,
         padding: {
           top: px(r.padTop, 0),
           right: px(r.padRight, 20),
