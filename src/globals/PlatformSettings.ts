@@ -217,15 +217,26 @@ export const PlatformSettings: GlobalConfig = {
                   },
                 },
                 {
-                  type: 'row',
+                  type: 'collapsible',
+                  label: { en: 'Spacing (px)', de: 'Abstände (px)' },
+                  admin: {
+                    initCollapsed: true,
+                    description: {
+                      en: 'Spacing of this logo in the footer band, in pixels per side. Set left/right to 0 where logos should sit flush (e.g. a funding pair with clear space inside the artwork).',
+                      de: 'Abstand dieses Logos im Footer, in Pixeln je Seite. Links/Rechts auf 0 setzen, wo Logos direkt aneinander anschließen sollen (z. B. Förderlogo-Paar mit Schutzraum in der Datei).',
+                    },
+                  },
                   fields: [
+                    {
+                      type: 'row',
+                      fields: [
                     {
                       name: 'padTop',
                       type: 'number',
                       defaultValue: 0,
                       min: 0,
                       max: 400,
-                      label: { en: 'Top (px)', de: 'Oben (px)' },
+                      label: { en: 'Top', de: 'Oben' },
                     },
                     {
                       name: 'padRight',
@@ -233,7 +244,7 @@ export const PlatformSettings: GlobalConfig = {
                       defaultValue: 20,
                       min: 0,
                       max: 400,
-                      label: { en: 'Right (px)', de: 'Rechts (px)' },
+                      label: { en: 'Right', de: 'Rechts' },
                     },
                     {
                       name: 'padBottom',
@@ -241,7 +252,7 @@ export const PlatformSettings: GlobalConfig = {
                       defaultValue: 0,
                       min: 0,
                       max: 400,
-                      label: { en: 'Bottom (px)', de: 'Unten (px)' },
+                      label: { en: 'Bottom', de: 'Unten' },
                     },
                     {
                       name: 'padLeft',
@@ -249,13 +260,9 @@ export const PlatformSettings: GlobalConfig = {
                       defaultValue: 20,
                       min: 0,
                       max: 400,
-                      label: { en: 'Left (px)', de: 'Links (px)' },
-                      admin: {
-                        description: {
-                          en: 'Spacing of this logo in the footer band, per side. Set left/right to 0 where logos should sit flush (e.g. a funding pair with clear space inside the artwork).',
-                          de: 'Abstand dieses Logos im Footer, je Seite. Links/Rechts auf 0 setzen, wo Logos direkt aneinander anschließen sollen (z. B. Förderlogo-Paar mit Schutzraum in der Datei).',
-                        },
-                      },
+                      label: { en: 'Left', de: 'Links' },
+                    },
+                      ],
                     },
                   ],
                 },
