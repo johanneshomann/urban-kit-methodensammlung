@@ -10,7 +10,7 @@ import BackButton from '@/components/BackButton'
 import { useSaved } from '@/hooks/useSaved'
 import { Link } from '@/navigation'
 import { useTranslations, useLocale } from 'next-intl'
-import { Bookmark, ChevronDown, FileDown } from 'lucide-react'
+import { Bookmark, ChevronDown, Compass, FileDown } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import type { FilterItem, Methode } from '@/types'
 
@@ -85,13 +85,16 @@ export default function SavedPage() {
               <p className="text-text leading-relaxed" style={{ color: 'var(--method-ink)' }}>
                 {t('empty')}
               </p>
-              <Link
-                href="/"
-                className="text-text font-bold"
-                style={{ color: 'var(--method)' }}
-              >
-                {t('discover')}
-              </Link>
+              <div>
+                <Link
+                  href="/#methods"
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-cta font-bold transition-all shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95"
+                  style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
+                >
+                  <Compass className="w-[1.1em] h-[1.1em] shrink-0" aria-hidden="true" />
+                  {t('discover')}
+                </Link>
+              </div>
             </div>
           )}
         </div>
