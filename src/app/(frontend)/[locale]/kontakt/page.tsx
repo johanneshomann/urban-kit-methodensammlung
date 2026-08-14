@@ -87,29 +87,15 @@ export default async function KontaktPage({ params }: Props) {
               </div>
             )}
             {email && (
-              <div className="flex flex-col gap-3">
-                <div>
-                  <p className="text-small uppercase tracking-widest font-bold mb-1" style={{ color: 'var(--method-ink)' }}>
-                    E-Mail
-                  </p>
-                  <a
-                    href={`mailto:${email}`}
-                    className="text-text underline transition-opacity hover:opacity-70"
-                    style={{ color: 'var(--method-dark)' }}
-                  >
-                    {email}
-                  </a>
-                </div>
-                <div>
-                  <a
-                    href={`mailto:${email}`}
-                    className="inline-flex items-center gap-2 px-5 py-3 rounded-lg text-cta transition-colors"
-                    style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
-                  >
-                    <Mail className="w-[1em] h-[1em] shrink-0" aria-hidden />
-                    {t('writeEmail')}
-                  </a>
-                </div>
+              <div>
+                <a
+                  href={`mailto:${email}`}
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-cta font-bold transition-all shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95"
+                  style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
+                >
+                  <Mail className="w-[1.1em] h-[1.1em] shrink-0" aria-hidden="true" />
+                  {t('writeEmail')}
+                </a>
               </div>
             )}
             {!content && !email && (
