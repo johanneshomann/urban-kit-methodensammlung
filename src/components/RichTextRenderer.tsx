@@ -58,12 +58,19 @@ type RichTextContent = {
   }
 }
 
-function renderNode(node: LexicalNode, index: number): React.ReactNode {
+type RenderOpts = {
+  /** Replaces the default per-tag heading classes (applied to ALL heading levels). */
+  headingClassName?: string
+  /** Appended to the default paragraph classes. */
+  paragraphClassName?: string
+}
+
+function renderNode(node: LexicalNode, index: number, opts: RenderOpts = {}): React.ReactNode {
   switch (node.type) {
     case 'paragraph':
       return (
-        <p key={index} className="mb-3 leading-relaxed">
-          {node.children?.map((child, i) => renderNode(child, i))}
+        <p key={index} className={`mb-3 leading-relaxed${opts.paragraphClassName ? ` ${opts.paragraphClassName}` : ''}`}>
+          {node.children?.map((child, i) => renderNode(child, i, opts))}
         </p>
       )
     case 'heading': {
@@ -75,25 +82,25 @@ function renderNode(node: LexicalNode, index: number): React.ReactNode {
         h4: 'text-base font-bold mb-2 mt-3',
       }
       return (
-        <Tag key={index} className={classes[node.tag ?? 'h2'] ?? 'font-bold mb-2'}>
-          {node.children?.map((child, i) => renderNode(child, i))}
+        <Tag key={index} className={opts.headingClassName ?? classes[node.tag ?? 'h2'] ?? 'font-bold mb-2'}>
+          {node.children?.map((child, i) => renderNode(child, i, opts))}
         </Tag>
       )
     }
     case 'list':
       return node.listType === 'bullet' ? (
         <ul key={index} className="list-disc pl-5 mb-3 space-y-1">
-          {node.children?.map((child, i) => renderNode(child, i))}
+          {node.children?.map((child, i) => renderNode(child, i, opts))}
         </ul>
       ) : (
         <ol key={index} className="list-decimal pl-5 mb-3 space-y-1">
-          {node.children?.map((child, i) => renderNode(child, i))}
+          {node.children?.map((child, i) => renderNode(child, i, opts))}
         </ol>
       )
     case 'listitem':
       return (
         <li key={index}>
-          {node.children?.map((child, i) => renderNode(child, i))}
+          {node.children?.map((child, i) => renderNode(child, i, opts))}
         </li>
       )
     case 'link':
@@ -137,16 +144,16 @@ function renderNode(node: LexicalNode, index: number): React.ReactNode {
 type Props = {
   content: unknown
   className?: string
-}
+} & RenderOpts
 
-export default function RichTextRenderer({ content, className }: Props) {
+export default function RichTextRenderer({ content, className, headingClassName, paragraphClassName }: Props) {
   if (!content || typeof content !== 'object') return null
   const rich = content as RichTextContent
   if (!rich.root?.children) return null
 
   return (
     <div className={className}>
-      {rich.root.children.map((node, i) => renderNode(node, i))}
+      {rich.root.children.map((node, i) => renderNode(node, i, { headingClassName, paragraphClassName }))}
     </div>
   )
 }

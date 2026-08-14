@@ -75,26 +75,35 @@ export default async function UeberPage({ params }: Props) {
       {/* Content */}
       <section
         id="ueber-content"
-        className="px-6 md:px-16 lg:px-24 py-12 md:py-24"
+        className="py-12 md:py-24"
         style={{ background: 'var(--method-very-light)' }}
       >
-        <div className="max-w-3xl">
-          {content
-            ? <RichTextRenderer content={content as any} />
-            : <p className="text-text italic" style={{ color: 'var(--method-ink)' }}>{t('placeholder')}</p>
-          }
-        </div>
-
-        {/* Sponsors — names visible here, unlike the footer band */}
-        {sponsors.length > 0 && (
-          <div className="mt-16">
-            <EyebrowBadge label={t('sponsorsEyebrow')} />
-            <h2 className="text-title font-bold tracking-tight mb-10" style={{ color: 'var(--method-ink-accent)' }}>
-              {t('sponsorsHeading')}<span style={{ color: 'var(--method)' }}>.</span>
-            </h2>
-            <SponsorCards sponsors={sponsors} />
+        {/* Container + text measure mirror the guide page's centered layout. */}
+        <div className="max-w-6xl mx-auto px-6 md:px-16 w-full">
+          <div className="max-w-2xl">
+            {content
+              ? (
+                <RichTextRenderer
+                  content={content as any}
+                  paragraphClassName="text-base"
+                  headingClassName="text-title font-bold mb-6 mt-12 first:mt-0"
+                />
+              )
+              : <p className="text-base italic" style={{ color: 'var(--method-ink)' }}>{t('placeholder')}</p>
+            }
           </div>
-        )}
+
+          {/* Sponsors — names via tooltip, same as the footer */}
+          {sponsors.length > 0 && (
+            <div className="mt-16">
+              <EyebrowBadge label={t('sponsorsEyebrow')} />
+              <h2 className="text-title font-bold tracking-tight mb-10" style={{ color: 'var(--method-ink-accent)' }}>
+                {t('sponsorsHeading')}<span style={{ color: 'var(--method)' }}>.</span>
+              </h2>
+              <SponsorCards sponsors={sponsors} />
+            </div>
+          )}
+        </div>
       </section>
     </div>
   )
