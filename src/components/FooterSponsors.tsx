@@ -109,7 +109,7 @@ function SponsorLogo({ sponsor }: { sponsor: FooterSponsor }) {
 export default function FooterSponsors({ heading, sponsors }: { heading: string; sponsors: FooterSponsor[] }) {
   if (sponsors.length === 0) return null
   return (
-    <div className="border-b">
+    <div className="border-t">
       <div className="max-w-6xl mx-auto px-4 py-6 flex flex-col items-center sm:flex-row gap-4 sm:gap-8">
         <p
           className="text-small uppercase tracking-widest shrink-0"

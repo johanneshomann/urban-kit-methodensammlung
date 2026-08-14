@@ -158,7 +158,6 @@ async function FooterText({ sponsors }: { sponsors: FooterSponsor[] }) {
   const t = await getTranslations('footer')
   return (
     <>
-      <FooterSponsors heading={t('sponsors')} sponsors={sponsors} />
       <div className="max-w-6xl mx-auto px-4 py-6 text-small text-ink flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
       <span>{t('text')}</span>
       <nav className="flex flex-wrap justify-center gap-x-4 gap-y-2">
@@ -179,6 +178,7 @@ async function FooterText({ sponsors }: { sponsors: FooterSponsor[] }) {
         </a>
       </nav>
     </div>
+    <FooterSponsors heading={t('sponsors')} sponsors={sponsors} />
     </>
   )
 }
