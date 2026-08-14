@@ -4,8 +4,8 @@
 
 /**
  * "Über das Projekt" — admin-editable rich text (PlatformSettings → Über) plus
- * the sponsor grid. Unlike the footer band, the sponsor NAMES are visible here,
- * under each logo. Mirrors the kontakt/legal page anatomy.
+ * the sponsor logo strip (the same setup as the footer band, so the admin's
+ * pixel settings apply identically). Mirrors the kontakt/legal page anatomy.
  */
 import { getPayload } from 'payload'
 import config from '@payload-config'
@@ -14,7 +14,7 @@ import { EyebrowBadge } from '@/components/EyebrowBadge'
 import BackButton from '@/components/BackButton'
 import RichTextRenderer from '@/components/RichTextRenderer'
 import { mapSponsors } from '@/lib/sponsors'
-import { SponsorCards } from '@/components/FooterSponsors'
+import { SponsorStrip } from '@/components/FooterSponsors'
 import { HeartHandshake, ChevronDown } from 'lucide-react'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -72,10 +72,10 @@ export default async function UeberPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Content */}
+      {/* Content — each block is its own full-viewport section */}
       <section
         id="ueber-content"
-        className="py-12 md:py-24"
+        className="min-h-[100svh] flex flex-col justify-center py-24 md:py-32"
         style={{ background: 'var(--method-very-light)' }}
       >
         {/* Container + text measure mirror the guide page's centered layout. */}
@@ -86,25 +86,32 @@ export default async function UeberPage({ params }: Props) {
                 <RichTextRenderer
                   content={content as any}
                   paragraphClassName="text-text"
-                  headingClassName="text-title font-bold mb-6 mt-12 first:mt-0"
+                  headingClassName="text-title font-bold mb-6 mt-20 first:mt-0"
                 />
               )
               : <p className="text-text italic" style={{ color: 'var(--method-ink)' }}>{t('placeholder')}</p>
             }
           </div>
-
-          {/* Sponsors — names via tooltip, same as the footer */}
-          {sponsors.length > 0 && (
-            <div className="mt-16">
-              <EyebrowBadge label={t('sponsorsEyebrow')} />
-              <h2 className="text-title font-bold tracking-tight mb-10" style={{ color: 'var(--method-ink-accent)' }}>
-                {t('sponsorsHeading')}<span style={{ color: 'var(--method)' }}>.</span>
-              </h2>
-              <SponsorCards sponsors={sponsors} />
-            </div>
-          )}
         </div>
       </section>
+
+      {/* Sponsors — names via tooltip, same as the footer */}
+      {sponsors.length > 0 && (
+        <section
+          className="min-h-[100svh] flex flex-col justify-center py-24 md:py-32"
+          style={{ background: 'var(--method-very-light)' }}
+        >
+          <div className="max-w-6xl mx-auto px-6 md:px-16 w-full">
+            <EyebrowBadge label={t('sponsorsEyebrow')} />
+            <h2 className="text-title font-bold tracking-tight mb-10" style={{ color: 'var(--method-ink-accent)' }}>
+              {t('sponsorsHeading')}<span style={{ color: 'var(--method)' }}>.</span>
+            </h2>
+            <div className="flex justify-center sm:justify-start">
+              <SponsorStrip sponsors={sponsors} />
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   )
 }
