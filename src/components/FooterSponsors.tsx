@@ -75,7 +75,7 @@ export default function FooterSponsors({ sponsors }: { sponsors: Sponsor[] }) {
   if (pathname === '/ueber' || sponsors.length === 0) return null
   return (
     <div className="border-t">
-      <div className="max-w-6xl mx-auto px-4 py-6 flex justify-center sm:justify-start">
+      <div className="max-w-6xl mx-auto px-4 py-10 flex justify-center">
         <SponsorStrip sponsors={sponsors} />
       </div>
     </div>
