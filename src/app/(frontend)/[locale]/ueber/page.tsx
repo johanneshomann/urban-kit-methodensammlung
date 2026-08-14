@@ -85,11 +85,11 @@ export default async function UeberPage({ params }: Props) {
               ? (
                 <RichTextRenderer
                   content={content as any}
-                  paragraphClassName="text-base"
+                  paragraphClassName="text-text"
                   headingClassName="text-title font-bold mb-6 mt-12 first:mt-0"
                 />
               )
-              : <p className="text-base italic" style={{ color: 'var(--method-ink)' }}>{t('placeholder')}</p>
+              : <p className="text-text italic" style={{ color: 'var(--method-ink)' }}>{t('placeholder')}</p>
             }
           </div>
 
