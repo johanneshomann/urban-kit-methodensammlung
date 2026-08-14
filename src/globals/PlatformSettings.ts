@@ -142,6 +142,66 @@ export const PlatformSettings: GlobalConfig = {
             },
           ],
         },
+        {
+          label: { en: 'Sponsors', de: 'Sponsoren' },
+          description: {
+            en: 'Logos shown in the footer under “Supported by”. The band only appears when at least one sponsor is set.',
+            de: 'Logos im Footer unter „Gefördert durch“. Der Bereich erscheint nur, wenn mindestens ein Sponsor eingetragen ist.',
+          },
+          fields: [
+            {
+              name: 'sponsors',
+              type: 'array',
+              label: { en: 'Sponsors', de: 'Sponsoren' },
+              labels: { singular: { en: 'Sponsor', de: 'Sponsor' }, plural: { en: 'Sponsors', de: 'Sponsoren' } },
+              admin: {
+                initCollapsed: true,
+                description: {
+                  en: 'Order here = order in the footer (drag and drop to reorder).',
+                  de: 'Reihenfolge hier = Reihenfolge im Footer (per Drag-and-drop sortierbar).',
+                },
+              },
+              fields: [
+                {
+                  name: 'logo',
+                  type: 'upload',
+                  relationTo: 'media',
+                  required: true,
+                  label: { en: 'Logo', de: 'Logo' },
+                  admin: {
+                    description: {
+                      en: 'Shown at a fixed height (~40px) with natural width — landscape logos with transparent background work best.',
+                      de: 'Wird mit fester Höhe (ca. 40px) und natürlicher Breite angezeigt – Querformat-Logos mit transparentem Hintergrund wirken am besten.',
+                    },
+                  },
+                },
+                {
+                  name: 'name',
+                  type: 'text',
+                  required: true,
+                  label: { en: 'Name', de: 'Name' },
+                  admin: {
+                    description: {
+                      en: 'Not shown next to the logo — appears as a tooltip on hover/focus and is read by screen readers.',
+                      de: 'Wird nicht neben dem Logo angezeigt – erscheint als Tooltip bei Hover/Fokus und wird von Screenreadern vorgelesen.',
+                    },
+                  },
+                },
+                {
+                  name: 'url',
+                  type: 'text',
+                  label: { en: 'Website (optional)', de: 'Website (optional)' },
+                  admin: {
+                    description: {
+                      en: 'Full address including https:// — the logo links there in a new tab. Leave empty for no link.',
+                      de: 'Vollständige Adresse inkl. https:// – das Logo verlinkt dorthin in einem neuen Tab. Leer lassen für kein Verlinken.',
+                    },
+                  },
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
   ],

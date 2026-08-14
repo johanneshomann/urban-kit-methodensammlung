@@ -88,8 +88,9 @@ Characteristics (Einfach/Strukturiert/Spielerisch/Aktivierend/Kreativ).
 ## Globals
 
 - **`PlatformSettings`** (admin-only): brand + text colors, branding uploads (admin
-  logo, favicon, OG sharing image), and the Kontakt page content (email address +
-  rich text). There is no contact form — the Kontakt page is mailto-only; SMTP env
+  logo, favicon, OG sharing image), the Kontakt page content (email address +
+  rich text), and the footer sponsors (array of logo upload + name + optional URL;
+  rendered as the "Gefördert durch" band, name shown via tooltip only). There is no contact form — the Kontakt page is mailto-only; SMTP env
   vars only serve Payload's auth mails.
 - **`Legal`** (admin-only): the legal texts — Impressum, Datenschutz, cookie policy, and the Erklärung zur Barrierefreiheit (seeded default per the EU model declaration; bracketed placeholders for the feedback address + enforcement body are filled by admins). Privacy policy, cookie policy and accessibility statement are seeded as defaults on a fresh install (`npm run seed`, or `npm run seed:legal` on its own — texts in [`../src/lib/legalDefaults.ts`](../src/lib/legalDefaults.ts)); the Impressum has no default. Copy-paste texts (DE/EN) for existing installs: [`COOKIE-POLICY-TEMPLATES.md`](COOKIE-POLICY-TEMPLATES.md) (matches the stock storage keys), [`ACCESSIBILITY-STATEMENT-TEMPLATES.md`](ACCESSIBILITY-STATEMENT-TEMPLATES.md) and [`PRIVACY-POLICY-TEMPLATES.md`](PRIVACY-POLICY-TEMPLATES.md) (placeholders must be filled before go-live).
 - **`Assistant`** (admin-only, **`read` locked** — it stores the API key): method-assistant

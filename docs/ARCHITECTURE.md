@@ -88,7 +88,7 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 
 | Global | Writable by | Purpose |
 |---|---|---|
-| `PlatformSettings` | admin | Colors, branding uploads (admin logo, favicon, OG image), Kontakt (email address + text) |
+| `PlatformSettings` | admin | Colors, branding uploads (admin logo, favicon, OG image), Kontakt (email address + text), footer sponsor logos (array: logo + name + optional URL) |
 | `Legal` | admin | Legal texts: Impressum, Datenschutz, cookie policy, Erklärung zur Barrierefreiheit |
 | `Assistant` | admin | Method-assistant config (provider, API key, model, greeting, rate limit). **`read` is locked** so the key can't leak via REST — see [`CHATBOT.md`](CHATBOT.md) |
 | `ParticipationDepthSettings` | admin+editor | Filter display icon + lucide fallback + active flag |
@@ -128,7 +128,7 @@ Each **filter** collection follows the same shape: localized `name`, optional up
 `MethodCard`, `MethodCardSlider`, `MethodAccordions`, `MethodStickyTitle`,
 `MethodAssistant`, `AssistantImmersive`, `CurrentMethodProvider`, `GalleryLightbox`,
 `SaveButton`, `SavedWidget`, `SectionDotsNav`, `ExpandableContent`, `FaqAccordion`,
-`RichTextRenderer`, `LanguageSwitcher`, `NavMenu`, `SiteFooter`, `BackButton`,
+`RichTextRenderer`, `LanguageSwitcher`, `NavMenu`, `SiteFooter`, `FooterSponsors`, `BackButton`,
 `CookieNotice`, `EyebrowBadge`, plus `accessibility/`.
 
 **Admin (`src/components/admin/`):** `TopNav`, `BottomNav`, `CollapseFilterGroups`,
