@@ -14,6 +14,7 @@ export type Sponsor = {
   url: string | null
   logoUrl: string
   alt: string
+  size: 'standard' | 'gross'
 }
 
 export function mapSponsors(settings: unknown): Sponsor[] {
@@ -21,7 +22,7 @@ export function mapSponsors(settings: unknown): Sponsor[] {
   if (!Array.isArray(rows)) return []
   return rows
     .map((row) => {
-      const r = row as { logo?: unknown; name?: unknown; url?: unknown }
+      const r = row as { logo?: unknown; name?: unknown; url?: unknown; size?: unknown }
       const logo = r?.logo as { url?: string | null; alt?: string | null; sizes?: { card?: { url?: string | null } } } | null
       if (!logo || typeof logo !== 'object' || !logo.url || typeof r?.name !== 'string' || r.name.trim() === '') return null
       return {
@@ -29,6 +30,7 @@ export function mapSponsors(settings: unknown): Sponsor[] {
         url: typeof r.url === 'string' && r.url.trim() !== '' ? r.url.trim() : null,
         logoUrl: logo.sizes?.card?.url ?? logo.url,
         alt: logo.alt || r.name,
+        size: r.size === 'gross' ? 'gross' as const : 'standard' as const,
       }
     })
     .filter(Boolean) as Sponsor[]

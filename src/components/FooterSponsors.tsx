@@ -39,7 +39,7 @@ function SponsorLogo({ sponsor }: { sponsor: Sponsor }) {
     <img
       src={sponsor.logoUrl}
       alt={sponsor.alt}
-      className="h-10 w-auto max-w-40 object-contain"
+      className={`w-auto object-contain ${sponsor.size === 'gross' ? 'h-24 max-w-[30rem]' : 'h-12 max-w-56'}`}
       loading="lazy"
     />
   )
@@ -100,18 +100,12 @@ function SponsorLogo({ sponsor }: { sponsor: Sponsor }) {
   )
 }
 
-export default function FooterSponsors({ heading, sponsors }: { heading: string; sponsors: Sponsor[] }) {
+export default function FooterSponsors({ sponsors }: { sponsors: Sponsor[] }) {
   if (sponsors.length === 0) return null
   return (
     <div className="border-t">
-      <div className="max-w-6xl mx-auto px-4 py-6 flex flex-col items-center sm:flex-row gap-4 sm:gap-8">
-        <p
-          className="text-small uppercase tracking-widest shrink-0"
-          style={{ color: 'var(--method-ink)' }}
-        >
-          {heading}
-        </p>
-        <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 list-none">
+      <div className="max-w-6xl mx-auto px-4 py-6 flex justify-center sm:justify-start">
+        <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 list-none">
           {sponsors.map((s, i) => (
             <li key={`${s.name}-${i}`} className="flex items-center">
               <SponsorLogo sponsor={s} />

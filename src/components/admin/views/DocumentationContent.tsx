@@ -457,12 +457,12 @@ const CATEGORIES: Category[] = [
         a: {
           de: [
             '„Plattform-Einstellungen“ öffnen und den Reiter „Sponsoren“ wählen.',
-            'Pro Sponsor ein Logo aus der Medien-Bibliothek wählen (Querformat mit transparentem Hintergrund wirkt am besten), den Namen eintragen (erscheint als Tooltip und für Screenreader – nicht sichtbar neben dem Logo) und optional die Website-Adresse inkl. https://.',
+            'Pro Sponsor ein Logo aus der Medien-Bibliothek wählen (SVG oder Querformat-PNG mit transparentem Hintergrund wirkt am besten), den Namen eintragen (erscheint als Tooltip und für Screenreader – nicht sichtbar neben dem Logo) und optional die Website-Adresse inkl. https://. Für kombinierte Förderlogo-Blöcke mit kleiner Schrift die Größe „Groß“ wählen.',
             'Die Reihenfolge per Drag-and-drop sortieren und speichern. Die Logos erscheinen unten im Footer (nur Tooltip-Name) und auf der Seite „Über das Projekt“ mit sichtbarem Namen — jeweils nur, wenn mindestens ein Sponsor eingetragen ist. Der Text dieser Seite wird im Reiter „Über“ gepflegt.',
           ],
           en: [
             'Open “Platform Settings” and choose the “Sponsors” tab.',
-            'Per sponsor, pick a logo from the media library (landscape with transparent background works best), enter the name (appears as a tooltip and for screen readers – not visibly next to the logo) and optionally the website address incl. https://.',
+            'Per sponsor, pick a logo from the media library (SVG or landscape PNG with transparent background works best), enter the name (appears as a tooltip and for screen readers – not visibly next to the logo) and optionally the website address incl. https://. Choose the size “Large” for combined funding blocks with small lettering.',
             'Reorder by drag-and-drop and save. The logos appear at the bottom of the footer (tooltip name only) and on the “About the project” page with visible names — each only when at least one sponsor is set. That page’s text is maintained in the “About” tab.',
           ],
         },

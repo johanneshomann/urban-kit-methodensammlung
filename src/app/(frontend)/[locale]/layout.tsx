@@ -170,7 +170,7 @@ async function FooterText({ sponsors }: { sponsors: Sponsor[] }) {
         </a>
       </nav>
     </div>
-    <FooterSponsors heading={t('sponsors')} sponsors={sponsors} />
+    <FooterSponsors sponsors={sponsors} />
     </>
   )
 }

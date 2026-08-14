@@ -95,8 +95,8 @@ export default async function UeberPage({ params }: Props) {
               {sponsors.map((s, i) => {
                 const card = (
                   <>
-                    <span className="flex items-center justify-center h-20 w-full">
-                      <img src={s.logoUrl} alt={s.alt} className="max-h-20 w-auto max-w-full object-contain" loading="lazy" />
+                    <span className={`flex items-center justify-center w-full ${s.size === 'gross' ? 'h-28' : 'h-20'}`}>
+                      <img src={s.logoUrl} alt={s.alt} className={`w-auto max-w-full object-contain ${s.size === 'gross' ? 'max-h-28' : 'max-h-20'}`} loading="lazy" />
                     </span>
                     <span className="text-small text-center" style={{ color: 'var(--method-ink)' }}>
                       {s.name}

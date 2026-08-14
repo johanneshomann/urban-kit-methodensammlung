@@ -160,8 +160,8 @@ export const PlatformSettings: GlobalConfig = {
         {
           label: { en: 'Sponsors', de: 'Sponsoren' },
           description: {
-            en: 'Logos shown in the footer under “Supported by”. The band only appears when at least one sponsor is set.',
-            de: 'Logos im Footer unter „Gefördert durch“. Der Bereich erscheint nur, wenn mindestens ein Sponsor eingetragen ist.',
+            en: 'Logos shown at the bottom of the footer and on the About page. The band only appears when at least one sponsor is set.',
+            de: 'Logos unten im Footer und auf der Seite „Über das Projekt“. Der Bereich erscheint nur, wenn mindestens ein Sponsor eingetragen ist.',
           },
           fields: [
             {
@@ -199,6 +199,22 @@ export const PlatformSettings: GlobalConfig = {
                     description: {
                       en: 'Not shown next to the logo — appears as a tooltip on hover/focus and is read by screen readers.',
                       de: 'Wird nicht neben dem Logo angezeigt – erscheint als Tooltip bei Hover/Fokus und wird von Screenreadern vorgelesen.',
+                    },
+                  },
+                },
+                {
+                  name: 'size',
+                  type: 'select',
+                  defaultValue: 'standard',
+                  label: { en: 'Size', de: 'Größe' },
+                  options: [
+                    { label: { en: 'Standard', de: 'Standard' }, value: 'standard' },
+                    { label: { en: 'Large', de: 'Groß' }, value: 'gross' },
+                  ],
+                  admin: {
+                    description: {
+                      en: '“Large” for combined funding blocks with small lettering (e.g. ministry + KfW lockup) so the text stays legible.',
+                      de: '„Groß“ für kombinierte Förderlogo-Blöcke mit kleiner Schrift (z. B. Ministerium + KfW), damit der Text lesbar bleibt.',
                     },
                   },
                 },
