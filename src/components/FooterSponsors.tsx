@@ -23,7 +23,7 @@ function SponsorLogo({ sponsor }: { sponsor: Sponsor }) {
     <img
       src={sponsor.logoUrl}
       alt={sponsor.alt}
-      className={`w-auto object-contain ${sponsor.size === 'gross' ? 'h-40 max-w-[48rem]' : 'h-[6.25rem] max-w-[30rem]'}`}
+      className={`w-auto object-contain ${sponsor.size === 'gross' ? 'h-40 max-w-[48rem]' : 'h-[6.875rem] max-w-[32rem]'}`}
       loading="lazy"
     />
   )
