@@ -56,7 +56,7 @@ export default function FooterSponsors({ sponsors }: { sponsors: Sponsor[] }) {
   return (
     <div className="border-t">
       <div className="max-w-6xl mx-auto px-4 py-6 flex justify-center sm:justify-start">
-        <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5 list-none">
+        <ul className="flex flex-wrap items-center justify-center gap-0 list-none">
           {sponsors.map((s, i) => (
             <li key={`${s.name}-${i}`} className="flex items-center">
               <SponsorLogo sponsor={s} />
