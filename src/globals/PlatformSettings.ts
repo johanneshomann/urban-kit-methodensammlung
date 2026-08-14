@@ -203,19 +203,16 @@ export const PlatformSettings: GlobalConfig = {
                   },
                 },
                 {
-                  name: 'size',
-                  type: 'select',
-                  defaultValue: 'standard',
-                  label: { en: 'Size', de: 'Größe' },
-                  options: [
-                    { label: { en: 'Small', de: 'Klein' }, value: 'klein' },
-                    { label: { en: 'Standard', de: 'Standard' }, value: 'standard' },
-                    { label: { en: 'Large', de: 'Groß' }, value: 'gross' },
-                  ],
+                  name: 'height',
+                  type: 'number',
+                  defaultValue: 110,
+                  min: 24,
+                  max: 400,
+                  label: { en: 'Height (px)', de: 'Höhe (px)' },
                   admin: {
                     description: {
-                      en: 'Affects the footer band only: “Large” for combined funding blocks with small lettering (e.g. ministry + KfW lockup) so the text stays legible. On the About page all logos fill their card equally.',
-                      de: 'Wirkt nur im Footer: „Groß“ für kombinierte Förderlogo-Blöcke mit kleiner Schrift (z. B. Ministerium + KfW), damit der Text lesbar bleibt. Auf der Über-Seite füllen alle Logos ihre Karte gleich.',
+                      en: 'Logo height in the footer band, in pixels — the width follows from the logo’s aspect ratio. Larger for combined funding blocks with small lettering so the text stays legible. On the About page all logos fill their card equally.',
+                      de: 'Höhe des Logos im Footer, in Pixeln — die Breite ergibt sich aus dem Seitenverhältnis. Größer wählen für kombinierte Förderlogo-Blöcke mit kleiner Schrift, damit der Text lesbar bleibt. Auf der Über-Seite füllen alle Logos ihre Karte gleich.',
                     },
                   },
                 },
