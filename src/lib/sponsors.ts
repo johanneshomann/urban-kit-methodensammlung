@@ -15,6 +15,7 @@ export type Sponsor = {
   logoUrl: string
   alt: string
   size: 'klein' | 'standard' | 'gross'
+  gapBefore: 'none' | 'klein' | 'standard' | 'gross'
   display: 'both' | 'footer' | 'ueber'
 }
 
@@ -33,7 +34,7 @@ export function mapSponsors(settings: unknown): Sponsor[] {
   if (!Array.isArray(rows)) return []
   return rows
     .map((row) => {
-      const r = row as { logo?: unknown; name?: unknown; url?: unknown; size?: unknown; display?: unknown }
+      const r = row as { logo?: unknown; name?: unknown; url?: unknown; size?: unknown; display?: unknown; gapBefore?: unknown }
       const logo = r?.logo as { url?: string | null; alt?: string | null; sizes?: { card?: { url?: string | null } } } | null
       if (!logo || typeof logo !== 'object' || !logo.url || typeof r?.name !== 'string' || r.name.trim() === '') return null
       return {
@@ -43,6 +44,7 @@ export function mapSponsors(settings: unknown): Sponsor[] {
         alt: logo.alt || r.name,
         size: r.size === 'gross' ? 'gross' as const : r.size === 'klein' ? 'klein' as const : 'standard' as const,
         display: r.display === 'footer' ? 'footer' as const : r.display === 'ueber' ? 'ueber' as const : 'both' as const,
+        gapBefore: r.gapBefore === 'none' || r.gapBefore === 'klein' || r.gapBefore === 'gross' ? r.gapBefore as 'none' | 'klein' | 'gross' : 'standard' as const,
       }
     })
     .filter(Boolean) as Sponsor[]

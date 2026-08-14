@@ -237,6 +237,24 @@ export const PlatformSettings: GlobalConfig = {
                   },
                 },
                 {
+                  name: 'gapBefore',
+                  type: 'select',
+                  defaultValue: 'standard',
+                  label: { en: 'Spacing before', de: 'Abstand davor' },
+                  options: [
+                    { label: { en: 'None', de: 'Kein Abstand' }, value: 'none' },
+                    { label: { en: 'Small', de: 'Klein' }, value: 'klein' },
+                    { label: { en: 'Standard', de: 'Standard' }, value: 'standard' },
+                    { label: { en: 'Large', de: 'Groß' }, value: 'gross' },
+                  ],
+                  admin: {
+                    description: {
+                      en: 'Gap to the logo before this one in the footer. “None” makes logos sit flush (e.g. a funding pair whose clear space is inside the artwork). Has no effect on the first logo.',
+                      de: 'Abstand zum davorstehenden Logo im Footer. „Kein Abstand“ lässt Logos direkt aneinander anschließen (z. B. ein Förderlogo-Paar mit Schutzraum in der Datei). Beim ersten Logo ohne Wirkung.',
+                    },
+                  },
+                },
+                {
                   name: 'url',
                   type: 'text',
                   label: { en: 'Website (optional)', de: 'Website (optional)' },

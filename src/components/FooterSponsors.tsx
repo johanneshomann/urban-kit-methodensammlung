@@ -56,14 +56,17 @@ export default function FooterSponsors({ sponsors }: { sponsors: Sponsor[] }) {
   return (
     <div className="border-t">
       <div className="max-w-6xl mx-auto px-4 py-6 flex justify-center sm:justify-start">
-        {/* First two logos sit flush (funding lockup pair whose clear space is
-            inside the artwork); every further logo gets a gap. */}
+        {/* Each row controls its own gap to the previous logo (admin field
+            "Abstand davor"); ignored on the first logo. */}
         <ul className="flex flex-wrap items-center justify-center gap-y-5 list-none">
-          {sponsors.map((s, i) => (
-            <li key={`${s.name}-${i}`} className={`flex items-center ${i >= 2 ? 'ml-10' : ''}`}>
-              <SponsorLogo sponsor={s} />
-            </li>
-          ))}
+          {sponsors.map((s, i) => {
+            const gap = i === 0 ? '' : { none: '', klein: 'ml-4', standard: 'ml-10', gross: 'ml-20' }[s.gapBefore]
+            return (
+              <li key={`${s.name}-${i}`} className={`flex items-center ${gap}`}>
+                <SponsorLogo sponsor={s} />
+              </li>
+            )
+          })}
         </ul>
       </div>
     </div>
