@@ -230,8 +230,8 @@ export const PlatformSettings: GlobalConfig = {
                   ],
                   admin: {
                     description: {
-                      en: '“Large” for combined funding blocks with small lettering (e.g. ministry + KfW lockup) so the text stays legible.',
-                      de: '„Groß“ für kombinierte Förderlogo-Blöcke mit kleiner Schrift (z. B. Ministerium + KfW), damit der Text lesbar bleibt.',
+                      en: 'Affects the footer band only: “Large” for combined funding blocks with small lettering (e.g. ministry + KfW lockup) so the text stays legible. On the About page all logos fill their card equally.',
+                      de: 'Wirkt nur im Footer: „Groß“ für kombinierte Förderlogo-Blöcke mit kleiner Schrift (z. B. Ministerium + KfW), damit der Text lesbar bleibt. Auf der Über-Seite füllen alle Logos ihre Karte gleich.',
                     },
                   },
                 },

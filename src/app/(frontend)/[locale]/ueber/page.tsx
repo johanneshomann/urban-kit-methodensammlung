@@ -14,6 +14,7 @@ import { EyebrowBadge } from '@/components/EyebrowBadge'
 import BackButton from '@/components/BackButton'
 import RichTextRenderer from '@/components/RichTextRenderer'
 import { aboutSponsors, mapSponsors } from '@/lib/sponsors'
+import { SponsorCards } from '@/components/FooterSponsors'
 import { HeartHandshake, ChevronDown } from 'lucide-react'
 
 type Props = { params: Promise<{ locale: string }> }
@@ -91,40 +92,7 @@ export default async function UeberPage({ params }: Props) {
             <h2 className="text-title font-bold tracking-tight mb-10" style={{ color: 'var(--method-ink-accent)' }}>
               {t('sponsorsHeading')}<span style={{ color: 'var(--method)' }}>.</span>
             </h2>
-            <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 list-none max-w-5xl">
-              {sponsors.map((s, i) => {
-                const card = (
-                  <>
-                    <span className={`flex items-center justify-center w-full ${s.size === 'gross' ? 'h-28' : 'h-20'}`}>
-                      <img src={s.logoUrl} alt={s.alt} className={`w-auto max-w-full object-contain ${s.size === 'gross' ? 'max-h-28' : 'max-h-20'}`} loading="lazy" />
-                    </span>
-                    <span className="text-small text-center" style={{ color: 'var(--method-ink)' }}>
-                      {s.name}
-                    </span>
-                  </>
-                )
-                const cardClass = 'flex flex-col items-center gap-3 rounded-xl p-6 h-full shadow-sm transition-shadow'
-                return (
-                  <li key={`${s.name}-${i}`}>
-                    {s.url ? (
-                      <a
-                        href={s.url}
-                        target="_blank"
-                        rel="sponsored noopener noreferrer"
-                        className={`${cardClass} hover:shadow-md`}
-                        style={{ background: 'var(--method-white)' }}
-                      >
-                        {card}
-                      </a>
-                    ) : (
-                      <div className={cardClass} style={{ background: 'var(--method-white)' }}>
-                        {card}
-                      </div>
-                    )}
-                  </li>
-                )
-              })}
-            </ul>
+            <SponsorCards sponsors={sponsors} />
           </div>
         )}
       </section>
