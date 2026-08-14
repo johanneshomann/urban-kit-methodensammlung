@@ -56,14 +56,14 @@ export default function FooterSponsors({ sponsors }: { sponsors: Sponsor[] }) {
   return (
     <div className="border-t">
       <div className="max-w-6xl mx-auto px-4 py-6 flex justify-center sm:justify-start">
-        {/* Each row controls its pixel gap to the previous logo (admin field
-            "Abstand davor (px)"); ignored on the first logo. */}
-        <ul className="flex flex-wrap items-center justify-center gap-y-5 list-none">
+        {/* Each row carries its own per-side pixel padding (admin fields
+            Oben/Rechts/Unten/Links) — full box control per logo. */}
+        <ul className="flex flex-wrap items-center justify-center list-none">
           {sponsors.map((s, i) => (
             <li
               key={`${s.name}-${i}`}
               className="flex items-center"
-              style={i > 0 && s.gapBefore > 0 ? { marginLeft: `${s.gapBefore}px` } : undefined}
+              style={{ padding: `${s.padding.top}px ${s.padding.right}px ${s.padding.bottom}px ${s.padding.left}px` }}
             >
               <SponsorLogo sponsor={s} />
             </li>

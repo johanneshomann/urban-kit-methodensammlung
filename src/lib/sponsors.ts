@@ -15,8 +15,8 @@ export type Sponsor = {
   logoUrl: string
   alt: string
   size: 'klein' | 'standard' | 'gross'
-  /** Pixel gap to the previous footer logo (first logo: ignored). */
-  gapBefore: number
+  /** Per-side padding (px) around the logo in the footer band. */
+  padding: { top: number; right: number; bottom: number; left: number }
   display: 'both' | 'footer' | 'ueber'
 }
 
@@ -30,12 +30,15 @@ export function aboutSponsors(all: Sponsor[]): Sponsor[] {
   return all.filter((s) => s.display !== 'footer')
 }
 
+const px = (v: unknown, fallback: number): number =>
+  typeof v === 'number' && v >= 0 ? v : fallback
+
 export function mapSponsors(settings: unknown): Sponsor[] {
   const rows = (settings as { sponsors?: unknown[] } | null)?.sponsors ?? []
   if (!Array.isArray(rows)) return []
   return rows
     .map((row) => {
-      const r = row as { logo?: unknown; name?: unknown; url?: unknown; size?: unknown; display?: unknown; gapBefore?: unknown }
+      const r = row as { logo?: unknown; name?: unknown; url?: unknown; size?: unknown; display?: unknown; padTop?: unknown; padRight?: unknown; padBottom?: unknown; padLeft?: unknown }
       const logo = r?.logo as { url?: string | null; alt?: string | null; sizes?: { card?: { url?: string | null } } } | null
       if (!logo || typeof logo !== 'object' || !logo.url || typeof r?.name !== 'string' || r.name.trim() === '') return null
       return {
@@ -45,7 +48,12 @@ export function mapSponsors(settings: unknown): Sponsor[] {
         alt: logo.alt || r.name,
         size: r.size === 'gross' ? 'gross' as const : r.size === 'klein' ? 'klein' as const : 'standard' as const,
         display: r.display === 'footer' ? 'footer' as const : r.display === 'ueber' ? 'ueber' as const : 'both' as const,
-        gapBefore: typeof r.gapBefore === 'number' && r.gapBefore >= 0 ? r.gapBefore : 40,
+        padding: {
+          top: px(r.padTop, 0),
+          right: px(r.padRight, 20),
+          bottom: px(r.padBottom, 0),
+          left: px(r.padLeft, 20),
+        },
       }
     })
     .filter(Boolean) as Sponsor[]

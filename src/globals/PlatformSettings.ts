@@ -237,18 +237,47 @@ export const PlatformSettings: GlobalConfig = {
                   },
                 },
                 {
-                  name: 'gapBefore',
-                  type: 'number',
-                  defaultValue: 40,
-                  min: 0,
-                  max: 400,
-                  label: { en: 'Spacing before (px)', de: 'Abstand davor (px)' },
-                  admin: {
-                    description: {
-                      en: 'Gap in pixels to the logo before this one in the footer. 0 makes logos sit flush (e.g. a funding pair whose clear space is inside the artwork). Has no effect on the first logo.',
-                      de: 'Abstand in Pixeln zum davorstehenden Logo im Footer. 0 lässt Logos direkt aneinander anschließen (z. B. ein Förderlogo-Paar mit Schutzraum in der Datei). Beim ersten Logo ohne Wirkung.',
+                  type: 'row',
+                  fields: [
+                    {
+                      name: 'padTop',
+                      type: 'number',
+                      defaultValue: 0,
+                      min: 0,
+                      max: 400,
+                      label: { en: 'Top (px)', de: 'Oben (px)' },
                     },
-                  },
+                    {
+                      name: 'padRight',
+                      type: 'number',
+                      defaultValue: 20,
+                      min: 0,
+                      max: 400,
+                      label: { en: 'Right (px)', de: 'Rechts (px)' },
+                    },
+                    {
+                      name: 'padBottom',
+                      type: 'number',
+                      defaultValue: 0,
+                      min: 0,
+                      max: 400,
+                      label: { en: 'Bottom (px)', de: 'Unten (px)' },
+                    },
+                    {
+                      name: 'padLeft',
+                      type: 'number',
+                      defaultValue: 20,
+                      min: 0,
+                      max: 400,
+                      label: { en: 'Left (px)', de: 'Links (px)' },
+                      admin: {
+                        description: {
+                          en: 'Spacing of this logo in the footer band, per side. Set left/right to 0 where logos should sit flush (e.g. a funding pair with clear space inside the artwork).',
+                          de: 'Abstand dieses Logos im Footer, je Seite. Links/Rechts auf 0 setzen, wo Logos direkt aneinander anschließen sollen (z. B. Förderlogo-Paar mit Schutzraum in der Datei).',
+                        },
+                      },
+                    },
+                  ],
                 },
                 {
                   name: 'url',
