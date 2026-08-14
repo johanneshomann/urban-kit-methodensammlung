@@ -241,7 +241,7 @@ export const PlatformSettings: GlobalConfig = {
                     {
                       name: 'padRight',
                       type: 'number',
-                      defaultValue: 20,
+                      defaultValue: 0,
                       min: 0,
                       max: 400,
                       label: { en: 'Right', de: 'Rechts' },
@@ -257,7 +257,7 @@ export const PlatformSettings: GlobalConfig = {
                     {
                       name: 'padLeft',
                       type: 'number',
-                      defaultValue: 20,
+                      defaultValue: 0,
                       min: 0,
                       max: 400,
                       label: { en: 'Left', de: 'Links' },

@@ -39,9 +39,9 @@ export function mapSponsors(settings: unknown): Sponsor[] {
         height: px(r.height, 110),
         padding: {
           top: px(r.padTop, 0),
-          right: px(r.padRight, 20),
+          right: px(r.padRight, 0),
           bottom: px(r.padBottom, 0),
-          left: px(r.padLeft, 20),
+          left: px(r.padLeft, 0),
         },
       }
     })
