@@ -9,8 +9,8 @@
 publiccodeYmlVersion: "0.4.0"
 
 name: Urban Kit – Methodensammlung
-url: "https://gitlab.opencode.de/CHANGE-ME/urban-kit-methodensammlung" # TODO: set to the canonical repository URL once published
-landingURL: "https://methoden.urbankit.de" # TODO: confirm public landing page
+url: "https://github.com/johanneshomann/urban-kit-methodensammlung"
+landingURL: "https://methoden.urbankit.de"
 
 softwareVersion: "1.0.0"
 releaseDate: "2026-06-26"
