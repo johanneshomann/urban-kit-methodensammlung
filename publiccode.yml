@@ -1,74 +1,156 @@
 # SPDX-FileCopyrightText: 2026 Johannes Homann
 #
 # SPDX-License-Identifier: EUPL-1.2
-
-# publiccode.yml — metadata for the openCode Softwareverzeichnis and other
-# public-software catalogues. Spec: https://yml.publiccode.tools
-# Validate at https://publiccode-editor.developers.italia.it or the openCode editor.
-
-publiccodeYmlVersion: "0.4.0"
+#
+# Metadata for the openCode software catalog (https://opencode.de).
+# Standard: https://yml.publiccode.tools/ — validated by openCode on harvesting.
+publiccodeYmlVersion: "0.4"
 
 name: Urban Kit – Methodensammlung
-url: "https://github.com/johanneshomann/urban-kit-methodensammlung"
+url: "https://gitlab.opencode.de/stadt-detmold/urban-kit-methodensammlung"
 landingURL: "https://methoden.urbankit.de"
-
-softwareVersion: "1.0.0"
 releaseDate: "2026-06-26"
-
-developmentStatus: stable
-softwareType: standalone/web
+softwareVersion: "1.0.0"
 
 platforms:
   - web
 
+usedBy:
+  - Stadt Detmold
+
+# Nur Werte aus https://guide.opencode.de/assets/code/possible_categories.txt
 categories:
   - knowledge-management
   - collaboration
+  - content-management
+
+developmentStatus: stable
+softwareType: standalone/web
+
+# Screenshot der Startseite, zugleich Cover in Katalogen. Die Spec erlaubt
+# hier nur SVG/SVGZ/PNG (kein JPG/WebP).
+logo: docs/assets/cover.png
 
 description:
   de:
+    genericName: Methodenkatalog
     shortDescription: >-
       Zweisprachige Sammlung von Beteiligungsmethoden für die Stadt- und
-      Quartiersentwicklung.
+      Quartiersentwicklung – filterbar, merkbar, als PDF exportierbar.
     longDescription: >-
-      Urban Kit – Methodensammlung ist ein durchsuchbarer, zweisprachiger Katalog
-      (Deutsch/Englisch) von Methoden für die Beteiligung in der Stadtplanung.
-      Redakteur:innen pflegen Methoden und deren Filter-Taxonomien in einem Payload-CMS;
-      die öffentliche Next.js-Website ermöglicht Stöbern, Filtern, Merken und – optional –
-      eine KI-gestützte Methodenempfehlung anhand einer freien Projektbeschreibung.
+      Urban Kit – Methodensammlung ist ein durchsuchbarer, zweisprachiger
+      Katalog (Deutsch/Englisch) erprobter Methoden für die Bürgerbeteiligung
+      in der Stadt- und Quartiersentwicklung. Redakteur:innen pflegen die
+      Methoden und ihre Filter-Taxonomien in einem eingebetteten Payload CMS;
+      die öffentliche Website ermöglicht Stöbern, Volltextsuche und das
+      Eingrenzen über acht Facetten (Beteiligungstiefe, Projektphase, Ziel,
+      Format, Dauer, Zielgruppe, Gruppengröße, Merkmal).
+
+      Jede Methode ist vollständig beschrieben: Ziel, Ablauf in Vorbereitung,
+      Durchführung und Auswertung, Praxisbeispiele mit Bildergalerie, Hinweise
+      zur Eignung sowie ähnliche und weiterführende Methoden. Besucher:innen
+      können Methoden ohne Konto lokal im Browser merken, in einer
+      Vergleichstabelle gegenüberstellen und einzeln oder gesammelt als PDF
+      exportieren. Ein optionaler, anbieterunabhängiger KI-Assistent
+      (Anthropic, OpenAI oder Mistral, im Admin konfigurierbar) schlägt anhand
+      einer freien Projektbeschreibung passende Methoden vor. Für externe
+      Integrationen steht eine schreibgeschützte GraphQL-API mit
+      API-Schlüsseln bereit.
+
+      Die Oberfläche ist barrierearm (BITV 2.0: Schriftgröße, hoher Kontrast,
+      unterstrichene Links, reduzierte Animationen, vollständige
+      Tastaturbedienung) und deutschsprachig mit englischem Fallback.
+      Technisch ist die Anwendung ein einzelnes Next.js-15-Projekt (App
+      Router, React 19) mit Payload CMS 3 auf MongoDB. Ein idempotentes
+      Seed-Skript legt Filter-Taxonomien, Plattform-Einstellungen und
+      Vorlagen für die Rechtstexte (Cookie-Richtlinie, Datenschutzerklärung,
+      Erklärung zur Barrierefreiheit) an, sodass eine neue Instanz sofort
+      betriebsbereit ist.
     features:
-      - Methodenkatalog mit Volltext und Schritt-für-Schritt-Ablauf
+      - Methodenkatalog mit Volltextsuche und Schritt-für-Schritt-Ablauf
       - Facettenfilter über acht Taxonomien
-      - KI-Assistent (anbieterunabhängig, im Admin konfigurierbar)
-      - Barrierearme Oberfläche (Schriftgröße, Kontrast, reduzierte Bewegung)
+      - Merkliste ohne Konto, Vergleichstabelle und PDF-Export (einzeln oder gesammelt)
+      - KI-Assistent zur Methodenempfehlung (anbieterunabhängig, im Admin konfigurierbar)
+      - Schreibgeschützte GraphQL-API für externe Integrationen
+      - Barrierearme Oberfläche (Schriftgröße, Kontrast, reduzierte Bewegung, Tastaturbedienung)
+      - Zweisprachig (Deutsch/Englisch) mit deutschem Standard
+      - Seed mit Taxonomien und Vorlagen für Rechtstexte
+    screenshots:
+      - docs/assets/cover.png
+      - docs/assets/screenshot-method-hero.png
+      - docs/assets/screenshot-method-sections.png
+      - docs/assets/screenshot-comparison.png
+      - docs/assets/screenshot-assistant.png
   en:
+    genericName: Method catalogue
     shortDescription: >-
-      Bilingual catalogue of participation methods for urban and neighbourhood planning.
+      Bilingual catalogue of participation methods for urban and neighbourhood
+      development – filterable, bookmarkable, exportable as PDF.
     longDescription: >-
-      Urban Kit – Methodensammlung is a searchable, bilingual (German/English) catalogue
-      of methods for citizen participation in urban planning. Editors maintain methods and
-      their filter taxonomies in a Payload CMS; the public Next.js site lets visitors browse,
-      filter, save and — optionally — receive AI-assisted method suggestions from a free-text
-      project description.
+      Urban Kit – Methodensammlung is a searchable, bilingual (German/English)
+      catalogue of tried-and-tested methods for citizen participation in urban
+      and neighbourhood development. Editors maintain the methods and their
+      filter taxonomies in an embedded Payload CMS; the public website offers
+      browsing, full-text search and faceted filtering across eight dimensions
+      (participation depth, project phase, goal, format, duration, target
+      group, group size, character).
+
+      Every method is fully described: its goal, the procedure across
+      preparation, execution and evaluation, best-practice examples with an
+      image gallery, suitability notes, and related and follow-up methods.
+      Visitors can bookmark methods locally in the browser without an account,
+      contrast them in a comparison table, and export them as PDF individually
+      or bundled. An optional provider-agnostic AI assistant (Anthropic,
+      OpenAI or Mistral, configured in the admin) suggests suitable methods
+      from a free-text project description. A read-only GraphQL API with API
+      keys is available for external integrations.
+
+      The interface is accessible (BITV 2.0: font scaling, high contrast,
+      underlined links, reduced motion, full keyboard operability) and
+      German-first with an English fallback. Technically, the application is
+      a single Next.js 15 project (App Router, React 19) with Payload CMS 3
+      on MongoDB. An idempotent seed script creates the filter taxonomies,
+      platform settings and legal-text templates (cookie policy, privacy
+      policy, accessibility statement), so a new instance is ready to run
+      immediately.
     features:
-      - Method catalogue with full text and step-by-step procedures
+      - Method catalogue with full-text search and step-by-step procedures
       - Faceted filtering across eight taxonomies
-      - AI assistant (provider-agnostic, admin-configurable)
-      - Accessible UI (font scaling, contrast, reduced motion)
+      - Account-free bookmarks, comparison table and PDF export (single or bundled)
+      - AI assistant for method suggestions (provider-agnostic, admin-configurable)
+      - Read-only GraphQL API for external integrations
+      - Accessible UI (font scaling, contrast, reduced motion, keyboard operability)
+      - Bilingual (German/English), German-first
+      - Seed with taxonomies and legal-text templates
+    screenshots:
+      - docs/assets/cover.png
+      - docs/assets/screenshot-method-hero.png
+      - docs/assets/screenshot-method-sections.png
+      - docs/assets/screenshot-comparison.png
+      - docs/assets/screenshot-assistant.png
 
 legal:
   license: EUPL-1.2
-  mainCopyrightOwner: Johannes Homann
-  repoOwner: Johannes Homann
+  mainCopyrightOwner: "Johannes Homann"
+  repoOwner: "Johannes Homann"
 
 maintenance:
   type: internal
   contacts:
     - name: Johannes Homann
-      email: "hi@johanneshomann.de"
+      email: hi@johanneshomann.de
 
 localisation:
   localisationReady: true
   availableLanguages:
     - de
     - en
+
+# scope: nur Werte aus https://yml.publiccode.tools/scope-list.html
+intendedAudience:
+  countries:
+    - "de"
+  scope:
+    - "local-authorities"
+    - "government"
+    - "society"
