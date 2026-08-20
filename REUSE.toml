@@ -42,7 +42,7 @@ SPDX-License-Identifier = "EUPL-1.2"
 # NOTE: declared as project assets. If any of these are third-party stock (e.g.
 # Unsplash), update the copyright/licence here to match the actual source.
 [[annotations]]
-path = "public/method-defaults/**"
+path = ["public/method-defaults/**", "docs/assets/**"]
 precedence = "aggregate"
 SPDX-FileCopyrightText = "2026 Johannes Homann"
 SPDX-License-Identifier = "EUPL-1.2"
