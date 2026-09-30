@@ -182,7 +182,8 @@
     "error": "Something went wrong. Please try again or use the <link>filter search</link>.",
     "errorRate": "A few too many requests right now. Please wait a moment and use the <link>filter search</link> in the meantime.",
     "privacyNotice": "By using the assistant you agree to the <link>privacy policy</link>.",
-    "imprint": "Imprint"
+    "imprint": "Imprint",
+    "errorUnavailable": "The method assistant is not configured at the moment. Please use the <link>filter search</link> in the meantime."
   },
   "assistantPage": {
     "metaTitle": "Method Assistant – Urban Kit Method Archive",

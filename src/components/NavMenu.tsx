@@ -12,7 +12,7 @@ import { ChevronRight, Home, Bookmark, HeartHandshake, Mail, Signpost, Menu, X, 
 const CLOSE_DURATION = 280
 const CLOSE_DELAY = 220
 
-export default function NavMenu({ assistantEnabled = false }: { assistantEnabled?: boolean }) {
+export default function NavMenu() {
   const t = useTranslations('nav')
   const [open, setOpen] = useState(false)
   const [closing, setClosing] = useState(false)
@@ -154,9 +154,7 @@ export default function NavMenu({ assistantEnabled = false }: { assistantEnabled
 
   const links = [
     { href: '/',            label: t('home'),              icon: Home },
-    ...(assistantEnabled
-      ? [{ href: '/assistant', label: t('assistant'), icon: Sparkles }]
-      : []),
+    { href: '/assistant',   label: t('assistant'),         icon: Sparkles },
     { href: '/saved',       label: t('saved'),             icon: Bookmark },
     { href: '/hilfe',       label: t('help'),              icon: Signpost },
     { href: '/ueber',       label: t('ueber'),             icon: HeartHandshake },

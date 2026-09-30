@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: EUPL-1.2
 
 import { getTranslations } from 'next-intl/server'
-import { redirect } from '@/navigation'
 import { EyebrowBadge } from '@/components/EyebrowBadge'
 import BackButton from '@/components/BackButton'
 import MethodAssistant from '@/components/MethodAssistant'
@@ -26,8 +25,8 @@ export default async function AssistantPage({ params }: Props) {
   const t = await getTranslations({ locale, namespace: 'assistantPage' })
   const settings = await loadAssistantSettings(locale as 'de' | 'en')
 
-  // If the assistant is off / unconfigured, there's nothing to show — go home.
-  if (!settings.configured) redirect({ href: '/', locale })
+  // Deliberately NOT gated on settings.configured: the page stays reachable
+  // for showcasing; the widget reports "not configured" on the first message.
 
   return (
     <div className="flex flex-col">

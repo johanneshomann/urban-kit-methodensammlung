@@ -28,8 +28,8 @@ export const Assistant: GlobalConfig = {
       label: { en: 'Enable assistant', de: 'Assistent aktivieren' },
       admin: {
         description: {
-          en: 'Master switch. When off, the chat widget is hidden everywhere and the site falls back to manual filtering.',
-          de: 'Hauptschalter. Wenn aus, ist der Chat überall ausgeblendet und es wird die normale Filterung genutzt.',
+          en: 'Master switch for the LLM. When off, the assistant page and its buttons stay visible (showcase), but every message is answered with a “not configured” notice and no provider is called.',
+          de: 'Hauptschalter für das Sprachmodell. Wenn aus, bleiben Assistent-Seite und -Buttons sichtbar (Showcase), jede Nachricht wird aber mit dem Hinweis „nicht konfiguriert“ beantwortet und kein Anbieter aufgerufen.',
         },
       },
     },

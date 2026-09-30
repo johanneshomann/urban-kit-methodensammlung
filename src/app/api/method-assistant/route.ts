@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
   }
 
   // Global daily budget first — an attacker rotating IPs slips past the per-IP
-  // window. Exhausted ⇒ same 503 as "not configured", so the widget hides and
+  // window. Exhausted ⇒ same 503 as "not configured", so the widget shows the unavailable notice and
   // the site falls back to manual filtering.
   if (dailyLimitReached()) {
     console.warn('[method-assistant] daily request ceiling reached')

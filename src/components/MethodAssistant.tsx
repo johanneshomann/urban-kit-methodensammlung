@@ -45,9 +45,10 @@ export default function MethodAssistant({
   const [messages, setMessages] = useState<Msg[]>([])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  // Holds the message KEY ('error' | 'errorRate'), not the text — rendered via
-  // t.rich so the message can embed a link to the manual filter search.
-  const [error, setError] = useState<'error' | 'errorRate' | null>(null)
+  // Holds the message KEY, not the text — rendered via t.rich so the message
+  // can embed a link to the manual filter search. 'errorUnavailable' = the
+  // assistant is switched off or has no API key (503 from the route).
+  const [error, setError] = useState<'error' | 'errorRate' | 'errorUnavailable' | null>(null)
 
   const scrollRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLTextAreaElement>(null)
@@ -169,7 +170,7 @@ export default function MethodAssistant({
       })
 
       if (!res.ok) {
-        setError(res.status === 429 ? 'errorRate' : 'error')
+        setError(res.status === 429 ? 'errorRate' : res.status === 503 ? 'errorUnavailable' : 'error')
         return
       }
 

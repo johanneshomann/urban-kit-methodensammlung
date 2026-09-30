@@ -151,8 +151,6 @@ type Props = {
   allFilterItems?: Record<FilterKey, FilterItem[]>
   allCategoryItems?: Partial<Record<FilterKey, CategoryItem[]>>
   activeFilterKeys?: Set<FilterKey>
-  /** Show a button in the toolbar linking to the assistant page. */
-  assistantEnabled?: boolean
 }
 
 function getItems(method: Methode, key: FilterKey): FilterItem[] {
@@ -166,7 +164,7 @@ function getNames(method: Methode, key: FilterKey, locale: string): string[] {
 }
 
 
-export default function FilterableMethodList({ methods, filterIcons, filterLucideIcons, allFilterItems, allCategoryItems, activeFilterKeys, assistantEnabled }: Props) {
+export default function FilterableMethodList({ methods, filterIcons, filterLucideIcons, allFilterItems, allCategoryItems, activeFilterKeys }: Props) {
   const t = useTranslations('methods')
   const tFilter = useTranslations('filter')
   const tAssistant = useTranslations('assistant')
@@ -332,9 +330,10 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
           />
         </div>
 
-        {/* Assistant CTA → dedicated page */}
-        {assistantEnabled && (
-          <Link
+        {/* Assistant CTA → dedicated page. Always shown — an unconfigured or
+            disabled assistant answers with a "not configured" notice instead of
+            vanishing (showcase behaviour, same as the platform's Urban Agent). */}
+        <Link
             href="/assistant"
             className="shrink-0 self-stretch flex items-center gap-2 px-4 rounded-xl cursor-pointer transition-all shadow-sm hover:shadow-md text-display"
             style={{ background: 'var(--method)', color: 'var(--method-on-brand)' }}
@@ -345,8 +344,7 @@ export default function FilterableMethodList({ methods, filterIcons, filterLucid
           >
             <Sparkles className="w-[1em] h-[1em] shrink-0" />
             <span className="hidden lg:inline whitespace-nowrap">{tAssistant('title')}</span>
-          </Link>
-        )}
+        </Link>
 
         {/* Settings button + popover */}
         <div className="relative shrink-0 self-stretch" ref={settingsAreaRef}>
