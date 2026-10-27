@@ -77,8 +77,9 @@ See [`.env.example`](.env.example) for the full list. The essentials:
 | `PAYLOAD_SECRET` | Signing secret (**required in production**, min 32 chars) |
 | `NEXT_PUBLIC_SERVER_URL` | Public base URL (used for media URLs etc.) |
 
-Optional: SMTP variables (contact form email) and an LLM provider API key for the
-assistant — both degrade gracefully when unset.
+Optional: SMTP variables (admin password-reset mail) and an LLM provider API key for
+the assistant — both degrade gracefully when unset. Full operations guide:
+[`docs/OPERATIONS.md`](docs/OPERATIONS.md).
 
 ---
 
@@ -97,10 +98,19 @@ assistant — both degrade gracefully when unset.
 
 ## Documentation
 
-- [`AGENTS.md`](AGENTS.md) — conventions, gotchas and a per-task map (for humans and AI agents).
-- [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — full directory, route, collection and component inventory.
-- [`docs/CONTENT-MODEL.md`](docs/CONTENT-MODEL.md) — the Payload data model (Methods tabs, taxonomies, localization).
-- [`docs/CHATBOT.md`](docs/CHATBOT.md) — the method assistant's design.
+By audience:
+
+| Audience | Start here |
+|---|---|
+| Visitors, editors, API consumers | [`docs/USAGE.md`](docs/USAGE.md) — purpose, roles, catalogue, editing, GraphQL access |
+| Operators | [`docs/OPERATIONS.md`](docs/OPERATIONS.md) — requirements, Docker Compose install, proxy/TLS, updates, backups |
+| Developers | [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md) — architecture summary, interfaces, build and checks; then [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), [`docs/CONTENT-MODEL.md`](docs/CONTENT-MODEL.md), [`docs/CHATBOT.md`](docs/CHATBOT.md) |
+| Everyone | [`docs/PROJECT-STATUS.md`](docs/PROJECT-STATUS.md) — stage, known limitations, open points; [`CHANGELOG.md`](CHANGELOG.md); [`SECURITY.md`](SECURITY.md) |
+
+Legal-text templates: [`docs/PRIVACY-POLICY-TEMPLATES.md`](docs/PRIVACY-POLICY-TEMPLATES.md),
+[`docs/COOKIE-POLICY-TEMPLATES.md`](docs/COOKIE-POLICY-TEMPLATES.md),
+[`docs/ACCESSIBILITY-STATEMENT-TEMPLATES.md`](docs/ACCESSIBILITY-STATEMENT-TEMPLATES.md).
+[`AGENTS.md`](AGENTS.md) holds the conventions and gotchas for humans and AI agents.
 
 ## Contributing
 
@@ -112,5 +122,10 @@ Contributions are welcome — please read [`CONTRIBUTING.md`](CONTRIBUTING.md) a
 Licensed under the **European Union Public Licence v. 1.2 (EUPL-1.2)** — see
 [`LICENSES/EUPL-1.2.txt`](LICENSES/EUPL-1.2.txt). The project is
 [REUSE](https://reuse.software)-compliant: every file declares its copyright and
-license. The bundled Atkinson Hyperlegible font is licensed separately under
-[OFL-1.1](LICENSES/OFL-1.1.txt).
+license (`reuse lint` runs in CI). Exceptions to EUPL-1.2: the bundled Atkinson
+Hyperlegible font ([OFL-1.1](LICENSES/OFL-1.1.txt)) and the files that
+`REUSE.toml` marks as [CC-BY-4.0](LICENSES/CC-BY-4.0.txt). Method content entered
+by an operator stays the operator's.
+
+Versions are tagged (`v1.0.0`, `v1.1.0`, …) and described in [`CHANGELOG.md`](CHANGELOG.md).
+Security reports: [`SECURITY.md`](SECURITY.md).

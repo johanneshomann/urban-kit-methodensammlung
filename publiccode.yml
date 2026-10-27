@@ -9,8 +9,8 @@ publiccodeYmlVersion: "0.4"
 name: Urban Kit – Methodensammlung
 url: "https://gitlab.opencode.de/stadt-detmold/urban-kit-methodensammlung"
 landingURL: "https://methoden.urbankit.de"
-releaseDate: "2026-06-26"
-softwareVersion: "1.0.0"
+releaseDate: "2026-10-27"
+softwareVersion: "1.1.0"
 
 platforms:
   - web
@@ -34,6 +34,7 @@ logo: docs/assets/cover.png
 description:
   de:
     genericName: Methodenkatalog
+    documentation: "https://gitlab.opencode.de/stadt-detmold/urban-kit-methodensammlung/-/blob/main/docs/USAGE.md"
     shortDescription: >-
       Zweisprachige Sammlung von Beteiligungsmethoden für die Stadt- und
       Quartiersentwicklung – filterbar, merkbar, als PDF exportierbar.
@@ -83,6 +84,7 @@ description:
       - docs/assets/screenshot-assistant.png
   en:
     genericName: Method catalogue
+    documentation: "https://gitlab.opencode.de/stadt-detmold/urban-kit-methodensammlung/-/blob/main/docs/USAGE.md"
     shortDescription: >-
       Bilingual catalogue of participation methods for urban and neighbourhood
       development – filterable, bookmarkable, exportable as PDF.
