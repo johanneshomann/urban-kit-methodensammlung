@@ -39,6 +39,7 @@ What is in place and used:
 | E-mail | SMTP is optional and only used for admin password resets; without it Payload logs a preview link in development and sends nothing in production. | Operators without SMTP reset admin passwords from the database or the CLI. |
 | Content language | German is the required source language; English is optional per field and falls back to German. | A partly translated catalogue shows mixed languages on `/en`. |
 | Rate limiting | PDF export and the assistant are limited per IP in memory of one process. | Limits reset on restart and are per container instance. |
+| Dependencies | Payload 3.84 pins a Next 15.4 peer range while the project runs Next 15.5; installs use `legacy-peer-deps`. | Upgrade Payload (and re-test) to drop the flag. |
 | Design history | `docs/CHATBOT.md` records the assistant's design including superseded plans. | Read it as history; the implemented state is summarised in `docs/DEVELOPMENT.md`. |
 
 ## Open points

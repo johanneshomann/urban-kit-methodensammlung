@@ -65,6 +65,10 @@ npm run build               # production build (8 GB heap configured)
 `npm run seed` populates taxonomies, platform settings and legal templates
 without touching methods.
 
+`.npmrc` sets `legacy-peer-deps=true`: Payload 3.84 declares a Next 15.4 peer
+range while the project runs Next 15.5, so plain `npm ci` would refuse to
+install. The Dockerfile uses the same flag. Remove it once Payload is upgraded.
+
 ## 5. Testing
 
 There are **no automated tests** and no lint configuration. The verification

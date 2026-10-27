@@ -29,6 +29,7 @@ path = [
   "docs/ACCESSIBILITY-STATEMENT-TEMPLATES.md",
   "docs/PRIVACY-POLICY-TEMPLATES.md",
   ".gitlab-ci.yml",
+  ".npmrc",
   ".github/workflows/**",
   "messages/de.json",
   "messages/en.json",
