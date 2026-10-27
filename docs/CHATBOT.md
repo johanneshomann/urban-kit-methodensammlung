@@ -247,7 +247,11 @@ touching retrieval or UI.
 
 ---
 
-## 7. Build plan (when approved)
+## 7. Build plan (historical — implemented in August 2026)
+
+> Kept as design history. The implemented state is the route in
+> `src/app/api/method-assistant/` and `src/lib/methodAssistant/`; see
+> [`DEVELOPMENT.md`](./DEVELOPMENT.md).
 
 1. `src/app/api/method-assistant/route.ts` — server route: load taxonomy enums (cached),
    build system prompt, run the **tool-use loop** (`search_methods`, `get_method`),
@@ -263,7 +267,11 @@ touching retrieval or UI.
 
 ---
 
-## 8. Open questions
+## 8. Open questions (historical)
+
+> Resolved since: provider defaults to Mistral (EU processing), the entry point is
+> the dedicated `/assistant` page plus a toolbar button, and no conversations are
+> logged. Remaining ideas live in [`PROJECT-STATUS.md`](./PROJECT-STATUS.md).
 
 - Provider choice (deferred — route stays provider-agnostic until decided).
 - Where to surface the entry point (floating button near the saved/accessibility widgets?
