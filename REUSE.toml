@@ -28,6 +28,8 @@ path = [
   "docs/COOKIE-POLICY-TEMPLATES.md",
   "docs/ACCESSIBILITY-STATEMENT-TEMPLATES.md",
   "docs/PRIVACY-POLICY-TEMPLATES.md",
+  ".gitlab-ci.yml",
+  ".github/workflows/**",
   "messages/de.json",
   "messages/en.json",
   "public/platform-defaults/admin-logo.svg",
