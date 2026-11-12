@@ -30,6 +30,13 @@ and get AI-assisted suggestions for the right method.
 - 🔖 **Save & print** methods locally (no account needed).
 - 🎨 **Editable platform identity** — colors, logo, favicon and legal texts from the admin.
 
+## Usage
+
+How the catalogue is used — searching and filtering, bookmarks and PDF export,
+editing methods and taxonomies in the admin, and reading methods through the
+GraphQL API — is described in **[`docs/USAGE.md`](docs/USAGE.md)**. To run your
+own instance, see [`docs/OPERATIONS.md`](docs/OPERATIONS.md).
+
 ## Tech stack
 
 | Layer | Tech |
